@@ -21,6 +21,7 @@
 
 <script>
 const prefixCls = "user-management-search";
+import { userType } from './../page-info';
 export default {
     name: "user-management-search",
     props: {
@@ -32,24 +33,7 @@ export default {
     data() {
         return {
             prefixCls,
-            userType: [
-                {
-                type: 0,
-                typeName: '全部'
-                },
-                {
-                type: 1,
-                typeName: '普通'
-                },
-                {
-                type: 2,
-                typeName: '会员'
-                },
-                {
-                type: 3,
-                typeName: '黑名单'
-                },
-            ]
+            userType
         };
     },
 };

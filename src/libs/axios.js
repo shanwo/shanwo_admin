@@ -57,6 +57,7 @@ class HttpRequest {
         return Promise.reject(data)
       }      
     }, error => {
+      Vue.prototype.$Message.error("服务器开小差了，请尝试刷新")
       this.destroy(url)
       let errorInfo = error.response
       if (!errorInfo) {

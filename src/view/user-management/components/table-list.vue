@@ -12,6 +12,7 @@
 
 <script>
 const prefixCls = "user-management-table-list";
+import { userType, columns } from './../page-info';
 export default {
     name: "user-management-table-list",
     props: {
@@ -28,74 +29,8 @@ export default {
             prefixCls,
             editId: null,
             isShowEdit: false,
-            userType: [
-                {
-                    type: 0,
-                    typeName: '全部'
-                },
-                {
-                    type: 1,
-                    typeName: '普通'
-                },
-                {
-                    type: 2,
-                    typeName: '会员'
-                },
-                {
-                    type: 3,
-                    typeName: '黑名单'
-                }
-            ],
-            columns: [
-                {
-                    key: "id",
-                    title: "id"
-                },
-                {
-                    key: "avatar",
-                    title: "用户头像",
-                    render: (h, { row }) => {
-                        return h('img', {
-                            attrs: {
-                                src: row.avatar,
-                                width: 30,
-                                height: 30
-                            }
-                        })
-                    }
-                },
-                {
-                    key: "nickname",
-                    title: "用户昵称"
-                },
-                {
-                    key: "type",
-                    title: "用户类型",
-                    render: (h, { row }) => {
-                        return h('span', this.userType[row.type] && this.userType[row.type].typeName)
-                    }
-                },
-                {
-                    key: "contact",
-                    title: "手机号",
-                    render: (h, { row }) => {
-                        return h('span', row.contact && row.contact.phone)
-                    }
-                },
-                {
-                    key: "pages",
-                    title: "闪页数"
-                },
-                // {
-                //     key: "updated_at",
-                //     title: "最近登录时间",
-                //     width: 160
-                // },
-                {
-                    slot: "action",
-                    title: "操作"
-                },
-            ]
+            userType,
+            columns
         };
     },
     methods: {

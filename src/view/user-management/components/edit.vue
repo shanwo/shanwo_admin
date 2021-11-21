@@ -1,5 +1,5 @@
 <template>
-    <Modal v-model="param" title="编辑用户信息" >
+    <Modal :value="param" title="编辑用户信息" >
        <Form>
            <FormItem label="用户类型：" :label-width="100">
                 <Select v-model="userInfo.type">
@@ -8,7 +8,7 @@
            </FormItem>
        </Form> 
        <div slot="footer">
-           <Button type="primary" @click="confim">确定</Button>
+           <Button type="primary" @click="confirm">确定</Button>
            <Button type="primary" @click="cancel" ghost>取消</Button>
        </div>
     </Modal>   
@@ -17,6 +17,7 @@
 
 <script>
 const prefixCls = "user-management-edit";
+import { userType } from './../page-info';
 import { getUserInfo, eidtUserStatus } from '@/api/user-management';
 export default {
     name: "user-management-edit",
@@ -31,20 +32,7 @@ export default {
         return {
             prefixCls,
             userInfo: {},
-            userType: [
-                {
-                    type: 1,
-                    typeName: '普通'
-                },
-                {
-                    type: 2,
-                    typeName: '会员'
-                },
-                {
-                    type: 3,
-                    typeName: '黑名单'
-                }
-            ]
+            userType
         };
     },
     computed: {
@@ -62,7 +50,7 @@ export default {
          * @description 确认修改用用户状态
          * @returns { undefined }
         */
-        confim () {
+        confirm () {
             eidtUserStatus({ id: this.id, type: this.userInfo.type }).then(() => {
                 this.$Message.success('修改成功');
                 this.$emit('refresh');

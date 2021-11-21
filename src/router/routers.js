@@ -99,13 +99,89 @@ export default [
     },
     children: [
       {
-        path: 'list',
-        name: 'list',
+        path: '/user_management/list',
+        name: 'user_management_list',
         meta: {
           icon: 'md-arrow-dropdown-circle',
           title: '用户管理'
         },
         component: () => import('@/view/user-management/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/shan_page_management',
+    name: 'shan_page_management',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'shan_page_management_list',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '闪页管理'
+        },
+        component: () => import('@/view/shan-page-mannager/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/link_white_list',
+    name: 'link_white_list',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'link_white_list_list',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '链接白名单'
+        },
+        component: () => import('@/view/link-white-list/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/mannager_classification',
+    name: 'mannager_classification',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'mannager_classification_list',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '分类管理'
+        },
+        component: () => import('@/view/mannager-classification/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/avatar_pendant',
+    name: 'avatar_pendant',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'avatar_pendant_list',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '头衔挂件'
+        },
+        component: () => import('@/view/avatar-pendant/list.vue')
       }
     ]
   },
