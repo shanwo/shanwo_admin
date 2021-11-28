@@ -41,55 +41,6 @@ export default [
       }
     ]
   },
-  // {
-  //   path: '',
-  //   name: 'doc',
-  //   meta: {
-  //     title: '文档',
-  //     href: 'https://lison16.github.io/iview-admin-doc/#/',
-  //     icon: 'ios-book'
-  //   }
-  // },
-  // {
-  //   path: '/join',
-  //   name: 'join',
-  //   component: Main,
-  //   meta: {
-  //     hideInBread: true
-  //   },
-  //   children: [
-  //     {
-  //       path: 'join_page',
-  //       name: 'join_page',
-  //       meta: {
-  //         icon: '_qq',
-  //         title: 'QQ群'
-  //       },
-  //       component: () => import('@/view/join-page.vue')
-  //     }
-  //   ]
-  // },
-  {
-    path: '/message',
-    name: 'message',
-    component: Main,
-    meta: {
-      hideInBread: true,
-      hideInMenu: true
-    },
-    children: [
-      {
-        path: 'message_page',
-        name: 'message_page',
-        meta: {
-          icon: 'md-notifications',
-          title: '消息中心'
-        },
-        component: () => import('@/view/single-page/message/index.vue')
-      }
-    ]
-  },
-  // TODO
   {
     path: '/user_management',
     name: 'user_management',
@@ -102,7 +53,7 @@ export default [
         path: '/user_management/list',
         name: 'user_management_list',
         meta: {
-          icon: 'md-arrow-dropdown-circle',
+          icon: 'md-contacts',
           title: '用户管理'
         },
         component: () => import('@/view/user-management/list.vue')
@@ -121,7 +72,7 @@ export default [
         path: 'list',
         name: 'shan_page_management_list',
         meta: {
-          icon: 'md-arrow-dropdown-circle',
+          icon: 'md-document',
           title: '闪页管理'
         },
         component: () => import('@/view/shan-page-mannager/list.vue')
@@ -140,7 +91,7 @@ export default [
         path: 'list',
         name: 'link_white_list_list',
         meta: {
-          icon: 'md-arrow-dropdown-circle',
+          icon: 'md-link',
           title: '链接白名单'
         },
         component: () => import('@/view/link-white-list/list.vue')
@@ -159,7 +110,7 @@ export default [
         path: 'list',
         name: 'mannager_classification_list',
         meta: {
-          icon: 'md-arrow-dropdown-circle',
+          icon: 'md-clipboard',
           title: '分类管理'
         },
         component: () => import('@/view/mannager-classification/list.vue')
@@ -178,7 +129,7 @@ export default [
         path: 'list',
         name: 'avatar_pendant_list',
         meta: {
-          icon: 'md-arrow-dropdown-circle',
+          icon: 'md-bookmark',
           title: '头衔挂件'
         },
         component: () => import('@/view/avatar-pendant/list.vue')
@@ -186,153 +137,288 @@ export default [
     ]
   },
   {
-    path: '/components',
-    name: 'components',
-    meta: {
-      icon: 'logo-buffer',
-      title: '组件'
-    },
+    path: '/template_management',
+    name: 'template_management',
     component: Main,
+    meta: {
+      hideInBread: true
+    },
     children: [
       {
-        path: 'tree_select_page',
-        name: 'tree_select_page',
+        path: 'list',
+        name: 'template_management_list',
         meta: {
-          icon: 'md-arrow-dropdown-circle',
-          title: '树状下拉选择器'
-        },
-        component: () => import('@/view/components/tree-select/index.vue')
-      },
-      {
-        path: 'count_to_page',
-        name: 'count_to_page',
-        meta: {
-          icon: 'md-trending-up',
-          title: '数字渐变'
-        },
-        component: () => import('@/view/components/count-to/count-to.vue')
-      },
-      {
-        path: 'drag_list_page',
-        name: 'drag_list_page',
-        meta: {
-          icon: 'ios-infinite',
-          title: '拖拽列表'
-        },
-        component: () => import('@/view/components/drag-list/drag-list.vue')
-      },
-      {
-        path: 'drag_drawer_page',
-        name: 'drag_drawer_page',
-        meta: {
-          icon: 'md-list',
-          title: '可拖拽抽屉'
-        },
-        component: () => import('@/view/components/drag-drawer')
-      },
-      {
-        path: 'org_tree_page',
-        name: 'org_tree_page',
-        meta: {
-          icon: 'ios-people',
-          title: '组织结构树'
-        },
-        component: () => import('@/view/components/org-tree')
-      },
-      {
-        path: 'tree_table_page',
-        name: 'tree_table_page',
-        meta: {
-          icon: 'md-git-branch',
-          title: '树状表格'
-        },
-        component: () => import('@/view/components/tree-table/index.vue')
-      },
-      {
-        path: 'cropper_page',
-        name: 'cropper_page',
-        meta: {
-          icon: 'md-crop',
-          title: '图片裁剪'
-        },
-        component: () => import('@/view/components/cropper/cropper.vue')
-      },
-      {
-        path: 'tables_page',
-        name: 'tables_page',
-        meta: {
-          icon: 'md-grid',
-          title: '多功能表格'
-        },
-        component: () => import('@/view/components/tables/tables.vue')
-      },
-      {
-        path: 'split_pane_page',
-        name: 'split_pane_page',
-        meta: {
-          icon: 'md-pause',
-          title: '分割窗口'
-        },
-        component: () => import('@/view/components/split-pane/split-pane.vue')
-      },
-      {
-        path: 'markdown_page',
-        name: 'markdown_page',
-        meta: {
-          icon: 'logo-markdown',
-          title: 'Markdown编辑器'
-        },
-        component: () => import('@/view/components/markdown/markdown.vue')
-      },
-      {
-        path: 'editor_page',
-        name: 'editor_page',
-        meta: {
-          icon: 'ios-create',
-          title: '富文本编辑器'
-        },
-        component: () => import('@/view/components/editor/editor.vue')
-      },
-      {
-        path: 'icons_page',
-        name: 'icons_page',
-        meta: {
-          icon: '_bear',
-          title: '自定义图标'
-        },
-        component: () => import('@/view/components/icons/icons.vue')
+          icon: 'md-browsers',
+          title: '模板管理'
+        }
+        // component: () => import('@/view/template-management/list.vue')
       }
     ]
   },
   {
-    path: '/update',
-    name: 'update',
-    meta: {
-      icon: 'md-cloud-upload',
-      title: '数据上传'
-    },
+    path: '/tutorials_pendant',
+    name: 'tutorials_pendant',
     component: Main,
+    meta: {
+      hideInBread: true
+    },
     children: [
       {
-        path: 'update_table_page',
-        name: 'update_table_page',
+        path: 'list',
+        name: 'tutorials_pendant_list',
         meta: {
-          icon: 'ios-document',
-          title: '上传Csv'
-        },
-        component: () => import('@/view/update/update-table.vue')
-      },
-      {
-        path: 'update_paste_page',
-        name: 'update_paste_page',
-        meta: {
-          icon: 'md-clipboard',
-          title: '粘贴表格数据'
-        },
-        component: () => import('@/view/update/update-paste.vue')
+          icon: 'md-glasses',
+          title: '教程管理'
+        }
+        // component: () => import('@/view/tutorials-pendant/list.vue')
       }
     ]
   },
+  {
+    path: '/order_pendant',
+    name: 'order_pendant',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'order_pendant_list',
+        meta: {
+          icon: 'md-cart',
+          title: '订单数据'
+        }
+        // component: () => import('@/view/order-pendant/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/ad_pendant',
+    name: 'ad_pendant',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'ad_pendant_list',
+        meta: {
+          icon: 'md-pie',
+          title: '广告管理'
+        }
+        // component: () => import('@/view/ad-pendant/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/feedback_pendant',
+    name: 'feedback_pendant',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'feedback_pendant_list',
+        meta: {
+          icon: 'md-chatboxes',
+          title: '用户反馈'
+        }
+        // component: () => import('@/view/feedback-pendant/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/config_pendant',
+    name: 'config_pendant',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'config_pendant_list',
+        meta: {
+          icon: 'md-settings',
+          title: '配置管理'
+        }
+        // component: () => import('@/view/config-pendant/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/pay_pendant',
+    name: 'pay_pendant',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'pay_pendant_list',
+        meta: {
+          icon: 'md-cart',
+          title: '支付渠道'
+        }
+        // component: () => import('@/view/pay-pendant/list.vue')
+      }
+    ]
+  }
+
+  // TODO
+  // {
+  //   path: '/components',
+  //   name: 'components',
+  //   meta: {
+  //     icon: 'logo-buffer',
+  //     title: '组件'
+  //   },
+  //   component: Main,
+  //   children: [
+  //     {
+  //       path: 'tree_select_page',
+  //       name: 'tree_select_page',
+  //       meta: {
+  //         icon: 'md-arrow-dropdown-circle',
+  //         title: '树状下拉选择器'
+  //       },
+  //       component: () => import('@/view/components/tree-select/index.vue')
+  //     },
+  //     {
+  //       path: 'count_to_page',
+  //       name: 'count_to_page',
+  //       meta: {
+  //         icon: 'md-trending-up',
+  //         title: '数字渐变'
+  //       },
+  //       component: () => import('@/view/components/count-to/count-to.vue')
+  //     },
+  //     {
+  //       path: 'drag_list_page',
+  //       name: 'drag_list_page',
+  //       meta: {
+  //         icon: 'ios-infinite',
+  //         title: '拖拽列表'
+  //       },
+  //       component: () => import('@/view/components/drag-list/drag-list.vue')
+  //     },
+  //     {
+  //       path: 'drag_drawer_page',
+  //       name: 'drag_drawer_page',
+  //       meta: {
+  //         icon: 'md-list',
+  //         title: '可拖拽抽屉'
+  //       },
+  //       component: () => import('@/view/components/drag-drawer')
+  //     },
+  //     {
+  //       path: 'org_tree_page',
+  //       name: 'org_tree_page',
+  //       meta: {
+  //         icon: 'ios-people',
+  //         title: '组织结构树'
+  //       },
+  //       component: () => import('@/view/components/org-tree')
+  //     },
+  //     {
+  //       path: 'tree_table_page',
+  //       name: 'tree_table_page',
+  //       meta: {
+  //         icon: 'md-git-branch',
+  //         title: '树状表格'
+  //       },
+  //       component: () => import('@/view/components/tree-table/index.vue')
+  //     },
+  //     {
+  //       path: 'cropper_page',
+  //       name: 'cropper_page',
+  //       meta: {
+  //         icon: 'md-crop',
+  //         title: '图片裁剪'
+  //       },
+  //       component: () => import('@/view/components/cropper/cropper.vue')
+  //     },
+  //     {
+  //       path: 'tables_page',
+  //       name: 'tables_page',
+  //       meta: {
+  //         icon: 'md-grid',
+  //         title: '多功能表格'
+  //       },
+  //       component: () => import('@/view/components/tables/tables.vue')
+  //     },
+  //     {
+  //       path: 'split_pane_page',
+  //       name: 'split_pane_page',
+  //       meta: {
+  //         icon: 'md-pause',
+  //         title: '分割窗口'
+  //       },
+  //       component: () => import('@/view/components/split-pane/split-pane.vue')
+  //     },
+  //     {
+  //       path: 'markdown_page',
+  //       name: 'markdown_page',
+  //       meta: {
+  //         icon: 'logo-markdown',
+  //         title: 'Markdown编辑器'
+  //       },
+  //       component: () => import('@/view/components/markdown/markdown.vue')
+  //     },
+  //     {
+  //       path: 'editor_page',
+  //       name: 'editor_page',
+  //       meta: {
+  //         icon: 'ios-create',
+  //         title: '富文本编辑器'
+  //       },
+  //       component: () => import('@/view/components/editor/editor.vue')
+  //     },
+  //     {
+  //       path: 'icons_page',
+  //       name: 'icons_page',
+  //       meta: {
+  //         icon: '_bear',
+  //         title: '自定义图标'
+  //       },
+  //       component: () => import('@/view/components/icons/icons.vue')
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/update',
+  //   name: 'update',
+  //   meta: {
+  //     icon: 'md-cloud-upload',
+  //     title: '数据上传'
+  //   },
+  //   component: Main,
+  //   children: [
+  //     {
+  //       path: 'update_table_page',
+  //       name: 'update_table_page',
+  //       meta: {
+  //         icon: 'ios-document',
+  //         title: '上传Csv'
+  //       },
+  //       component: () => import('@/view/update/update-table.vue')
+  //     },
+  //     {
+  //       path: 'update_paste_page',
+  //       name: 'update_paste_page',
+  //       meta: {
+  //         icon: 'md-clipboard',
+  //         title: '粘贴表格数据'
+  //       },
+  //       component: () => import('@/view/update/update-paste.vue')
+  //     }
+  //   ]
+  // },
   // {
   //   path: '/excel',
   //   name: 'excel',
