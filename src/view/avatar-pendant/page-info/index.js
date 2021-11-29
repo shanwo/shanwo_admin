@@ -1,27 +1,31 @@
 export const columns = [
-    {
-        key: "id",
-        title: "id"
-    },
-    {
-        key: "image",
-        title: "徽章",
-        render: (h, { row }) => {
-            return h('img', {
-                attrs: {
-                    src: row.image,
-                    width: 30,
-                    height: 30
-                }
-            })
+  {
+    key: 'id',
+    title: 'id'
+  },
+  {
+    key: 'image',
+    title: '徽章',
+    render: (h, { row }) => {
+      return h('img', {
+        attrs: {
+          src: row.image,
+          width: 30,
+          height: 30
         }
-    },
-    {
-        key: "order",
-        title: "排序"
-    },
-    {
-        slot: "action",
-        title: "操作"
-    },
+      })
+    }
+  },
+  {
+    key: 'order',
+    title: '排序'
+  },
+  {
+    key: 'updated_at',
+    title: '更新时间'
+  },
+  {
+    slot: 'action',
+    title: '操作'
+  }
 ]

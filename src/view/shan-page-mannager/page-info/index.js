@@ -2,19 +2,19 @@
 export const cacheTypeList = {
   0: {
     type: 0,
-    name: '关闭'
+    name: '清除缓存'
   },
   1: {
     type: 1,
-    name: '全部'
+    name: '全部缓存'
   },
   2: {
     type: 2,
-    name: '热门'
+    name: '仅热门'
   },
   3: {
     type: 3,
-    name: '最近更新'
+    name: '仅最近更新'
   }
 }
 export const openType = [
@@ -72,6 +72,10 @@ export const columns = [
   {
     key: 'browse',
     title: '浏览数'
+  },
+  {
+    key: 'sort',
+    title: '排序值'
   },
   {
     key: 'is_open',
