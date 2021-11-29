@@ -188,8 +188,8 @@ export default [
         meta: {
           icon: 'md-cart',
           title: '订单数据'
-        }
-        // component: () => import('@/view/order-data/list.vue')
+        },
+        component: () => import('@/view/order-data/list.vue')
       }
     ]
   },
