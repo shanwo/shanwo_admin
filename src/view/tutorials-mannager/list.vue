@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     /**
-     * @description 获取挂件列表列表
+     * @description 获取教程列表
      * @returns { undefined }
     */
     getTutorialsMannagerList () {
