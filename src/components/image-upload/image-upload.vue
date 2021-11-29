@@ -1,42 +1,42 @@
 <template>
   <div :class="prefixCls">
-        <Upload 
-            :action="`${config.baseUrl.dev}/upload/file`" 
+        <Upload
+            :action="`${config.baseUrl.dev}/upload/file`"
             :headers="{
                 Authorization: `Bearer ${this.token}`
             }"
             :on-success="uploadSuccess">
             <div :class="prefixCls + '-box'">
-                <img :src="value" width="30">
+                <img :src="value" width="256">
             </div>
         </Upload>
   </div>
 </template>
 
 <script>
-const prefixCls = "image-upload";
 import config from '@/config/index'
+const prefixCls = 'image-upload'
 export default {
-    name: "image-upload",
-    data () {
-        return {
-            prefixCls,
-            config
-        }
-    },
-    props: {
-        value: ''
-    },
-    computed: {
-        token () {
-            return this.$store.state && this.$store.state.user && this.$store.state.user.token;
-        }
-    },
-    methods: {
-        uploadSuccess (args) {
-            this.$emit('on-change',args);
-        }
+  name: 'image-upload',
+  data () {
+    return {
+      prefixCls,
+      config
     }
+  },
+  props: {
+    value: ''
+  },
+  computed: {
+    token () {
+      return this.$store.state && this.$store.state.user && this.$store.state.user.token
+    }
+  },
+  methods: {
+    uploadSuccess (args) {
+      this.$emit('on-change', args)
+    }
+  }
 }
 </script>
 
@@ -47,11 +47,9 @@ export default {
 @prefix: ~"image-upload";
 .@{prefix}{
     &-box{
-        width: 32px;
-        height: 32px;
-        
+        width: 258px;
         border: 1px dashed #999;
     }
-  
+
 }
 </style>
