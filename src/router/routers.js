@@ -137,8 +137,8 @@ export default [
     ]
   },
   {
-    path: '/template_management',
-    name: 'template_management',
+    path: '/template_mannager',
+    name: 'template_mannager',
     component: Main,
     meta: {
       hideInBread: true
@@ -146,18 +146,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'template_management_list',
+        name: 'template_mannager_list',
         meta: {
           icon: 'md-browsers',
           title: '模板管理'
         }
-        // component: () => import('@/view/template-management/list.vue')
+        // component: () => import('@/view/template-mannager/list.vue')
       }
     ]
   },
   {
-    path: '/tutorials_pendant',
-    name: 'tutorials_pendant',
+    path: '/tutorials_mannager',
+    name: 'tutorials_mannager',
     component: Main,
     meta: {
       hideInBread: true
@@ -165,18 +165,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'tutorials_pendant_list',
+        name: 'tutorials_mannager_list',
         meta: {
           icon: 'md-glasses',
           title: '教程管理'
-        }
-        // component: () => import('@/view/tutorials-pendant/list.vue')
+        },
+        component: () => import('@/view/tutorials-mannager/list.vue')
       }
     ]
   },
   {
-    path: '/order_pendant',
-    name: 'order_pendant',
+    path: '/order_data',
+    name: 'order_data',
     component: Main,
     meta: {
       hideInBread: true
@@ -184,18 +184,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'order_pendant_list',
+        name: 'order_data_list',
         meta: {
           icon: 'md-cart',
           title: '订单数据'
         }
-        // component: () => import('@/view/order-pendant/list.vue')
+        // component: () => import('@/view/order-data/list.vue')
       }
     ]
   },
   {
-    path: '/ad_pendant',
-    name: 'ad_pendant',
+    path: '/ad_mannager',
+    name: 'ad_mannager',
     component: Main,
     meta: {
       hideInBread: true
@@ -203,18 +203,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'ad_pendant_list',
+        name: 'ad_mannager_list',
         meta: {
           icon: 'md-pie',
           title: '广告管理'
         }
-        // component: () => import('@/view/ad-pendant/list.vue')
+        // component: () => import('@/view/ad-mannager/list.vue')
       }
     ]
   },
   {
-    path: '/feedback_pendant',
-    name: 'feedback_pendant',
+    path: '/user_feedback',
+    name: 'user_feedback',
     component: Main,
     meta: {
       hideInBread: true
@@ -222,18 +222,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'feedback_pendant_list',
+        name: 'user_feedback_list',
         meta: {
           icon: 'md-chatboxes',
           title: '用户反馈'
         }
-        // component: () => import('@/view/feedback-pendant/list.vue')
+        // component: () => import('@/view/user-feedback/list.vue')
       }
     ]
   },
   {
-    path: '/config_pendant',
-    name: 'config_pendant',
+    path: '/config_mannager',
+    name: 'config_mannager',
     component: Main,
     meta: {
       hideInBread: true
@@ -241,18 +241,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'config_pendant_list',
+        name: 'config_mannager_list',
         meta: {
           icon: 'md-settings',
           title: '配置管理'
         }
-        // component: () => import('@/view/config-pendant/list.vue')
+        // component: () => import('@/view/config-mannager/list.vue')
       }
     ]
   },
   {
-    path: '/pay_pendant',
-    name: 'pay_pendant',
+    path: '/pay_channel',
+    name: 'pay_channel',
     component: Main,
     meta: {
       hideInBread: true
@@ -260,12 +260,12 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'pay_pendant_list',
+        name: 'pay_channel_list',
         meta: {
           icon: 'md-cart',
           title: '支付渠道'
         }
-        // component: () => import('@/view/pay-pendant/list.vue')
+        // component: () => import('@/view/pay-channel/list.vue')
       }
     ]
   }
