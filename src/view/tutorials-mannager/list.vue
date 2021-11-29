@@ -19,8 +19,8 @@
 </template>
 
 <script>
-const prefixCls = 'tutorials-mannager-list';
-import { getTutorialsMannagerList, getSortList } from '@/api/tutorials-mannager';
+import { getTutorialsMannagerList, getSortList } from '@/api/tutorials-mannager'
+const prefixCls = 'tutorials-mannager-list'
 export default {
   name: 'tutorials-mannager-list',
   components: {
@@ -56,17 +56,17 @@ export default {
     */
     getTutorialsMannagerList () {
       getTutorialsMannagerList(this.searchData).then(res => {
-            this.total = res.data.total;
-            this.tutorialsMannagerList = res.data.lists || [];
-        })
+        this.total = res.data.total
+        this.tutorialsMannagerList = res.data.lists || []
+      })
     },
     /**
      * @description 获取sort列表
      * @returns { undefined }
     */
     getSortList () {
-      return getSortList({type: this.sortType}).then(res => {
-        this.sortList = res.data && res.data.lists;
+      return getSortList({ type: this.sortType }).then(res => {
+        this.sortList = res.data && res.data.lists
       })
     },
     /**
@@ -75,31 +75,31 @@ export default {
      * @returns { undefined }
     */
     pageChange (page) {
-        this.searchData.page = page;
-        this.getTutorialsMannagerList();
+      this.searchData.page = page
+      this.getTutorialsMannagerList()
     },
     addIcon () {
-      this.addIconStatus = true;
+      this.addIconStatus = true
     },
     toDetail (id) {
-      this.id = id;
-      this.addIconStatus = true;
+      this.id = id
+      this.addIconStatus = true
     },
     editChange () {
-      this.id = 0;
-      this.getTutorialsMannagerList();
+      this.id = 0
+      this.getTutorialsMannagerList()
     },
     init () {
-      let that = this;
+      let that = this
       this.getSortList().then(() => {
-        that.searchData.sort_id =  that.sortList[0].id;
-         // 执行查询列表
-        that.getTutorialsMannagerList();
+        that.searchData.sort_id = that.sortList[0].id
+        // 执行查询列表
+        that.getTutorialsMannagerList()
       })
     }
   },
   created () {
-      this.init();
+    this.init()
   }
 }
 </script>

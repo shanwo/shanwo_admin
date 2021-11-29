@@ -13,33 +13,33 @@
             <slot name="btn"></slot>
         </div>
     </div>
-    
+
 </template>
 
 <script>
-const prefixCls = "link-white-list";
 import { openType } from './../page-info'
+const prefixCls = 'link-white-list'
 export default {
-    name: "link-white-list",
-    data() {
-        return {
-            prefixCls,
-            openType
-        };
-    },
-    props: {
-        value: {
-        type: Object,
-        default: () => {},
-        },
-    },
-    inject: [ 'sortList' ],
-    computed: {
-        getSortList () {
-            return this.sortList && this.sortList() || {}
-        }
+  name: 'link-white-list',
+  data () {
+    return {
+      prefixCls,
+      openType
     }
-};
+  },
+  props: {
+    value: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  inject: [ 'sortList' ],
+  computed: {
+    getSortList () {
+      return this.sortList && this.sortList() || {}
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
