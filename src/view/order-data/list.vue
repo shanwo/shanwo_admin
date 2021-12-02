@@ -3,12 +3,12 @@
     <div :class="prefixCls + '-search'">
       <search v-model="searchData">
         <template slot="btn">
-          <Button @click="getOrderList" type="primary">查询</Button>
+          <Button type="primary" @click="getOrderList">查询</Button>
         </template>
       </search>
     </div>
     <div :class="prefixCls + '-table'">
-      <table-list @refresh="getOrderList" :orderList="orderList"></table-list>
+      <table-list :orderList="orderList" @refresh="getOrderList"></table-list>
     </div>
     <div :class="prefixCls + '-page'">
       <Page :total="total" show-sizer @on-change="pageChange"></Page>
@@ -22,7 +22,8 @@ const prefixCls = 'order-data-list'
 export default {
   name: 'order-data-list',
   components: {
-
+    search: () => import('./components/search.vue'),
+    tableList: () => import('./components/table-list.vue')
   },
   data () {
     return {
@@ -31,6 +32,9 @@ export default {
       total: 0,
       orderList: [],
       searchData: {
+        order_sn: '',
+        third_sn: '',
+        keyword: '',
         page: 1,
         size: 10
       }
@@ -55,13 +59,10 @@ export default {
     pageChange (page) {
       this.searchData.page = page
       this.getOrderList()
-    },
-    init () {
-      this.getOrderList()
     }
   },
   created () {
-    this.init()
+    this.getOrderList()
   }
 }
 </script>
@@ -70,7 +71,7 @@ export default {
 .mr10{
   margin-right: 10px;
 }
-@prefix: ~"order_data_list";
+@prefix: ~"order-data-list";
 .@{prefix}{
   padding: 10px;
   border-radius: 4px;

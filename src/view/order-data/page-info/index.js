@@ -35,7 +35,10 @@ export const columns = [
   },
   {
     key: 'pay_price',
-    title: '支付金额(分)'
+    title: '支付金额',
+    render: (h, { row }) => {
+      return h('span', row.pay_price / 100)
+    }
   },
   {
     key: 'status',
