@@ -17,7 +17,7 @@ export default {
    * @description api请求基础路径
    */
   baseUrl: {
-    dev: 'https://admin.shanwo.cc',
+    dev: '//test.shanwo.cc/admin',
     pro: 'https://admin.shanwo.cc'
   },
   /**
