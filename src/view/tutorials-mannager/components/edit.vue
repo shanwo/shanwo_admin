@@ -114,12 +114,3 @@ export default {
 
 }
 </script>
-
-<style lang="less" scoped>
-    .iptWidth{
-        width: 300px;
-    }
-    .mr{
-        margin-right: 10px;
-    }
-</style>

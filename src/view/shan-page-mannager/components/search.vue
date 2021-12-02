@@ -19,41 +19,39 @@
             <slot name="btn"></slot>
         </div>
     </div>
-    
+
 </template>
 
 <script>
-const prefixCls = "shan-page-mannager";
 import { openType, userType } from './../page-info'
+const prefixCls = 'shan-page-mannager'
 export default {
-    name: "shan-page-mannager",
-    props: {
-        value: {
-        type: Object,
-        default: () => {},
-        },
-    },
-    data() {
-        return {
-            prefixCls,
-            openType,
-            userType
-        };
-    },
-};
+  name: 'shan-page-mannager',
+  props: {
+    value: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  data () {
+    return {
+      prefixCls,
+      openType,
+      userType
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
 @prefix: ~"shan-page-mannager";
 .@{prefix}{
-    padding-bottom: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  padding-bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
-</style>
-<style>
-    .inputWidth {
-        width: 160px;
-    }
+.inputWidth {
+  width: 160px;
+}
 </style>

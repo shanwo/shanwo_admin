@@ -16,40 +16,38 @@
             <slot name="btn"></slot>
         </div>
     </div>
-    
+
 </template>
 
 <script>
-const prefixCls = "user-management-search";
-import { userType } from './../page-info';
+import { userType } from './../page-info'
+const prefixCls = 'user-management-search'
 export default {
-    name: "user-management-search",
-    props: {
-        value: {
-        type: Object,
-        default: () => {},
-        },
-    },
-    data() {
-        return {
-            prefixCls,
-            userType
-        };
-    },
-};
+  name: 'user-management-search',
+  props: {
+    value: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  data () {
+    return {
+      prefixCls,
+      userType
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
 @prefix: ~"user-management-search";
 .@{prefix}{
-    padding-bottom: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  padding-bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
-</style>
-<style>
-    .inputWidth {
-        width: 160px;
-    }
+.inputWidth {
+  width: 160px;
+}
 </style>

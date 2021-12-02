@@ -9,77 +9,70 @@
                 <FormItem label="排序值：">
                 <Input-number  v-model="pageInfo.sort" placeholder="请输入排序值" class="inputWidth"></Input-number>
             </FormItem>
-       </Form> 
+       </Form>
        <div slot="footer">
            <Button type="primary" @click="confirm">确定</Button>
            <Button type="primary" @click="cancel" ghost>取消</Button>
        </div>
-    </Modal>   
-    
+    </Modal>
+
 </template>
 
 <script>
-const prefixCls = "shan-page-mannager-edit";
 import { openType, userType, cacheTypeList } from './../page-info'
-import { setSortConfig } from '@/api/shan-page-mannager';
+import { setSortConfig } from '@/api/shan-page-mannager'
+const prefixCls = 'shan-page-mannager-edit'
 export default {
-    name: "shan-page-mannager-edit",
-    props: {
-        value: {
-            type: Boolean,
-            default: false,
-        },
-        id: Number
+  name: 'shan-page-mannager-edit',
+  props: {
+    value: {
+      type: Boolean,
+      default: false
     },
-    data() {
-        return {
-            prefixCls,
-            userType,
-            openType,
-            cacheTypeList,
-            pageInfo: {
-                cache: 0,
-                sort: 1
-            }
-        };
-    },
-    computed: {
-        param: {
-            get () {
-                return this.value;
-            },
-            set (val) {
-                this.$emit('input', val);
-            }
-        }
-    },
-    methods: {
-        /**
+    id: Number
+  },
+  data () {
+    return {
+      prefixCls,
+      userType,
+      openType,
+      cacheTypeList,
+      pageInfo: {
+        cache: 0,
+        sort: 1
+      }
+    }
+  },
+  computed: {
+    param: {
+      get () {
+        return this.value
+      },
+      set (val) {
+        this.$emit('input', val)
+      }
+    }
+  },
+  methods: {
+    /**
          * @description 确认修改用用户状态
          * @returns { undefined }
         */
-        confirm () {
-            setSortConfig({ id: this.id, ...this.pageInfo }).then(() => {
-                this.$Message.success('修改成功');
-                this.$emit('refresh');
-                this.cancel();
-            })
-        },
-        /**
+    confirm () {
+      setSortConfig({ id: this.id, ...this.pageInfo }).then(() => {
+        this.$Message.success('修改成功')
+        this.$emit('refresh')
+        this.cancel()
+      })
+    },
+    /**
          * @description 取消弹层
          * @returns { undefined }
         */
-        cancel () {
-            this.$set(this, 'userInfo', {});
-            this.param = false;
-        }
+    cancel () {
+      this.$set(this, 'userInfo', {})
+      this.param = false
     }
-};
-</script>
-
-<style lang="less" scoped>
-@prefix: ~"shan-page-mannager-edit";
-.@{prefix}{
-   
+  }
 }
-</style>
+</script>

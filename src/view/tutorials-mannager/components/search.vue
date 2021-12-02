@@ -45,14 +45,12 @@ export default {
 <style lang="less" scoped>
 @prefix: ~"link-white-list";
 .@{prefix}{
-    padding-bottom: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  padding-bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
-</style>
-<style>
-    .inputWidth {
-        width: 160px;
-    }
+.inputWidth {
+  width: 160px;
+}
 </style>

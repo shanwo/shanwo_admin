@@ -13,40 +13,38 @@
             <slot name="btn"></slot>
         </div>
     </div>
-    
+
 </template>
 
 <script>
-const prefixCls = "mannager-classification-search";
-import { classificationType } from './../page-info';
+import { classificationType } from './../page-info'
+const prefixCls = 'mannager-classification-search'
 export default {
-    name: "mannager-classification-search",
-    props: {
-        value: {
-        type: Object,
-        default: () => {},
-        },
-    },
-    data() {
-        return {
-            prefixCls,
-            classificationType
-        };
-    },
-};
+  name: 'mannager-classification-search',
+  props: {
+    value: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  data () {
+    return {
+      prefixCls,
+      classificationType
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
 @prefix: ~"mannager-classification-search";
 .@{prefix}{
-    padding-bottom: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  padding-bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
-</style>
-<style>
-    .inputWidth {
-        width: 160px;
-    }
+.inputWidth {
+  width: 160px;
+}
 </style>

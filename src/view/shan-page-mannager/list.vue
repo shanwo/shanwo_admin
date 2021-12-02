@@ -17,9 +17,9 @@
 </template>
 
 <script>
-const prefixCls = 'shan-page-mannager-list';
 import { userType } from './page-info'
-import { getPageList } from '@/api/shan-page-mannager';
+import { getPageList } from '@/api/shan-page-mannager'
+const prefixCls = 'shan-page-mannager-list'
 export default {
   name: 'shan-page-mannager-list',
   components: {
@@ -47,10 +47,10 @@ export default {
      * @returns { undefined }
     */
     getPageList () {
-        getPageList(this.searchData).then(res => {
-            this.total = res.data.total;
-            this.pageList = res.data.lists || [];
-        })
+      getPageList(this.searchData).then(res => {
+        this.total = res.data.total
+        this.pageList = res.data.lists || []
+      })
     },
     /**
      * @description 分页参数发生变化时调用
@@ -58,17 +58,20 @@ export default {
      * @returns { undefined }
     */
     pageChange (page) {
-        this.value.page = page;
-        this.getPageList();
+      this.value.page = page
+      this.getPageList()
     }
   },
   created () {
-      this.getPageList();
+    this.getPageList()
   }
 }
 </script>
 
 <style lang="less" scoped>
+.mr10{
+  margin-right: 10px;
+}
 @prefix: ~"shan-page-mannager-list";
 .@{prefix}{
   padding: 10px;

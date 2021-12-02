@@ -13,44 +13,42 @@
             <slot name="btn"></slot>
         </div>
     </div>
-    
+
 </template>
 
 <script>
-const prefixCls = "link-white-list";
+const prefixCls = 'link-white-list'
 export default {
-    name: "link-white-list",
-    data() {
-        return {
-            prefixCls
-        };
-    },
-    props: {
-        value: {
-        type: Object,
-        default: () => {},
-        },
-    },
-    inject: [ 'sortList' ],
-    computed: {
-        getSortList () {
-            return this.sortList && this.sortList() || {}
-        }
+  name: 'link-white-list',
+  data () {
+    return {
+      prefixCls
     }
-};
+  },
+  props: {
+    value: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  inject: [ 'sortList' ],
+  computed: {
+    getSortList () {
+      return this.sortList && this.sortList() || {}
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
 @prefix: ~"link-white-list";
 .@{prefix}{
-    padding-bottom: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  padding-bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
-</style>
-<style>
-    .inputWidth {
-        width: 160px;
-    }
+.inputWidth {
+  width: 160px;
+}
 </style>

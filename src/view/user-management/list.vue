@@ -17,8 +17,8 @@
 </template>
 
 <script>
-const prefixCls = 'user-management-list';
-import { getUserList } from '@/api/user-management';
+import { getUserList } from '@/api/user-management'
+const prefixCls = 'user-management-list'
 export default {
   name: 'user-management-list',
   components: {
@@ -32,20 +32,20 @@ export default {
       userList: [],
       userType: [
         {
-            type: 0,
-            typeName: '全部'
+          type: 0,
+          typeName: '全部'
         },
         {
-            type: 1,
-            typeName: '普通'
+          type: 1,
+          typeName: '普通'
         },
         {
-            type: 2,
-            typeName: '会员'
+          type: 2,
+          typeName: '会员'
         },
         {
-            type: 3,
-            typeName: '黑名单'
+          type: 3,
+          typeName: '黑名单'
         }
       ],
       searchData: {
@@ -62,10 +62,10 @@ export default {
      * @returns { undefined }
     */
     getUserList () {
-        getUserList(this.searchData).then(res => {
-            this.total = res.data.total;
-            this.userList = res.data.lists || [];
-        })
+      getUserList(this.searchData).then(res => {
+        this.total = res.data.total
+        this.userList = res.data.lists || []
+      })
     },
     /**
      * @description 分页参数发生变化时调用
@@ -73,17 +73,20 @@ export default {
      * @returns { undefined }
     */
     pageChange (page) {
-        this.value.page = page;
-        this.getUserList();
+      this.value.page = page
+      this.getUserList()
     }
   },
   created () {
-      this.getUserList();
+    this.getUserList()
   }
 }
 </script>
 
 <style lang="less" scoped>
+.mr10{
+  margin-right: 10px;
+}
 @prefix: ~"user-management-list";
 .@{prefix}{
   padding: 10px;
