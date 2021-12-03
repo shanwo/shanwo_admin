@@ -35,7 +35,7 @@ export default {
       userType,
       searchData: {
         nickname: '',
-        open: 0,
+        open: '',
         keyword: '',
         page: 1,
         size: 10
