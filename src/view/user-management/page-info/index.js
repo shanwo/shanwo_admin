@@ -16,6 +16,32 @@ export const userType = [
     typeName: '黑名单'
   }
 ]
+export const userRenewal = [
+  {
+    type: 0,
+    typeName: '-'
+  },
+  {
+    type: 1,
+    typeName: '年'
+  },
+  {
+    type: 2,
+    typeName: '季'
+  },
+  {
+    type: 3,
+    typeName: '月'
+  },
+  {
+    type: 4,
+    typeName: '周'
+  },
+  {
+    type: 5,
+    typeName: '天'
+  }
+]
 export const columns = [
   {
     key: 'id',

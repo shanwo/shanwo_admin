@@ -16,7 +16,7 @@ export const getUserInfo = (params) => {
   })
 }
 
-export const eidtUserStatus = (params) => {
+export const editUserStatus = (params) => {
   return axios.request({
     url: '/user/status',
     data: params,
