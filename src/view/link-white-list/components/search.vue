@@ -35,7 +35,7 @@ export default {
   inject: ['sortList'],
   computed: {
     getSortList () {
-      return this.sortList
+      return this.sortList()
     }
   }
 }

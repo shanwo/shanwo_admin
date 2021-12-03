@@ -75,7 +75,7 @@ export default {
   },
   computed: {
     getSortList () {
-      return this.sortList
+      return this.sortList()
     }
   },
   methods: {

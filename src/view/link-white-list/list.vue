@@ -91,13 +91,11 @@ export default {
       this.getLinkWhiteList()
     },
     init () {
+      let that = this
       this.getSortList().then(() => {
-        let that = this
-        this.getSortList().then(() => {
-          that.searchData.sort_id = that.sortList[0].id
-          // 执行查询列表
-          that.getLinkWhiteList()
-        })
+        that.searchData.sort_id = that.sortList[0].id
+        // 执行查询列表
+        that.getLinkWhiteList()
       })
     }
   },
