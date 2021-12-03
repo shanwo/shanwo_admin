@@ -4,12 +4,13 @@ import routes from './routers'
 import store from '@/store'
 import iView from 'iview'
 import { toLogin } from '@/api/user'
-import { getUserInfo, canTurnTo, setTitle, urlQuery } from '@/libs/util'
+import { getToken, canTurnTo, setTitle, urlQuery } from '@/libs/util'
 import config from '@/config'
 const { homeName } = config
 const userToLogin = () => {
   toLogin().then(res => {
     if (res.data) {
+      console.log(res.data)
       window.location.href = res.data.redirect_url
     }
   })
@@ -27,7 +28,8 @@ const turnTo = (to, access, next) => {
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
-  const token = getUserInfo().api_token
+  const token = getToken()
+  console.log(token)
   if (!token) {
     //! 需要处理token失效的情况清除token
     let query = urlQuery(window.location.search)

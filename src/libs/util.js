@@ -5,17 +5,23 @@ import { forEach, hasOneOf, objEqual } from '@/libs/tools'
 
 const { title, useI18n } = config
 
-export const setUserInfo = (user) => {
-  localStorage.setItem('user', user)
+export const setUser = (info) => {
+  localStorage.setItem('user', JSON.stringify(info))
+  localStorage.setItem('token', info.api_token)
 }
-
-export const getUserInfo = () => {
-  const user = localStorage.getItem('user')
-  if (user) return user
+export const getToken = () => {
+  const token = localStorage.getItem('token')
+  if (token) return token
   else return false
 }
-export const removeUserInfo = () => {
+export const getUser = () => {
+  const user = localStorage.getItem('user')
+  if (user) return JSON.parse(user)
+  else return false
+}
+export const removeUser = () => {
   localStorage.removeItem('user')
+  localStorage.removeItem('token')
 }
 
 export const hasChild = (item) => {

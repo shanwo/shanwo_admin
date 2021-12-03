@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Vue from 'vue'
-import { getUserInfo } from '@/libs/util'
+import { getToken } from '@/libs/util'
 
 class HttpRequest {
   constructor (baseUrl = baseURL) {
@@ -63,7 +63,7 @@ class HttpRequest {
   request (options) {
     const instance = axios.create()
     options = Object.assign(this.getInsideConfig(), options)
-    let token = getUserInfo().api_token
+    let token = getToken()
     if (token) {
       options.headers.Authorization = `Bearer ${token}`
     }

@@ -1,39 +1,46 @@
-import { setUserInfo, getUserInfo, removeUserInfo } from '@/libs/util'
+import { setUser, removeUser } from '@/libs/util'
+import { getUserToken } from '../../api/user'
 
 export default {
   state: {
-    userName: getUserInfo().nickname,
-    userId: getUserInfo().id,
-    avatarImgPath: getUserInfo().avatar,
-    token: getUserInfo().api_token,
+    userName: '',
+    userId: 0,
+    avatarImgPath: '',
+    token: '',
     access: '',
-    userInfo: getUserInfo()
+    userInfo: {}
   },
   mutations: {
-    setUserInfo (status) {
-      setUserInfo(status)
-    },
-    removeUserInfo () {
-      removeUserInfo()
+    setUserInfo (state, user) {
+      state.userId = user.id
+      state.userName = user.nickname
+      state.avatarImgPath = user.avatar
+      state.token = user.api_token
+      state.userInfo = user
+      setUser(user)
     }
   },
   actions: {
-    // 登录
-    handleLogin ({ commit }) {
+    // 获取用户相关信息
+    userInfo ({ state, commit }, param) {
       return new Promise((resolve, reject) => {
-        login().then(res => {
-          const data = res.data
-          commit('setUserInfo', data)
-          resolve()
-        }).catch(err => {
-          reject(err)
-        })
+        try {
+          getUserToken(param).then(res => {
+            const data = res.data
+            commit('setUserInfo', data)
+            resolve()
+          }).catch(err => {
+            reject(err)
+          })
+        } catch (error) {
+          reject(error)
+        }
       })
     },
     // 退出登录
     handleLogOut () {
-      return new Promise(() => {
-        commit('removeUserInfo')
+      return new Promise((resolve) => {
+        removeUser()
         resolve()
       })
     }
