@@ -13,6 +13,11 @@
                         <Option v-for="item of openType" :value="item.type" :key="item.type">{{item.typeName}}</Option>
                     </Select>
                 </FormItem>
+                <FormItem label="用户类型：">
+                    <Select v-model="value.type" class="inputWidth">
+                        <Option v-for="item of userType" :value="item.type" :key="item.type">{{item.typeName}}</Option>
+                    </Select>
+                </FormItem>
             </Form>
         </div>
         <div :class="prefixCls + '-right'">
