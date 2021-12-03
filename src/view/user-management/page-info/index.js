@@ -1,6 +1,6 @@
 export const userType = [
   {
-    type: 0,
+    type: '',
     typeName: '全部'
   },
   {
