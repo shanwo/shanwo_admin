@@ -36,8 +36,7 @@ export default {
   },
   getters: {
     menuList: (state, getters, rootState) => {
-      let res = getMenuByRouter(routers, rootState.user.access)
-      return res;
+      return getMenuByRouter(routers, rootState.user.access)
     },
     errorCount: state => state.errorList.length
   },
