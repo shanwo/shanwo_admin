@@ -2,7 +2,7 @@
     <div :class="prefixCls">
         <Table :columns="columns" :data="userList" class="iviewtable">
             <template slot-scope="{ row }" slot="action">
-                <a @click="toEdit(row.id)">编辑</a>
+                <a @click="toStatus(row.id)">拉黑</a>
             </template>
         </Table>
         <edit v-model="isShowEdit" :id="editId" @refresh="refresh"></edit>
@@ -22,9 +22,6 @@ export default {
       default: () => []
     }
   },
-  components: {
-    edit: () => import('./edit.vue')
-  },
   data () {
     return {
       prefixCls,
@@ -42,14 +39,17 @@ export default {
     refresh () {
       this.$emit('refresh')
     },
-    /**
-         * @description 编辑当前数据
-         * @param { Number } id 当前数据id
-         * @returns { undefined }
-         */
-    toEdit (id) {
-      this.editId = id
-      this.isShowEdit = true
+    toStatus (id) {
+      this.$Modal.confirm({
+        title: '警告',
+        content: '拉黑后用户相关数据全部清除！！',
+        onOk: () => {
+          deleteDecoration({ id }).then(() => {
+            this.$Message.success('拉黑成功')
+            this.$emit('refresh')
+          })
+        }
+      })
     }
   }
 }
