@@ -2,18 +2,20 @@ import Cookies from 'js-cookie'
 // cookie保存的天数
 import config from '@/config'
 import { forEach, hasOneOf, objEqual } from '@/libs/tools'
-const { title, cookieExpires, useI18n } = config
 
-export const TOKEN_KEY = 'token'
+const { title, useI18n } = config
 
-export const setToken = (token) => {
-  Cookies.set(TOKEN_KEY, token, { expires: cookieExpires || 1 })
+export const setUserInfo = (user) => {
+  localStorage.setItem('user', user)
 }
 
-export const getToken = () => {
-  const token = Cookies.get(TOKEN_KEY)
-  if (token) return token
+export const getUserInfo = () => {
+  const user = localStorage.getItem('user')
+  if (user) return user
   else return false
+}
+export const removeUserInfo = () => {
+  localStorage.removeItem('user')
 }
 
 export const hasChild = (item) => {
@@ -355,11 +357,11 @@ export const scrollTop = (el, from = 0, to, duration = 500, endCallback) => {
   if (!window.requestAnimationFrame) {
     window.requestAnimationFrame = (
       window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      window.msRequestAnimationFrame ||
-      function (callback) {
-        return window.setTimeout(callback, 1000 / 60)
-      }
+        window.mozRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function (callback) {
+          return window.setTimeout(callback, 1000 / 60)
+        }
     )
   }
   const difference = Math.abs(from - to)
@@ -401,12 +403,12 @@ export const setTitle = (routeItem, vm) => {
  * @param {String} 地址
  */
 export const urlQuery = (url) => {
-  if (!url) return {};
-  let result = {};
-  let params = url.split('?')[1].split('&');
+  if (!url) return {}
+  let result = {}
+  let params = url.split('?')[1].split('&')
   params.forEach(param => {
-    let [key, val] = param.split('=');
-    result[key] = val;
-;  })
-return result;
+    let [key, val] = param.split('=')
+    result[key] = val
+  })
+  return result
 }

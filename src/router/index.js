@@ -4,13 +4,13 @@ import routes from './routers'
 import store from '@/store'
 import iView from 'iview'
 import { toLogin } from '@/api/user'
-import { setToken, getToken, canTurnTo, setTitle, urlQuery } from '@/libs/util'
+import { getUserInfo, canTurnTo, setTitle, urlQuery } from '@/libs/util'
 import config from '@/config'
 const { homeName } = config
 const userToLogin = () => {
   toLogin().then(res => {
     if (res.data) {
-      window.location.href = res.data.redirect_url;
+      window.location.href = res.data.redirect_url
     }
   })
 }
@@ -27,18 +27,17 @@ const turnTo = (to, access, next) => {
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
-  const token = getToken()
+  const token = getUserInfo().api_token
   if (!token) {
     //! 需要处理token失效的情况清除token
     let query = urlQuery(window.location.search)
     if (query.code && query.state) {
       // 换取token
-      store.dispatch('getUserInfo', query).then(res => {
-        next({path: '/home'})
+      store.dispatch('userInfo', query).then(res => {
+        next({ path: '/home' })
       }).catch(res => {
-        userToLogin();
+        userToLogin()
       })
-
     } else {
       userToLogin()
     }

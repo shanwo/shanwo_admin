@@ -1,18 +1,6 @@
 import axios from 'axios'
 import Vue from 'vue'
-import { getToken } from '@/libs/util'
-// import store from '@/store'
-// import { Spin } from 'iview'
-// const addErrorLog = errorInfo => {
-//   const { statusText, status, request: { responseURL } } = errorInfo
-//   let info = {
-//     type: 'ajax',
-//     code: status,
-//     mes: statusText,
-//     url: responseURL
-//   }
-//   // if (!responseURL.includes('save_error_logger')) store.dispatch('addErrorLog', info)
-// }
+import { getUserInfo } from '@/libs/util'
 
 class HttpRequest {
   constructor (baseUrl = baseURL) {
@@ -75,7 +63,7 @@ class HttpRequest {
   request (options) {
     const instance = axios.create()
     options = Object.assign(this.getInsideConfig(), options)
-    let token = getToken()
+    let token = getUserInfo().api_token
     if (token) {
       options.headers.Authorization = `Bearer ${token}`
     }
