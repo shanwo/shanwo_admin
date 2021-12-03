@@ -1,14 +1,14 @@
-import { setUser, removeUser } from '@/libs/util'
+import { setUser, getUser, getToken, removeUser } from '@/libs/util'
 import { getUserToken } from '../../api/user'
 
 export default {
   state: {
-    userName: '',
-    userId: 0,
-    avatarImgPath: '',
-    token: '',
-    access: '',
-    userInfo: {}
+    token: getToken(),
+    userId: getUser().id,
+    userName: getUser().nickname,
+    avatarImgPath: getUser().avatar,
+    userInfo: getUser(),
+    access: ''
   },
   mutations: {
     setUserInfo (state, user) {
