@@ -2,17 +2,19 @@
     <div :class="prefixCls">
         <Modal :value="value" title="编辑/添加" @on-cancel="cancel">
             <div :class="prefixCls + '-box'">
-                <Form :label-width="100" >
-                    <FormItem label="所属分类：" >
+                <Form :label-width="100">
+                    <FormItem label="所属分类：">
                         <Select v-model="iconInfo.sort_id" class="iptWidth">
-                            <Option v-for="(item, index) of getSortList" :value="item.id" :key="index">{{item.name}}</Option>
+                            <Option v-for="(item, index) of getSortList" :value="item.id" :key="index">{{item.name}}
+                            </Option>
                         </Select>
                     </FormItem>
-                    <FormItem label="图片上传：" >
-                        <image-upload v-model="iconInfo.image" @on-change="uploadImageChange" />
+                    <FormItem label="图片上传：">
+                        <image-upload v-model="iconInfo.image" @on-change="uploadImageChange"/>
                     </FormItem>
-                    <FormItem label="排序：" >
-                        <Input-number :min="1" v-model="iconInfo.order" placeholder="请输入排序值"  class="iptWidth"></Input-number>
+                    <FormItem label="排序：">
+                        <Input-number :min="1" v-model="iconInfo.order" placeholder="请输入排序值"
+                                      class="iptWidth"></Input-number>
                     </FormItem>
                 </Form>
             </div>
@@ -26,6 +28,7 @@
 
 <script>
 import { updateDecoration, addDecoration, getDecorationInfo } from '@/api/avatar-pendant'
+
 const prefixCls = 'edit'
 export default {
   name: 'edit',
@@ -42,7 +45,7 @@ export default {
       }
     }
   },
-  inject: [ 'sortList' ],
+  inject: ['sortList'],
   props: {
     value: {
       type: Boolean,
@@ -54,7 +57,7 @@ export default {
   },
   computed: {
     getSortList () {
-      return this.sortList && this.sortList() || []
+      return this.sortList
     }
   },
   methods: {

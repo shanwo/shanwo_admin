@@ -1,25 +1,27 @@
 <template>
-  <div :class="prefixCls">
-    <div :class="prefixCls + '-search'">
-      <search v-model="searchData">
-        <template slot="btn">
-          <Button @click="addIcon" type="primary" class="mr10">添加</Button>
-          <Button @click="getTutorialsMannagerList" type="primary">查询</Button>
-        </template>
-      </search>
+    <div :class="prefixCls">
+        <div :class="prefixCls + '-search'">
+            <search v-model="searchData">
+                <template slot="btn">
+                    <Button @click="addIcon" type="primary" class="mr10">添加</Button>
+                    <Button @click="getTutorialsMannagerList" type="primary">查询</Button>
+                </template>
+            </search>
+        </div>
+        <div :class="prefixCls + '-table'">
+            <table-list @refresh="getTutorialsMannagerList" :tutorialsMannagerList="tutorialsMannagerList"
+                        @toDetail="toDetail"></table-list>
+        </div>
+        <div :class="prefixCls + '-page'">
+            <Page :total="total" show-sizer @on-change="pageChange"></Page>
+        </div>
+        <edit v-model="addIconStatus" :id="id" @on-change="editChange"/>
     </div>
-    <div :class="prefixCls + '-table'">
-      <table-list @refresh="getTutorialsMannagerList" :tutorialsMannagerList="tutorialsMannagerList" @toDetail="toDetail"></table-list>
-    </div>
-    <div :class="prefixCls + '-page'">
-      <Page :total="total" show-sizer @on-change="pageChange"></Page>
-    </div>
-    <edit v-model="addIconStatus"  :id="id" @on-change="editChange"/>
-  </div>
 </template>
 
 <script>
 import { getTutorialsMannagerList, getSortList } from '@/api/tutorials-mannager'
+
 const prefixCls = 'tutorials-mannager-list'
 export default {
   name: 'tutorials-mannager-list',
@@ -51,9 +53,9 @@ export default {
   },
   methods: {
     /**
-     * @description 获取教程列表
-     * @returns { undefined }
-    */
+         * @description 获取教程列表
+         * @returns { undefined }
+         */
     getTutorialsMannagerList () {
       getTutorialsMannagerList(this.searchData).then(res => {
         this.total = res.data.total
@@ -61,19 +63,19 @@ export default {
       })
     },
     /**
-     * @description 获取sort列表
-     * @returns { undefined }
-    */
+         * @description 获取sort列表
+         * @returns { undefined }
+         */
     getSortList () {
       return getSortList({ type: this.sortType }).then(res => {
         this.sortList = res.data && res.data.lists
       })
     },
     /**
-     * @description 分页参数发生变化时调用
-     * @param { Number } page 当前页码
-     * @returns { undefined }
-    */
+         * @description 分页参数发生变化时调用
+         * @param { Number } page 当前页码
+         * @returns { undefined }
+         */
     pageChange (page) {
       this.searchData.page = page
       this.getTutorialsMannagerList()
@@ -105,17 +107,19 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.mr10{
-  margin-right: 10px;
-}
-@prefix: ~"tutorials-mannager-list";
-.@{prefix}{
-  padding: 10px;
-  border-radius: 4px;
-  background-color: #fff;
-  &-page{
-    padding: 8px;
-    text-align: right;
-  }
-}
+    .mr10 {
+        margin-right: 10px;
+    }
+
+    @prefix: ~"tutorials-mannager-list";
+    .@{prefix} {
+        padding: 10px;
+        border-radius: 4px;
+        background-color: #fff;
+
+        &-page {
+            padding: 8px;
+            text-align: right;
+        }
+    }
 </style>

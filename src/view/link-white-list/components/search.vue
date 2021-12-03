@@ -1,7 +1,7 @@
 <template>
     <div :class="prefixCls">
         <div :class="prefixCls + '-left'">
-             <Form :label-width="80" inline>
+            <Form :label-width="100" inline>
                 <FormItem label="分类：">
                     <Select v-model="value.sort_id" class="inputWidth">
                         <Option v-for="item of getSortList" :value="item.id" :key="item.id">{{item.name}}</Option>
@@ -28,27 +28,29 @@ export default {
   props: {
     value: {
       type: Object,
-      default: () => {}
+      default: () => {
+      }
     }
   },
-  inject: [ 'sortList' ],
+  inject: ['sortList'],
   computed: {
     getSortList () {
-      return this.sortList && this.sortList() || {}
+      return this.sortList
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"link-white-list";
-.@{prefix}{
-  padding-bottom: 10px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-.inputWidth {
-  width: 160px;
-}
+    @prefix: ~"link-white-list";
+    .@{prefix} {
+        padding-bottom: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .inputWidth {
+        width: 160px;
+    }
 </style>

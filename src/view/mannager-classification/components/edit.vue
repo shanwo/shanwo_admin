@@ -1,22 +1,23 @@
 <template>
-    <Modal :value="param" title="编辑用户信息" >
-       <Form>
-            <FormItem label="分类：" :label-width="100">
+    <Modal :value="param" title="编辑用户信息">
+        <Form :label-width="100">
+            <FormItem label="分类：">
                 <Select v-model="classificationInfo.type" :disabled="!!id" class="iptWidth">
-                    <Option v-for="item in classificationType" :value="item.type" :key="item.type">{{item.name}}</Option>
+                    <Option v-for="item in classificationType" :value="item.type" :key="item.type">{{item.name}}
+                    </Option>
                 </Select>
             </FormItem>
-            <FormItem label="名称：" :label-width="100">
+            <FormItem label="名称：">
                 <Input v-model="classificationInfo.name" placeholder="请输入名称" class="iptWidth"></Input>
             </FormItem>
-            <FormItem label="排序：" :label-width="100">
+            <FormItem label="排序：">
                 <Input-number v-model="classificationInfo.order" placeholder="请输入排序" class="iptWidth"></Input-number>
             </FormItem>
-       </Form>
-       <div slot="footer">
-           <Button type="primary" @click="confirm">确定</Button>
-           <Button type="primary" @click="cancel" ghost>取消</Button>
-       </div>
+        </Form>
+        <div slot="footer">
+            <Button type="primary" @click="confirm">确定</Button>
+            <Button type="primary" @click="cancel" ghost>取消</Button>
+        </div>
     </Modal>
 
 </template>
@@ -24,6 +25,7 @@
 <script>
 import { classificationType } from './../page-info'
 import { getClassificationInfo, addClassification, updateClassification } from '@/api/mannager-classification'
+
 const prefixCls = 'mannager-classification-edit'
 export default {
   name: 'mannager-classification-edit',
@@ -55,7 +57,7 @@ export default {
     /**
          * @description 确认修改类型
          * @returns { undefined }
-        */
+         */
     confirm () {
       let actionFn = addClassification
       let summitInfo = {}
@@ -77,7 +79,7 @@ export default {
     /**
          * @description 取消弹层
          * @returns { undefined }
-        */
+         */
     cancel () {
       this.$set(this, 'classificationInfo', {})
       this.$emit('input', false)
@@ -87,7 +89,7 @@ export default {
     /**
          * @description 获取用户信息
          * @returns { undefined }
-        */
+         */
     getClassificationInfo () {
       getClassificationInfo({ id: this.id }).then(res => {
         this.classificationInfo = res.data || {}
@@ -97,7 +99,7 @@ export default {
          * @description 控制弹出层的显示隐藏
          * @param { Boolearn } 是否显示
          * @returns { undefined }
-        */
+         */
     modelValChange (val) {
       if (val && this.id) {
         this.getClassificationInfo()

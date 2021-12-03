@@ -2,19 +2,20 @@
     @import "./common.less";
 </style>
 <template>
-  <div>
-    <Card title="导出EXCEL">
-      <Row>
-        <Button icon="md-download" :loading="exportLoading" @click="exportExcel">导出文件</Button>
-      </Row>
-    </Card>
-    <Row class="margin-top-10">
-      <Table :columns="tableTitle" :data="tableData"></Table>
-    </Row>
-  </div>
+    <div>
+        <Card title="导出EXCEL">
+            <Row>
+                <Button icon="md-download" :loading="exportLoading" @click="exportExcel">导出文件</Button>
+            </Row>
+        </Card>
+        <Row class="margin-top-10">
+            <Table :columns="tableTitle" :data="tableData"></Table>
+        </Row>
+    </div>
 </template>
 <script>
 import excel from '@/libs/excel'
+
 export default {
   name: 'export-excel',
   data () {

@@ -1,40 +1,41 @@
 <template>
-  <div>
-    <Card shadow>
-      <Row>
-        <i-col span="4">
-          <Button @click="createTagParams">添加一个标签</Button>
-        </i-col>
-        <i-col span="20">
-          <p>动态路由，添加params</p>
-        </i-col>
-      </Row>
-    </Card>
-    <Card shadow style="margin-top: 10px;">
-      <Row>
-        <i-col span="4">
-          <Button @click="createTagQuery">添加一个标签</Button>
-        </i-col>
-        <i-col span="20">
-          <p>动态路由，添加query</p>
-        </i-col>
-      </Row>
-    </Card>
-    <Card shadow style="margin-top: 10px;">
-      <Row>
-        <i-col span="4">
-          <Button @click="handleCloseTag">关闭工具方法页</Button>
-        </i-col>
-        <i-col span="20">
-          <p>手动关闭页面</p>
-        </i-col>
-      </Row>
-    </Card>
-  </div>
+    <div>
+        <Card shadow>
+            <Row>
+                <i-col span="4">
+                    <Button @click="createTagParams">添加一个标签</Button>
+                </i-col>
+                <i-col span="20">
+                    <p>动态路由，添加params</p>
+                </i-col>
+            </Row>
+        </Card>
+        <Card shadow style="margin-top: 10px;">
+            <Row>
+                <i-col span="4">
+                    <Button @click="createTagQuery">添加一个标签</Button>
+                </i-col>
+                <i-col span="20">
+                    <p>动态路由，添加query</p>
+                </i-col>
+            </Row>
+        </Card>
+        <Card shadow style="margin-top: 10px;">
+            <Row>
+                <i-col span="4">
+                    <Button @click="handleCloseTag">关闭工具方法页</Button>
+                </i-col>
+                <i-col span="20">
+                    <p>手动关闭页面</p>
+                </i-col>
+            </Row>
+        </Card>
+    </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
+
 export default {
   name: 'tools_methods_page',
   methods: {

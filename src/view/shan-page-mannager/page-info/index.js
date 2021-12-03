@@ -1,4 +1,3 @@
-
 export const cacheTypeList = {
   0: {
     type: 0,

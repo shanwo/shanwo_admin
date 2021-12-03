@@ -1,11 +1,11 @@
 <template>
     <div :class="prefixCls">
-       <Table :columns="columns" :data="tutorialsMannagerList" class="iviewtable">
+        <Table :columns="columns" :data="tutorialsMannagerList" class="iviewtable">
             <template slot-scope="{ row }" slot="action">
                 <a @click="toEdit(row.id)">编辑</a>&nbsp;
                 <a @click="toDel(row.id)">删除</a>
             </template>
-       </Table>
+        </Table>
     </div>
 
 </template>
@@ -13,6 +13,7 @@
 <script>
 import { deleteTutorials } from '@/api/tutorials-mannager'
 import { columns } from './../page-info'
+
 const prefixCls = 'avatar-pendant-list'
 export default {
   name: 'tutorials-mannager-list',
@@ -29,17 +30,17 @@ export default {
       default: () => []
     }
   },
-  inject: [ 'sortList' ],
+  inject: ['sortList'],
   computed: {
     getSortList () {
-      return this.sortList && this.sortList() || {}
+      return this.sortList
     }
   },
   methods: {
     /**
          * @description 刷新列表页数据
          * @returns { undefined }
-        */
+         */
     refresh () {
       this.$emit('refresh')
     },
@@ -47,7 +48,7 @@ export default {
          * @description 编辑当前数据
          * @param { Number } id 当前数据id
          * @returns { undefined }
-        */
+         */
     toEdit (id) {
       this.$emit('toDetail', id)
     },
