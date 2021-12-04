@@ -9,7 +9,7 @@
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list :userList="userList" @refresh="getClassificationList"></table-list>
+    <table-list :ClassificationList="ClassificationList" @refresh="getClassificationList"></table-list>
   </div>
   <edit v-model="isShowEdit" :id="editId" @refresh="refresh"></edit>
 </div>
@@ -32,11 +32,11 @@ export default {
       prefixCls,
       total: 0,
       editId: 0,
-      userList: [],
+      ClassificationList: [],
       isShowEdit: false,
       addClassificationStatus: false,
       searchData: {
-        type: 0
+        type: ''
       }
     }
   },
@@ -48,7 +48,7 @@ export default {
     getClassificationList () {
       getClassificationList(this.searchData).then(res => {
         this.total = res.data.total
-        this.userList = res.data.lists || []
+        this.ClassificationList = res.data.lists || []
       })
     },
     /**

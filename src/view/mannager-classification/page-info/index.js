@@ -1,25 +1,25 @@
-export const classificationType = {
-  0: {
+export const classificationType = [
+  {
     type: '',
     name: '全部'
   },
-  1: {
+  {
     type: 1,
     name: '头像'
   },
-  2: {
+  {
     type: 2,
     name: '教学'
   },
-  3: {
+  {
     type: 3,
     name: '模板'
   },
-  4: {
+  {
     type: 4,
     name: '链接'
   }
-}
+]
 export const columns = [
   {
     key: 'id',

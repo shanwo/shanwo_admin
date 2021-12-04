@@ -1,6 +1,6 @@
 <template>
 <div :class="prefixCls">
-  <Table :columns="columns" :data="userList" class="iviewtable">
+  <Table :columns="columns" :data="ClassificationList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
       <a @click="toEdit(row.id)">编辑</a>&nbsp;
       <a @click="toDel(row.id)">删除</a>
@@ -20,7 +20,7 @@ const prefixCls = 'mannager-classification-list'
 export default {
   name: 'mannager-classification-list',
   props: {
-    userList: {
+    ClassificationList: {
       type: Array,
       default: () => []
     }
