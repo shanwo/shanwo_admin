@@ -61,44 +61,6 @@ export default [
     ]
   },
   {
-    path: '/shan_page_management',
-    name: 'shan_page_management',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'shan_page_management_list',
-        meta: {
-          icon: 'md-document',
-          title: '闪页管理'
-        },
-        component: () => import('@/view/shan-page-mannager/list.vue')
-      }
-    ]
-  },
-  {
-    path: '/link_white_list',
-    name: 'link_white_list',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'link_white_list_list',
-        meta: {
-          icon: 'md-link',
-          title: '链接白名单'
-        },
-        component: () => import('@/view/link-white-list/list.vue')
-      }
-    ]
-  },
-  {
     path: '/mannager_classification',
     name: 'mannager_classification',
     component: Main,
@@ -133,6 +95,25 @@ export default [
           title: '头衔挂件'
         },
         component: () => import('@/view/avatar-pendant/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/link_white_list',
+    name: 'link_white_list',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'link_white_list_list',
+        meta: {
+          icon: 'md-link',
+          title: '链接白名单'
+        },
+        component: () => import('@/view/link-white-list/list.vue')
       }
     ]
   },
@@ -175,8 +156,8 @@ export default [
     ]
   },
   {
-    path: '/order_data',
-    name: 'order_data',
+    path: '/shan_page_management',
+    name: 'shan_page_management',
     component: Main,
     meta: {
       hideInBread: true
@@ -184,12 +165,12 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'order_data_list',
+        name: 'shan_page_management_list',
         meta: {
-          icon: 'md-cart',
-          title: '订单数据'
+          icon: 'md-document',
+          title: '闪页管理'
         },
-        component: () => import('@/view/order-data/list.vue')
+        component: () => import('@/view/shan-page-mannager/list.vue')
       }
     ]
   },
@@ -209,6 +190,44 @@ export default [
           title: '广告管理'
         }
         // component: () => import('@/view/ad-mannager/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/pay_channel',
+    name: 'pay_channel',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'pay_channel_list',
+        meta: {
+          icon: 'md-cart',
+          title: '支付渠道'
+        }
+        // component: () => import('@/view/pay-channel/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/order_data',
+    name: 'order_data',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'order_data_list',
+        meta: {
+          icon: 'md-cart',
+          title: '订单数据'
+        },
+        component: () => import('@/view/order-data/list.vue')
       }
     ]
   },
@@ -247,25 +266,6 @@ export default [
           title: '配置管理'
         }
         // component: () => import('@/view/config-mannager/list.vue')
-      }
-    ]
-  },
-  {
-    path: '/pay_channel',
-    name: 'pay_channel',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'pay_channel_list',
-        meta: {
-          icon: 'md-cart',
-          title: '支付渠道'
-        }
-        // component: () => import('@/view/pay-channel/list.vue')
       }
     ]
   }
