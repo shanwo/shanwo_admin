@@ -13,19 +13,15 @@
     <slot name="btn"></slot>
   </div>
 </div>
-
 </template>
 
 <script>
-import { openType } from './../page-info'
-
-const prefixCls = 'link-white-list'
+const prefixCls = 'avatar-pendant-list'
 export default {
-  name: 'link-white-list',
+  name: 'avatar-pendant-list',
   data () {
     return {
-      prefixCls,
-      openType
+      prefixCls
     }
   },
   props: {
@@ -45,7 +41,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"link-white-list";
+@prefix: ~"avatar-pendant-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

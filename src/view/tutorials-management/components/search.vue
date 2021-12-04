@@ -17,15 +17,12 @@
 </template>
 
 <script>
-import { openType } from './../page-info'
-
 const prefixCls = 'link-white-list'
 export default {
   name: 'link-white-list',
   data () {
     return {
-      prefixCls,
-      openType
+      prefixCls
     }
   },
   props: {
