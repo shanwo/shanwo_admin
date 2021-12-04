@@ -41,7 +41,7 @@
 
 <script>
 import { linkType } from './../page-info'
-import { updateLink, addLink, getLinkInfo } from '@/api/link-white-list'
+import { updateLink, addLink, getLinkInfo } from '@/api/link-white'
 
 const prefixCls = 'edit'
 export default {

@@ -99,8 +99,8 @@ export default [
     ]
   },
   {
-    path: '/link_white_list',
-    name: 'link_white_list',
+    path: '/link_white',
+    name: 'link_white',
     component: Main,
     meta: {
       hideInBread: true
@@ -108,12 +108,12 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'link_white_list_list',
+        name: 'link_white_list',
         meta: {
           icon: 'md-link',
           title: '链接白名单'
         },
-        component: () => import('@/view/link-white-list/list.vue')
+        component: () => import('@/view/link-white/list.vue')
       }
     ]
   },

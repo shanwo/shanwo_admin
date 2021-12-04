@@ -19,11 +19,11 @@
 </template>
 
 <script>
-import { getLinkWhiteList, getSortList } from '@/api/link-white-list'
-const prefixCls = 'link-white-list-list'
+import { getLinkWhiteList, getSortList } from '@/api/link-white'
+const prefixCls = 'link-white-list'
 
 export default {
-  name: 'link-white-list-list',
+  name: 'link-white-list',
   components: {
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue'),
@@ -110,7 +110,7 @@ export default {
         margin-right: 10px;
     }
 
-    @prefix: ~"link-white-list-list";
+    @prefix: ~"link-white-list";
     .@{prefix} {
         padding: 10px;
         border-radius: 4px;
