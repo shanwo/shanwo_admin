@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <div v-if="searchable && searchPlace === 'top'" class="search-con search-con-top">
-      <Select v-model="searchKey" class="search-col">
-        <Option v-for="item in columns" v-if="item.key !== 'handle'" :value="item.key" :key="`search-col-${item.key}`">{{ item.title }}</Option>
-      </Select>
-      <Input @on-change="handleClear" clearable placeholder="输入关键字搜索" class="search-input" v-model="searchValue"/>
-      <Button @click="handleSearch" class="search-btn" type="primary"><Icon type="search"/>&nbsp;&nbsp;搜索</Button>
-    </div>
-    <Table
+<div>
+  <div v-if="searchable && searchPlace === 'top'" class="search-con search-con-top">
+    <Select v-model="searchKey" class="search-col">
+      <Option v-for="item in columns" v-if="item.key !== 'handle'" :value="item.key" :key="`search-col-${item.key}`">{{ item.title }}</Option>
+    </Select>
+    <Input @on-change="handleClear" clearable placeholder="输入关键字搜索" class="search-input" v-model="searchValue"/>
+    <Button @click="handleSearch" class="search-btn" type="primary">
+      <Icon type="search"/>&nbsp;&nbsp;搜索
+    </Button>
+  </div>
+  <Table
       ref="tablesMain"
       :data="insideTableData"
       :columns="insideColumns"
@@ -33,26 +35,29 @@
       @on-row-click="onRowClick"
       @on-row-dblclick="onRowDblclick"
       @on-expand="onExpand"
-    >
-      <slot name="header" slot="header"></slot>
-      <slot name="footer" slot="footer"></slot>
-      <slot name="loading" slot="loading"></slot>
-    </Table>
-    <div v-if="searchable && searchPlace === 'bottom'" class="search-con search-con-top">
-      <Select v-model="searchKey" class="search-col">
-        <Option v-for="item in columns" v-if="item.key !== 'handle'" :value="item.key" :key="`search-col-${item.key}`">{{ item.title }}</Option>
-      </Select>
-      <Input placeholder="输入关键字搜索" class="search-input" v-model="searchValue"/>
-      <Button class="search-btn" type="primary"><Icon type="search"/>&nbsp;&nbsp;搜索</Button>
-    </div>
-    <a id="hrefToExportTable" style="display: none;width: 0px;height: 0px;"></a>
+  >
+    <slot name="header" slot="header"></slot>
+    <slot name="footer" slot="footer"></slot>
+    <slot name="loading" slot="loading"></slot>
+  </Table>
+  <div v-if="searchable && searchPlace === 'bottom'" class="search-con search-con-top">
+    <Select v-model="searchKey" class="search-col">
+      <Option v-for="item in columns" v-if="item.key !== 'handle'" :value="item.key" :key="`search-col-${item.key}`">{{ item.title }}</Option>
+    </Select>
+    <Input placeholder="输入关键字搜索" class="search-input" v-model="searchValue"/>
+    <Button class="search-btn" type="primary">
+      <Icon type="search"/>&nbsp;&nbsp;搜索
+    </Button>
   </div>
+  <a id="hrefToExportTable" style="display: none;width: 0px;height: 0px;"></a>
+</div>
 </template>
 
 <script>
 import TablesEdit from './edit.vue'
 import handleBtns from './handle-btns'
 import './index.less'
+
 export default {
   name: 'Tables',
   props: {
@@ -70,10 +75,10 @@ export default {
     },
     size: String,
     width: {
-      type: [Number, String]
+      type: [ Number, String ]
     },
     height: {
-      type: [Number, String]
+      type: [ Number, String ]
     },
     stripe: {
       type: Boolean,
@@ -157,7 +162,7 @@ export default {
         return h(TablesEdit, {
           props: {
             params: params,
-            value: this.insideTableData[params.index][params.column.key],
+            value: this.insideTableData[ params.index ][ params.column.key ],
             edittingCellId: this.edittingCellId,
             editable: this.editable
           },
@@ -174,7 +179,7 @@ export default {
               this.$emit('on-cancel-edit', params)
             },
             'on-save-edit': (params) => {
-              this.value[params.row.initRowIndex][params.column.key] = this.edittingText
+              this.value[ params.row.initRowIndex ][ params.column.key ] = this.edittingText
               this.$emit('input', this.value)
               this.$emit('on-save-edit', Object.assign(params, { value: this.edittingText }))
               this.edittingCellId = ''
@@ -188,7 +193,7 @@ export default {
       let options = item.options || []
       let insideBtns = []
       options.forEach(item => {
-        if (handleBtns[item]) insideBtns.push(handleBtns[item])
+        if (handleBtns[ item ]) insideBtns.push(handleBtns[ item ])
       })
       let btns = item.button ? [].concat(insideBtns, item.button) : insideBtns
       item.render = (h, params) => {
@@ -206,13 +211,13 @@ export default {
       })
     },
     setDefaultSearchKey () {
-      this.searchKey = this.columns[0].key !== 'handle' ? this.columns[0].key : (this.columns.length > 1 ? this.columns[1].key : '')
+      this.searchKey = this.columns[ 0 ].key !== 'handle' ? this.columns[ 0 ].key : (this.columns.length > 1 ? this.columns[ 1 ].key : '')
     },
     handleClear (e) {
       if (e.target.value === '') this.insideTableData = this.value
     },
     handleSearch () {
-      this.insideTableData = this.value.filter(item => item[this.searchKey].indexOf(this.searchValue) > -1)
+      this.insideTableData = this.value.filter(item => item[ this.searchKey ].indexOf(this.searchValue) > -1)
     },
     handleTableData () {
       this.insideTableData = this.value.map((item, index) => {

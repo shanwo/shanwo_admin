@@ -1,36 +1,36 @@
 <template>
-  <Layout style="height: 100%" class="main">
-    <Sider hide-trigger collapsible :width="256" :collapsed-width="64" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}">
-      <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
-        <!-- 需要放在菜单上面的内容，如Logo，写在side-menu标签内部，如下 -->
-        <div class="logo-con">
-          <img :src="logo" key="logo" />
+<Layout style="height: 100%" class="main">
+  <Sider hide-trigger collapsible :width="256" :collapsed-width="64" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}">
+    <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
+      <!-- 需要放在菜单上面的内容，如Logo，写在side-menu标签内部，如下 -->
+      <div class="logo-con">
+        <img :src="logo" key="logo"/>
+      </div>
+    </side-menu>
+  </Sider>
+  <Layout>
+    <Header class="header-con">
+      <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
+        <user :user-avatar="userAvatar"/>
+        <language v-if="$config.useI18n" @on-lang-change="setLocal" style="margin-right: 10px;" :lang="local"/>
+        <fullscreen v-model="isFullscreen" style="margin-right: 10px;"/>
+      </header-bar>
+    </Header>
+    <Content class="main-content-con">
+      <Layout class="main-layout-con">
+        <div class="tag-nav-wrapper">
+          <tags-nav :value="$route" @input="handleClick" :list="tagNavList" @on-close="handleCloseTag"/>
         </div>
-      </side-menu>
-    </Sider>
-    <Layout>
-      <Header class="header-con">
-        <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
-          <user :user-avatar="userAvatar"/>
-          <language v-if="$config.useI18n" @on-lang-change="setLocal" style="margin-right: 10px;" :lang="local"/>
-          <fullscreen v-model="isFullscreen" style="margin-right: 10px;"/>
-        </header-bar>
-      </Header>
-      <Content class="main-content-con">
-        <Layout class="main-layout-con">
-          <div class="tag-nav-wrapper">
-            <tags-nav :value="$route" @input="handleClick" :list="tagNavList" @on-close="handleCloseTag"/>
-          </div>
-          <Content class="content-wrapper">
-            <keep-alive :include="cacheList">
-              <router-view/>
-            </keep-alive>
-            <ABackTop :height="100" :bottom="80" :right="50" container=".content-wrapper"></ABackTop>
-          </Content>
-        </Layout>
-      </Content>
-    </Layout>
+        <Content class="content-wrapper">
+          <keep-alive :include="cacheList">
+            <router-view/>
+          </keep-alive>
+          <ABackTop :height="100" :bottom="80" :right="50" container=".content-wrapper"></ABackTop>
+        </Content>
+      </Layout>
+    </Content>
   </Layout>
+</Layout>
 </template>
 <script>
 import SideMenu from './components/side-menu'
@@ -46,6 +46,7 @@ import { getNewTagList, routeEqual } from '@/libs/util'
 import routers from '@/router/routers'
 import logo from '@/assets/images/logo.jpg'
 import './main.less'
+
 export default {
   name: 'Main',
   components: {
@@ -79,7 +80,7 @@ export default {
       return this.$store.state.user.avatarImgPath
     },
     cacheList () {
-      const list = ['ParentView', ...this.tagNavList.length ? this.tagNavList.filter(item => !(item.meta && item.meta.notCache)).map(item => item.name) : []]
+      const list = [ 'ParentView', ...this.tagNavList.length ? this.tagNavList.filter(item => !(item.meta && item.meta.notCache)).map(item => item.name) : [] ]
       return list
     },
     menuList () {
@@ -113,7 +114,7 @@ export default {
         query = route.query
       }
       if (name.indexOf('isTurnByHref_') > -1) {
-        window.open(name.split('_')[1])
+        window.open(name.split('_')[ 1 ])
         return
       }
       this.$router.push({

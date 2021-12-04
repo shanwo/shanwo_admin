@@ -1,46 +1,46 @@
 <template>
-  <Drawer ref="drawerWrapper"
-          :value="value"
-          @input="handleInput"
-          :width="width"
-          :class-name="outerClasses"
-          v-bind="$attrs"
-          v-on="$listeners">
-    <!-- 所有插槽内容显示在这里 ↓ -->
+<Drawer ref="drawerWrapper"
+        :value="value"
+        @input="handleInput"
+        :width="width"
+        :class-name="outerClasses"
+        v-bind="$attrs"
+        v-on="$listeners">
+  <!-- 所有插槽内容显示在这里 ↓ -->
 
-    <template v-for="(slots, slotsName) in $slots">
-      <template v-if="slotsName !== 'default'">
+  <template v-for="(slots, slotsName) in $slots">
+    <template v-if="slotsName !== 'default'">
+      <render-dom v-for="(render, index) in slots"
+                  :key="`b_drawer_${slotsName}_${index}`"
+                  :render="() => render"
+                  :slot="slotsName">
+      </render-dom>
+    </template>
+    <template v-else>
+      <div :class="`${prefix}-body-wrapper`"
+           :key="`b_drawer_${slotsName}`">
         <render-dom v-for="(render, index) in slots"
                     :key="`b_drawer_${slotsName}_${index}`"
                     :render="() => render"
                     :slot="slotsName">
         </render-dom>
-      </template>
-      <template v-else>
-        <div :class="`${prefix}-body-wrapper`"
-             :key="`b_drawer_${slotsName}`">
-          <render-dom v-for="(render, index) in slots"
-                      :key="`b_drawer_${slotsName}_${index}`"
-                      :render="() => render"
-                      :slot="slotsName">
-          </render-dom>
-        </div>
-      </template>
+      </div>
     </template>
-    <!-- 所有插槽内容显示在这里 ↑ -->
-    <div v-if="draggable"
-         :style="triggerStyle"
-         :class="`${prefix}-trigger-wrapper`"
-         @mousedown="handleTriggerMousedown">
-      <slot name="trigger">
-        <drag-drawer-trigger></drag-drawer-trigger>
-      </slot>
-    </div>
-    <div v-if="$slots.footer"
-         :class="`${prefix}-footer`">
-      <slot name="footer"></slot>
-    </div>
-  </Drawer>
+  </template>
+  <!-- 所有插槽内容显示在这里 ↑ -->
+  <div v-if="draggable"
+       :style="triggerStyle"
+       :class="`${prefix}-trigger-wrapper`"
+       @mousedown="handleTriggerMousedown">
+    <slot name="trigger">
+      <drag-drawer-trigger></drag-drawer-trigger>
+    </slot>
+  </div>
+  <div v-if="$slots.footer"
+       :class="`${prefix}-footer`">
+    <slot name="footer"></slot>
+  </div>
+</Drawer>
 </template>
 
 <script>
@@ -49,20 +49,21 @@ import DragDrawerTrigger from './drag-drawer-trigger.vue'
 import Mixin from './mixin'
 import { on, off } from '@/libs/tools'
 import './index.less'
+
 export default {
   name: 'BDrawer',
   components: {
     RenderDom,
     DragDrawerTrigger
   },
-  mixins: [Mixin],
+  mixins: [ Mixin ],
   props: {
     value: {
       type: Boolean,
       default: false
     },
     width: {
-      type: [String, Number],
+      type: [ String, Number ],
       default: 256
     },
     // 是否可拖动修改宽度
@@ -72,7 +73,7 @@ export default {
     },
     // 最小拖动宽度
     minWidth: {
-      type: [String, Number],
+      type: [ String, Number ],
       default: 256
     }
   },
@@ -100,7 +101,7 @@ export default {
     },
     triggerStyle () {
       return {
-        [this.placement]: `${this.innerWidth}px`,
+        [ this.placement ]: `${this.innerWidth}px`,
         position: this.$attrs.inner ? 'absolute' : 'fixed'
       }
     }

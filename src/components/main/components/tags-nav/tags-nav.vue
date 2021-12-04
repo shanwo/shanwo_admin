@@ -1,33 +1,33 @@
 <template>
-  <div class="tags-nav">
-    <div class="close-con">
-      <Dropdown transfer @on-click="handleTagsOption" style="margin-top:7px;">
-        <Button size="small" type="text">
-          <Icon :size="18" type="ios-close-circle-outline" />
-        </Button>
-        <DropdownMenu slot="list">
-          <DropdownItem name="close-all">关闭所有</DropdownItem>
-          <DropdownItem name="close-others">关闭其他</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
-    </div>
-    <ul v-show="visible" :style="{left: contextMenuLeft + 'px', top: contextMenuTop + 'px'}" class="contextmenu">
-      <li v-for="(item, key) of menuList" @click="handleTagsOption(key)" :key="key">{{item}}</li>
-    </ul>
-    <div class="btn-con left-btn">
-      <Button type="text" @click="handleScroll(240)">
-        <Icon :size="18" type="ios-arrow-back" />
+<div class="tags-nav">
+  <div class="close-con">
+    <Dropdown transfer @on-click="handleTagsOption" style="margin-top:7px;">
+      <Button size="small" type="text">
+        <Icon :size="18" type="ios-close-circle-outline"/>
       </Button>
-    </div>
-    <div class="btn-con right-btn">
-      <Button type="text" @click="handleScroll(-240)">
-        <Icon :size="18" type="ios-arrow-forward" />
-      </Button>
-    </div>
-    <div class="scroll-outer" ref="scrollOuter" @DOMMouseScroll="handlescroll" @mousewheel="handlescroll">
-      <div ref="scrollBody" class="scroll-body" :style="{left: tagBodyLeft + 'px'}">
-        <transition-group name="taglist-moving-animation">
-          <Tag
+      <DropdownMenu slot="list">
+        <DropdownItem name="close-all">关闭所有</DropdownItem>
+        <DropdownItem name="close-others">关闭其他</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  </div>
+  <ul v-show="visible" :style="{left: contextMenuLeft + 'px', top: contextMenuTop + 'px'}" class="contextmenu">
+    <li v-for="(item, key) of menuList" @click="handleTagsOption(key)" :key="key">{{ item }}</li>
+  </ul>
+  <div class="btn-con left-btn">
+    <Button type="text" @click="handleScroll(240)">
+      <Icon :size="18" type="ios-arrow-back"/>
+    </Button>
+  </div>
+  <div class="btn-con right-btn">
+    <Button type="text" @click="handleScroll(-240)">
+      <Icon :size="18" type="ios-arrow-forward"/>
+    </Button>
+  </div>
+  <div class="scroll-outer" ref="scrollOuter" @DOMMouseScroll="handlescroll" @mousewheel="handlescroll">
+    <div ref="scrollBody" class="scroll-body" :style="{left: tagBodyLeft + 'px'}">
+      <transition-group name="taglist-moving-animation">
+        <Tag
             type="dot"
             v-for="(item, index) in list"
             ref="tagsPageOpened"
@@ -39,16 +39,18 @@
             :closable="item.name !== $config.homeName"
             :color="isCurrentTag(item) ? 'primary' : 'default'"
             @contextmenu.prevent.native="contextMenu(item, $event)"
-          >{{ showTitleInside(item) }}</Tag>
-        </transition-group>
-      </div>
+        >{{ showTitleInside(item) }}
+        </Tag>
+      </transition-group>
     </div>
   </div>
+</div>
 </template>
 
 <script>
 import { showTitle, routeEqual } from '@/libs/util'
 import beforeClose from '@/router/before-close'
+
 export default {
   name: 'TagsNav',
   props: {
@@ -122,7 +124,7 @@ export default {
     },
     handleClose (current) {
       if (current.meta && current.meta.beforeCloseName && current.meta.beforeCloseName in beforeClose) {
-        new Promise(beforeClose[current.meta.beforeCloseName]).then(close => {
+        new Promise(beforeClose[ current.meta.beforeCloseName ]).then(close => {
           if (close) {
             this.close(current)
           }
@@ -164,8 +166,8 @@ export default {
       this.$nextTick(() => {
         this.refsTag = this.$refs.tagsPageOpened
         this.refsTag.forEach((item, index) => {
-          if (routeEqual(route, item.$attrs['data-route-item'])) {
-            let tag = this.refsTag[index].$el
+          if (routeEqual(route, item.$attrs[ 'data-route-item' ])) {
+            let tag = this.refsTag[ index ].$el
             this.moveToView(tag)
           }
         })

@@ -62,7 +62,7 @@ export const getMenuByRouter = (list, access) => {
 export const getBreadCrumbList = (route, homeRoute) => {
   let homeItem = { ...homeRoute, icon: homeRoute.meta.icon }
   let routeMetched = route.matched
-  if (routeMetched.some(item => item.name === homeRoute.name)) return [homeItem]
+  if (routeMetched.some(item => item.name === homeRoute.name)) return [ homeItem ]
   let res = routeMetched.filter(item => {
     return item.meta === undefined || !item.meta.hideInBread
   }).map(item => {
@@ -81,7 +81,7 @@ export const getBreadCrumbList = (route, homeRoute) => {
   res = res.filter(item => {
     return !item.meta.hideInMenu
   })
-  return [{ ...homeItem, to: homeRoute.path }, ...res]
+  return [ { ...homeItem, to: homeRoute.path }, ...res ]
 }
 
 export const getRouteTitleHandled = (route) => {
@@ -133,7 +133,7 @@ export const getHomeRoute = (routers, homeName = 'home') => {
   let len = routers.length
   let homeRoute = {}
   while (++i < len) {
-    let item = routers[i]
+    let item = routers[ i ]
     if (item.children && item.children.length) {
       let res = getHomeRoute(item.children, homeName)
       if (res.name) return res
@@ -151,7 +151,7 @@ export const getHomeRoute = (routers, homeName = 'home') => {
  */
 export const getNewTagList = (list, newRoute) => {
   const { name, path, meta } = newRoute
-  let newList = [...list]
+  let newList = [ ...list ]
   if (newList.findIndex(item => item.name === name) >= 0) return newList
   else newList.push({ name, path, meta })
   return newList
@@ -192,11 +192,11 @@ export const canTurnTo = (name, access, routes) => {
  * @description 从URL中解析参数
  */
 export const getParams = url => {
-  const keyValueArr = url.split('?')[1].split('&')
+  const keyValueArr = url.split('?')[ 1 ].split('&')
   let paramObj = {}
   keyValueArr.forEach(item => {
     const keyValue = item.split('=')
-    paramObj[keyValue[0]] = keyValue[1]
+    paramObj[ keyValue[ 0 ] ] = keyValue[ 1 ]
   })
   return paramObj
 }
@@ -211,8 +211,8 @@ export const getNextRoute = (list, route) => {
     res = getHomeRoute(list)
   } else {
     const index = list.findIndex(item => routeEqual(item, route))
-    if (index === list.length - 1) res = list[list.length - 2]
-    else res = list[index + 1]
+    if (index === list.length - 1) res = list[ list.length - 2 ]
+    else res = list[ index + 1 ]
   }
   return res
 }
@@ -235,7 +235,7 @@ export const doCustomTimes = (times, callback) => {
  */
 export const getArrayFromFile = (file) => {
   let nameSplit = file.name.split('.')
-  let format = nameSplit[nameSplit.length - 1]
+  let format = nameSplit[ nameSplit.length - 1 ]
   return new Promise((resolve, reject) => {
     let reader = new FileReader()
     reader.readAsText(file) // 以文本格式读取
@@ -246,7 +246,7 @@ export const getArrayFromFile = (file) => {
       arr = pasteData.split((/[\n\u0085\u2028\u2029]|\r\n?/g)).map(row => {
         return row.split('\t')
       }).map(item => {
-        return item[0].split(',')
+        return item[ 0 ].split(',')
       })
       if (format === 'csv') resolve(arr)
       else reject(new Error('[Format Error]:你上传的不是Csv文件'))
@@ -273,7 +273,7 @@ export const getTableDataFromArray = (array) => {
     tableData = array.map(item => {
       let res = {}
       item.forEach((col, i) => {
-        res[titles[i]] = col
+        res[ titles[ i ] ] = col
       })
       return res
     })
@@ -312,7 +312,7 @@ export const findNodeDownward = (ele, tag) => {
     let i = -1
     let len = ele.childNodes.length
     while (++i < len) {
-      let child = ele.childNodes[i]
+      let child = ele.childNodes[ i ]
       if (child.tagName === tagName) return child
       else return findNodeDownward(child, tag)
     }
@@ -343,7 +343,7 @@ export const routeHasExist = (tagNavList, routeItem) => {
   let len = tagNavList.length
   let res = false
   doCustomTimes(len, (index) => {
-    if (routeEqual(tagNavList[index], routeItem)) res = true
+    if (routeEqual(tagNavList[ index ], routeItem)) res = true
   })
   return res
 }
@@ -361,11 +361,11 @@ export const scrollTop = (el, from = 0, to, duration = 500, endCallback) => {
   if (!window.requestAnimationFrame) {
     window.requestAnimationFrame = (
       window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.msRequestAnimationFrame ||
-        function (callback) {
-          return window.setTimeout(callback, 1000 / 60)
-        }
+      window.mozRequestAnimationFrame ||
+      window.msRequestAnimationFrame ||
+      function (callback) {
+        return window.setTimeout(callback, 1000 / 60)
+      }
     )
   }
   const difference = Math.abs(from - to)
@@ -409,10 +409,10 @@ export const setTitle = (routeItem, vm) => {
 export const urlQuery = (url) => {
   if (!url) return {}
   let result = {}
-  let params = url.split('?')[1].split('&')
+  let params = url.split('?')[ 1 ].split('&')
   params.forEach(param => {
-    let [key, val] = param.split('=')
-    result[key] = val
+    let [ key, val ] = param.split('=')
+    result[ key ] = val
   })
   return result
 }

@@ -6,6 +6,7 @@ import iView from 'iview'
 import { toLogin } from '@/api/user'
 import { getToken, setTitle, urlQuery } from '@/libs/util'
 import config from '@/config'
+
 const { homeName } = config
 const userToLogin = () => {
   toLogin().then(res => {

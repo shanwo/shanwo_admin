@@ -28,8 +28,8 @@ export default {
             return (
               < div>
                 < icon
-                  size={ 16 }
-                  type={ row.type === 'ajax' ? 'md-link' : 'md-code-working' }>< /icon>
+                  size={16}
+                  type={row.type === 'ajax' ? 'md-link' : 'md-code-working'}>< /icon>
               < /div>
             )
           }
@@ -39,7 +39,7 @@ export default {
           title: '编码',
           render: (h, { row }) => {
             return (
-              < span> { row.code === 0 ? '-' : row.code } < /span>
+              < span> {row.code === 0 ? '-' : row.code} < /span>
             )
           }
         },
@@ -56,7 +56,7 @@ export default {
           title: '时间',
           render: (h, { row }) => {
             return (
-              < span> { dayjs(row.time
+              < span> {dayjs(row.time
               )
                 .format('YYYY-MM-DD HH:mm:ss')
               }<

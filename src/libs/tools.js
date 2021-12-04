@@ -3,7 +3,7 @@ export const forEach = (arr, fn) => {
   let i = -1
   let len = arr.length
   while (++i < len) {
-    let item = arr[i]
+    let item = arr[ i ]
     fn(item, i, arr)
   }
 }
@@ -18,7 +18,7 @@ export const getIntersection = (arr1, arr2) => {
   let i = -1
   let res = []
   while (++i < len) {
-    const item = arr2[i]
+    const item = arr2[ i ]
     if (arr1.indexOf(item) > -1) res.push(item)
   }
   return res
@@ -30,7 +30,7 @@ export const getIntersection = (arr1, arr2) => {
  * @description 得到两个数组的并集, 两个数组的元素为数值或字符串
  */
 export const getUnion = (arr1, arr2) => {
-  return Array.from(new Set([...arr1, ...arr2]))
+  return Array.from(new Set([ ...arr1, ...arr2 ]))
 }
 
 /**
@@ -48,7 +48,7 @@ export const hasOneOf = (targetarr, arr) => {
  */
 export function oneOf (value, validList) {
   for (let i = 0; i < validList.length; i++) {
-    if (value === validList[i]) {
+    if (value === validList[ i ]) {
       return true
     }
   }
@@ -211,5 +211,5 @@ export const objEqual = (obj1, obj2) => {
   if (keysArr1.length !== keysArr2.length) return false
   else if (keysArr1.length === 0 && keysArr2.length === 0) return true
   /* eslint-disable-next-line */
-  else return !keysArr1.some(key => obj1[key] != obj2[key])
+  else return !keysArr1.some(key => obj1[ key ] != obj2[ key ])
 }

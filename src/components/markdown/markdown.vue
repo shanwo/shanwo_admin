@@ -1,12 +1,13 @@
 <template>
-  <div class="markdown-wrapper">
-    <textarea ref="editor"></textarea>
-  </div>
+<div class="markdown-wrapper">
+  <textarea ref="editor"></textarea>
+</div>
 </template>
 
 <script>
 import Simplemde from 'simplemde'
 import 'simplemde/dist/simplemde.min.css'
+
 export default {
   name: 'MarkdownEditor',
   props: {
@@ -62,14 +63,16 @@ export default {
 </script>
 
 <style lang="less">
-.markdown-wrapper{
-  .editor-toolbar.fullscreen{
+.markdown-wrapper {
+  .editor-toolbar.fullscreen {
     z-index: 9999;
   }
-  .CodeMirror-fullscreen{
+
+  .CodeMirror-fullscreen {
     z-index: 9999;
   }
-  .CodeMirror-fullscreen ~ .editor-preview-side{
+
+  .CodeMirror-fullscreen ~ .editor-preview-side {
     z-index: 9999;
   }
 }

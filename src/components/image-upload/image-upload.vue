@@ -1,20 +1,21 @@
 <template>
-  <div :class="prefixCls">
-        <Upload
-            :action="`${config.baseUrl.dev}/upload/file`"
-            :headers="{
+<div :class="prefixCls">
+  <Upload
+      :action="`${config.baseUrl.dev}/upload/file`"
+      :headers="{
                 Authorization: `Bearer ${this.token}`
             }"
-            :on-success="uploadSuccess">
-            <div :class="prefixCls + '-box'">
-                <img :src="value" width="256">
-            </div>
-        </Upload>
-  </div>
+      :on-success="uploadSuccess">
+    <div :class="prefixCls + '-box'">
+      <img :src="value" width="256">
+    </div>
+  </Upload>
+</div>
 </template>
 
 <script>
 import config from '@/config/index'
+
 const prefixCls = 'image-upload'
 export default {
   name: 'image-upload',
@@ -41,15 +42,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.mr10{
+.mr10 {
   margin-right: 10px;
 }
+
 @prefix: ~"image-upload";
-.@{prefix}{
-    &-box{
-        width: 258px;
-        border: 1px dashed #999;
-    }
+.@{prefix} {
+  &-box {
+    width: 258px;
+    border: 1px dashed #999;
+  }
 
 }
 </style>

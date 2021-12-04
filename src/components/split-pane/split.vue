@@ -1,29 +1,38 @@
 <template>
-  <div ref="outerWrapper" :class="wrapperClasses">
-    <div v-if="isHorizontal" :class="`${prefix}-horizontal`">
-      <div :style="{right: `${anotherOffset}%`}" :class="[`${prefix}-pane`, 'left-pane']"><slot name="left"/></div>
-      <div :class="`${prefix}-trigger-con`" :style="{left: `${offset}%`}" @mousedown="handleMousedown">
-        <slot name="trigger">
-          <trigger mode="vertical"/>
-        </slot>
-      </div>
-      <div :style="{left: `${offset}%`}" :class="[`${prefix}-pane`, 'right-pane']"><slot name="right"/></div>
+<div ref="outerWrapper" :class="wrapperClasses">
+  <div v-if="isHorizontal" :class="`${prefix}-horizontal`">
+    <div :style="{right: `${anotherOffset}%`}" :class="[`${prefix}-pane`, 'left-pane']">
+      <slot name="left"/>
     </div>
-    <div v-else :class="`${prefix}-vertical`">
-      <div :style="{bottom: `${anotherOffset}%`}" :class="[`${prefix}-pane`, 'top-pane']"><slot name="top"/></div>
-     <div :class="`${prefix}-trigger-con`" :style="{top: `${offset}%`}" @mousedown="handleMousedown">
-        <slot name="trigger">
-          <trigger mode="horizontal"/>
-        </slot>
-      </div>
-      <div :style="{top: `${offset}%`}" :class="[`${prefix}-pane`, 'bottom-pane']"><slot name="bottom"/></div>
+    <div :class="`${prefix}-trigger-con`" :style="{left: `${offset}%`}" @mousedown="handleMousedown">
+      <slot name="trigger">
+        <trigger mode="vertical"/>
+      </slot>
+    </div>
+    <div :style="{left: `${offset}%`}" :class="[`${prefix}-pane`, 'right-pane']">
+      <slot name="right"/>
     </div>
   </div>
+  <div v-else :class="`${prefix}-vertical`">
+    <div :style="{bottom: `${anotherOffset}%`}" :class="[`${prefix}-pane`, 'top-pane']">
+      <slot name="top"/>
+    </div>
+    <div :class="`${prefix}-trigger-con`" :style="{top: `${offset}%`}" @mousedown="handleMousedown">
+      <slot name="trigger">
+        <trigger mode="horizontal"/>
+      </slot>
+    </div>
+    <div :style="{top: `${offset}%`}" :class="[`${prefix}-pane`, 'bottom-pane']">
+      <slot name="bottom"/>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
 import { oneOf, on, off } from '@/libs/tools'
 import Trigger from './trigger.vue'
+
 export default {
   name: 'SplitPane',
   components: {
@@ -31,21 +40,21 @@ export default {
   },
   props: {
     value: {
-      type: [Number, String],
+      type: [ Number, String ],
       default: 0.5
     },
     mode: {
       validator (value) {
-        return oneOf(value, ['horizontal', 'vertical'])
+        return oneOf(value, [ 'horizontal', 'vertical' ])
       },
       default: 'horizontal'
     },
     min: {
-      type: [Number, String],
+      type: [ Number, String ],
       default: '40px'
     },
     max: {
-      type: [Number, String],
+      type: [ Number, String ],
       default: '40px'
     }
   },
@@ -94,9 +103,9 @@ export default {
       return parseFloat(numerator) / parseFloat(denominator)
     },
     getComputedThresholdValue (type) {
-      let size = this.$refs.outerWrapper[this.offsetSize]
-      if (this.valueIsPx) return typeof this[type] === 'string' ? this[type] : size * this[type]
-      else return typeof this[type] === 'string' ? this.px2percent(this[type], size) : this[type]
+      let size = this.$refs.outerWrapper[ this.offsetSize ]
+      if (this.valueIsPx) return typeof this[ type ] === 'string' ? this[ type ] : size * this[ type ]
+      else return typeof this[ type ] === 'string' ? this.px2percent(this[ type ], size) : this[ type ]
     },
     getMin (value1, value2) {
       if (this.valueIsPx) return `${Math.min(parseFloat(value1), parseFloat(value2))}px`
@@ -108,14 +117,14 @@ export default {
     },
     getAnotherOffset (value) {
       let res = 0
-      if (this.valueIsPx) res = `${this.$refs.outerWrapper[this.offsetSize] - parseFloat(value)}px`
+      if (this.valueIsPx) res = `${this.$refs.outerWrapper[ this.offsetSize ] - parseFloat(value)}px`
       else res = 1 - value
       return res
     },
     handleMove (e) {
       let pageOffset = this.isHorizontal ? e.pageX : e.pageY
       let offset = pageOffset - this.initOffset
-      let outerWidth = this.$refs.outerWrapper[this.offsetSize]
+      let outerWidth = this.$refs.outerWrapper[ this.offsetSize ]
       let value = this.valueIsPx ? `${parseFloat(this.oldOffset) + offset}px` : (this.px2percent(outerWidth * this.oldOffset + offset, outerWidth))
       let anotherValue = this.getAnotherOffset(value)
       if (parseFloat(value) <= parseFloat(this.computedMin)) value = this.getMax(value, this.computedMin)
@@ -142,12 +151,12 @@ export default {
   },
   watch: {
     value () {
-      this.offset = (this.valueIsPx ? this.px2percent(this.value, this.$refs.outerWrapper[this.offsetSize]) : this.value) * 10000 / 100
+      this.offset = (this.valueIsPx ? this.px2percent(this.value, this.$refs.outerWrapper[ this.offsetSize ]) : this.value) * 10000 / 100
     }
   },
   mounted () {
     this.$nextTick(() => {
-      this.offset = (this.valueIsPx ? this.px2percent(this.value, this.$refs.outerWrapper[this.offsetSize]) : this.value) * 10000 / 100
+      this.offset = (this.valueIsPx ? this.px2percent(this.value, this.$refs.outerWrapper[ this.offsetSize ]) : this.value) * 10000 / 100
     })
   }
 }

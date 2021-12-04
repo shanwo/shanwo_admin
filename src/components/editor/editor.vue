@@ -1,13 +1,14 @@
 <template>
-  <div class="editor-wrapper">
-    <div :id="editorId"></div>
-  </div>
+<div class="editor-wrapper">
+  <div :id="editorId"></div>
+</div>
 </template>
 
 <script>
 import Editor from 'wangeditor'
 import 'wangeditor/release/wangEditor.min.css'
 import { oneOf } from '@/libs/tools'
+
 export default {
   name: 'Editor',
   props: {
@@ -22,7 +23,7 @@ export default {
       type: String,
       default: 'html',
       validator: (val) => {
-        return oneOf(val, ['html', 'text'])
+        return oneOf(val, [ 'html', 'text' ])
       }
     },
     /**
@@ -69,7 +70,7 @@ export default {
 </script>
 
 <style lang="less">
-.editor-wrapper *{
+.editor-wrapper * {
   z-index: 100 !important;
 }
 </style>

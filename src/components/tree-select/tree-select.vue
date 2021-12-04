@@ -1,27 +1,28 @@
 <template>
-  <Select
+<Select
     ref="select"
     class="tree-select"
     v-bind="$attrs"
     @on-change="handleChange"
     multiple
-  >
-    <tree-select-tree-item
+>
+  <tree-select-tree-item
       :selectedArray="value"
       :data="data"
       @on-clear="handleClear"
       :load-data="loadData"
       @on-check="handleTreeCheck"
-    ></tree-select-tree-item>
-  </Select>
+  ></tree-select-tree-item>
+</Select>
 </template>
 
 <script>
 import Emitter from 'iview/src/mixins/emitter'
 import TreeSelectTreeItem from './tree-select-tree.vue'
+
 export default {
   name: 'TreeSelect',
-  mixins: [Emitter],
+  mixins: [ Emitter ],
   components: {
     TreeSelectTreeItem
   },

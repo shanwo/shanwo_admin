@@ -1,11 +1,12 @@
 <template>
-  <div ref="dom" class="charts chart-pie"></div>
+<div ref="dom" class="charts chart-pie"></div>
 </template>
 
 <script>
 import echarts from 'echarts'
 import tdTheme from './theme.json'
 import { on, off } from '@/libs/tools'
+
 echarts.registerTheme('tdTheme', tdTheme)
 export default {
   name: 'ChartPie',
@@ -46,7 +47,7 @@ export default {
           {
             type: 'pie',
             radius: '55%',
-            center: ['50%', '60%'],
+            center: [ '50%', '60%' ],
             data: this.value,
             itemStyle: {
               emphasis: {

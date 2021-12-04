@@ -1,13 +1,14 @@
 <template>
-  <div class="paste-editor-wrapper">
-    <textarea ref="codemirror" class="textarea-el"></textarea>
-  </div>
+<div class="paste-editor-wrapper">
+  <textarea ref="codemirror" class="textarea-el"></textarea>
+</div>
 </template>
 <script>
 import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 import { forEach } from '@/libs/tools'
 import createPlaceholder from './plugins/placeholder'
+
 export default {
   name: 'PasteEditor',
   props: {
@@ -40,7 +41,7 @@ export default {
       return this.pasteDataArr.length
     },
     colNum () {
-      return this.pasteDataArr[0] ? this.pasteDataArr[0].length : 0
+      return this.pasteDataArr[ 0 ] ? this.pasteDataArr[ 0 ].length : 0
     }
   },
   methods: {
@@ -70,8 +71,8 @@ export default {
       const len = this.rowNum
       if (len === 0) return
       while (++i < len) {
-        let item = this.pasteDataArr[i]
-        if (item.length !== this.colNum && (!(i === len - 1 && item.length === 1 && item[0] === '') || i !== len - 1)) {
+        let item = this.pasteDataArr[ i ]
+        if (item.length !== this.colNum && (!(i === len - 1 && item.length === 1 && item[ 0 ] === '') || i !== len - 1)) {
           this.markIncorrectRow(i)
           this.$emit('on-error', i)
           return false

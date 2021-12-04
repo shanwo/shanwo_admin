@@ -84,8 +84,8 @@ export default {
     handleResize (event) {
       const { atMin } = event
       /* eslint-disable */
-      console.log(atMin);
-    },
+      console.log(atMin)
+    }
   }
 }
 </script>
