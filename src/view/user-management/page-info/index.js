@@ -1,45 +1,45 @@
 export const userType = [
   {
     type: '',
-    typeName: '全部'
+    name: '全部'
   },
   {
     type: 1,
-    typeName: '普通'
+    name: '普通'
   },
   {
     type: 2,
-    typeName: '会员'
+    name: '会员'
   },
   {
     type: 3,
-    typeName: '黑名单'
+    name: '黑名单'
   }
 ]
 export const userRenewal = [
   {
     type: 0,
-    typeName: '-'
+    name: '-'
   },
   {
     type: 1,
-    typeName: '年'
+    name: '年'
   },
   {
     type: 2,
-    typeName: '季'
+    name: '季'
   },
   {
     type: 3,
-    typeName: '月'
+    name: '月'
   },
   {
     type: 4,
-    typeName: '周'
+    name: '周'
   },
   {
     type: 5,
-    typeName: '天'
+    name: '天'
   }
 ]
 export const columns = [
@@ -68,7 +68,7 @@ export const columns = [
     key: 'type',
     title: '用户类型',
     render: (h, { row }) => {
-      return h('span', userType[row.type] && userType[row.type].typeName)
+      return h('span', userType[row.type] && userType[row.type].name)
     }
   },
   {
@@ -78,6 +78,34 @@ export const columns = [
       return h('span', row.contact && row.contact.phone)
     }
   },
+  {
+    key: 'contact',
+    title: '微信号',
+    render: (h, { row }) => {
+      return h('span', row.contact && row.contact.wechat)
+    }
+  },
+  {
+    key: 'contact',
+    title: 'QQ',
+    render: (h, { row }) => {
+      return h('span', row.contact && row.contact.qq)
+    }
+  },
+  // {
+  //   key: 'contact',
+  //   title: '微博',
+  //   render: (h, { row }) => {
+  //     return h('span', row.contact && row.contact.weibo)
+  //   }
+  // },
+  // {
+  //   key: 'contact',
+  //   title: '邮箱',
+  //   render: (h, { row }) => {
+  //     return h('span', row.contact && row.contact.email)
+  //   }
+  // },
   {
     key: 'pages',
     title: '闪页数'
