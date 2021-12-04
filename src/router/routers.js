@@ -174,25 +174,25 @@ export default [
       }
     ]
   },
-  {
-    path: '/ad_management',
-    name: 'ad_management',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'ad_management_list',
-        meta: {
-          icon: 'md-pie',
-          title: '广告管理'
-        }
-        // component: () => import('@/view/ad-management/list.vue')
-      }
-    ]
-  },
+  // {
+  //   path: '/ad_management',
+  //   name: 'ad_management',
+  //   component: Main,
+  //   meta: {
+  //     hideInBread: true
+  //   },
+  //   children: [
+  //     {
+  //       path: 'list',
+  //       name: 'ad_management_list',
+  //       meta: {
+  //         icon: 'md-pie',
+  //         title: '广告管理'
+  //       },
+  //       component: () => import('@/view/ad-management/list.vue')
+  //     }
+  //   ]
+  // },
   {
     path: '/pay_channel',
     name: 'pay_channel',
