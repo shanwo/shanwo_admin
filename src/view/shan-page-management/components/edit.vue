@@ -22,9 +22,9 @@
 import { openType, userType, cacheTypeList } from './../page-info'
 import { setSortConfig } from '@/api/shan-page-management'
 
-const prefixCls = 'shan-page-management-edit'
+const prefixCls = 'edit'
 export default {
-  name: 'shan-page-management-edit',
+  name: 'edit',
   props: {
     value: {
       type: Boolean,

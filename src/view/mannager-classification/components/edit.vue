@@ -26,9 +26,9 @@
 import { classificationType } from './../page-info'
 import { getClassificationInfo, addClassification, updateClassification } from '@/api/mannager-classification'
 
-const prefixCls = 'mannager-classification-edit'
+const prefixCls = 'edit'
 export default {
-  name: 'mannager-classification-edit',
+  name: 'edit',
   props: {
     value: {
       type: Boolean,

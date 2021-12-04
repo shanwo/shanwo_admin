@@ -18,10 +18,6 @@ export const cacheTypeList = {
 }
 export const openType = [
   {
-    type: '',
-    typeName: '全部'
-  },
-  {
     type: 0,
     typeName: '关'
   },
