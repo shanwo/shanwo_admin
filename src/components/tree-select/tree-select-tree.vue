@@ -19,7 +19,7 @@ const arrayEqual = (arr1, arr2) => {
   } else {
     // 循环遍历数组的值进行比较
     for (let i = 0; i < arr1.length; i++) {
-      if (arr1[ i ] !== arr2[ i ]) {
+      if (arr1[i] !== arr2[i]) {
         return false
       }
     }
@@ -50,7 +50,7 @@ export default {
   inject: [ 'parent' ],
   computed: {
     expandAll () {
-      return this.parent.$attrs[ 'expand-all' ]
+      return this.parent.$attrs['expand-all']
     }
   },
   watch: {
@@ -60,13 +60,13 @@ export default {
       this.selectedArray.forEach(id => {
         if (id in this.flatDic) selectArray.push(id)
       })
-      this.$emit('on-check', selectArray.map(id => this.flatDic[ id ]))
+      this.$emit('on-check', selectArray.map(id => this.flatDic[id]))
       if (this.expandAll) this.checkData(newData, false, true)
     },
     selectedArray (newVal, oldVal) {
       if (arrayEqual(newVal, oldVal)) return
       const filtedNewVal = newVal.filter(id => id in this.flatDic)
-      this.$emit('on-check', filtedNewVal.map(id => this.flatDic[ id ]))
+      this.$emit('on-check', filtedNewVal.map(id => this.flatDic[id]))
       this.$emit('on-clear')
       this.$nextTick(() => {
         this.checkData(this.data, true)
@@ -87,7 +87,7 @@ export default {
     updateFlagDic (newData) {
       let newFlagDic = {}
       this.setFlagDic(newData, item => {
-        newFlagDic[ item.id ] = item
+        newFlagDic[item.id] = item
       })
       this.flatDic = newFlagDic
     },

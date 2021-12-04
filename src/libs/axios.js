@@ -19,7 +19,7 @@ class HttpRequest {
   }
 
   destroy (url) {
-    delete this.queue[ url ]
+    delete this.queue[url]
     if (!Object.keys(this.queue).length) {
       // Spin.hide()
     }
@@ -32,7 +32,7 @@ class HttpRequest {
       if (!Object.keys(this.queue).length) {
         // Spin.show() // 不建议开启，因为界面不友好
       }
-      this.queue[ url ] = true
+      this.queue[url] = true
       return config
     }, error => {
       return Promise.reject(error)

@@ -162,7 +162,7 @@ export default {
         return h(TablesEdit, {
           props: {
             params: params,
-            value: this.insideTableData[ params.index ][ params.column.key ],
+            value: this.insideTableData[params.index][params.column.key],
             edittingCellId: this.edittingCellId,
             editable: this.editable
           },
@@ -179,7 +179,7 @@ export default {
               this.$emit('on-cancel-edit', params)
             },
             'on-save-edit': (params) => {
-              this.value[ params.row.initRowIndex ][ params.column.key ] = this.edittingText
+              this.value[params.row.initRowIndex][params.column.key] = this.edittingText
               this.$emit('input', this.value)
               this.$emit('on-save-edit', Object.assign(params, { value: this.edittingText }))
               this.edittingCellId = ''
@@ -193,7 +193,7 @@ export default {
       let options = item.options || []
       let insideBtns = []
       options.forEach(item => {
-        if (handleBtns[ item ]) insideBtns.push(handleBtns[ item ])
+        if (handleBtns[item]) insideBtns.push(handleBtns[item])
       })
       let btns = item.button ? [].concat(insideBtns, item.button) : insideBtns
       item.render = (h, params) => {
@@ -211,13 +211,13 @@ export default {
       })
     },
     setDefaultSearchKey () {
-      this.searchKey = this.columns[ 0 ].key !== 'handle' ? this.columns[ 0 ].key : (this.columns.length > 1 ? this.columns[ 1 ].key : '')
+      this.searchKey = this.columns[0].key !== 'handle' ? this.columns[0].key : (this.columns.length > 1 ? this.columns[1].key : '')
     },
     handleClear (e) {
       if (e.target.value === '') this.insideTableData = this.value
     },
     handleSearch () {
-      this.insideTableData = this.value.filter(item => item[ this.searchKey ].indexOf(this.searchValue) > -1)
+      this.insideTableData = this.value.filter(item => item[this.searchKey].indexOf(this.searchValue) > -1)
     },
     handleTableData () {
       this.insideTableData = this.value.map((item, index) => {

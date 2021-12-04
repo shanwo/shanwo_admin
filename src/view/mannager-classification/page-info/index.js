@@ -37,7 +37,7 @@ export const columns = [
     key: 'type',
     title: '类型',
     render: (h, { row }) => {
-      return h('span', classificationType[ row.type ] && classificationType[ row.type ].name)
+      return h('span', classificationType[row.type] && classificationType[row.type].name)
     }
   },
   {

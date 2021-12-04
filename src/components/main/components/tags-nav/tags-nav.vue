@@ -124,7 +124,7 @@ export default {
     },
     handleClose (current) {
       if (current.meta && current.meta.beforeCloseName && current.meta.beforeCloseName in beforeClose) {
-        new Promise(beforeClose[ current.meta.beforeCloseName ]).then(close => {
+        new Promise(beforeClose[current.meta.beforeCloseName]).then(close => {
           if (close) {
             this.close(current)
           }
@@ -166,8 +166,8 @@ export default {
       this.$nextTick(() => {
         this.refsTag = this.$refs.tagsPageOpened
         this.refsTag.forEach((item, index) => {
-          if (routeEqual(route, item.$attrs[ 'data-route-item' ])) {
-            let tag = this.refsTag[ index ].$el
+          if (routeEqual(route, item.$attrs['data-route-item'])) {
+            let tag = this.refsTag[index].$el
             this.moveToView(tag)
           }
         })

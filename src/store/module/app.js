@@ -53,10 +53,10 @@ export default {
       if (list) {
         tagList = [ ...list ]
       } else tagList = getTagNavListFromLocalstorage() || []
-      if (tagList[ 0 ] && tagList[ 0 ].name !== homeName) tagList.shift()
+      if (tagList[0] && tagList[0].name !== homeName) tagList.shift()
       let homeTagIndex = tagList.findIndex(item => item.name === homeName)
       if (homeTagIndex > 0) {
-        let homeTag = tagList.splice(homeTagIndex, 1)[ 0 ]
+        let homeTag = tagList.splice(homeTagIndex, 1)[0]
         tagList.unshift(homeTag)
       }
       state.tagNavList = tagList
@@ -64,7 +64,7 @@ export default {
     },
     closeTag (state, route) {
       let tag = state.tagNavList.filter(item => routeEqual(item, route))
-      route = tag[ 0 ] ? tag[ 0 ] : null
+      route = tag[0] ? tag[0] : null
       if (!route) return
       closePage(state, route)
     },

@@ -62,8 +62,8 @@ export default {
       let actionFn = addClassification
       let summitInfo = {}
       for (let key in this.classificationInfo) {
-        if (this.classificationInfo[ key ]) {
-          summitInfo[ key ] = this.classificationInfo[ key ]
+        if (this.classificationInfo[key]) {
+          summitInfo[key] = this.classificationInfo[key]
         }
       }
       if (this.id) {

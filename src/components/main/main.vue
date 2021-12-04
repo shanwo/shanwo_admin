@@ -114,7 +114,7 @@ export default {
         query = route.query
       }
       if (name.indexOf('isTurnByHref_') > -1) {
-        window.open(name.split('_')[ 1 ])
+        window.open(name.split('_')[1])
         return
       }
       this.$router.push({

@@ -73,8 +73,8 @@ export default {
       let actionFn = addDecoration
       let summitInfo = {}
       for (let key in this.iconInfo) {
-        if (this.iconInfo[ key ]) {
-          summitInfo[ key ] = this.iconInfo[ key ]
+        if (this.iconInfo[key]) {
+          summitInfo[key] = this.iconInfo[key]
         }
       }
       if (this.id) {

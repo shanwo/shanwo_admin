@@ -94,7 +94,7 @@ export default {
     init () {
       let that = this
       this.getSortList().then(() => {
-        that.searchData.sort_id = that.sortList[ 0 ].id
+        that.searchData.sort_id = that.sortList[0].id
         // 执行查询列表
         that.getLinkWhiteList()
       })

@@ -120,8 +120,8 @@ export default {
   methods: {
     getHandleVal (val, len) {
       return {
-        endVal: parseInt(val / Math.pow(10, this.unit[ len - 1 ][ 0 ])),
-        unitText: this.unit[ len - 1 ][ 1 ]
+        endVal: parseInt(val / Math.pow(10, this.unit[len - 1][0])),
+        unitText: this.unit[len - 1][1]
       }
     },
     transformValue (val) {
@@ -130,13 +130,13 @@ export default {
         endVal: 0,
         unitText: ''
       }
-      if (val < Math.pow(10, this.unit[ 0 ][ 0 ])) res.endVal = val
+      if (val < Math.pow(10, this.unit[0][0])) res.endVal = val
       else {
         for (let i = 1; i < len; i++) {
-          if (val >= Math.pow(10, this.unit[ i - 1 ][ 0 ]) && val < Math.pow(10, this.unit[ i ][ 0 ])) res = this.getHandleVal(val, i)
+          if (val >= Math.pow(10, this.unit[i - 1][0]) && val < Math.pow(10, this.unit[i][0])) res = this.getHandleVal(val, i)
         }
       }
-      if (val > Math.pow(10, this.unit[ len - 1 ][ 0 ])) res = this.getHandleVal(val, len)
+      if (val > Math.pow(10, this.unit[len - 1][0])) res = this.getHandleVal(val, len)
       return res
     },
     getValue (val) {

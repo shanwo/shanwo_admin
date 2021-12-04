@@ -13,10 +13,10 @@ export default {
     const handleMousedown = e => {
       let transform = /\(.*\)/.exec(bodyDom.style.transform)
       if (transform) {
-        transform = transform[ 0 ].slice(1, transform[ 0 ].length - 1)
+        transform = transform[0].slice(1, transform[0].length - 1)
         let splitxy = transform.split('px, ')
-        transformX = parseFloat(splitxy[ 0 ])
-        transformY = parseFloat(splitxy[ 1 ].split('px')[ 0 ])
+        transformX = parseFloat(splitxy[0])
+        transformY = parseFloat(splitxy[1].split('px')[0])
       }
       pageX = e.pageX
       pageY = e.pageY

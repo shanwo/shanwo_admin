@@ -4,13 +4,13 @@
     <div :class="prefixCls + '-box'">
       <img :src="userInfo.avatar" style="float: right;width: 128px"/>
       <p>ID：{{ userInfo.id }}</p>
-      <p>类型：{{ userType[ userInfo.type ].typeName }}</p>
+      <p>类型：{{ userType[userInfo.type].typeName }}</p>
       <p>昵称：{{ userInfo.nickname }}</p>
       <p>性别：{{ userInfo.sex }}</p>
       <p>生日：{{ userInfo.birthday }}</p>
       <p>地区：{{ userInfo.merger_name }}</p>
       <p>闪页数：{{ userInfo.pages }}</p>
-      <p>续费方式：{{ userRenewal[ userInfo.renewal ].typeName }}</p>
+      <p>续费方式：{{ userRenewal[userInfo.renewal].typeName }}</p>
       <p>到期时间：{{ userInfo.expired_at }}</p>
       <p>更新时间：{{ userInfo.updated_at }}</p>
       <p>创建时间：{{ userInfo.created_at }}</p>

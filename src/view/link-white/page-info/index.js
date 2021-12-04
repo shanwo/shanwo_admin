@@ -42,7 +42,7 @@ export const columns = [
     key: 'type',
     title: '链接类型',
     render: (h, { row }) => {
-      return h('span', linkType[ row.type ] && linkType[ row.type ].name)
+      return h('span', linkType[row.type] && linkType[row.type].name)
     }
   },
   {

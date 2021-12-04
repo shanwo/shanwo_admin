@@ -116,7 +116,7 @@ export default {
       this.cropper.zoom(0.1)
     },
     scale (d) {
-      this.cropper[ `scale${d}` ](-this.cropper.getData()[ `scale${d}` ])
+      this.cropper[`scale${d}`](-this.cropper.getData()[`scale${d}`])
     },
     move (...argu) {
       this.cropper.move(...argu)

@@ -41,7 +41,7 @@ export default {
       return this.pasteDataArr.length
     },
     colNum () {
-      return this.pasteDataArr[ 0 ] ? this.pasteDataArr[ 0 ].length : 0
+      return this.pasteDataArr[0] ? this.pasteDataArr[0].length : 0
     }
   },
   methods: {
@@ -71,8 +71,8 @@ export default {
       const len = this.rowNum
       if (len === 0) return
       while (++i < len) {
-        let item = this.pasteDataArr[ i ]
-        if (item.length !== this.colNum && (!(i === len - 1 && item.length === 1 && item[ 0 ] === '') || i !== len - 1)) {
+        let item = this.pasteDataArr[i]
+        if (item.length !== this.colNum && (!(i === len - 1 && item.length === 1 && item[0] === '') || i !== len - 1)) {
           this.markIncorrectRow(i)
           this.$emit('on-error', i)
           return false

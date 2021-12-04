@@ -101,7 +101,7 @@ export default {
     },
     triggerStyle () {
       return {
-        [ this.placement ]: `${this.innerWidth}px`,
+        [this.placement]: `${this.innerWidth}px`,
         position: this.$attrs.inner ? 'absolute' : 'fixed'
       }
     }

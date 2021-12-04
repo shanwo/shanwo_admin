@@ -103,9 +103,9 @@ export default {
       return parseFloat(numerator) / parseFloat(denominator)
     },
     getComputedThresholdValue (type) {
-      let size = this.$refs.outerWrapper[ this.offsetSize ]
-      if (this.valueIsPx) return typeof this[ type ] === 'string' ? this[ type ] : size * this[ type ]
-      else return typeof this[ type ] === 'string' ? this.px2percent(this[ type ], size) : this[ type ]
+      let size = this.$refs.outerWrapper[this.offsetSize]
+      if (this.valueIsPx) return typeof this[type] === 'string' ? this[type] : size * this[type]
+      else return typeof this[type] === 'string' ? this.px2percent(this[type], size) : this[type]
     },
     getMin (value1, value2) {
       if (this.valueIsPx) return `${Math.min(parseFloat(value1), parseFloat(value2))}px`
@@ -117,14 +117,14 @@ export default {
     },
     getAnotherOffset (value) {
       let res = 0
-      if (this.valueIsPx) res = `${this.$refs.outerWrapper[ this.offsetSize ] - parseFloat(value)}px`
+      if (this.valueIsPx) res = `${this.$refs.outerWrapper[this.offsetSize] - parseFloat(value)}px`
       else res = 1 - value
       return res
     },
     handleMove (e) {
       let pageOffset = this.isHorizontal ? e.pageX : e.pageY
       let offset = pageOffset - this.initOffset
-      let outerWidth = this.$refs.outerWrapper[ this.offsetSize ]
+      let outerWidth = this.$refs.outerWrapper[this.offsetSize]
       let value = this.valueIsPx ? `${parseFloat(this.oldOffset) + offset}px` : (this.px2percent(outerWidth * this.oldOffset + offset, outerWidth))
       let anotherValue = this.getAnotherOffset(value)
       if (parseFloat(value) <= parseFloat(this.computedMin)) value = this.getMax(value, this.computedMin)
@@ -151,12 +151,12 @@ export default {
   },
   watch: {
     value () {
-      this.offset = (this.valueIsPx ? this.px2percent(this.value, this.$refs.outerWrapper[ this.offsetSize ]) : this.value) * 10000 / 100
+      this.offset = (this.valueIsPx ? this.px2percent(this.value, this.$refs.outerWrapper[this.offsetSize]) : this.value) * 10000 / 100
     }
   },
   mounted () {
     this.$nextTick(() => {
-      this.offset = (this.valueIsPx ? this.px2percent(this.value, this.$refs.outerWrapper[ this.offsetSize ]) : this.value) * 10000 / 100
+      this.offset = (this.valueIsPx ? this.px2percent(this.value, this.$refs.outerWrapper[this.offsetSize]) : this.value) * 10000 / 100
     })
   }
 }

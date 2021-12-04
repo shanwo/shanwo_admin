@@ -51,8 +51,8 @@ export default {
       else this.$emit('update:list2', value)
     },
     handleEnd (event, type) {
-      const srcClassName = (event.srcElement || event.target).classList[ 0 ]
-      const targetClassName = event.to.classList[ 0 ]
+      const srcClassName = (event.srcElement || event.target).classList[0]
+      const targetClassName = event.to.classList[0]
       let src = ''
       let target = ''
       if (srcClassName === targetClassName) {

@@ -38,7 +38,7 @@ export const columns = [
     key: 'type',
     title: '模板类型',
     render: (h, { row }) => {
-      return h('span', templateType[ row.type ] && templateType[ row.type ].name)
+      return h('span', templateType[row.type] && templateType[row.type].name)
     }
   },
   {

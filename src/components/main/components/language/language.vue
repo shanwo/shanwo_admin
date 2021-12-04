@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     title () {
-      return this.langList[ this.lang ]
+      return this.langList[this.lang]
     }
   },
   methods: {

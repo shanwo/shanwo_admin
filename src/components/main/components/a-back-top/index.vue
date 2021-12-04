@@ -59,7 +59,7 @@ export default {
       return [
         `${prefixCls}`,
         {
-          [ `${prefixCls}-show` ]: this.backTop
+          [`${prefixCls}-show`]: this.backTop
         }
       ]
     },
