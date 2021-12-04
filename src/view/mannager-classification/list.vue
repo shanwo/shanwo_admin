@@ -11,9 +11,6 @@
         <div :class="prefixCls + '-table'">
             <table-list :userList="userList" @refresh="getClassificationList"></table-list>
         </div>
-        <div :class="prefixCls + '-page'">
-            <Page :total="total" show-sizer @on-change="pageChange"></Page>
-        </div>
         <edit v-model="isShowEdit" :id="editId" @refresh="refresh"></edit>
     </div>
 </template>
@@ -38,9 +35,7 @@ export default {
       isShowEdit: false,
       addClassificationStatus: false,
       searchData: {
-        type: 0,
-        page: 1,
-        size: 10
+        type: 0
       }
     }
   },
