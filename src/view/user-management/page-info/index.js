@@ -1,3 +1,17 @@
+export const userSex = [
+  {
+    type: 0,
+    name: '保密'
+  },
+  {
+    type: 1,
+    name: '男'
+  },
+  {
+    type: 2,
+    name: '女'
+  }
+]
 export const userType = [
   {
     type: '',
@@ -40,6 +54,53 @@ export const userRenewal = [
   {
     type: 5,
     name: '天'
+  }
+]
+export const contactType = {
+  'wechat': {
+    type: 'wechat',
+    name: '微信号'
+  },
+  'official': {
+    type: 'wechat',
+    name: '公众号'
+  },
+  'phone': {
+    type: 'phone',
+    name: '手机号'
+  },
+  'qq': {
+    type: 'qq',
+    name: 'QQ'
+  },
+  'weibo': {
+    type: 'weibo',
+    name: '微博'
+  },
+  'email': {
+    type: 'email',
+    name: '邮箱'
+  }
+}
+export const userThird = [
+  {
+    key: 'source',
+    title: '平台类型',
+    render: (h, { row }) => {
+      return h('span', contactType[row.source] ? contactType[row.source].name : row.source)
+    }
+  },
+  {
+    key: 'nickname',
+    title: '平台昵称'
+  },
+  {
+    key: 'logins_number',
+    title: '登录次数'
+  },
+  {
+    key: 'updated_at',
+    title: '最后登录时间'
   }
 ]
 export const columns = [

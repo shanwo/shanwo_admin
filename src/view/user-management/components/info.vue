@@ -2,21 +2,53 @@
 <div :class="prefixCls">
   <Modal :value="value" title="查看用户信息" @on-cancel="cancel">
     <div :class="prefixCls + '-box'">
-      <img :src="userInfo.avatar" style="float: right;width: 128px"/>
-      <p>ID：{{ userInfo.id }}</p>
-      <p v-if="userType[userInfo.type]">类型：{{ userType[userInfo.type].name }}</p><p v-else>类型：-</p>
-      <p>昵称：{{ userInfo.nickname }}</p>
-      <p>性别：{{ userInfo.sex }}</p>
-      <p>生日：{{ userInfo.birthday }}</p>
-      <p>地区：{{ userInfo.merger_name }}</p>
-      <p>闪页数：{{ userInfo.pages }}</p>
-      <p v-if="userRenewal[userInfo.renewal]">续费方式：{{ userRenewal[userInfo.renewal].name }}</p><p v-else>续费方式：-</p>
-      <p>到期时间：{{ userInfo.expired_at }}</p>
-      <p>更新时间：{{ userInfo.updated_at }}</p>
-      <p>创建时间：{{ userInfo.created_at }}</p>
-      <p>绑定账号：{{ userInfo.third }}</p>
-      <p>关注的闪页：{{ userInfo.attention }}</p>
-      <p>看过的闪页：{{ userInfo.browse }}</p>
+      <Form :label-width="100">
+        <FormItem style="right: 32px;position: absolute;">
+          <img :src="userInfo.avatar" style="width: 128px"/>
+        </FormItem>
+        <FormItem label="ID：">
+          <p>{{ userInfo.id }}</p>
+        </FormItem>
+        <FormItem label="用户类型：" v-if="userType[userInfo.type]">
+          <p>{{ userType[userInfo.type].name }}</p>
+        </FormItem>
+        <FormItem label="昵称：">
+          <p>{{ userInfo.nickname }}</p>
+        </FormItem>
+        <FormItem label="性别：" v-if="userSex[userInfo.sex]">
+          <p>{{ userSex[userInfo.sex].name }}</p>
+        </FormItem>
+        <FormItem label="生日：">
+          <p>{{ userInfo.birthday }}</p>
+        </FormItem>
+        <FormItem label="地区：">
+          <p>{{ userInfo.merger_name }}</p>
+        </FormItem>
+        <FormItem label="到期时间：" v-if="userInfo.renewal">
+          <p>{{ userInfo.expired_at }}</p>
+        </FormItem>
+        <FormItem label="关联账号：">
+          <Table :columns="userThird" :data="userInfo.third" class="iviewtable"></Table>
+        </FormItem>
+        <FormItem label="用户闪页数：">
+          <p>{{ userInfo.pages }}</p>
+        </FormItem>
+        <FormItem label="关注的页数：">
+          {{ userInfo.attention.total }}
+        </FormItem>
+        <FormItem label="看过的页数：">
+          {{ userInfo.browse.total }}
+        </FormItem>
+        <FormItem label="续费方式：">
+          <p v-if="userRenewal[userInfo.renewal]">{{ userRenewal[userInfo.renewal].name }}</p>
+        </FormItem>
+        <FormItem label="更新时间：">
+          <p>{{ userInfo.updated_at }}</p>
+        </FormItem>
+        <FormItem label="注册时间：">
+          <p>{{ userInfo.created_at }}</p>
+        </FormItem>
+      </Form>
     </div>
     <div slot="footer">
       <Button type="primary" @click="cancel">关闭</Button>
@@ -26,7 +58,7 @@
 </template>
 
 <script>
-import { userType, userRenewal } from './../page-info'
+import { userSex, userType, userThird, userRenewal } from './../page-info'
 import { getUserInfo } from '@/api/user-management'
 
 const prefixCls = 'user-management-info'
@@ -52,11 +84,13 @@ export default {
         expired_at: '',
         updated_at: '',
         created_at: '',
-        third: '',
-        attention: '',
-        browse: ''
+        third: [],
+        attention: [],
+        browse: []
       },
+      userSex,
       userType,
+      userThird,
       userRenewal
     }
   },
@@ -87,3 +121,17 @@ export default {
   }
 }
 </script>
+<style lang="less">
+.ivu-modal-body {
+  padding: 8px;
+}
+
+.ivu-form-item {
+  margin-bottom: 4px;
+}
+
+.ivu-table-cell {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+</style>
