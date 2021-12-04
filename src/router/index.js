@@ -4,7 +4,7 @@ import routes from './routers'
 import store from '@/store'
 import iView from 'iview'
 import { toLogin } from '@/api/user'
-import { getToken, canTurnTo, setTitle, urlQuery } from '@/libs/util'
+import { getToken, setTitle, urlQuery } from '@/libs/util'
 import config from '@/config'
 const { homeName } = config
 const userToLogin = () => {
@@ -21,10 +21,6 @@ const router = new Router({
   mode: 'history'
 })
 const LOGIN_PAGE_NAME = 'login'
-const turnTo = (to, access, next) => {
-  if (canTurnTo(to.name, access, routes)) next() // 有权限，可访问
-  else next({ replace: true, name: 'error_401' }) // 无权限，重定向到401页面
-}
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
