@@ -1,21 +1,21 @@
 <template>
-    <div
-            ref="dragWrapper"
-            class="org-tree-drag-wrapper"
-            @mousedown="mousedownView"
-            @contextmenu="handleDocumentContextmenu"
-    >
-        <div class="org-tree-wrapper" :style="orgTreeStyle">
-            <v-org-tree
-                    v-if="data"
-                    :data="data"
-                    :node-render="nodeRender"
-                    :expand-all="true"
-                    @on-node-click="handleNodeClick"
-                    collapsable
-            ></v-org-tree>
-        </div>
-    </div>
+<div
+    ref="dragWrapper"
+    class="org-tree-drag-wrapper"
+    @mousedown="mousedownView"
+    @contextmenu="handleDocumentContextmenu"
+>
+  <div class="org-tree-wrapper" :style="orgTreeStyle">
+    <v-org-tree
+        v-if="data"
+        :data="data"
+        :node-render="nodeRender"
+        :expand-all="true"
+        @on-node-click="handleNodeClick"
+        collapsable
+    ></v-org-tree>
+  </div>
+</div>
 </template>
 
 <script>
@@ -86,13 +86,15 @@ export default {
         : ''
     },
     nodeRender (h, data) {
-      return (<div class={['custom-org-node', data.children && data.children.length ? 'has-children-label' : '']}on-mousedown={event => event.stopPropagation()}
-        on-contextmenu={this.contextmenu.bind(this, data)}> {data.label}
-        <dropdown trigger = "custom" class = "context-menu" visible = {this.currentContextMenuId === data.id}nativeOn-click = {this.handleDropdownClick}on-on-click = {this.handleContextMenuClick.bind(this, data)}
-          style = {{ transform: `scale(${1 / this.zoomHandled}, ${1 / this.zoomHandled})` }}
-          v-click-outside = {this.closeMenu}>
-          <dropdown-menu slot = "list" >
-            {menuList.map(item => { return (< dropdown-item name = {item.key}>{item.label}</dropdown-item>) })}
+      return (<div class={ [ 'custom-org-node', data.children && data.children.length ? 'has-children-label' : '' ] } on-mousedown={ event => event.stopPropagation() }
+        on-contextmenu={ this.contextmenu.bind(this, data) }> { data.label }
+        <dropdown trigger="custom" class="context-menu" visible={ this.currentContextMenuId === data.id } nativeOn-click={ this.handleDropdownClick } on-on-click={ this.handleContextMenuClick.bind(this, data) }
+          style={ { transform: `scale(${1 / this.zoomHandled}, ${1 / this.zoomHandled})` } }
+          v-click-outside={ this.closeMenu }>
+          <dropdown-menu slot="list">
+            { menuList.map(item => {
+              return (< dropdown-item name={ item.key }>{ item.label }</dropdown-item>)
+            }) }
           </dropdown-menu>
         </dropdown>
       </div>

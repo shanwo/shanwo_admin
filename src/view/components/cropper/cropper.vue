@@ -1,19 +1,19 @@
 <template>
-    <div>
-        <Row>
-            <i-col span="12">
-                <Card>
-                    <div class="cropper-example cropper-first">
-                        <cropper
-                                :src="exampleImageSrc"
-                                crop-button-text="确认提交"
-                                @on-crop="handleCroped"
-                        ></cropper>
-                    </div>
-                </Card>
-            </i-col>
-        </Row>
-    </div>
+<div>
+  <Row>
+    <i-col span="12">
+      <Card>
+        <div class="cropper-example cropper-first">
+          <cropper
+              :src="exampleImageSrc"
+              crop-button-text="确认提交"
+              @on-crop="handleCroped"
+          ></cropper>
+        </div>
+      </Card>
+    </i-col>
+  </Row>
+</div>
 </template>
 
 <script>
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="less">
-    .cropper-example {
-        height: 400px;
-    }
+.cropper-example {
+  height: 400px;
+}
 </style>

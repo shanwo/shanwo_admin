@@ -1,38 +1,38 @@
 <style lang="less">
-    @import "./common.less";
+@import "./common.less";
 </style>
 <template>
-    <div>
-        <Card title="导入EXCEL">
-            <Row>
-                <Upload action="" :before-upload="handleBeforeUpload" accept=".xls, .xlsx">
-                    <Button icon="ios-cloud-upload-outline" :loading="uploadLoading" @click="handleUploadFile">上传文件
-                    </Button>
-                </Upload>
-            </Row>
-            <Row>
-                <div class="ivu-upload-list-file" v-if="file !== null">
-                    <Icon type="ios-stats"></Icon>
-                    {{ file.name }}
-                    <Icon v-show="showRemoveFile" type="ios-close" class="ivu-upload-list-remove"
-                          @click.native="handleRemove()"></Icon>
-                </div>
-            </Row>
-            <Row>
-                <transition name="fade">
-                    <Progress v-if="showProgress" :percent="progressPercent" :stroke-width="2">
-                        <div v-if="progressPercent == 100">
-                            <Icon type="ios-checkmark-circle"></Icon>
-                            <span>成功</span>
-                        </div>
-                    </Progress>
-                </transition>
-            </Row>
-        </Card>
-        <Row class="margin-top-10">
-            <Table :columns="tableTitle" :data="tableData" :loading="tableLoading"></Table>
-        </Row>
-    </div>
+<div>
+  <Card title="导入EXCEL">
+    <Row>
+      <Upload action="" :before-upload="handleBeforeUpload" accept=".xls, .xlsx">
+        <Button icon="ios-cloud-upload-outline" :loading="uploadLoading" @click="handleUploadFile">上传文件
+        </Button>
+      </Upload>
+    </Row>
+    <Row>
+      <div class="ivu-upload-list-file" v-if="file !== null">
+        <Icon type="ios-stats"></Icon>
+        {{ file.name }}
+        <Icon v-show="showRemoveFile" type="ios-close" class="ivu-upload-list-remove"
+              @click.native="handleRemove()"></Icon>
+      </div>
+    </Row>
+    <Row>
+      <transition name="fade">
+        <Progress v-if="showProgress" :percent="progressPercent" :stroke-width="2">
+          <div v-if="progressPercent == 100">
+            <Icon type="ios-checkmark-circle"></Icon>
+            <span>成功</span>
+          </div>
+        </Progress>
+      </transition>
+    </Row>
+  </Card>
+  <Row class="margin-top-10">
+    <Table :columns="tableTitle" :data="tableData" :loading="tableLoading"></Table>
+  </Row>
+</div>
 </template>
 <script>
 import excel from '@/libs/excel'

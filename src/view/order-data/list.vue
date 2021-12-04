@@ -1,19 +1,19 @@
 <template>
-    <div :class="prefixCls">
-        <div :class="prefixCls + '-search'">
-            <search v-model="searchData">
-                <template slot="btn">
-                    <Button type="primary" @click="getOrderList">查询</Button>
-                </template>
-            </search>
-        </div>
-        <div :class="prefixCls + '-table'">
-            <table-list :orderList="orderList" @refresh="getOrderList"></table-list>
-        </div>
-        <div :class="prefixCls + '-page'">
-            <Page :total="total" show-sizer @on-change="pageChange"></Page>
-        </div>
-    </div>
+<div :class="prefixCls">
+  <div :class="prefixCls + '-search'">
+    <search v-model="searchData">
+      <template slot="btn">
+        <Button type="primary" @click="getOrderList">查询</Button>
+      </template>
+    </search>
+  </div>
+  <div :class="prefixCls + '-table'">
+    <table-list :orderList="orderList" @refresh="getOrderList"></table-list>
+  </div>
+  <div :class="prefixCls + '-page'">
+    <Page :total="total" show-sizer @on-change="pageChange"></Page>
+  </div>
+</div>
 </template>
 
 <script>
@@ -43,9 +43,9 @@ export default {
   },
   methods: {
     /**
-         * @description 获取订单列表
-         * @returns { undefined }
-         */
+     * @description 获取订单列表
+     * @returns { undefined }
+     */
     getOrderList () {
       getOrderList(this.searchData).then(res => {
         this.total = res.data.total
@@ -53,10 +53,10 @@ export default {
       })
     },
     /**
-         * @description 分页参数发生变化时调用
-         * @param { Number } page 当前页码
-         * @returns { undefined }
-         */
+     * @description 分页参数发生变化时调用
+     * @param { Number } page 当前页码
+     * @returns { undefined }
+     */
     pageChange (page) {
       this.searchData.page = page
       this.getOrderList()
@@ -69,19 +69,19 @@ export default {
 </script>
 
 <style lang="less" scoped>
-    .mr10 {
-        margin-right: 10px;
-    }
+.mr10 {
+  margin-right: 10px;
+}
 
-    @prefix: ~"order-data-list";
-    .@{prefix} {
-        padding: 10px;
-        border-radius: 4px;
-        background-color: #fff;
+@prefix: ~"order-data-list";
+.@{prefix} {
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #fff;
 
-        &-page {
-            padding: 8px;
-            text-align: right;
-        }
-    }
+  &-page {
+    padding: 8px;
+    text-align: right;
+  }
+}
 </style>

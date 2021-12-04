@@ -1,28 +1,28 @@
 <template>
-  <div :class="prefixCls">
-    <Modal :value="value" title="查看用户信息" @on-cancel="cancel">
-      <div :class="prefixCls + '-box'">
-        <img :src="userInfo.avatar" style="float: right;width: 128px"/>
-        <p>ID：{{userInfo.id}}</p>
-        <p>类型：{{userType[userInfo.type].typeName}}</p>
-        <p>昵称：{{userInfo.nickname}}</p>
-        <p>性别：{{userInfo.sex}}</p>
-        <p>生日：{{userInfo.birthday}}</p>
-        <p>地区：{{userInfo.merger_name}}</p>
-        <p>闪页数：{{userInfo.pages}}</p>
-        <p>续费方式：{{userRenewal[userInfo.renewal].typeName}}</p>
-        <p>到期时间：{{userInfo.expired_at}}</p>
-        <p>更新时间：{{userInfo.updated_at}}</p>
-        <p>创建时间：{{userInfo.created_at}}</p>
-        <p>绑定账号：{{ userInfo.third }}</p>
-        <p>关注的闪页：{{userInfo.attention}}</p>
-        <p>看过的闪页：{{userInfo.browse}}</p>
-      </div>
-      <div slot="footer">
-        <Button type="primary" @click="cancel">关闭</Button>
-      </div>
-    </Modal>
-  </div>
+<div :class="prefixCls">
+  <Modal :value="value" title="查看用户信息" @on-cancel="cancel">
+    <div :class="prefixCls + '-box'">
+      <img :src="userInfo.avatar" style="float: right;width: 128px"/>
+      <p>ID：{{ userInfo.id }}</p>
+      <p>类型：{{ userType[ userInfo.type ].typeName }}</p>
+      <p>昵称：{{ userInfo.nickname }}</p>
+      <p>性别：{{ userInfo.sex }}</p>
+      <p>生日：{{ userInfo.birthday }}</p>
+      <p>地区：{{ userInfo.merger_name }}</p>
+      <p>闪页数：{{ userInfo.pages }}</p>
+      <p>续费方式：{{ userRenewal[ userInfo.renewal ].typeName }}</p>
+      <p>到期时间：{{ userInfo.expired_at }}</p>
+      <p>更新时间：{{ userInfo.updated_at }}</p>
+      <p>创建时间：{{ userInfo.created_at }}</p>
+      <p>绑定账号：{{ userInfo.third }}</p>
+      <p>关注的闪页：{{ userInfo.attention }}</p>
+      <p>看过的闪页：{{ userInfo.browse }}</p>
+    </div>
+    <div slot="footer">
+      <Button type="primary" @click="cancel">关闭</Button>
+    </div>
+  </Modal>
+</div>
 </template>
 
 <script>
@@ -62,9 +62,9 @@ export default {
   },
   methods: {
     /**
-       * @description 获取用户信息
-       * @returns { undefined }
-       */
+     * @description 获取用户信息
+     * @returns { undefined }
+     */
     getUserInfo () {
       getUserInfo({ id: this.id }).then(res => {
         this.userInfo = res.data || {}

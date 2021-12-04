@@ -1,18 +1,19 @@
 <template>
-    <div :class="prefixCls">
-        <Table :columns="columns" :data="linkWhiteList" class="iviewtable">
-            <template slot-scope="{ row }" slot="action">
-                <a @click="toEdit(row.id)">编辑</a>&nbsp;
-                <a @click="toDel(row.id)">删除</a>
-            </template>
-        </Table>
-    </div>
+<div :class="prefixCls">
+  <Table :columns="columns" :data="linkWhiteList" class="iviewtable">
+    <template slot-scope="{ row }" slot="action">
+      <a @click="toEdit(row.id)">编辑</a>&nbsp;
+      <a @click="toDel(row.id)">删除</a>
+    </template>
+  </Table>
+</div>
 
 </template>
 
 <script>
 import { deleteLink } from '@/api/link-white'
 import { columns } from './../page-info'
+
 const prefixCls = 'link-white-list'
 
 export default {
@@ -30,7 +31,7 @@ export default {
       default: () => []
     }
   },
-  inject: ['sortList'],
+  inject: [ 'sortList' ],
   computed: {
     getSortList () {
       return this.sortList()
@@ -38,17 +39,17 @@ export default {
   },
   methods: {
     /**
-         * @description 刷新列表页数据
-         * @returns { undefined }
-         */
+     * @description 刷新列表页数据
+     * @returns { undefined }
+     */
     refresh () {
       this.$emit('refresh')
     },
     /**
-         * @description 编辑当前数据
-         * @param { Number } id 当前数据id
-         * @returns { undefined }
-         */
+     * @description 编辑当前数据
+     * @param { Number } id 当前数据id
+     * @returns { undefined }
+     */
     toEdit (id) {
       this.$emit('toDetail', id)
     },

@@ -68,7 +68,7 @@ export const columns = [
     key: 'type',
     title: '用户类型',
     render: (h, { row }) => {
-      return h('span', userType[row.type] && userType[row.type].typeName)
+      return h('span', userType[ row.type ] && userType[ row.type ].typeName)
     }
   },
   {

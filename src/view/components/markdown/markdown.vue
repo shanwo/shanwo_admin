@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <markdown-editor v-model="content"/>
-    </div>
+<div>
+  <markdown-editor v-model="content"/>
+</div>
 </template>
 
 <script>

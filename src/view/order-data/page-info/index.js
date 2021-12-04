@@ -44,7 +44,7 @@ export const columns = [
     key: 'status',
     title: '订单状态',
     render: (h, { row }) => {
-      return h('span', orderStatus[row.status] && orderStatus[row.status].name)
+      return h('span', orderStatus[ row.status ] && orderStatus[ row.status ].name)
     }
   }
 ]

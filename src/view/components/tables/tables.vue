@@ -1,11 +1,11 @@
 <template>
-    <div>
-        <Card>
-            <tables ref="tables" editable searchable search-place="top" v-model="tableData" :columns="columns"
-                    @on-delete="handleDelete"/>
-            <Button style="margin: 10px 0;" type="primary" @click="exportExcel">导出为Csv文件</Button>
-        </Card>
-    </div>
+<div>
+  <Card>
+    <tables ref="tables" editable searchable search-place="top" v-model="tableData" :columns="columns"
+            @on-delete="handleDelete"/>
+    <Button style="margin: 10px 0;" type="primary" @click="exportExcel">导出为Csv文件</Button>
+  </Card>
+</div>
 </template>
 
 <script>
@@ -26,7 +26,7 @@ export default {
         {
           title: 'Handle',
           key: 'handle',
-          options: ['delete'],
+          options: [ 'delete' ],
           button: [
             (h, params, vm) => {
               return h('Poptip', {

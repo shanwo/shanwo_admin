@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <Button @click="exportData" type="primary" style="margin: 0 10px 10px 0;">导出日志记录</Button>
-        <b>注：这里只会显示成功保存到服务端的错误日志，而且页面错误日志不会在浏览器持久化存储，刷新页面即会丢失</b>
-        <Table ref="table" :columns="columns" :data="errorList"></Table>
-    </div>
+<div>
+  <Button @click="exportData" type="primary" style="margin: 0 10px 10px 0;">导出日志记录</Button>
+  <b>注：这里只会显示成功保存到服务端的错误日志，而且页面错误日志不会在浏览器持久化存储，刷新页面即会丢失</b>
+  <Table ref="table" :columns="columns" :data="errorList"></Table>
+</div>
 </template>
 
 <script>
@@ -26,10 +26,10 @@ export default {
           width: 100,
           render: (h, { row }) => {
             return (
-              < div >
+              < div>
                 < icon
-                  size = {16}
-                  type = {row.type === 'ajax' ? 'md-link' : 'md-code-working'} > < /icon>
+                  size={ 16 }
+                  type={ row.type === 'ajax' ? 'md-link' : 'md-code-working' }>< /icon>
               < /div>
             )
           }
@@ -39,7 +39,7 @@ export default {
           title: '编码',
           render: (h, { row }) => {
             return (
-              < span > {row.code === 0 ? '-' : row.code} < /span>
+              < span> { row.code === 0 ? '-' : row.code } < /span>
             )
           }
         },
@@ -56,7 +56,7 @@ export default {
           title: '时间',
           render: (h, { row }) => {
             return (
-              < span > {dayjs(row.time
+              < span> { dayjs(row.time
               )
                 .format('YYYY-MM-DD HH:mm:ss')
               }<

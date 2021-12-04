@@ -1,10 +1,10 @@
 <template>
-    <div :class="prefixCls">
-        <Table :columns="columns" :data="orderList" class="iviewtable">
-            <template slot-scope="{ row }" slot="action">
-            </template>
-        </Table>
-    </div>
+<div :class="prefixCls">
+  <Table :columns="columns" :data="orderList" class="iviewtable">
+    <template slot-scope="{ row }" slot="action">
+    </template>
+  </Table>
+</div>
 </template>
 <script>
 import { columns } from './../page-info'
@@ -23,9 +23,9 @@ export default {
   },
   methods: {
     /**
-         * @description 刷新列表页数据
-         * @returns { undefined }
-         */
+     * @description 刷新列表页数据
+     * @returns { undefined }
+     */
     refresh () {
       this.$emit('refresh')
     }

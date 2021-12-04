@@ -63,7 +63,7 @@ export default {
       }
     }
   },
-  inject: ['sortList'],
+  inject: [ 'sortList' ],
   props: {
     value: {
       type: Boolean,
@@ -91,8 +91,8 @@ export default {
       let actionFn = addTemplate
       let summitInfo = {}
       for (let key in this.iconInfo) {
-        if (this.iconInfo[key]) {
-          summitInfo[key] = this.iconInfo[key]
+        if (this.iconInfo[ key ]) {
+          summitInfo[ key ] = this.iconInfo[ key ]
         }
       }
       if (this.id) {

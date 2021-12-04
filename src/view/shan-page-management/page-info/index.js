@@ -61,7 +61,7 @@ export const columns = [
     key: 'type',
     title: '状态',
     render: (h, { row }) => {
-      return h('span', userType[row.type] && userType[row.type].typeName)
+      return h('span', userType[ row.type ] && userType[ row.type ].typeName)
     }
   },
   {
@@ -84,7 +84,7 @@ export const columns = [
     key: 'is_open',
     title: '广场开关',
     render: (h, { row }) => {
-      return h('span', openType[row.is_open] && openType[row.is_open].typeName)
+      return h('span', openType[ row.is_open ] && openType[ row.is_open ].typeName)
     }
   },
   {

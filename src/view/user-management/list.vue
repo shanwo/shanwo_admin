@@ -1,20 +1,20 @@
 <template>
-    <div :class="prefixCls">
-        <div :class="prefixCls + '-search'">
-            <search v-model="searchData">
-                <template slot="btn">
-                    <Button type="primary" @click="getUserList">查询</Button>
-                </template>
-            </search>
-        </div>
-        <div :class="prefixCls + '-table'">
-            <table-list :userList="userList" @refresh="getUserList" @toDetail="toDetail"></table-list>
-        </div>
-        <div :class="prefixCls + '-page'">
-            <Page :total="total" show-sizer @on-change="pageChange"></Page>
-        </div>
-        <info v-model="infoData" :id="id" @on-change="editChange"/>
-    </div>
+<div :class="prefixCls">
+  <div :class="prefixCls + '-search'">
+    <search v-model="searchData">
+      <template slot="btn">
+        <Button type="primary" @click="getUserList">查询</Button>
+      </template>
+    </search>
+  </div>
+  <div :class="prefixCls + '-table'">
+    <table-list :userList="userList" @refresh="getUserList" @toDetail="toDetail"></table-list>
+  </div>
+  <div :class="prefixCls + '-page'">
+    <Page :total="total" show-sizer @on-change="pageChange"></Page>
+  </div>
+  <info v-model="infoData" :id="id" @on-change="editChange"/>
+</div>
 </template>
 
 <script>
@@ -80,19 +80,19 @@ export default {
 </script>
 
 <style lang="less" scoped>
-    .mr10 {
-        margin-right: 10px;
-    }
+.mr10 {
+  margin-right: 10px;
+}
 
-    @prefix: ~"user-management-list";
-    .@{prefix} {
-        padding: 10px;
-        border-radius: 4px;
-        background-color: #fff;
+@prefix: ~"user-management-list";
+.@{prefix} {
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #fff;
 
-        &-page {
-            padding: 8px;
-            text-align: right;
-        }
-    }
+  &-page {
+    padding: 8px;
+    text-align: right;
+  }
+}
 </style>
