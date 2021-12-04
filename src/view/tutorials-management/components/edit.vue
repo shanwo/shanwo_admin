@@ -10,15 +10,13 @@
           </Select>
         </FormItem>
         <FormItem label="名称：">
-          <Input-number :min="1" v-model="iconInfo.name" placeholder="教程名称"
-                        class="iptWidth"></Input-number>
+          <Input v-model="iconInfo.name" placeholder="请输入教程名称" class="iptWidth"></Input>
         </FormItem>
         <FormItem label="图片上传：">
           <image-upload v-model="iconInfo.image" @on-change="uploadImageChange"/>
         </FormItem>
         <FormItem label="排序：">
-          <Input-number :min="1" v-model="iconInfo.order" placeholder="请输入排序值"
-                        class="iptWidth"></Input-number>
+          <Input-number :min="1" v-model="iconInfo.order" placeholder="请输入排序值" class="iptWidth"></Input-number>
         </FormItem>
       </Form>
     </div>

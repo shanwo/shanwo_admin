@@ -14,7 +14,7 @@ export const columns = [
       return h('img', {
         attrs: {
           src: row.image,
-          width: 128
+          width: 32
         }
       })
     }
