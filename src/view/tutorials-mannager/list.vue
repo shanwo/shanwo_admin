@@ -21,7 +21,6 @@
 
 <script>
 import { getTutorialsMannagerList, getSortList } from '@/api/tutorials-mannager'
-
 const prefixCls = 'tutorials-mannager-list'
 export default {
   name: 'tutorials-mannager-list',

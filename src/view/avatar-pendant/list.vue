@@ -22,7 +22,6 @@
 <script>
 import { getAvatarPendantList, getSortList } from '@/api/avatar-pendant'
 const prefixCls = 'avatar-pendant-list'
-
 export default {
   name: 'avatar-pendant-list',
   components: {

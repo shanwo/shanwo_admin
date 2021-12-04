@@ -13,9 +13,9 @@
 import { editUserStatus } from '@/api/user-management'
 import { userType, columns } from './../page-info'
 
-const prefixCls = 'user-management-table-list'
+const prefixCls = 'user-management-list'
 export default {
-  name: 'user-management-table-list',
+  name: 'user-management-list',
   data () {
     return {
       prefixCls,

@@ -13,10 +13,10 @@
 <script>
 import { deleteLink } from '@/api/link-white-list'
 import { columns } from './../page-info'
-const prefixCls = 'link-white-list-table-list'
+const prefixCls = 'link-white-list-list'
 
 export default {
-  name: 'link-white-list-table-list',
+  name: 'link-white-list-list',
   data () {
     return {
       prefixCls,

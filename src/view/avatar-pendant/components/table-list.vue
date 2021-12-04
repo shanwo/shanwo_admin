@@ -14,7 +14,6 @@
 import { deleteDecoration } from '@/api/avatar-pendant'
 import { columns } from './../page-info'
 const prefixCls = 'avatar-pendant-list'
-
 export default {
   name: 'avatar-pendant-list',
   data () {

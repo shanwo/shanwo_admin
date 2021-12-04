@@ -13,8 +13,7 @@
 <script>
 import { deleteTutorials } from '@/api/tutorials-mannager'
 import { columns } from './../page-info'
-
-const prefixCls = 'avatar-pendant-list'
+const prefixCls = 'tutorials-mannager-list'
 export default {
   name: 'tutorials-mannager-list',
   data () {

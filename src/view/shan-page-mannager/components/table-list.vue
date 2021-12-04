@@ -12,10 +12,10 @@
 
 <script>
 import { openType, userType, columns } from './../page-info'
-const prefixCls = 'shan-page-mannager-table-list'
+const prefixCls = 'shan-page-mannager-list'
 
 export default {
-  name: 'shan-page-mannager-table-list',
+  name: 'shan-page-mannager-list',
   props: {
     pageList: {
       type: Array,

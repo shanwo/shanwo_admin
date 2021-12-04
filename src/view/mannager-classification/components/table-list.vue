@@ -14,10 +14,10 @@
 <script>
 import { delClassification } from '@/api/mannager-classification'
 import { columns } from './../page-info'
-const prefixCls = 'mannager-classification-table-list'
+const prefixCls = 'mannager-classification-list'
 
 export default {
-  name: 'mannager-classification-table-list',
+  name: 'mannager-classification-list',
   props: {
     userList: {
       type: Array,
