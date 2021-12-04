@@ -1,6 +1,6 @@
 import axios from '@/libs/api.request'
 
-export const getTutorialsMannagerList = (params) => {
+export const getTutorialsManagementList = (params) => {
   return axios.request({
     url: '/tutorials/lists',
     params: params,

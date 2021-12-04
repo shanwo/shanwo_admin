@@ -18,11 +18,11 @@
 
 <script>
 import { userType } from './page-info'
-import { getPageList } from '@/api/shan-page-mannager'
+import { getPageList } from '@/api/shan-page-management'
 
-const prefixCls = 'shan-page-mannager-list'
+const prefixCls = 'shan-page-management-list'
 export default {
-  name: 'shan-page-mannager-list',
+  name: 'shan-page-management-list',
   components: {
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue')
@@ -74,7 +74,7 @@ export default {
         margin-right: 10px;
     }
 
-    @prefix: ~"shan-page-mannager-list";
+    @prefix: ~"shan-page-management-list";
     .@{prefix} {
         padding: 10px;
         border-radius: 4px;

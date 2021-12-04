@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { updateTutorials, addTutorials, getTutorialsInfo } from '@/api/tutorials-mannager'
+import { updateTutorials, addTutorials, getTutorialsInfo } from '@/api/tutorials-management'
 
 const prefixCls = 'edit'
 export default {

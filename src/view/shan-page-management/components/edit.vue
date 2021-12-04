@@ -20,11 +20,11 @@
 
 <script>
 import { openType, userType, cacheTypeList } from './../page-info'
-import { setSortConfig } from '@/api/shan-page-mannager'
+import { setSortConfig } from '@/api/shan-page-management'
 
-const prefixCls = 'shan-page-mannager-edit'
+const prefixCls = 'shan-page-management-edit'
 export default {
-  name: 'shan-page-mannager-edit',
+  name: 'shan-page-management-edit',
   props: {
     value: {
       type: Boolean,

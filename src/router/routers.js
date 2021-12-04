@@ -118,8 +118,8 @@ export default [
     ]
   },
   {
-    path: '/template_mannager',
-    name: 'template_mannager',
+    path: '/template_management',
+    name: 'template_management',
     component: Main,
     meta: {
       hideInBread: true
@@ -127,18 +127,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'template_mannager_list',
+        name: 'template_management_list',
         meta: {
           icon: 'md-browsers',
           title: '模板管理'
-        }
-        // component: () => import('@/view/template-mannager/list.vue')
+        },
+        component: () => import('@/view/template-management/list.vue')
       }
     ]
   },
   {
-    path: '/tutorials_mannager',
-    name: 'tutorials_mannager',
+    path: '/tutorials_management',
+    name: 'tutorials_management',
     component: Main,
     meta: {
       hideInBread: true
@@ -146,12 +146,12 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'tutorials_mannager_list',
+        name: 'tutorials_management_list',
         meta: {
           icon: 'md-glasses',
           title: '教程管理'
         },
-        component: () => import('@/view/tutorials-mannager/list.vue')
+        component: () => import('@/view/tutorials-management/list.vue')
       }
     ]
   },
@@ -170,13 +170,13 @@ export default [
           icon: 'md-document',
           title: '闪页管理'
         },
-        component: () => import('@/view/shan-page-mannager/list.vue')
+        component: () => import('@/view/shan-page-management/list.vue')
       }
     ]
   },
   {
-    path: '/ad_mannager',
-    name: 'ad_mannager',
+    path: '/ad_management',
+    name: 'ad_management',
     component: Main,
     meta: {
       hideInBread: true
@@ -184,12 +184,12 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'ad_mannager_list',
+        name: 'ad_management_list',
         meta: {
           icon: 'md-pie',
           title: '广告管理'
         }
-        // component: () => import('@/view/ad-mannager/list.vue')
+        // component: () => import('@/view/ad-management/list.vue')
       }
     ]
   },
@@ -251,8 +251,8 @@ export default [
     ]
   },
   {
-    path: '/config_mannager',
-    name: 'config_mannager',
+    path: '/config_management',
+    name: 'config_management',
     component: Main,
     meta: {
       hideInBread: true
@@ -260,12 +260,12 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'config_mannager_list',
+        name: 'config_management_list',
         meta: {
           icon: 'md-settings',
           title: '配置管理'
         }
-        // component: () => import('@/view/config-mannager/list.vue')
+        // component: () => import('@/view/config-management/list.vue')
       }
     ]
   }

@@ -4,12 +4,12 @@
             <search v-model="searchData">
                 <template slot="btn">
                     <Button @click="addIcon" type="primary" class="mr10">添加</Button>
-                    <Button @click="getTutorialsMannagerList" type="primary">查询</Button>
+                    <Button @click="getTutorialsManagementList" type="primary">查询</Button>
                 </template>
             </search>
         </div>
         <div :class="prefixCls + '-table'">
-            <table-list @refresh="getTutorialsMannagerList" :tutorialsMannagerList="tutorialsMannagerList"
+            <table-list @refresh="getTutorialsManagementList" :tutorialsManagementList="tutorialsManagementList"
                         @toDetail="toDetail"></table-list>
         </div>
         <div :class="prefixCls + '-page'">
@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import { getTutorialsMannagerList, getSortList } from '@/api/tutorials-mannager'
-const prefixCls = 'tutorials-mannager-list'
+import { getTutorialsManagementList, getSortList } from '@/api/tutorials-management'
+const prefixCls = 'tutorials-management-list'
 export default {
-  name: 'tutorials-mannager-list',
+  name: 'tutorials-management-list',
   components: {
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue'),
@@ -36,7 +36,7 @@ export default {
       total: 0,
       sortType: 2,
       addIconStatus: false,
-      tutorialsMannagerList: [],
+      tutorialsManagementList: [],
       sortList: [],
       searchData: {
         sort_id: 0,
@@ -55,10 +55,10 @@ export default {
          * @description 获取教程列表
          * @returns { undefined }
          */
-    getTutorialsMannagerList () {
-      getTutorialsMannagerList(this.searchData).then(res => {
+    getTutorialsManagementList () {
+      getTutorialsManagementList(this.searchData).then(res => {
         this.total = res.data.total
-        this.tutorialsMannagerList = res.data.lists || []
+        this.tutorialsManagementList = res.data.lists || []
       })
     },
     /**
@@ -77,7 +77,7 @@ export default {
          */
     pageChange (page) {
       this.searchData.page = page
-      this.getTutorialsMannagerList()
+      this.getTutorialsManagementList()
     },
     addIcon () {
       this.addIconStatus = true
@@ -88,14 +88,14 @@ export default {
     },
     editChange () {
       this.id = 0
-      this.getTutorialsMannagerList()
+      this.getTutorialsManagementList()
     },
     init () {
       let that = this
       this.getSortList().then(() => {
         that.searchData.sort_id = that.sortList[0].id
         // 执行查询列表
-        that.getTutorialsMannagerList()
+        that.getTutorialsManagementList()
       })
     }
   },
@@ -110,7 +110,7 @@ export default {
         margin-right: 10px;
     }
 
-    @prefix: ~"tutorials-mannager-list";
+    @prefix: ~"tutorials-management-list";
     .@{prefix} {
         padding: 10px;
         border-radius: 4px;

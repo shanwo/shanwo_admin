@@ -1,6 +1,6 @@
 <template>
     <div :class="prefixCls">
-        <Table :columns="columns" :data="tutorialsMannagerList" class="iviewtable">
+        <Table :columns="columns" :data="tutorialsManagementList" class="iviewtable">
             <template slot-scope="{ row }" slot="action">
                 <a @click="toEdit(row.id)">编辑</a>&nbsp;
                 <a @click="toDel(row.id)">删除</a>
@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import { deleteTutorials } from '@/api/tutorials-mannager'
+import { deleteTutorials } from '@/api/tutorials-management'
 import { columns } from './../page-info'
-const prefixCls = 'tutorials-mannager-list'
+const prefixCls = 'tutorials-management-list'
 export default {
-  name: 'tutorials-mannager-list',
+  name: 'tutorials-management-list',
   data () {
     return {
       prefixCls,
@@ -24,7 +24,7 @@ export default {
     }
   },
   props: {
-    tutorialsMannagerList: {
+    tutorialsManagementList: {
       type: Array,
       default: () => []
     }
