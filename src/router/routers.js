@@ -207,8 +207,8 @@ export default [
         meta: {
           icon: 'md-cart',
           title: '支付渠道'
-        }
-        // component: () => import('@/view/pay-channel/list.vue')
+        },
+        component: () => import('@/view/pay-channel/list.vue')
       }
     ]
   },
