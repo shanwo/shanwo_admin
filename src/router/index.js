@@ -7,6 +7,10 @@ import { toLogin } from '@/api/user'
 import { getToken, setTitle, urlQuery } from '@/libs/util'
 import config from '@/config'
 
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 const { homeName } = config
 const userToLogin = () => {
   toLogin().then(res => {
