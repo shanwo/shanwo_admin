@@ -1,4 +1,8 @@
 export const classificationType = {
+  0: {
+    type: '',
+    name: '全部'
+  },
   1: {
     type: 1,
     name: '头像'

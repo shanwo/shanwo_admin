@@ -38,7 +38,7 @@ export default {
       isShowEdit: false,
       addClassificationStatus: false,
       searchData: {
-        type: 1,
+        type: 0,
         page: 1,
         size: 10
       }
