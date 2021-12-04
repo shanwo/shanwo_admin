@@ -1,23 +1,23 @@
 export const payType = {
   1: {
     type: 1,
-    name: '年'
+    name: '一年'
   },
   2: {
     type: 2,
-    name: '季'
+    name: '一季'
   },
   3: {
     type: 3,
-    name: '月'
+    name: '一月'
   },
   4: {
     type: 4,
-    name: '周'
+    name: '一周'
   },
   5: {
     type: 5,
-    name: '天'
+    name: '一天'
   }
 }
 export const columns = [
@@ -52,7 +52,7 @@ export const columns = [
     key: 'type',
     title: '时长类型',
     render: (h, { row }) => {
-      return h('span', payType[row.type] ? '未定义' : payType[row.type].name)
+      return h('span', payType[row.type] ? payType[row.type].name : '未定义')
     }
   },
   {

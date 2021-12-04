@@ -52,5 +52,4 @@ export default {
 
 .inputWidth {
   width: 160px;
-}
-</style>
+}</style>

@@ -15,6 +15,9 @@
         <FormItem label="图标：">
           <image-upload v-model="iconInfo.image" @on-change="uploadImageChange"/>
         </FormItem>
+        <FormItem label="svg图标：">
+          <image-upload v-model="iconInfo.svg" @on-change="uploadSvgImageChange"/>
+        </FormItem>
         <FormItem label="排序：">
           <Input-number :min="1" v-model="iconInfo.order" placeholder="请输入排序值"
                         class="iptWidth"></Input-number>
@@ -81,6 +84,9 @@ export default {
   methods: {
     uploadImageChange (arg) {
       this.iconInfo.image = arg.data && arg.data.url
+    },
+    uploadSvgImageChange (arg) {
+      this.iconInfo.svg = arg.data && arg.data.url
     },
     getLinkInfo () {
       getLinkInfo({ id: this.id }).then(res => {
