@@ -17,9 +17,9 @@
 </template>
 
 <script>
-const prefixCls = 'link-white-list'
+const prefixCls = 'tutorials-management-list'
 export default {
-  name: 'link-white-list',
+  name: 'tutorials-management-list',
   data () {
     return {
       prefixCls
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"link-white-list";
+@prefix: ~"tutorials-management-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

@@ -30,9 +30,9 @@
 <script>
 import { openType, userType } from './../page-info'
 
-const prefixCls = 'shan-page-management'
+const prefixCls = 'shan-page-management-list'
 export default {
-  name: 'shan-page-management',
+  name: 'shan-page-management-list',
   props: {
     value: {
       type: Object,
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"shan-page-management";
+@prefix: ~"shan-page-management-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

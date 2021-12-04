@@ -20,9 +20,9 @@
 <script>
 import { classificationType } from './../page-info'
 
-const prefixCls = 'mannager-classification-search'
+const prefixCls = 'mannager-classification-list'
 export default {
-  name: 'mannager-classification-search',
+  name: 'mannager-classification-list',
   props: {
     value: {
       type: Object,
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"mannager-classification-search";
+@prefix: ~"mannager-classification-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

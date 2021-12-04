@@ -35,9 +35,9 @@
 import { feedbackStatus } from './../page-info'
 import { getFeedbackInfo, uploadFeedbackInfo } from '@/api/user-feedback'
 
-const prefixCls = 'edit'
+const prefixCls = 'result'
 export default {
-  name: 'edit',
+  name: 'result',
   data () {
     return {
       prefixCls,
