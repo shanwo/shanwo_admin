@@ -1,21 +1,21 @@
-export const cacheTypeList = {
-  0: {
+export const cacheTypeList = [
+  {
     type: 0,
-    name: '清除缓存'
+    name: '关闭推荐'
   },
-  1: {
+  {
     type: 1,
-    name: '全部缓存'
+    name: '全部推荐'
   },
-  2: {
+  {
     type: 2,
     name: '仅热门'
   },
-  3: {
+  {
     type: 3,
     name: '仅最近更新'
   }
-}
+]
 export const openType = [
   {
     type: 0,
