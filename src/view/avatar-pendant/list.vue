@@ -3,19 +3,18 @@
   <div :class="prefixCls + '-search'">
     <search v-model="searchData">
       <template slot="btn">
-        <Button @click="addIcon" type="primary" class="mr10">添加</Button>
-        <Button @click="getAvatarPendantList" type="primary">查询</Button>
+        <Button type="primary" @click="addIcon" class="mr10">添加</Button>
+        <Button type="primary" @click="getAvatarPendantList">查询</Button>
       </template>
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list @refresh="getAvatarPendantList" :avatarPendantList="avatarPendantList"
-                @toDetail="toDetail"></table-list>
+    <table-list @refresh="getAvatarPendantList" :avatarPendantList="avatarPendantList" @toDetail="toDetail"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total="total" show-sizer @on-change="pageChange"></Page>
   </div>
-  <edit v-model="addIconStatus" :id="id" @on-change="editChange"/>
+  <edit v-model="addIconStatus" :id="editId" @on-change="editChange"/>
 </div>
 </template>
 
@@ -33,7 +32,7 @@ export default {
   data () {
     return {
       prefixCls,
-      id: null,
+      editId: null,
       total: 0,
       sortType: 1,
       addIconStatus: false,
