@@ -1,12 +1,12 @@
 <template>
 <div :class="prefixCls">
-  <Table :columns="columns" :data="ClassificationList" class="iviewtable">
+  <Table :columns="columns" :data="classificationList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
       <a @click="toEdit(row.id)">编辑</a>&nbsp;
       <a @click="toDel(row.id)">删除</a>
     </template>
   </Table>
-  <edit v-model="isShowEdit" :id="editId" @refresh="refresh"></edit>
+  <edit v-model="isShowEdit" :id="id" @refresh="refresh"></edit>
 </div>
 
 </template>
@@ -20,7 +20,7 @@ const prefixCls = 'mannager-classification-list'
 export default {
   name: 'mannager-classification-list',
   props: {
-    ClassificationList: {
+    classificationList: {
       type: Array,
       default: () => []
     }
@@ -31,7 +31,7 @@ export default {
   data () {
     return {
       prefixCls,
-      editId: null,
+      id: null,
       isShowEdit: false,
       columns
     }
@@ -50,8 +50,7 @@ export default {
      * @returns { undefined }
      */
     toEdit (id) {
-      this.editId = id
-      this.isShowEdit = true
+      this.$emit('toDetail', id)
     },
     toDel (id) {
       this.$Modal.confirm({

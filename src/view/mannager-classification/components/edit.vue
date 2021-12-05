@@ -1,5 +1,5 @@
 <template>
-<Modal :value="param" title="编辑用户信息">
+<Modal :value="value" title="编辑用户信息">
   <Form :label-width="100">
     <FormItem label="分类：">
       <Select v-model="classificationInfo.type" :disabled="!!id" class="iptWidth">
@@ -34,26 +34,27 @@ export default {
       type: Boolean,
       default: false
     },
-    id: Number
+    id: {
+      type: Number
+    }
   },
   data () {
     return {
       prefixCls,
-      classificationInfo: {},
+      classificationInfo: {
+        type: null,
+        name: '',
+        order: 1
+      },
       classificationType
     }
   },
-  computed: {
-    param: {
-      get () {
-        return this.value
-      },
-      set (val) {
-        this.$emit('input', val)
-      }
-    }
-  },
   methods: {
+    getClassificationInfo () {
+      getClassificationInfo({ id: this.id }).then(res => {
+        this.$set(this, 'classificationInfo', res.data || {})
+      })
+    },
     /**
      * @description 确认修改类型
      * @returns { undefined }
@@ -71,9 +72,8 @@ export default {
         actionFn = updateClassification
       }
       actionFn(summitInfo).then(() => {
-        this.$Message.success('操作成功')
-        this.$emit('refresh')
         this.cancel()
+        this.$Message.success('操作成功')
       })
     },
     /**
@@ -81,34 +81,22 @@ export default {
      * @returns { undefined }
      */
     cancel () {
-      this.$set(this, 'classificationInfo', {})
+      this.$set(this, 'classificationInfo', {
+        type: null,
+        image: null,
+        order: null
+      })
       this.$emit('input', false)
       this.$emit('on-change')
-      this.param = false
-    },
-    /**
-     * @description 获取用户信息
-     * @returns { undefined }
-     */
-    getClassificationInfo () {
-      getClassificationInfo({ id: this.id }).then(res => {
-        this.classificationInfo = res.data || {}
-      })
-    },
-    /**
-     * @description 控制弹出层的显示隐藏
-     * @param { Boolearn } 是否显示
-     * @returns { undefined }
-     */
-    modelValChange (val) {
-      if (val && this.id) {
-        this.getClassificationInfo()
-      }
     }
   },
   watch: {
-    value: {
-      handler: 'modelValChange',
+    id: {
+      handler (val, oldVal) {
+        if (val && val !== oldVal) {
+          this.getClassificationInfo()
+        }
+      },
       immediate: true
     }
   }

@@ -9,9 +9,9 @@
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list :ClassificationList="ClassificationList" @refresh="getClassificationList"></table-list>
+    <table-list :classificationList="classificationList" @refresh="getClassificationList" @toDetail="toDetail"></table-list>
   </div>
-  <edit v-model="isShowEdit" :id="editId" @refresh="refresh"></edit>
+  <edit v-model="isShowEdit" :id="id" @on-change="editChange"/>
 </div>
 </template>
 
@@ -30,13 +30,12 @@ export default {
   data () {
     return {
       prefixCls,
+      id: null,
       total: 0,
-      editId: 0,
-      ClassificationList: [],
       isShowEdit: false,
-      addClassificationStatus: false,
+      classificationList: [],
       searchData: {
-        type: ''
+        type: 0
       }
     }
   },
@@ -48,22 +47,18 @@ export default {
     getClassificationList () {
       getClassificationList(this.searchData).then(res => {
         this.total = res.data.total
-        this.ClassificationList = res.data.lists || []
+        this.classificationList = res.data.lists || []
       })
-    },
-    /**
-     * @description 分页参数发生变化时调用
-     * @param { Number } page 当前页码
-     * @returns { undefined }
-     */
-    pageChange (page) {
-      this.value.page = page
-      this.getClassificationList()
     },
     addClassification () {
       this.isShowEdit = true
     },
-    refresh () {
+    toDetail (id) {
+      this.id = id
+      this.isShowEdit = true
+    },
+    editChange () {
+      this.id = 0
       this.getClassificationList()
     }
   },

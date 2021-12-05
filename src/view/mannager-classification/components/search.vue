@@ -4,8 +4,7 @@
     <Form :label-width="100" inline>
       <FormItem label="类型：">
         <Select v-model="value.type" class="inputWidth">
-          <Option v-for="item of classificationType" :value="item.type" :key="item.type">{{ item.name }}
-          </Option>
+          <Option v-for="item of classificationType" :value="item.type" :key="item.type">{{ item.name }}</Option>
         </Select>
       </FormItem>
     </Form>
@@ -14,7 +13,6 @@
     <slot name="btn"></slot>
   </div>
 </div>
-
 </template>
 
 <script>
@@ -23,17 +21,17 @@ import { classificationType } from './../page-info'
 const prefixCls = 'mannager-classification-list'
 export default {
   name: 'mannager-classification-list',
+  data () {
+    return {
+      prefixCls,
+      classificationType
+    }
+  },
   props: {
     value: {
       type: Object,
       default: () => {
       }
-    }
-  },
-  data () {
-    return {
-      prefixCls,
-      classificationType
     }
   }
 }
