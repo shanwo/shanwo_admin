@@ -56,8 +56,7 @@ export default {
      * @returns { undefined }
      */
     toEdit (id) {
-      this.id = id
-      this.isShowEdit = true
+      this.$emit('toDetail', id)
     },
     toDel (id) {
       this.$Modal.confirm({

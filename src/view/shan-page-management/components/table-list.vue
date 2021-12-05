@@ -2,10 +2,11 @@
 <div :class="prefixCls">
   <Table :columns="columns" :data="pageList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
-      <a @click="toEdit(row.id)">推荐</a>
+      <a v-if="row.is_open" @click="toEdit(row.id)">推荐</a>
+      <a v-else style="color: #ff0000">-</a>
     </template>
   </Table>
-  <edit v-model="isShowEdit" :id="editId" @refresh="refresh"></edit>
+  <edit v-model="isShowEdit" :id="id" @refresh="refresh"></edit>
 </div>
 
 </template>
@@ -29,7 +30,7 @@ export default {
   data () {
     return {
       prefixCls,
-      editId: null,
+      id: null,
       isShowEdit: false,
       openType,
       userType,
@@ -50,7 +51,7 @@ export default {
      * @returns { undefined }
      */
     toEdit (id) {
-      this.editId = id
+      this.id = id
       this.isShowEdit = true
     }
   }

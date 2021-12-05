@@ -7,7 +7,6 @@
     </template>
   </Table>
 </div>
-
 </template>
 
 <script>
