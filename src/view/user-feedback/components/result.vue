@@ -43,7 +43,7 @@ export default {
       prefixCls,
       feedbackStatus,
       iconInfo: {
-        editId: 0,
+        id: null,
         user_id: 0,
         contacts: '',
         result: ''

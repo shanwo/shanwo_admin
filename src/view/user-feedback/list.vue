@@ -13,6 +13,7 @@
   <div :class="prefixCls + '-page'">
     <Page :total="total" show-sizer @on-change="pageChange"></Page>
   </div>
+  <result v-model="isShowEdit" :id="id" @on-change="editChange"/>
 </div>
 </template>
 
@@ -23,16 +24,17 @@ const prefixCls = 'user-feedback-list'
 export default {
   name: 'user-feedback-list',
   components: {
+    result: () => import('./components/result.vue'),
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue')
   },
   data () {
     return {
       prefixCls,
-      editId: null,
+      id: null,
       total: 0,
+      isShowEdit: false,
       userFeedbackList: [],
-      infoData: false,
       searchData: {
         type: '',
         nickname: '',
@@ -63,7 +65,7 @@ export default {
     },
     toDetail (id) {
       this.id = id
-      this.infoData = true
+      this.isShowEdit = true
     },
     editChange () {
       this.id = 0
