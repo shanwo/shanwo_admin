@@ -19,9 +19,6 @@
         <FormItem label="模板名称：">
           <Input v-model="iconInfo.name" placeholder="请输入模板名称" class="iptWidth"></Input>
         </FormItem>
-        <FormItem label="预览图：">
-          <image-upload v-model="iconInfo.preview" @on-change="uploadImageChange"/>
-        </FormItem>
         <FormItem label="背景图：">
           <image-upload v-model="iconInfo.background" @on-change="uploadImageChange"/>
         </FormItem>
@@ -56,8 +53,7 @@ export default {
       iconInfo: {
         sort_id: null,
         name: null,
-        image: null,
-        url: null,
+        background: null,
         type: 1,
         order: 1
       }
@@ -108,11 +104,9 @@ export default {
       this.$set(this, 'iconInfo', {
         sort_id: null,
         name: null,
-        image: null,
-        url: null,
+        background: null,
         type: 1,
-        order: null,
-        description: null
+        order: 1
       })
       this.$emit('input', false)
       this.$emit('on-change')

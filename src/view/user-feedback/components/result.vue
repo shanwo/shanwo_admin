@@ -73,6 +73,9 @@ export default {
       })
     },
     cancel () {
+      this.$set(this, 'iconInfo', {
+        result: ''
+      })
       this.$emit('input', false)
       this.$emit('on-change')
     }

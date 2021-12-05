@@ -90,13 +90,12 @@ export default {
     },
     cancel () {
       this.$set(this, 'iconInfo', {
-        sort_id: null,
-        name: null,
-        image: null,
-        url: null,
-        type: 1,
-        order: null,
-        description: null
+        name: '',
+        channel: 0,
+        original_price: 0,
+        activity_price: 0,
+        description: '',
+        type: 1
       })
       this.$emit('input', false)
       this.$emit('on-change')

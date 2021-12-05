@@ -116,9 +116,8 @@ export default {
         name: null,
         image: null,
         url: null,
-        type: 1,
-        order: null,
-        description: null
+        type: 0,
+        order: 0
       })
       this.$emit('input', false)
       this.$emit('on-change')

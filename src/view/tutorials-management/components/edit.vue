@@ -92,12 +92,9 @@ export default {
     cancel () {
       this.$set(this, 'iconInfo', {
         sort_id: null,
-        name: null,
         image: null,
-        url: null,
-        type: 1,
-        order: null,
-        description: null
+        name: '',
+        order: 1
       })
       this.$emit('input', false)
       this.$emit('on-change')

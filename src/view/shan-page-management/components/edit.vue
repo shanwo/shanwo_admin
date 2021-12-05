@@ -71,8 +71,12 @@ export default {
      * @returns { undefined }
      */
     cancel () {
-      this.$set(this, 'userInfo', {})
-      this.param = false
+      this.$set(this, 'iconInfo', {
+        cache: 0,
+        sort: 1
+      })
+      this.$emit('input', false)
+      this.$emit('on-change')
     }
   }
 }
