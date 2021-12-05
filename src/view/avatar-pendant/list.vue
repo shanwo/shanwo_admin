@@ -3,8 +3,8 @@
   <div :class="prefixCls + '-search'">
     <search v-model="searchData">
       <template slot="btn">
-        <Button @click="addIcon" type="primary" class="mr10">添加</Button>
-        <Button @click="getAvatarPendantList" type="primary">查询</Button>
+        <Button type="primary" @click="addIcon" class="mr10">添加</Button>
+        <Button type="primary" @click="getAvatarPendantList">查询</Button>
       </template>
     </search>
   </div>
