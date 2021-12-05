@@ -1,21 +1,22 @@
 <template>
-<Modal :value="param" title="推荐设置">
-  <Form :label-width="100">
-    <FormItem label="缓存类型：">
-      <Select v-model="pageInfo.cache" class="inputWidth">
-        <Option v-for="item of cacheTypeList" :value="item.type" :key="item.type">{{ item.name }}</Option>
-      </Select>
-    </FormItem>
-    <FormItem label="排序值：">
-      <Input-number v-model="pageInfo.sort" placeholder="请输入排序值" class="inputWidth"></Input-number>
-    </FormItem>
-  </Form>
-  <div slot="footer">
-    <Button type="primary" @click="confirm">确定</Button>
-    <Button type="primary" @click="cancel" ghost>取消</Button>
-  </div>
-</Modal>
-
+<div :class="prefixCls">
+  <Modal :value="value" title="推荐设置">
+    <Form :label-width="100">
+      <FormItem label="缓存类型：">
+        <Select v-model="pageInfo.cache" class="inputWidth">
+          <Option v-for="item of cacheTypeList" :value="item.type" :key="item.type">{{ item.name }}</Option>
+        </Select>
+      </FormItem>
+      <FormItem label="排序值：">
+        <Input-number v-model="pageInfo.sort" placeholder="请输入排序值" class="inputWidth"></Input-number>
+      </FormItem>
+    </Form>
+    <div slot="footer">
+      <Button type="primary" @click="confirm">确定</Button>
+      <Button type="primary" @click="cancel" ghost>取消</Button>
+    </div>
+  </Modal>
+</div>
 </template>
 
 <script>
@@ -25,13 +26,6 @@ import { setSortConfig } from '@/api/shan-page-management'
 const prefixCls = 'edit'
 export default {
   name: 'edit',
-  props: {
-    value: {
-      type: Boolean,
-      default: false
-    },
-    id: Number
-  },
   data () {
     return {
       prefixCls,
@@ -39,19 +33,18 @@ export default {
       openType,
       cacheTypeList,
       pageInfo: {
-        cache: 0,
+        cache: 1,
         sort: 1
       }
     }
   },
-  computed: {
-    param: {
-      get () {
-        return this.value
-      },
-      set (val) {
-        this.$emit('input', val)
-      }
+  props: {
+    value: {
+      type: Boolean,
+      default: false
+    },
+    id: {
+      type: Number
     }
   },
   methods: {
@@ -71,8 +64,8 @@ export default {
      * @returns { undefined }
      */
     cancel () {
-      this.$set(this, 'userInfo', {})
-      this.param = false
+      this.$emit('input', false)
+      this.$emit('on-change')
     }
   }
 }
