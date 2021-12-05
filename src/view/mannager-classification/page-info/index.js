@@ -1,6 +1,6 @@
 export const classificationType = [
   {
-    type: '',
+    type: 0,
     name: '全部'
   },
   {
