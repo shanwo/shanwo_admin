@@ -1,9 +1,10 @@
 <template>
 <div :class="prefixCls">
-  <Modal :value="value" title="推荐设置">
-    <Form :label-width="100">
-      <FormItem label="缓存类型：">
-        <Select v-model="pageInfo.cache" class="inputWidth">
+  <Modal :value="value" title="推荐设置" @on-cancel="cancel">
+    <div :class="prefixCls + '-box'">
+      <Form :label-width="100">
+      <FormItem label="推荐类型：">
+        <Select v-model="cache" class="inputWidth">
           <Option v-for="item of cacheTypeList" :value="item.type" :key="item.type">{{ item.name }}</Option>
         </Select>
       </FormItem>
@@ -11,6 +12,7 @@
         <Input-number v-model="pageInfo.sort" placeholder="请输入排序值" class="inputWidth"></Input-number>
       </FormItem>
     </Form>
+    </div>
     <div slot="footer">
       <Button type="primary" @click="confirm">确定</Button>
       <Button type="primary" @click="cancel" ghost>取消</Button>
@@ -30,9 +32,8 @@ export default {
     return {
       prefixCls,
       cacheTypeList,
-      pageInfo: {
-        cache: 0
-      }
+      cache: 1,
+      pageInfo: {}
     }
   },
   props: {
@@ -56,12 +57,8 @@ export default {
      */
     confirm () {
       let summitInfo = {}
-      for (let key in this.pageInfo) {
-        if (this.pageInfo[key]) {
-          summitInfo[key] = this.pageInfo[key]
-        }
-      }
       summitInfo.id = this.id
+      summitInfo.sort = this.pageInfo.sort
       setSortConfig(summitInfo).then(() => {
         this.cancel()
         this.$Message.success('操作成功')
@@ -73,8 +70,7 @@ export default {
      */
     cancel () {
       this.$set(this, 'pageInfo', {
-        cache: 0,
-        sort: 1
+        cache: 0
       })
       this.$emit('input', false)
       this.$emit('on-change')

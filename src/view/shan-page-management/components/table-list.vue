@@ -6,7 +6,6 @@
       <a v-else style="color: #ff0000">-</a>
     </template>
   </Table>
-  <edit v-model="isShowEdit" :id="id" @refresh="refresh"></edit>
 </div>
 
 </template>
@@ -18,23 +17,19 @@ const prefixCls = 'shan-page-management-list'
 
 export default {
   name: 'shan-page-management-list',
-  props: {
-    pageList: {
-      type: Array,
-      default: () => []
-    }
-  },
-  components: {
-    edit: () => import('./edit.vue')
-  },
   data () {
     return {
       prefixCls,
-      id: null,
       isShowEdit: false,
       openType,
       userType,
       columns
+    }
+  },
+  props: {
+    pageList: {
+      type: Array,
+      default: () => []
     }
   },
   methods: {
@@ -51,8 +46,7 @@ export default {
      * @returns { undefined }
      */
     toEdit (id) {
-      this.id = id
-      this.isShowEdit = true
+      this.$emit('toDetail', id)
     }
   }
 }

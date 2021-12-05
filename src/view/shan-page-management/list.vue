@@ -8,11 +8,12 @@
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list :pageList="pageList" @refresh="getPageList"></table-list>
+    <table-list :pageList="pageList" @refresh="getPageList" @toDetail="toDetail"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total="total" show-sizer @on-change="pageChange"></Page>
   </div>
+  <edit v-model="isShowEdit" :id="id" @on-change="editChange"/>
 </div>
 </template>
 
@@ -24,12 +25,14 @@ const prefixCls = 'shan-page-management-list'
 export default {
   name: 'shan-page-management-list',
   components: {
+    edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue')
   },
   data () {
     return {
       prefixCls,
+      id: null,
       total: 0,
       pageList: [],
       isShowEdit: false,
@@ -53,6 +56,14 @@ export default {
         this.total = res.data.total
         this.pageList = res.data.lists || []
       })
+    },
+    toDetail (id) {
+      this.id = id
+      this.isShowEdit = true
+    },
+    editChange () {
+      this.id = 0
+      this.getPageList()
     },
     /**
      * @description 分页参数发生变化时调用
