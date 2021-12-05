@@ -6,6 +6,7 @@
       <a @click="toDel(row.id)">删除</a>
     </template>
   </Table>
+  <edit v-model="isShowEdit" :id="id" @refresh="refresh"></edit>
 </div>
 
 </template>
@@ -15,19 +16,24 @@ import { deleteDecoration } from '@/api/avatar-pendant'
 import { columns } from './../page-info'
 
 const prefixCls = 'avatar-pendant-list'
+
 export default {
   name: 'avatar-pendant-list',
-  data () {
-    return {
-      prefixCls,
-      isShowEdit: false,
-      columns
-    }
-  },
   props: {
     avatarPendantList: {
       type: Array,
       default: () => []
+    }
+  },
+  components: {
+    edit: () => import('./edit.vue')
+  },
+  data () {
+    return {
+      prefixCls,
+      id: null,
+      isShowEdit: false,
+      columns
     }
   },
   inject: [ 'sortList' ],
@@ -50,7 +56,8 @@ export default {
      * @returns { undefined }
      */
     toEdit (id) {
-      this.$emit('toDetail', id)
+      this.id = id
+      this.isShowEdit = true
     },
     toDel (id) {
       this.$Modal.confirm({

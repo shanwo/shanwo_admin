@@ -9,12 +9,14 @@
             </Option>
           </Select>
         </FormItem>
+        <FormItem label="名称：">
+          <Input v-model="iconInfo.name" placeholder="请输入名称" class="iptWidth"></Input>
+        </FormItem>
         <FormItem label="图片上传：">
           <image-upload v-model="iconInfo.image" @on-change="uploadImageChange"/>
         </FormItem>
         <FormItem label="排序：">
-          <Input-number :min="1" v-model="iconInfo.order" placeholder="请输入排序值"
-                        class="iptWidth"></Input-number>
+          <Input-number :min="1" v-model="iconInfo.order" placeholder="请输入排序值" class="iptWidth"></Input-number>
         </FormItem>
       </Form>
     </div>
@@ -32,20 +34,6 @@ import { updateDecoration, addDecoration, getDecorationInfo } from '@/api/avatar
 const prefixCls = 'edit'
 export default {
   name: 'edit',
-  components: {
-    imageUpload: () => import('@/components/image-upload')
-  },
-  data () {
-    return {
-      prefixCls,
-      iconInfo: {
-        sort_id: null,
-        image: null,
-        order: 1
-      }
-    }
-  },
-  inject: [ 'sortList' ],
   props: {
     value: {
       type: Boolean,
@@ -55,6 +43,21 @@ export default {
       type: Number
     }
   },
+  data () {
+    return {
+      prefixCls,
+      iconInfo: {
+        sort_id: null,
+        name: '',
+        image: null,
+        order: 1
+      }
+    }
+  },
+  components: {
+    imageUpload: () => import('@/components/image-upload')
+  },
+  inject: [ 'sortList' ],
   computed: {
     getSortList () {
       return this.sortList()
@@ -91,10 +94,7 @@ export default {
         sort_id: null,
         name: null,
         image: null,
-        url: null,
-        type: 1,
-        order: null,
-        description: null
+        order: null
       })
       this.$emit('input', false)
       this.$emit('on-change')
@@ -110,6 +110,5 @@ export default {
       immediate: true
     }
   }
-
 }
 </script>

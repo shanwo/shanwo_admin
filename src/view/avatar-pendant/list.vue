@@ -9,13 +9,12 @@
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list @refresh="getAvatarPendantList" :avatarPendantList="avatarPendantList"
-                @toDetail="toDetail"></table-list>
+    <table-list @refresh="getAvatarPendantList" :avatarPendantList="avatarPendantList" @toDetail="toDetail"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total="total" show-sizer @on-change="pageChange"></Page>
   </div>
-  <edit v-model="addIconStatus" :id="id" @on-change="editChange"/>
+  <edit v-model="isShowEdit" :id="id" @on-change="editChange"/>
 </div>
 </template>
 
@@ -36,7 +35,7 @@ export default {
       id: null,
       total: 0,
       sortType: 1,
-      addIconStatus: false,
+      isShowEdit: false,
       avatarPendantList: [],
       sortList: [],
       searchData: {
@@ -81,11 +80,11 @@ export default {
       this.getAvatarPendantList()
     },
     addIcon () {
-      this.addIconStatus = true
+      this.isShowEdit = true
     },
     toDetail (id) {
       this.id = id
-      this.addIconStatus = true
+      this.isShowEdit = true
     },
     editChange () {
       this.id = 0

@@ -4,6 +4,10 @@ export const columns = [
     title: 'id'
   },
   {
+    key: 'name',
+    title: '名称'
+  },
+  {
     key: 'image',
     title: '徽章',
     render: (h, { row }) => {
