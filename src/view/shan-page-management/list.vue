@@ -32,6 +32,7 @@ export default {
       prefixCls,
       total: 0,
       pageList: [],
+      isShowEdit: false,
       userType,
       searchData: {
         nickname: '',
