@@ -264,8 +264,8 @@ export default [
         meta: {
           icon: 'md-settings',
           title: '配置管理'
-        }
-        // component: () => import('@/view/config-management/list.vue')
+        },
+        component: () => import('@/view/config-management/list.vue')
       }
     ]
   }
