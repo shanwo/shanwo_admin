@@ -268,5 +268,24 @@ export default [
         component: () => import('@/view/config-management/list.vue')
       }
     ]
+  },
+  {
+    path: '/menu',
+    name: 'menu',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: '/official_menu',
+        name: 'official_menu',
+        meta: {
+          icon: 'md-menu',
+          title: '公众号菜单'
+        }
+        // component: () => import('@/view/official_menu/list.vue')
+      }
+    ]
   }
 ]
