@@ -23,9 +23,9 @@ const prefixCls = 'mannager-classification-list'
 export default {
   name: 'mannager-classification-list',
   components: {
+    edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
-    tableList: () => import('./components/table-list.vue'),
-    edit: () => import('./components/edit.vue')
+    tableList: () => import('./components/table-list.vue')
   },
   data () {
     return {

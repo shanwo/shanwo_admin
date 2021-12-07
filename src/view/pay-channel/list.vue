@@ -26,9 +26,9 @@ const prefixCls = 'pay-channel-list'
 export default {
   name: 'pay-channel-list',
   components: {
+    edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
-    tableList: () => import('./components/table-list.vue'),
-    edit: () => import('./components/edit.vue')
+    tableList: () => import('./components/table-list.vue')
   },
   data () {
     return {

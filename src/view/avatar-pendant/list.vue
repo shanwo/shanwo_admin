@@ -25,9 +25,9 @@ const prefixCls = 'avatar-pendant-list'
 export default {
   name: 'avatar-pendant-list',
   components: {
+    edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
-    tableList: () => import('./components/table-list.vue'),
-    edit: () => import('./components/edit.vue')
+    tableList: () => import('./components/table-list.vue')
   },
   data () {
     return {

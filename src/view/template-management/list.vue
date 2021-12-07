@@ -26,9 +26,9 @@ const prefixCls = 'template-management-list'
 export default {
   name: 'template-management-list',
   components: {
+    edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
-    tableList: () => import('./components/table-list.vue'),
-    edit: () => import('./components/edit.vue')
+    tableList: () => import('./components/table-list.vue')
   },
   data () {
     return {

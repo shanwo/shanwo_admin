@@ -25,9 +25,9 @@ const prefixCls = 'tutorials-management-list'
 export default {
   name: 'tutorials-management-list',
   components: {
+    edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
-    tableList: () => import('./components/table-list.vue'),
-    edit: () => import('./components/edit.vue')
+    tableList: () => import('./components/table-list.vue')
   },
   data () {
     return {
