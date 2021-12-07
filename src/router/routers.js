@@ -287,5 +287,24 @@ export default [
         // component: () => import('@/view/official_menu/list.vue')
       }
     ]
+  },
+  {
+    path: '/menu',
+    name: 'menu',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: '/official_reply',
+        name: 'official_reply',
+        meta: {
+          icon: 'md-reply',
+          title: '公众号回复'
+        }
+        // component: () => import('@/view/official_menu/list.vue')
+      }
+    ]
   }
 ]
