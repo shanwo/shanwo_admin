@@ -1,19 +1,23 @@
 export const orderStatus = {
-  1: {
-    type: 1,
-    name: '预支付'
+  10: {
+    type: 10,
+    name: '订单创建'
   },
-  2: {
-    type: 2,
+  20: {
+    type: 20,
+    name: '订单取消'
+  },
+  30: {
+    type: 30,
     name: '支付成功'
   },
-  3: {
-    type: 3,
+  40: {
+    type: 40,
     name: '支付失败'
   },
-  4: {
-    type: 4,
-    name: '退款'
+  50: {
+    type: 50,
+    name: '退款完成'
   }
 }
 export const columns = [
