@@ -24,7 +24,7 @@
         <FormItem label="地区：">
           <p>{{ userInfo.merger_name }}</p>
         </FormItem>
-        <FormItem label="到期时间：" v-if="userInfo.renewal">
+        <FormItem label="到期时间：" v-if="userInfo.vip_type">
           <p>{{ userInfo.expired_at }}</p>
         </FormItem>
         <FormItem label="关联账号：">
@@ -39,8 +39,8 @@
         <FormItem label="看过的页数：">
           {{ userInfo.browse.total }}
         </FormItem>
-        <FormItem label="续费方式：">
-          <p v-if="userRenewal[userInfo.renewal]">{{ userRenewal[userInfo.renewal].name }}</p>
+        <FormItem label="购买方式：">
+          <p v-if="userVipType[userInfo.vip_type]">{{ userVipType[userInfo.vip_type].name }}</p>
         </FormItem>
         <FormItem label="更新时间：">
           <p>{{ userInfo.updated_at }}</p>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { userSex, userType, userThird, userRenewal } from './../page-info'
+import { userSex, userType, userThird, userVipType } from './../page-info'
 import { getUserInfo } from '@/api/user-management'
 
 const prefixCls = 'user-management-info'
@@ -80,7 +80,7 @@ export default {
         birthday: '-',
         merger_name: '',
         pages: '',
-        renewal: '',
+        vip_type: '',
         expired_at: '',
         updated_at: '',
         created_at: '',
@@ -91,7 +91,7 @@ export default {
       userSex,
       userType,
       userThird,
-      userRenewal
+      userVipType
     }
   },
   methods: {

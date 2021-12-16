@@ -30,7 +30,7 @@ export const userType = [
     name: '黑名单'
   }
 ]
-export const userRenewal = [
+export const userVipType = [
   {
     type: 0,
     name: '-'
