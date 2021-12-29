@@ -65,13 +65,19 @@ export default {
       let summitInfo = {}
       for (let key in this.iconInfo) {
         if (this.iconInfo[key]) {
-          summitInfo[key] = this.iconInfo[key]
+          if (key === 'option_value') {
+            summitInfo[key] = JSON.parse(this.iconInfo[key])
+          } else {
+            summitInfo[key] = this.iconInfo[key]
+          }
         }
       }
       if (this.id) {
         summitInfo.id = this.id
         actionFn = updateConfig
       }
+      // console.log(summitInfo.option_value)
+      console.log(summitInfo)
       actionFn(summitInfo).then(() => {
         this.cancel()
         this.$Message.success('操作成功')
