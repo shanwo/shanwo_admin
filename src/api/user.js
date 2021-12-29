@@ -13,6 +13,16 @@ export const toLogin = () => {
     method: 'get'
   })
 }
+export const toLogout = () => {
+  var url = 'https://api.shanwo.cc/user/signOut'
+  if (process.env.NODE_ENV !== 'production') {
+    url = '//api.shanwo.vip/user/signOut'
+  }
+  return axios.request({
+    url,
+    method: 'get'
+  })
+}
 export const getUserToken = ({ code, state }) => {
   var url = 'https://api.shanwo.cc/callback/wechat'
   if (process.env.NODE_ENV !== 'production') {
