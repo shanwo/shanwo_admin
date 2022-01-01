@@ -65,6 +65,10 @@ export const columns = [
     title: '创建人'
   },
   {
+    key: 'code',
+    title: '闪码'
+  },
+  {
     key: 'follow',
     title: '关注数'
   },
