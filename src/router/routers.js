@@ -205,7 +205,7 @@ export default [
         path: 'list',
         name: 'pay_channel_list',
         meta: {
-          icon: 'md-cart',
+          icon: 'md-card',
           title: '支付渠道'
         },
         component: () => import('@/view/pay-channel/list.vue')
@@ -270,8 +270,8 @@ export default [
     ]
   },
   {
-    path: '/menu',
-    name: 'menu',
+    path: '/official_menu',
+    name: 'official_menu',
     component: Main,
     meta: {
       hideInBread: true
@@ -300,8 +300,27 @@ export default [
         path: '/official_reply',
         name: 'official_reply',
         meta: {
-          icon: 'md-reply',
+          icon: 'md-quote',
           title: '公众号回复'
+        }
+        // component: () => import('@/view/official_menu/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/tag',
+    name: 'tag',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: '/tag_management',
+        name: 'tag_management',
+        meta: {
+          icon: 'md-pricetags',
+          title: '标签管理'
         }
         // component: () => import('@/view/official_menu/list.vue')
       }
