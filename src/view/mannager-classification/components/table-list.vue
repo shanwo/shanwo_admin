@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { delClassification } from '@/api/mannager-classification'
+import { statusClassification } from '@/api/mannager-classification'
 import { columns } from './../page-info'
 
 const prefixCls = 'mannager-classification-list'
@@ -57,7 +57,7 @@ export default {
         title: '警告',
         content: '确认删除当前数据？',
         onOk: () => {
-          delClassification({ id }).then(() => {
+          statusClassification({ id }).then(() => {
             this.$Message.success('删除成功')
             this.$emit('refresh')
           })

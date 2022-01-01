@@ -29,9 +29,9 @@ export const updatePay = (params) => {
     method: 'post'
   })
 }
-export const deletePay = (params) => {
+export const statusPay = (params) => {
   return axios.request({
-    url: '/pay/del',
+    url: '/pay/status',
     data: params,
     method: 'post'
   })

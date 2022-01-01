@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { deleteConfig } from '@/api/config-management'
+import { statusConfig } from '@/api/config-management'
 import { columns } from './../page-info'
 
 const prefixCls = 'config-management-list'
@@ -53,7 +53,7 @@ export default {
         title: '警告',
         content: '确认删除当前数据？',
         onOk: () => {
-          deleteConfig({ id }).then(() => {
+          statusConfig({ id }).then(() => {
             this.$Message.success('删除成功')
             this.$emit('refresh')
           })

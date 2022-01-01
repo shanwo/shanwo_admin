@@ -37,9 +37,9 @@ export const updateDecoration = (params) => {
     method: 'post'
   })
 }
-export const deleteDecoration = (params) => {
+export const statusDecoration = (params) => {
   return axios.request({
-    url: '/decoration/del',
+    url: '/decoration/status',
     data: params,
     method: 'post'
   })

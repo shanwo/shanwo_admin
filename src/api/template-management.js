@@ -37,9 +37,9 @@ export const updateTemplate = (params) => {
     method: 'post'
   })
 }
-export const deleteTemplate = (params) => {
+export const statusTemplate = (params) => {
   return axios.request({
-    url: '/template/del',
+    url: '/template/status',
     data: params,
     method: 'post'
   })

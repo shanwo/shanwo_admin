@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { deleteTutorials } from '@/api/tutorials-management'
+import { statusTutorials } from '@/api/tutorials-management'
 import { columns } from './../page-info'
 
 const prefixCls = 'tutorials-management-list'
@@ -56,7 +56,7 @@ export default {
         title: '警告',
         content: '确认删除当前数据？',
         onOk: () => {
-          deleteTutorials({ id }).then(() => {
+          statusTutorials({ id }).then(() => {
             this.$Message.success('删除成功')
             this.$emit('refresh')
           })

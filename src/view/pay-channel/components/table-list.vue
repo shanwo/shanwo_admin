@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { deletePay } from '@/api/pay-channel'
+import { statusPay } from '@/api/pay-channel'
 import { columns } from './../page-info'
 
 const prefixCls = 'pay-channel-list'
@@ -53,7 +53,7 @@ export default {
         title: '警告',
         content: '确认删除当前数据？',
         onOk: () => {
-          deletePay({ id }).then(() => {
+          statusPay({ id }).then(() => {
             this.$Message.success('删除成功')
             this.$emit('refresh')
           })

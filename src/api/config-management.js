@@ -29,9 +29,9 @@ export const updateConfig = (params) => {
     method: 'post'
   })
 }
-export const deleteConfig = (params) => {
+export const statusConfig = (params) => {
   return axios.request({
-    url: '/config/del',
+    url: '/config/status',
     data: params,
     method: 'post'
   })

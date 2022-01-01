@@ -37,9 +37,9 @@ export const updateTutorials = (params) => {
     method: 'post'
   })
 }
-export const deleteTutorials = (params) => {
+export const statusTutorials = (params) => {
   return axios.request({
-    url: '/tutorials/del',
+    url: '/tutorials/status',
     data: params,
     method: 'post'
   })

@@ -24,17 +24,17 @@ export const getClassificationInfo = (params) => {
   })
 }
 
-export const delClassification = (params) => {
+export const updateClassification = (params) => {
   return axios.request({
-    url: '/sort/del',
+    url: '/sort/edit',
     data: params,
     method: 'post'
   })
 }
 
-export const updateClassification = (params) => {
+export const statusClassification = (params) => {
   return axios.request({
-    url: '/sort/edit',
+    url: '/sort/del',
     data: params,
     method: 'post'
   })

@@ -23,3 +23,10 @@ export const setSortConfig = (params) => {
     method: 'post'
   })
 }
+export const statusShanPage = (params) => {
+  return axios.request({
+    url: '/page/status',
+    data: params,
+    method: 'post'
+  })
+}

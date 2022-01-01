@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { deleteDecoration } from '@/api/avatar-pendant'
+import { statusDecoration } from '@/api/avatar-pendant'
 import { columns } from './../page-info'
 
 const prefixCls = 'avatar-pendant-list'
@@ -63,7 +63,7 @@ export default {
         title: '警告',
         content: '确认删除当前数据？',
         onOk: () => {
-          deleteDecoration({ id }).then(() => {
+          statusDecoration({ id }).then(() => {
             this.$Message.success('删除成功')
             this.$emit('refresh')
           })

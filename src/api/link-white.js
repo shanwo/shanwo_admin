@@ -37,9 +37,9 @@ export const updateLink = (params) => {
     method: 'post'
   })
 }
-export const deleteLink = (params) => {
+export const statusLink = (params) => {
   return axios.request({
-    url: '/link/del',
+    url: '/link/status',
     data: params,
     method: 'post'
   })
