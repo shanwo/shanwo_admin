@@ -37,23 +37,23 @@ export const userVipType = [
   },
   {
     type: 1,
-    name: '年'
+    name: '年卡'
   },
   {
     type: 2,
-    name: '季'
+    name: '季卡'
   },
   {
     type: 3,
-    name: '月'
+    name: '月卡'
   },
   {
     type: 4,
-    name: '周'
+    name: '周卡'
   },
   {
     type: 5,
-    name: '天'
+    name: '日卡'
   }
 ]
 export const contactType = {
