@@ -50,13 +50,32 @@ export default [
     },
     children: [
       {
-        path: '/user_management/list',
+        path: 'list',
         name: 'user_management_list',
         meta: {
-          icon: 'md-contacts',
+          icon: 'md-people',
           title: '用户管理'
         },
         component: () => import('@/view/user-management/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/user_feedback',
+    name: 'user_feedback',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'user_feedback_list',
+        meta: {
+          icon: 'md-chatboxes',
+          title: '用户反馈'
+        },
+        component: () => import('@/view/user-feedback/list.vue')
       }
     ]
   },
@@ -148,7 +167,7 @@ export default [
         path: 'list',
         name: 'tutorials_management_list',
         meta: {
-          icon: 'md-glasses',
+          icon: 'md-bookmarks',
           title: '教程管理'
         },
         component: () => import('@/view/tutorials-management/list.vue')
@@ -232,25 +251,6 @@ export default [
     ]
   },
   {
-    path: '/user_feedback',
-    name: 'user_feedback',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'user_feedback_list',
-        meta: {
-          icon: 'md-chatboxes',
-          title: '用户反馈'
-        },
-        component: () => import('@/view/user-feedback/list.vue')
-      }
-    ]
-  },
-  {
     path: '/config_management',
     name: 'config_management',
     component: Main,
@@ -270,59 +270,60 @@ export default [
     ]
   },
   {
-    path: '/official_menu',
-    name: 'official_menu',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: '/official_menu',
-        name: 'official_menu',
-        meta: {
-          icon: 'md-menu',
-          title: '公众号菜单'
-        }
-        // component: () => import('@/view/official_menu/list.vue')
-      }
-    ]
-  },
-  {
-    path: '/menu',
-    name: 'menu',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: '/official_reply',
-        name: 'official_reply',
-        meta: {
-          icon: 'md-quote',
-          title: '公众号回复'
-        }
-        // component: () => import('@/view/official_menu/list.vue')
-      }
-    ]
-  },
-  {
     path: '/tag',
     name: 'tag',
     component: Main,
     meta: {
-      hideInBread: true
+      icon: 'md-pricetags',
+      title: '标签管理'
     },
     children: [
       {
-        path: '/tag_management',
+        path: 'management',
         name: 'tag_management',
         meta: {
           icon: 'md-pricetags',
           title: '标签管理'
         }
-        // component: () => import('@/view/official_menu/list.vue')
+        // component: () => import('@/view/tag_management/list.vue')
+      },
+      {
+        path: 'rule',
+        name: 'tag_rule',
+        meta: {
+          icon: 'md-done-all',
+          title: '标签规则'
+        }
+        // component: () => import('@/view/tag_rule/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/official',
+    name: 'official',
+    component: Main,
+    meta: {
+      icon: 'md-ionic',
+      title: '公众号'
+    },
+    children: [
+      {
+        path: 'menu',
+        name: 'official_menu',
+        meta: {
+          icon: 'md-menu',
+          title: '公众号菜单'
+        }
+        // component: () => import('@/view/official_menu/info.vue')
+      },
+      {
+        path: 'reply',
+        name: 'official_reply',
+        meta: {
+          icon: 'md-quote',
+          title: '公众号回复'
+        }
+        // component: () => import('@/view/official_reply/list.vue')
       }
     ]
   }
