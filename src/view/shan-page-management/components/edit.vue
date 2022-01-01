@@ -4,7 +4,7 @@
     <div :class="prefixCls + '-box'">
       <Form :label-width="100">
       <FormItem label="推荐类型：">
-        <Select v-model="cache" class="inputWidth">
+        <Select v-model="pageInfo.is_open" class="inputWidth">
           <Option v-for="item of cacheTypeList" :value="item.type" :key="item.type">{{ item.name }}</Option>
         </Select>
       </FormItem>
@@ -33,7 +33,10 @@ export default {
       prefixCls,
       cacheTypeList,
       cache: 1,
-      pageInfo: {}
+      pageInfo: {
+        is_open: 0,
+        sort: 0
+      }
     }
   },
   props: {
@@ -59,6 +62,7 @@ export default {
       let summitInfo = {}
       summitInfo.id = this.id
       summitInfo.sort = this.pageInfo.sort
+      summitInfo.cache = this.pageInfo.is_open
       setSortConfig(summitInfo).then(() => {
         this.cancel()
         this.$Message.success('操作成功')

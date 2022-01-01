@@ -16,16 +16,6 @@ export const cacheTypeList = [
     name: '仅最近更新'
   }
 ]
-export const openType = [
-  {
-    type: 0,
-    typeName: '关'
-  },
-  {
-    type: 1,
-    typeName: '开'
-  }
-]
 export const userType = [
   {
     type: '',
@@ -84,7 +74,7 @@ export const columns = [
     key: 'is_open',
     title: '广场开关',
     render: (h, { row }) => {
-      return h('span', openType[row.is_open] && openType[row.is_open].typeName)
+      return h('span', row.is_open ? '开' : '关')
     }
   },
   {

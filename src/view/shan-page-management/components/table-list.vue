@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { openType, userType, columns } from './../page-info'
+import { userType, columns } from './../page-info'
 
 const prefixCls = 'shan-page-management-list'
 
@@ -21,7 +21,6 @@ export default {
     return {
       prefixCls,
       isShowEdit: false,
-      openType,
       userType,
       columns
     }

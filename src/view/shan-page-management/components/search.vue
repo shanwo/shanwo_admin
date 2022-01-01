@@ -8,11 +8,6 @@
       <FormItem label="创建人：">
         <Input v-model="value.nickname" class="inputWidth" placeholder="请输入创建人"></Input>
       </FormItem>
-      <FormItem label="广场开关：">
-        <Select v-model="value.open" class="inputWidth">
-          <Option v-for="item of openType" :value="item.type" :key="item.type">{{ item.typeName }}</Option>
-        </Select>
-      </FormItem>
       <FormItem label="用户类型：">
         <Select v-model="value.type" class="inputWidth">
           <Option v-for="item of userType" :value="item.type" :key="item.type">{{ item.typeName }}</Option>
@@ -28,7 +23,7 @@
 </template>
 
 <script>
-import { openType, userType } from './../page-info'
+import { userType } from './../page-info'
 
 const prefixCls = 'shan-page-management-list'
 export default {
@@ -43,7 +38,6 @@ export default {
   data () {
     return {
       prefixCls,
-      openType,
       userType
     }
   }
