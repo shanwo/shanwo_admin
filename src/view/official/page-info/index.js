@@ -57,3 +57,28 @@ export const columns = [
     title: '操作'
   }
 ]
+
+export const menuTypeInfo = {
+  view: [
+    {
+      title: '页面地址',
+      key: 'url'
+    }
+  ],
+  miniprogram: [
+    {
+      title: 'appid',
+      key: 'appid'
+    },
+    {
+      title: 'pagepath',
+      key: 'pagepath'
+    }
+  ],
+  click: []
+}
+export const menuTypeKey = {
+  allKey: ['url', 'appid', 'pagepath'],
+  view: [ 'url' ],
+  miniprogram: [ 'appid', 'pagepath' ]
+}

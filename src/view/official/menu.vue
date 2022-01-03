@@ -1,40 +1,88 @@
 <template>
-<div :class="prefixCls">
-  <div :class="prefixCls + '-table'">
-    <Form :label-width="100">
-      <textarea @refresh="menuInfo" :rows="32" v-model="menu" class="ivu-input"/>
-    </Form>
+  <div :class="prefixCls">
+    <div :class="prefixCls + '-box'">
+      <!-- 菜单 -->
+      <div :class="prefixCls + '-box-left'">
+        <div :class="prefixCls + '-box-left-menu'">
+          <template v-for="(item, index) of menu">
+            <menu-item
+              @touchMenu="(val) => touchMenu(index, val)"
+              @touchSubMenu="touchSubMenu"
+              :key="index"
+              :menuDate="item"
+              :isSelected="selectIndex === index"
+            />
+          </template>
+          <template v-if="menu.length < 3">
+            <div class="add-action" @click="addMenu">添加菜单</div>
+          </template>
+        </div>
+      </div>
+      <!-- 菜单信息 -->
+      <div :class="prefixCls + '-box-right'">
+        <menu-info-component :menuInfo="currentMenuInfo" />
+      </div>
+    </div>
+
+    <div :class="prefixCls + '-footer'">
+      <Button type="primary" @click="confirm">保存配置</Button>
+    </div>
   </div>
-  <div slot="footer">
-    <Button type="primary" @click="confirm">更新</Button>
-  </div>
-</div>
 </template>
 
 <script>
 import { setMenu, menuInfo } from '@/api/official'
-
+import menuItem from './components/menu-item.vue'
+import menuInfoComponent from './components/menu-info.vue'
 const prefixCls = 'menu'
 export default {
   name: 'menu',
+  components: {
+    menuItem,
+    menuInfoComponent
+  },
   data () {
     return {
       prefixCls,
-      menu: {}
+      menu: [],
+      selectIndex: 0,
+      currentMenuInfo: {}
     }
   },
   methods: {
     menuInfo () {
-      menuInfo().then(res => {
-        this.menu = JSON.stringify(res.data, null, 4)
+      menuInfo().then((res) => {
+        this.menu = (res.data && res.data.menu && res.data.menu.button) || []
+        // 判断菜单是不是空的
+        if (!this.menu.length) {
+          let index = this.addMenu()
+          this.touchMenu(index, this.menu[index])
+        } else {
+          this.touchMenu(0, this.menu[0])
+        }
       })
     },
     confirm () {
-      let summitInfo = {}
-      summitInfo['menu'] = JSON.parse(this.menu)
-      setMenu(summitInfo).then(() => {
+      setMenu({ menu: this.menu }).then(() => {
         this.$Message.success('操作成功')
       })
+    },
+    addMenu () {
+      if (this.menu.length > 2) return
+      this.menu.push({
+        name: '待编辑',
+        sub_button: [],
+        type: 'view',
+        url: ''
+      })
+      return this.menu.length - 1
+    },
+    touchMenu (index, val) {
+      this.selectIndex = index
+      this.$set(this, 'currentMenuInfo', val)
+    },
+    touchSubMenu (val) {
+      this.$set(this, 'currentMenuInfo', val)
     }
   },
   created () {
@@ -53,10 +101,39 @@ export default {
   padding: 10px;
   border-radius: 4px;
   background-color: #fff;
-
-  &-page {
-    padding: 8px;
-    text-align: right;
+  &-box {
+    display: flex;
+    justify-content: center;
+    &-left {
+      position: relative;
+      width: 375px;
+      height: 667px;
+      background-size: 375px 667px;
+      background-image: url(./../../assets/images/phone.jpeg);
+      background-repeat: no-repeat;
+      &-menu {
+        position: absolute;
+        bottom: 78px;
+        left: 28px;
+        width: 320px;
+        display: flex;
+        text-align: center;
+        cursor: pointer;
+        background-color: #fff;
+        .add-action {
+          flex: 1;
+          height: 48px;
+          line-height: 48px;
+        }
+      }
+    }
+    &-right {
+      width: 350px;
+    }
+  }
+  &-footer{
+    padding: 20px 0;
+    text-align: center;
   }
 }
 </style>
