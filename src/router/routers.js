@@ -23,8 +23,8 @@ export default [
     name: 'index',
     meta: {
       hideInMenu: true,
-      title: '首页',
       notCache: true,
+      title: '官网',
       icon: 'md-home'
     },
     component: () => import('@/view/main')
