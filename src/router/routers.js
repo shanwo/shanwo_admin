@@ -324,8 +324,8 @@ export default [
         meta: {
           icon: 'md-menu',
           title: '公众号菜单'
-        }
-        // component: () => import('@/view/official_menu/info.vue')
+        },
+        component: () => import('@/view/official/menu.vue')
       },
       {
         path: 'reply',
@@ -333,8 +333,8 @@ export default [
         meta: {
           icon: 'md-quote',
           title: '公众号回复'
-        }
-        // component: () => import('@/view/official_reply/list.vue')
+        },
+        component: () => import('@/view/official/list.vue')
       }
     ]
   }

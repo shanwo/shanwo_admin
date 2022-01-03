@@ -1,5 +1,5 @@
 <template>
-<Modal :value="value" title="编辑用户信息" @on-cancel="cancel">
+<Modal :value="value" title="编辑分类" @on-cancel="cancel">
   <Form :label-width="100">
     <FormItem label="分类：">
       <Select v-model="classificationInfo.type" :disabled="!!id" class="iptWidth">
