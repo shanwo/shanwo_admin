@@ -62,15 +62,15 @@ export default {
 .@{prefix} {
   position: relative;
   flex: 1;
-  height: 48px;
-  line-height: 48px;
+  height: 38px;
+  line-height: 38px;
   background: #fff;
-  border-right: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
   &-submenu {
     position: absolute;
-    bottom: 48px;
+    bottom: 38px;
     width: 100%;
-    line-height: 48px;
+    line-height: 38px;
     background-color: #fff;
     border-bottom: 1px solid #e0e0e0;
   }

@@ -2,10 +2,10 @@
   <div :class="prefixCls">
     <div :class="prefixCls + '-title'">
       <span>菜单信息</span>
-      <div @click="saveMenuInfo">保存</div>
+      <div @click="saveMenuInfo" style="width: 100px">保存</div>
     </div>
     <div :class="prefixCls + '-content'">
-      <Form :label-width="80">
+      <Form :label-width="100">
         <FormItem label="菜单名称:">
           <Input v-model="cloneMenuInfo.name" placeholder=""></Input>
         </FormItem>
@@ -14,9 +14,10 @@
             v-model="cloneMenuInfo.type"
             @on-change="(val) => menuTypeHandle(val, cloneMenuInfo)"
           >
-            <Radio label="click">点击</Radio>
-            <Radio label="miniprogram">小程序</Radio>
+            <Radio label="media_id">素材消息</Radio>
+            <Radio label="article_id">图文消息</Radio>
             <Radio label="view">跳转网页</Radio>
+            <Radio label="miniprogram">跳转小程序</Radio>
           </RadioGroup>
         </FormItem>
         <template v-if="menuTypeInfo[cloneMenuInfo.type]">
@@ -87,17 +88,18 @@ export default {
   border: 1px solid #e0e0e0;
   &-title {
     position: relative;
-    height: 48px;
-    line-height: 48px;
+    height: 38px;
+    line-height: 38px;
     font-size: 20px;
     border-bottom: 1px solid #e0e0e0;
     text-align: center;
     > div {
       position: absolute;
       top: 0;
-      right: 4px;
-      line-height: 48px;
-      font-size: 12px;
+      right: 0;
+      border-left: 1px solid #e0e0e0;
+      line-height: 37px;
+      font-size: 14px;
       cursor: pointer;
     }
   }

@@ -59,6 +59,18 @@ export const columns = [
 ]
 
 export const menuTypeInfo = {
+  media_id: [
+    {
+      title: '图片/语音/视频',
+      key: 'media_id'
+    }
+  ],
+  article_id: [
+    {
+      title: '图文消息ID',
+      key: 'article_id'
+    }
+  ],
   view: [
     {
       title: '页面地址',
@@ -71,14 +83,19 @@ export const menuTypeInfo = {
       key: 'appid'
     },
     {
-      title: 'pagepath',
+      title: '小程序路径',
       key: 'pagepath'
+    },
+    {
+      title: '备用网页',
+      key: 'url'
     }
-  ],
-  click: []
+  ]
 }
 export const menuTypeKey = {
-  allKey: ['url', 'appid', 'pagepath'],
+  allKey: [ 'url', 'appid', 'pagepath', 'media_id', 'view_limited', 'article_id', 'article_view_limited' ],
+  media_id: [ 'media_id' ],
+  article_id: [ 'article_id' ],
   view: [ 'url' ],
-  miniprogram: [ 'appid', 'pagepath' ]
+  miniprogram: [ 'appid', 'pagepath', 'url' ]
 }

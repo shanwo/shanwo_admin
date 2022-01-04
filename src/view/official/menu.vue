@@ -106,29 +106,30 @@ export default {
     justify-content: center;
     &-left {
       position: relative;
-      width: 375px;
-      height: 667px;
-      background-size: 375px 667px;
-      background-image: url(./../../assets/images/phone.jpeg);
+      width: 327px;
+      height: 695px;
+      background-image: url(//cdn.shanwo.cc/img/phone3.png);
       background-repeat: no-repeat;
       &-menu {
         position: absolute;
-        bottom: 78px;
-        left: 28px;
-        width: 320px;
+        bottom: 114px;
+        left: 67px;
+        width: 230px;
         display: flex;
         text-align: center;
         cursor: pointer;
         background-color: #fff;
         .add-action {
           flex: 1;
-          height: 48px;
-          line-height: 48px;
+          height: 38px;
+          line-height: 38px;
+          border-left: 1px solid #e0e0e0;
         }
       }
     }
     &-right {
-      width: 350px;
+      padding-bottom: 30px;
+      width: 450px;
     }
   }
   &-footer{
