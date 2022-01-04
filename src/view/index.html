@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <title>北京闪我科技有限公司</title>
+  <meta charset="UTF-8">
+  <meta name="author" content="Powerless">
+  <meta name="keywords" content="闪我,快闪" />
+  <meta name="description" content="快速闪到你的品牌">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="//cdn.shanwo.cc/img/favicon.png" type="image/png">
+  <link rel="shortcut icon" href="//cdn.shanwo.cc/img/favicon.ico" type="image/x-icon">
+  <!-- 避免IE使用兼容模式 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <!-- 启用浏览器的极速模式(webkit) -->
+  <meta name="renderer" content="webkit">
+  <!-- 屏蔽百毒转码 -->
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <style type="text/css">
+      * {
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+      }
+
+      body {
+          background: #fff;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size:cover;
+          background-attachment:fixed;
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size: 14px;
+          line-height: 1.5;
+      }
+
+      a {
+          color: #efefef;
+          text-decoration: none;
+          background-color: transparent;
+      }
+
+
+      @media (min-width: 1200px) {
+          .footer-contain,.container {
+              width: 1170px;
+          }
+      }
+      @media (min-width: 1px) and (max-width: 980px) {
+          .info {
+              margin-bottom: 2em;
+          }
+      }
+
+      #footer {
+          left:0px;
+          padding: 0px 20px;
+          bottom: 0px;
+          width: 100%;
+          position:fixed;
+          z-index:999;
+          text-shadow: 1px 0px 0px #fff, -1px 0px 0px #fff, 0px 1px 0px #fff, 0px -1px 0px #fff;
+      }
+
+      .footer-contain {
+          margin: 0 auto;
+          line-height: 30px;
+      }
+
+      .footer-contain a {
+          color: #333;
+          text-decoration: none;
+          display: inline-block;
+      }
+
+      .footer-contain .copy {
+          float: left;
+      }
+
+      .footer-contain .bei {
+          text-align: right;
+      }
+
+      .links {
+          max-width: 100%;
+      }
+
+      .links a {
+          margin-right: 8px;
+      }
+      .navbar-fixed-top{
+          top: 0;
+          right: 0;
+          left: 0;
+          z-index: 1030;
+          margin-right: 0px;
+          margin-left: 0px;
+          position: fixed;
+          border-width: 0;
+      }
+      .nav-sw {
+          color: #fff;
+          min-height: 50px;
+          line-height: 50px;
+          background-color: #222;
+      }
+      .nav-sw .navbar-brand {
+          float: left;
+          height: 50px;
+          color: #9d9d9d;
+          padding: 0 15px;
+          font-size: 18px;
+          line-height: 50px;
+      }
+      .container {
+          padding-right: 15px;
+          padding-left: 15px;
+          margin-right: auto;
+          margin-left: auto;
+      }
+      .main {
+          margin-top:20%;
+          text-align: center;
+          width: 100%;
+          height: 100%;
+          display: inline-block;
+      }
+      .main h2{
+          text-shadow: 1px 0px 0px #fff, -1px 0px 0px #fff, 0px 1px 0px #fff, 0px -1px 0px #fff;
+      }
+  </style>
+  <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+  <script type="application/javascript">
+  fetch('https://api.shanwo.cc/test/image')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      console.log(data.data);
+      $("body").css("background-image","url(" + data.data.url + ")");
+    });
+  </script>
+</head>
+<body>
+<nav class="navbar-fixed-top nav-sw">
+  <div class="container">
+    <a class="navbar-brand" href="/">北京闪我科技有限公司</a>
+  </div>
+</nav>
+<div class="main">
+  <h2>项目开发中，敬请期待。。。</h2>
+  <a target="_blank" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=dxYTGh4ZNwQfFhkAGFkUFA" style="text-decoration:none;">
+    <img src="https://cdn.shanwo.cc/img/ico_mailme_12.png"/>
+  </a>
+</div>
+<div id="footer">
+  <br>
+  <div class="footer-contain">
+    <div class="links">
+      <a href="https://wzxaini9.cn/" target="_blank">Powerless</a>&nbsp;
+    </div>
+    <div class="info">
+      <p class="copy">Copyright © 2021 闪我科技. All Rights Reserved.</p>
+      <p class="bei">
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="external nofollow">京ICP备2021017507号</a>
+        <!--                        <a href="https://www.beian.gov.cn/" target="_blank" rel="external nofollow">京公网安备-备案中...</a>-->
+      </p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
