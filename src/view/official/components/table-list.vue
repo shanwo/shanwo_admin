@@ -14,10 +14,10 @@
 import { statusReply } from '@/api/official'
 import { columns } from './../page-info'
 
-const prefixCls = 'reply-list-list'
+const prefixCls = 'reply-list'
 
 export default {
-  name: 'reply-list-list',
+  name: 'reply-list',
   props: {
     replyList: {
       type: 0,

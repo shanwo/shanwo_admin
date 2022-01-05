@@ -18,9 +18,9 @@
 <script>
 import { replyType } from './../page-info'
 
-const prefixCls = 'reply-list-list'
+const prefixCls = 'reply-list'
 export default {
-  name: 'reply-list-list',
+  name: 'reply-list',
   data () {
     return {
       prefixCls,
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"reply-list-list";
+@prefix: ~"reply-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;
