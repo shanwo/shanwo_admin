@@ -21,10 +21,10 @@
 <script>
 import { getReplyList } from '@/api/official'
 
-const prefixCls = 'reply-list-list'
+const prefixCls = 'reply-list'
 
 export default {
-  name: 'reply-list-list',
+  name: 'reply-list',
   components: {
     edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
@@ -83,7 +83,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"reply-list-list";
+@prefix: ~"reply-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;
