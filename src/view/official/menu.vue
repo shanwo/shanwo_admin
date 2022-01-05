@@ -63,7 +63,7 @@ export default {
       })
     },
     confirm () {
-      setMenu({ menu: this.menu }).then(() => {
+      setMenu({ button: this.menu }).then(() => {
         this.$Message.success('操作成功')
       })
     },

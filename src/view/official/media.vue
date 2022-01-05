@@ -4,12 +4,12 @@
     <search v-model="searchData">
       <template slot="btn">
         <Button @click="addIcon" type="primary" class="mr10">添加</Button>
-        <Button @click="getMediaList" type="primary">查询</Button>
+        <Button @click="getMaterialList" type="primary">查询</Button>
       </template>
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list @refresh="getMediaList" :mediaList="mediaList" @toDetail="toDetail"></table-list>
+    <table-list @refresh="getMaterialList" :materialList="materialList" @toDetail="toDetail"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total="total" show-sizer @on-change="pageChange"></Page>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getMediaList } from '@/api/official'
+import { getMaterialList } from '@/api/official'
 
 const prefixCls = 'media-list'
 
@@ -36,19 +36,19 @@ export default {
       id: null,
       total: 0,
       isShowEdit: false,
-      mediaList: [],
+      materialList: [],
       searchData: {
-        type: 0,
+        type: 'image',
         page: 1,
         size: 10
       }
     }
   },
   methods: {
-    getMediaList () {
-      getMediaList(this.searchData).then(res => {
+    getMaterialList () {
+      getMaterialList(this.searchData).then(res => {
         this.total = res.data.total
-        this.mediaList = res.data.lists || []
+        this.materialList = res.data.lists || []
       })
     },
     /**
@@ -58,7 +58,7 @@ export default {
      */
     pageChange (page) {
       this.searchData.page = page
-      this.getMediaList()
+      this.getMaterialList()
     },
     addIcon () {
       this.isShowEdit = true
@@ -69,11 +69,11 @@ export default {
     },
     editChange () {
       this.id = 0
-      this.getMediaList()
+      this.getMaterialList()
     }
   },
   created () {
-    this.getMediaList()
+    this.getMaterialList()
   }
 }
 </script>

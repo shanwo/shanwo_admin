@@ -3,13 +3,12 @@
   <div :class="prefixCls + '-search'">
     <search v-model="searchData">
       <template slot="btn">
-        <Button @click="addIcon" type="primary" class="mr10">添加</Button>
-        <Button @click="getArticleList" type="primary">查询</Button>
+        <Button @click="getMaterialList" type="primary">查询</Button>
       </template>
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list @refresh="getArticleList" :articleList="articleList" @toDetail="toDetail"></table-list>
+    <table-list @refresh="getMaterialList" :materialList="materialList" @toDetail="toDetail"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total="total" show-sizer @on-change="pageChange"></Page>
@@ -19,7 +18,7 @@
 </template>
 
 <script>
-import { getArticleList } from '@/api/official'
+import { getMaterialList } from '@/api/official'
 
 const prefixCls = 'article-list'
 
@@ -36,19 +35,18 @@ export default {
       id: null,
       total: 0,
       isShowEdit: false,
-      articleList: [],
+      materialList: [],
       searchData: {
-        type: 0,
         page: 1,
         size: 10
       }
     }
   },
   methods: {
-    getArticleList () {
-      getArticleList(this.searchData).then(res => {
+    getMaterialList () {
+      getMaterialList(this.searchData).then(res => {
         this.total = res.data.total
-        this.articleList = res.data.lists || []
+        this.materialList = res.data.lists || []
       })
     },
     /**
@@ -58,7 +56,7 @@ export default {
      */
     pageChange (page) {
       this.searchData.page = page
-      this.getArticleList()
+      this.getMaterialList()
     },
     addIcon () {
       this.isShowEdit = true
@@ -69,11 +67,11 @@ export default {
     },
     editChange () {
       this.id = 0
-      this.getArticleList()
+      this.getMaterialList()
     }
   },
   created () {
-    this.getArticleList()
+    this.getMaterialList()
   }
 }
 </script>

@@ -15,16 +15,23 @@ export const setMenu = (params) => {
     method: 'post'
   })
 }
-export const getMediaList = (params) => {
+export const getMaterialList = (params) => {
   return axios.request({
-    url: '/official/material/media',
+    url: '/official/material/lists',
     params: params,
     method: 'get'
   })
 }
-export const getArticleList = (params) => {
+export const getMaterialInfo = (params) => {
   return axios.request({
-    url: '/official/material/article',
+    url: '/official/material/info',
+    params: params,
+    method: 'get'
+  })
+}
+export const getMaterialDel = (params) => {
+  return axios.request({
+    url: '/official/material/del',
     params: params,
     method: 'get'
   })
