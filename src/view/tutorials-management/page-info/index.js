@@ -1,3 +1,13 @@
+export const status = [
+  {
+    type: -1,
+    name: '禁用'
+  },
+  {
+    type: 1,
+    name: '启用'
+  }
+]
 export const columns = [
   {
     key: 'id',
@@ -22,6 +32,13 @@ export const columns = [
   {
     key: 'order',
     title: '排序'
+  },
+  {
+    key: 'status',
+    title: '状态',
+    render: (h, { row }) => {
+      return h('span', status[row.status] && status[row.status].name)
+    }
   },
   {
     key: 'updated_at',

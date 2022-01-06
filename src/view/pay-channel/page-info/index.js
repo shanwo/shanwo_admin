@@ -1,3 +1,13 @@
+export const status = [
+  {
+    type: -1,
+    name: '禁用'
+  },
+  {
+    type: 1,
+    name: '启用'
+  }
+]
 export const payType = {
   1: {
     type: 1,
@@ -53,6 +63,13 @@ export const columns = [
     title: '时长类型',
     render: (h, { row }) => {
       return h('span', payType[row.type] ? payType[row.type].name : '未定义')
+    }
+  },
+  {
+    key: 'status',
+    title: '状态',
+    render: (h, { row }) => {
+      return h('span', status[row.status] && status[row.status].name)
     }
   },
   {

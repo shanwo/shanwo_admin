@@ -1,3 +1,13 @@
+export const status = [
+  {
+    type: -1,
+    name: '禁用'
+  },
+  {
+    type: 1,
+    name: '启用'
+  }
+]
 export const configAutoload = [
   {
     type: 0,
@@ -22,6 +32,13 @@ export const columns = [
     title: '加载方式',
     render: (h, { row }) => {
       return h('span', configAutoload[row.autoload] ? configAutoload[row.autoload].name : '未定义')
+    }
+  },
+  {
+    key: 'status',
+    title: '状态',
+    render: (h, { row }) => {
+      return h('span', status[row.status] && status[row.status].name)
     }
   },
   {

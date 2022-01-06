@@ -1,3 +1,13 @@
+export const status = [
+  {
+    type: -1,
+    name: '禁用'
+  },
+  {
+    type: 1,
+    name: '启用'
+  }
+]
 export const replyType = [
   {
     type: 0,
@@ -47,6 +57,13 @@ export const columns = [
   {
     key: 'number',
     title: '累计使用数'
+  },
+  {
+    key: 'status',
+    title: '状态',
+    render: (h, { row }) => {
+      return h('span', status[row.status] && status[row.status].name)
+    }
   },
   {
     key: 'updated_at',

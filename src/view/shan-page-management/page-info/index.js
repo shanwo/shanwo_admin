@@ -1,3 +1,13 @@
+export const status = [
+  {
+    type: -1,
+    name: '禁用'
+  },
+  {
+    type: 1,
+    name: '启用'
+  }
+]
 export const cacheTypeList = [
   {
     type: 0,
@@ -9,11 +19,11 @@ export const cacheTypeList = [
   },
   {
     type: 2,
-    name: '仅热门'
+    name: '热门推荐'
   },
   {
     type: 3,
-    name: '仅最近更新'
+    name: '最近更新'
   }
 ]
 export const userType = [
@@ -75,6 +85,13 @@ export const columns = [
     title: '广场开关',
     render: (h, { row }) => {
       return h('span', row.is_open ? '开' : '关')
+    }
+  },
+  {
+    key: 'status',
+    title: '状态',
+    render: (h, { row }) => {
+      return h('span', status[row.status] && status[row.status].name)
     }
   },
   {
