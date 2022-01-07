@@ -2,8 +2,9 @@
 <div :class="prefixCls">
   <Table :columns="columns" :data="templateManagementList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
-      <a @click="toEdit(row.id)">编辑</a>&nbsp;
-      <a @click="toDel(row.id)">删除</a>
+      <a v-if="row.status === 1" @click="toStatus(row.id,-1)">禁用</a>
+      <a v-else @click="toStatus(row.id,1)" style="color: #ff0000">启用</a>|
+      <a @click="toEdit(row.id)">编辑</a>
     </template>
   </Table>
 </div>
@@ -11,6 +12,7 @@
 </template>
 
 <script>
+import { statusTemplate } from '@/api/template-management'
 import { columns } from './../page-info'
 
 const prefixCls = 'template-management-list'
@@ -52,13 +54,13 @@ export default {
     toEdit (id) {
       this.$emit('toDetail', id)
     },
-    toDel (id) {
+    toStatus (id, status) {
       this.$Modal.confirm({
         title: '警告',
-        content: '确认删除当前数据？',
+        content: '确认启/停用嘛？',
         onOk: () => {
-          deleteLxink({ id }).then(() => {
-            this.$Message.success('删除成功')
+          statusTemplate({ id: id, status: status }).then(() => {
+            this.$Message.success('成功')
             this.$emit('refresh')
           })
         }

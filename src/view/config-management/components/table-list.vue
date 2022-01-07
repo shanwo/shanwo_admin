@@ -2,8 +2,9 @@
   <div :class="prefixCls">
     <Table :columns="columns" :data="configlList" class="iviewtable">
       <template slot-scope="{ row }" slot="action">
-        <a @click="toEdit(row.id)">编辑</a>&nbsp;
-        <a @click="toDel(row.id)">删除</a>
+        <a v-if="row.status === 1" @click="toStatus(row.id,-1)">禁用</a>
+        <a v-else @click="toStatus(row.id,1)" style="color: #ff0000">启用</a>|
+        <a @click="toEdit(row.id)">编辑</a>
       </template>
     </Table>
   </div>
