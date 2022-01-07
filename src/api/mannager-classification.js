@@ -32,7 +32,7 @@ export const updateClassification = (params) => {
   })
 }
 
-export const statusClassification = (params) => {
+export const delClassification = (params) => {
   return axios.request({
     url: '/sort/del',
     data: params,
