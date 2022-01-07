@@ -2,7 +2,7 @@
 <div :class="prefixCls">
   <Table :columns="columns" :data="classificationList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
-      <a @click="toEdit(row.id)">编辑</a>&nbsp;
+      <a @click="toEdit(row.id)">编辑</a> |
       <a @click="toDel(row.id)">删除</a>
     </template>
   </Table>
