@@ -2,8 +2,8 @@
 <div :class="prefixCls">
   <Table :columns="columns" :data="pageList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
-      <a v-if="row.status === 1" @click="toStatus(row.id)" style="color: #ff0000">禁用</a>
-      <a v-else  @click="toStatus(row.id)">启用</a>|
+      <a v-if="row.status === 1" @click="toStatus(row.id,-1)">禁用</a>
+      <a v-else @click="toStatus(row.id,1)" style="color: #ff0000">启用</a>|
       <a v-if="row.is_open" @click="toEdit(row.id)">推荐</a>
       <a v-else style="color: #ff0000">-</a>
     </template>
@@ -50,12 +50,12 @@ export default {
     toEdit (id) {
       this.$emit('toDetail', id)
     },
-    toStatus (id) {
+    toStatus (id, status) {
       this.$Modal.confirm({
         title: '警告',
         content: '确认启/停用嘛？',
         onOk: () => {
-          statusShanPage({ id }).then(() => {
+          statusShanPage({ id: id, status: status }).then(() => {
             this.$Message.success('成功')
             this.$emit('refresh')
           })
