@@ -1,13 +1,13 @@
-export const status = [
-  {
+export const status = {
+  '-1': {
     type: -1,
-    name: '禁用'
+    name: '已禁用'
   },
-  {
+  '1': {
     type: 1,
-    name: '启用'
+    name: '已启用'
   }
-]
+}
 export const payType = {
   1: {
     type: 1,
