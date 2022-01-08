@@ -28,7 +28,7 @@ export default {
   components: {
     edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
-    tableList: () => import('./components/table-list.vue')
+    tableList: () => import('./components/table-reply.vue')
   },
   data () {
     return {
