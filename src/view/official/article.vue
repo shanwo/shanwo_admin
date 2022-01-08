@@ -1,7 +1,7 @@
 <template>
 <div :class="prefixCls">
   <div :class="prefixCls + '-search'">
-    <Button v-model="searchData" @click="getMaterialList" type="primary">刷新</Button>
+    <Button :v-model="searchData" @click="getMaterialList" type="primary">刷新</Button>
   </div>
   <div :class="prefixCls + '-table'">
     <table-list @refresh="getMaterialList" :materialList="materialList" @toDetail="toDetail"></table-list>

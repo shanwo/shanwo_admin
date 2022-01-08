@@ -90,38 +90,16 @@ export const replyColumns = [
 ]
 export const articleColumns = [
   {
-    key: 'id',
-    title: 'id'
+    key: 'media_id',
+    title: 'media_id'
   },
   {
-    key: 'type',
-    title: '链接类型',
-    render: (h, { row }) => {
-      return h('span', replyType[row.type] && replyType[row.type].name)
-    }
+    key: 'content',
+    title: '内容'
   },
   {
-    key: 'keyword',
-    title: '关键词'
-  },
-  {
-    key: 'number',
-    title: '累计使用数'
-  },
-  {
-    key: 'status',
-    title: '状态',
-    render: (h, { row }) => {
-      return h('span', status[row.status] && status[row.status].name)
-    }
-  },
-  {
-    key: 'updated_at',
+    key: 'update_time',
     title: '更新时间'
-  },
-  {
-    slot: 'action',
-    title: '操作'
   }
 ]
 export const mediaColumns = [
@@ -136,10 +114,6 @@ export const mediaColumns = [
   {
     key: 'update_time',
     title: '更新时间'
-  },
-  {
-    slot: 'action',
-    title: '操作'
   }
 ]
 
