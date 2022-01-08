@@ -1,6 +1,6 @@
 <template>
 <div :class="prefixCls">
-  <Table :columns="columns" :data="replyList" class="iviewtable">
+  <Table :columns="replyColumns" :data="replyList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
       <a v-if="row.status === 1" @click="toStatus(row.id,-1)">禁用</a>
       <a v-else @click="toStatus(row.id,1)" style="color: #ff0000">启用</a> |
@@ -13,7 +13,7 @@
 
 <script>
 import { statusReply } from '@/api/official'
-import { columns } from './../page-info'
+import { replyColumns } from '../page-info'
 
 const prefixCls = 'reply-list'
 
@@ -30,7 +30,7 @@ export default {
       prefixCls,
       id: null,
       isShowEdit: false,
-      columns
+      replyColumns
     }
   },
   methods: {

@@ -38,7 +38,79 @@ export const replyType = [
     name: '图文消息'
   }
 ]
-export const columns = [
+export const replyColumns = [
+  {
+    key: 'id',
+    title: 'id'
+  },
+  {
+    key: 'type',
+    title: '链接类型',
+    render: (h, { row }) => {
+      return h('span', replyType[row.type] && replyType[row.type].name)
+    }
+  },
+  {
+    key: 'keyword',
+    title: '关键词'
+  },
+  {
+    key: 'number',
+    title: '累计使用数'
+  },
+  {
+    key: 'status',
+    title: '状态',
+    render: (h, { row }) => {
+      return h('span', status[row.status] && status[row.status].name)
+    }
+  },
+  {
+    key: 'updated_at',
+    title: '更新时间'
+  },
+  {
+    slot: 'action',
+    title: '操作'
+  }
+]
+export const articleColumns = [
+  {
+    key: 'id',
+    title: 'id'
+  },
+  {
+    key: 'type',
+    title: '链接类型',
+    render: (h, { row }) => {
+      return h('span', replyType[row.type] && replyType[row.type].name)
+    }
+  },
+  {
+    key: 'keyword',
+    title: '关键词'
+  },
+  {
+    key: 'number',
+    title: '累计使用数'
+  },
+  {
+    key: 'status',
+    title: '状态',
+    render: (h, { row }) => {
+      return h('span', status[row.status] && status[row.status].name)
+    }
+  },
+  {
+    key: 'updated_at',
+    title: '更新时间'
+  },
+  {
+    slot: 'action',
+    title: '操作'
+  }
+]
+export const mediaColumns = [
   {
     key: 'id',
     title: 'id'
