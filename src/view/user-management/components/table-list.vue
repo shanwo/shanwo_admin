@@ -11,7 +11,7 @@
 </template>
 <script>
 import { editUserStatus } from '@/api/user-management'
-import { userType, columns } from './../page-info'
+import { userType, columns } from '../page-info'
 
 const prefixCls = 'user-management-list'
 export default {

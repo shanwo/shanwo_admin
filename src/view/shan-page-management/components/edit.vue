@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { cacheTypeList } from './../page-info'
+import { cacheTypeList } from '../page-info'
 import { setSortConfig, getPageInfo } from '@/api/shan-page-management'
 
 const prefixCls = 'edit'

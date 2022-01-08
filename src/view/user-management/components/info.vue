@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { userSex, userType, userThird, userVipType } from './../page-info'
+import { userSex, userType, userThird, userVipType } from '../page-info'
 import { getUserInfo } from '@/api/user-management'
 
 const prefixCls = 'user-management-info'

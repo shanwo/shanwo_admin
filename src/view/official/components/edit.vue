@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { replyType } from './../page-info'
+import { replyType } from '../page-info'
 import { updateReply, addReply, getReplyInfo } from '@/api/official'
 
 const prefixCls = 'edit'

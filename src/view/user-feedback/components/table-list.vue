@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { feedbackStatus, columns } from './../page-info'
+import { feedbackStatus, columns } from '../page-info'
 
 const prefixCls = 'user-feedback-list'
 export default {

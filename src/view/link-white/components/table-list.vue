@@ -13,7 +13,7 @@
 
 <script>
 import { statusLink } from '@/api/link-white'
-import { columns } from './../page-info'
+import { columns } from '../page-info'
 
 const prefixCls = 'link-white-list'
 

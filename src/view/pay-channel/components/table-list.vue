@@ -13,7 +13,7 @@
 
 <script>
 import { statusPay } from '@/api/pay-channel'
-import { columns } from './../page-info'
+import { columns } from '../page-info'
 
 const prefixCls = 'pay-channel-list'
 

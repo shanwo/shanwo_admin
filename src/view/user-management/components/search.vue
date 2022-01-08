@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { userType } from './../page-info'
+import { userType } from '../page-info'
 
 const prefixCls = 'user-management-list'
 export default {

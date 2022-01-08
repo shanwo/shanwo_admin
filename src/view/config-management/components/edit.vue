@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { configAutoload } from './../page-info'
+import { configAutoload } from '../page-info'
 import { updateConfig, addConfig, getConfigInfo } from '@/api/config-management'
 
 const prefixCls = 'edit'

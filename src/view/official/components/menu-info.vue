@@ -35,7 +35,7 @@
 
 <script>
 import _ from 'loadsh'
-import { menuTypeInfo, menuTypeKey } from './../page-info'
+import { menuTypeInfo, menuTypeKey } from '../page-info'
 const prefixCls = 'menu-info'
 export default {
   name: 'menu-info',

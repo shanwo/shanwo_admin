@@ -7,7 +7,7 @@
 </div>
 </template>
 <script>
-import { columns } from './../page-info'
+import { columns } from '../page-info'
 
 const prefixCls = 'order-data-list'
 export default {

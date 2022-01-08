@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { feedbackStatus } from './../page-info'
+import { feedbackStatus } from '../page-info'
 
 const prefixCls = 'user-feedback-list'
 export default {

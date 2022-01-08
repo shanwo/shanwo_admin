@@ -13,7 +13,7 @@
 
 <script>
 import { statusTemplate } from '@/api/template-management'
-import { columns } from './../page-info'
+import { columns } from '../page-info'
 
 const prefixCls = 'template-management-list'
 

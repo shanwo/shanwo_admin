@@ -12,7 +12,7 @@
 
 <script>
 import { statusTutorials } from '@/api/tutorials-management'
-import { columns } from './../page-info'
+import { columns } from '../page-info'
 
 const prefixCls = 'tutorials-management-list'
 export default {

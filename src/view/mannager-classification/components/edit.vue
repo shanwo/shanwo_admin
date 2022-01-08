@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { classificationType } from './../page-info'
+import { classificationType } from '../page-info'
 import { getClassificationInfo, addClassification, updateClassification } from '@/api/mannager-classification'
 
 const prefixCls = 'edit'

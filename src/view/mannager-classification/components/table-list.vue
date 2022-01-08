@@ -13,7 +13,7 @@
 
 <script>
 import { delClassification } from '@/api/mannager-classification'
-import { columns } from './../page-info'
+import { columns } from '../page-info'
 
 const prefixCls = 'mannager-classification-list'
 

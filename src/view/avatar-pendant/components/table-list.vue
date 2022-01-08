@@ -14,7 +14,7 @@
 
 <script>
 import { statusDecoration } from '@/api/avatar-pendant'
-import { columns } from './../page-info'
+import { columns } from '../page-info'
 
 const prefixCls = 'avatar-pendant-list'
 

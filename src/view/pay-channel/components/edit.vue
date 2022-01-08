@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { payType } from './../page-info'
+import { payType } from '../page-info'
 import { updatePay, addPay, getPayInfo } from '@/api/pay-channel'
 
 const prefixCls = 'edit'

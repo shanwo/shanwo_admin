@@ -13,7 +13,7 @@
 
 <script>
 import { statusConfig } from '@/api/config-management'
-import { columns } from './../page-info'
+import { columns } from '../page-info'
 
 const prefixCls = 'config-management-list'
 

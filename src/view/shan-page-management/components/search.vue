@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { userType } from './../page-info'
+import { userType } from '../page-info'
 
 const prefixCls = 'shan-page-management-list'
 export default {

@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { payType } from './../page-info'
+import { payType } from '../page-info'
 const prefixCls = 'pay-channel-list'
 export default {
   name: 'pay-channel-list',

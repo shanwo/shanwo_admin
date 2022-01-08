@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { linkType } from './../page-info'
+import { linkType } from '../page-info'
 import { updateLink, addLink, getLinkInfo } from '@/api/link-white'
 
 const prefixCls = 'edit'

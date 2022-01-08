@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { classificationType } from './../page-info'
+import { classificationType } from '../page-info'
 
 const prefixCls = 'mannager-classification-list'
 export default {

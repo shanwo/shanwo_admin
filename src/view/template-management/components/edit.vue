@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { templateType } from './../page-info'
+import { templateType } from '../page-info'
 import { updateTemplate, addTemplate, getTemplateInfo } from '@/api/template-management'
 
 const prefixCls = 'edit'

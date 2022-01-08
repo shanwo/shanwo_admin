@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { userType, columns } from './../page-info'
+import { userType, columns } from '../page-info'
 import { statusShanPage } from '@/api/shan-page-management'
 
 const prefixCls = 'shan-page-management-list'

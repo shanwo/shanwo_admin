@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { feedbackStatus } from './../page-info'
+import { feedbackStatus } from '../page-info'
 import { getFeedbackInfo, uploadFeedbackInfo } from '@/api/user-feedback'
 
 const prefixCls = 'result'
