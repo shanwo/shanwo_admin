@@ -319,24 +319,6 @@ export default [
     },
     children: [
       {
-        path: 'article',
-        name: 'official_article',
-        meta: {
-          icon: 'md-bookmarks',
-          title: '图文库'
-        },
-        component: () => import('@/view/official/article.vue')
-      },
-      {
-        path: 'media',
-        name: 'official_media',
-        meta: {
-          icon: 'md-planet',
-          title: '素材库'
-        },
-        component: () => import('@/view/official/media.vue')
-      },
-      {
         path: 'menu',
         name: 'official_menu',
         meta: {
@@ -353,6 +335,24 @@ export default [
           title: '回复'
         },
         component: () => import('@/view/official/reply.vue')
+      },
+      {
+        path: 'media',
+        name: 'official_media',
+        meta: {
+          icon: 'md-planet',
+          title: '素材库'
+        },
+        component: () => import('@/view/official/media.vue')
+      },
+      {
+        path: 'article',
+        name: 'official_article',
+        meta: {
+          icon: 'md-bookmarks',
+          title: '图文库'
+        },
+        component: () => import('@/view/official/article.vue')
       }
     ]
   }
