@@ -3,7 +3,6 @@
   <div :class="prefixCls + '-search'">
     <search v-model="searchData">
       <template slot="btn">
-        <Button @click="addIcon" type="primary" class="mr10">添加</Button>
         <Button @click="getMaterialList" type="primary">查询</Button>
       </template>
     </search>
@@ -14,7 +13,6 @@
   <div :class="prefixCls + '-page'">
     <Page :total="total" show-sizer @on-change="pageChange"></Page>
   </div>
-  <edit v-model="isShowEdit" :id="id" @on-change="editChange"/>
 </div>
 </template>
 
@@ -26,9 +24,8 @@ const prefixCls = 'media-list'
 export default {
   name: 'media-list',
   components: {
-    edit: () => import('./components/edit.vue'),
-    search: () => import('./components/search.vue'),
-    tableList: () => import('./components/table-list.vue')
+    search: () => import('./components/search-media.vue'),
+    tableList: () => import('./components/table-media.vue')
   },
   data () {
     return {
@@ -47,6 +44,7 @@ export default {
   methods: {
     getMaterialList () {
       getMaterialList(this.searchData).then(res => {
+        console.log(res)
         this.total = res.data.total
         this.materialList = res.data.lists || []
       })
@@ -60,16 +58,9 @@ export default {
       this.searchData.page = page
       this.getMaterialList()
     },
-    addIcon () {
-      this.isShowEdit = true
-    },
     toDetail (id) {
       this.id = id
       this.isShowEdit = true
-    },
-    editChange () {
-      this.id = 0
-      this.getMaterialList()
     }
   },
   created () {
@@ -83,7 +74,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"reply-list";
+@prefix: ~"media-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;
