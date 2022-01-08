@@ -27,7 +27,7 @@ export default {
   name: 'reply-list',
   components: {
     edit: () => import('./components/edit.vue'),
-    search: () => import('./components/search.vue'),
+    search: () => import('./components/search-reply.vue'),
     tableList: () => import('./components/table-reply.vue')
   },
   data () {

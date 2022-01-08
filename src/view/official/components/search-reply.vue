@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { replyType } from './../page-info'
+import { replyType } from '../page-info'
 
 const prefixCls = 'reply-list'
 export default {
