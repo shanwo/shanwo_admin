@@ -108,7 +108,7 @@ export default {
       position: relative;
       width: 327px;
       height: 695px;
-      background-image: url(//cdn.shanwo.cc/img/phone3.png);
+      background-image: url(//cdn.shanwo.cc/img/phone.png);
       background-repeat: no-repeat;
       &-menu {
         position: absolute;
