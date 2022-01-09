@@ -30,3 +30,17 @@ export const statusShanPage = (params) => {
     method: 'post'
   })
 }
+export const getShanPageAttention = (params) => {
+  return axios.request({
+    url: '/page/attention',
+    params,
+    method: 'get'
+  })
+}
+export const getShanPageBrowse = (params) => {
+  return axios.request({
+    url: '/page/browse',
+    params,
+    method: 'get'
+  })
+}

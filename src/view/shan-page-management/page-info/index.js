@@ -104,3 +104,26 @@ export const columns = [
     title: '操作'
   }
 ]
+export const record = [
+  {
+    key: 'id',
+    title: 'id'
+  },
+  {
+    key: 'avatar',
+    title: '闪页头像',
+    render: (h, { row }) => {
+      return h('img', {
+        attrs: {
+          src: row.avatar,
+          width: 30,
+          height: 30
+        }
+      })
+    }
+  },
+  {
+    key: 'nickname',
+    title: '闪页名称'
+  }
+]

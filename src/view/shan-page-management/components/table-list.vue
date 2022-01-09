@@ -2,14 +2,17 @@
 <div :class="prefixCls">
   <Table :columns="columns" :data="pageList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
+      <a @click="toBrowse(row.id)">浏览</a> |
+      <a @click="toAttention(row.id)">关注</a> |
       <a v-if="row.status === 1" @click="toStatus(row.id,-1)">禁用</a>
       <a v-else @click="toStatus(row.id,1)" style="color: #ff0000">启用</a> |
       <a v-if="row.is_open" @click="toEdit(row.id)">推荐</a>
       <a v-else style="color: #ff0000">-</a>
     </template>
   </Table>
+  <browse v-model="browseData" :id="id"/>
+  <attention v-model="attentionData" :id="id"/>
 </div>
-
 </template>
 
 <script>
@@ -20,10 +23,16 @@ const prefixCls = 'shan-page-management-list'
 
 export default {
   name: 'shan-page-management-list',
+  components: {
+    browse: () => import('./browse.vue'),
+    attention: () => import('./attention.vue')
+  },
   data () {
     return {
       prefixCls,
       isShowEdit: false,
+      browseData: false,
+      attentionData: false,
       userType,
       columns
     }
@@ -49,6 +58,14 @@ export default {
      */
     toEdit (id) {
       this.$emit('toDetail', id)
+    },
+    toBrowse (id) {
+      this.id = id
+      this.browseData = true
+    },
+    toAttention (id) {
+      this.id = id
+      this.attentionData = true
     },
     toStatus (id, status) {
       this.$Modal.confirm({
