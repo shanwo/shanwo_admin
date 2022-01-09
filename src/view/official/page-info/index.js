@@ -1,3 +1,5 @@
+import { formatDate } from 'iview/src/components/date-picker/util'
+
 export const status = {
   '-1': {
     type: -1,
@@ -99,7 +101,10 @@ export const articleColumns = [
   },
   {
     key: 'update_time',
-    title: '更新时间'
+    title: '更新时间',
+    render: (h, { row }) => {
+      return h('span', formatDate(row.update_time * 1000, 'yyyy-MM-dd HH:mm:ss'))
+    }
   }
 ]
 export const mediaColumns = [
@@ -113,7 +118,10 @@ export const mediaColumns = [
   },
   {
     key: 'update_time',
-    title: '更新时间'
+    title: '更新时间',
+    render: (h, { row }) => {
+      return h('span', formatDate(row.update_time * 1000, 'yyyy-MM-dd HH:mm:ss'))
+    }
   }
 ]
 
