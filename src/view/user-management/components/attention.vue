@@ -5,7 +5,7 @@
       <Table :columns="record" :data="attentionList" class="iviewtable"></Table>
     </div>
     <div :class="prefixCls + '-page'">
-      <Page :total=total show-total :page-size=attentionData.size @on-change="pageChange"></Page>
+      <Page :total=total show-total :page-size=attentionSearch.size @on-change="pageChange"></Page>
     </div>
     <div slot="footer">
       <Button type="primary" @click="cancel">关闭</Button>
@@ -34,7 +34,7 @@ export default {
       total: 0,
       record,
       attentionList: [],
-      attentionData: {
+      attentionSearch: {
         id: 0,
         page: 1,
         size: 20
@@ -43,12 +43,12 @@ export default {
   },
   methods: {
     pageChange (page) {
-      this.attentionData.page = page
-      this.getUserList()
+      this.attentionSearch.page = page
+      this.getUserAttention()
     },
     getUserAttention () {
-      this.attentionData.id = this.id
-      getUserAttention(this.attentionData).then(res => {
+      this.attentionSearch.id = this.id
+      getUserAttention(this.attentionSearch).then(res => {
         this.total = res.data.total
         this.attentionList = res.data.lists || []
       })
