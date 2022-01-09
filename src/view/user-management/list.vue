@@ -40,7 +40,7 @@ export default {
         type: '',
         keyword: '',
         page: 1,
-        size: 2
+        size: 20
       }
     }
   },

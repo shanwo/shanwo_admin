@@ -37,7 +37,7 @@ export default {
         third_sn: '',
         keyword: '',
         page: 1,
-        size: 10
+        size: 20
       }
     }
   },

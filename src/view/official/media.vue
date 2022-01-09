@@ -37,7 +37,7 @@ export default {
       searchData: {
         type: 'image',
         page: 1,
-        size: 10
+        size: 20
       }
     }
   },

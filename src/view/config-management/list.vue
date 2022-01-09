@@ -39,7 +39,7 @@ export default {
       configlList: [],
       searchData: {
         page: 1,
-        size: 10
+        size: 20
       }
     }
   },

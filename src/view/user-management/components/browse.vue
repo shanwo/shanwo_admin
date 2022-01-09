@@ -37,7 +37,7 @@ export default {
       browseSearch: {
         id: 0,
         page: 1,
-        size: 2
+        size: 20
       }
     }
   },

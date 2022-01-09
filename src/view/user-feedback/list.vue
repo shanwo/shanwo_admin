@@ -39,7 +39,7 @@ export default {
         type: '',
         nickname: '',
         page: 1,
-        size: 10
+        size: 20
       }
     }
   },
