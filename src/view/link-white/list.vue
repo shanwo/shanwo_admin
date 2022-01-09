@@ -12,7 +12,7 @@
     <table-list @refresh="getLinkWhiteList" :linkWhiteList="linkWhiteList" @toDetail="toDetail"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
-    <Page :total="total" show-sizer @on-change="pageChange"></Page>
+    <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
   </div>
   <edit v-model="isShowEdit" :id="id" @on-change="editChange"/>
 </div>

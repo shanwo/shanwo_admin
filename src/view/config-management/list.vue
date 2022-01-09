@@ -12,7 +12,7 @@
       <table-list @refresh="getConfiglList" :configlList="configlList" @toDetail="toDetail"></table-list>
     </div>
     <div :class="prefixCls + '-page'">
-      <Page :total="total" show-sizer @on-change="pageChange"></Page>
+      <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
     </div>
     <edit v-model="isShowEdit" :id="id" @on-change="editChange"/>
   </div>
@@ -60,7 +60,7 @@ export default {
      * @returns { undefined }
      */
     pageChange (page) {
-      this.value.page = page
+      this.searchData.page = page
       this.getConfiglList()
     },
     addIcon () {
