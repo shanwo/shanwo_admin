@@ -23,3 +23,17 @@ export const editUserStatus = (params) => {
     method: 'post'
   })
 }
+export const getUserAttention = (params) => {
+  return axios.request({
+    url: '/user/attention',
+    params,
+    method: 'get'
+  })
+}
+export const getUserBrowse = (params) => {
+  return axios.request({
+    url: '/user/browse',
+    params,
+    method: 'get'
+  })
+}

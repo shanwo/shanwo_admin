@@ -11,9 +11,9 @@
     <table-list :userList="userList" @refresh="getUserList" @toDetail="toDetail"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
-    <Page :total="total" show-sizer @on-change="pageChange"></Page>
+    <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
   </div>
-  <info v-model="infoData" :id="id" @on-change="editChange"/>
+  <info v-model="infoData" :id="id"/>
 </div>
 </template>
 
@@ -40,7 +40,7 @@ export default {
         type: '',
         keyword: '',
         page: 1,
-        size: 10
+        size: 2
       }
     }
   },
@@ -61,16 +61,12 @@ export default {
      * @returns { undefined }
      */
     pageChange (page) {
-      this.value.page = page
+      this.searchData.page = page
       this.getUserList()
     },
     toDetail (id) {
       this.id = id
       this.infoData = true
-    },
-    editChange () {
-      this.id = 0
-      this.getUserList()
     }
   },
   created () {

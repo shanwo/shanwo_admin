@@ -18,12 +18,6 @@
         <FormItem label="生日：">
           <p>{{ userInfo.birthday }}</p>
         </FormItem>
-        <FormItem label="关注数：" style="width:200px;float: left">
-          {{ userInfo.attention.total }}
-        </FormItem>
-        <FormItem label="浏览数：">
-          {{ userInfo.browse.total }}
-        </FormItem>
         <FormItem label="闪页数：" style="width:200px;float: left">
           {{ userInfo.pages }}
         </FormItem>
@@ -93,9 +87,7 @@ export default {
         expired_at: '',
         updated_at: '',
         created_at: '',
-        third: [],
-        attention: [],
-        browse: []
+        third: []
       },
       userSex,
       userType,
@@ -124,8 +116,7 @@ export default {
         if (val && val !== oldVal) {
           this.getUserInfo()
         }
-      },
-      immediate: true
+      }
     }
   }
 }
