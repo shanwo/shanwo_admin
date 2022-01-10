@@ -30,6 +30,7 @@ export default {
   data () {
     return {
       prefixCls,
+      id: null,
       isShowEdit: false,
       browseData: false,
       attentionData: false,
