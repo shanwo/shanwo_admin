@@ -183,7 +183,7 @@ export const record = [
   },
   {
     key: 'avatar',
-    title: '用户头像',
+    title: '闪页头像',
     render: (h, { row }) => {
       return h('img', {
         attrs: {
@@ -196,6 +196,6 @@ export const record = [
   },
   {
     key: 'nickname',
-    title: '用户昵称'
+    title: '闪页名称'
   }
 ]
