@@ -3,7 +3,7 @@
   <Table :columns="columns" :data="userList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
       <a @click="toBrowse(row.id)">浏览</a> |
-      <a @click="toAttention(row.id)">关注</a> |
+      <a @click="toAttention(row.id)">关注</a><br>
       <a @click="toDetail(row.id)">详情</a> |
       <a v-if="row.type !==3" @click="toStatus(row.id)">拉黑</a>
       <a v-else style="color: #ff0000">已拉黑</a>
