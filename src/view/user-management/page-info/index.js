@@ -109,6 +109,13 @@ export const columns = [
     title: 'id'
   },
   {
+    key: 'type',
+    title: '用户类型',
+    render: (h, { row }) => {
+      return h('span', userType[row.type] && userType[row.type].name)
+    }
+  },
+  {
     key: 'avatar',
     title: '用户头像',
     render: (h, { row }) => {
@@ -126,11 +133,19 @@ export const columns = [
     title: '用户昵称'
   },
   {
-    key: 'type',
-    title: '用户类型',
+    key: 'sex',
+    title: '性别',
     render: (h, { row }) => {
-      return h('span', userType[row.type] && userType[row.type].name)
+      return h('span', userSex[row.sex] && userSex[row.sex].name)
     }
+  },
+  {
+    key: 'merger_name',
+    title: '地区'
+  },
+  {
+    key: 'pages',
+    title: '闪页数'
   },
   {
     key: 'contact',
@@ -167,10 +182,6 @@ export const columns = [
   //     return h('span', row.contact && row.contact.email)
   //   }
   // },
-  {
-    key: 'pages',
-    title: '闪页数'
-  },
   {
     slot: 'action',
     title: '操作'
