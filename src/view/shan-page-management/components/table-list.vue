@@ -3,7 +3,7 @@
   <Table :columns="columns" :data="pageList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
       <a @click="toBrowse(row.id)">浏览</a> |
-      <a @click="toAttention(row.id)">关注</a> |
+      <a @click="toAttention(row.id)">关注</a><br>
       <a v-if="row.status === 1" @click="toStatus(row.id,-1)">禁用</a>
       <a v-else @click="toStatus(row.id,1)" style="color: #ff0000">启用</a> |
       <a v-if="row.is_open" @click="toEdit(row.id)">推荐</a>
