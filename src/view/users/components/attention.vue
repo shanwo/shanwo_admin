@@ -18,9 +18,9 @@
 import { getUserAttention } from '@/api/users'
 import { record } from '../page-info'
 
-const prefixCls = 'user-management-attention'
+const prefixCls = 'users--attention'
 export default {
-  name: 'user-management-attention',
+  name: 'users--attention',
   props: {
     value: {
       type: Boolean,

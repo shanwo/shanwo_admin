@@ -15,10 +15,10 @@
 import { statusPay } from '@/api/pay'
 import { columns } from '../page-info'
 
-const prefixCls = 'pay-channel-list'
+const prefixCls = 'pay-list'
 
 export default {
-  name: 'pay-channel-list',
+  name: 'pay-list',
   data () {
     return {
       prefixCls,

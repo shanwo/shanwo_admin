@@ -19,10 +19,10 @@
 import { userType, columns } from '../page-info'
 import { statusShanPage } from '@/api/shan-page'
 
-const prefixCls = 'shan-page-management-list'
+const prefixCls = 'shan-page-list'
 
 export default {
-  name: 'shan-page-management-list',
+  name: 'shan-page-list',
   components: {
     browse: () => import('./browse.vue'),
     attention: () => import('./attention.vue')

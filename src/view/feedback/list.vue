@@ -20,9 +20,9 @@
 <script>
 import { getUserFeedbackList } from '@/api/feedback'
 
-const prefixCls = 'user-feedback-list'
+const prefixCls = 'feedback-list'
 export default {
-  name: 'user-feedback-list',
+  name: 'feedback-list',
   components: {
     result: () => import('./components/result.vue'),
     search: () => import('./components/search.vue'),
@@ -83,7 +83,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"user-feedback-list";
+@prefix: ~"feedback-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;

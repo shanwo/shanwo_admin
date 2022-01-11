@@ -21,9 +21,9 @@
 <script>
 import { getAvatarPendantList, getSortList } from '@/api/decoration'
 
-const prefixCls = 'avatar-pendant-list'
+const prefixCls = 'decoration-list'
 export default {
-  name: 'avatar-pendant-list',
+  name: 'decoration-list',
   components: {
     edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
@@ -110,7 +110,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"avatar-pendant-list";
+@prefix: ~"decoration-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;

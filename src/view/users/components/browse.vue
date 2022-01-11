@@ -18,9 +18,9 @@
 import { getUserBrowse } from '@/api/users'
 import { record } from '../page-info'
 
-const prefixCls = 'user-management-browse'
+const prefixCls = 'users--browse'
 export default {
-  name: 'user-management-browse',
+  name: 'users--browse',
   props: {
     value: {
       type: Boolean,

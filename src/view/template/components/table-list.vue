@@ -15,10 +15,10 @@
 import { statusTemplate } from '@/api/template'
 import { columns } from '../page-info'
 
-const prefixCls = 'template-management-list'
+const prefixCls = 'template-list'
 
 export default {
-  name: 'template-management-list',
+  name: 'template-list',
   data () {
     return {
       prefixCls,

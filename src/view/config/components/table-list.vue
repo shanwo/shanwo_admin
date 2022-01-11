@@ -15,10 +15,10 @@
 import { statusConfig } from '@/api/config'
 import { columns } from '../page-info'
 
-const prefixCls = 'config-management-list'
+const prefixCls = 'config-list'
 
 export default {
-  name: 'config-management-list',
+  name: 'config-list',
   data () {
     return {
       prefixCls,

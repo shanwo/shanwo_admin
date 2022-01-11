@@ -18,10 +18,10 @@
 <script>
 import { getClassificationList } from '@/api/classification'
 
-const prefixCls = 'mannager-classification-list'
+const prefixCls = 'classification-list'
 
 export default {
-  name: 'mannager-classification-list',
+  name: 'classification-list',
   components: {
     edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
@@ -73,7 +73,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"mannager-classification-list";
+@prefix: ~"classification-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;

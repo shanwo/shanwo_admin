@@ -64,9 +64,9 @@
 import { userSex, userType, userThird, userVipType } from '../page-info'
 import { getUserInfo } from '@/api/users'
 
-const prefixCls = 'user-management-info'
+const prefixCls = 'users--info'
 export default {
-  name: 'user-management-info',
+  name: 'users--info',
   props: {
     value: {
       type: Boolean,

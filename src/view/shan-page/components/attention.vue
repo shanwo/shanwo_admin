@@ -18,9 +18,9 @@
 import { getShanPageAttention } from '@/api/shan-page'
 import { record } from '../page-info'
 
-const prefixCls = 'shan-page-management-attention'
+const prefixCls = 'shan-page-attention'
 export default {
-  name: 'shan-page-management-attention',
+  name: 'shan-page-attention',
   props: {
     value: {
       type: Boolean,

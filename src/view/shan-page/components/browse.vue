@@ -18,9 +18,9 @@
 import { getShanPageBrowse } from '@/api/shan-page'
 import { record } from '../page-info'
 
-const prefixCls = 'shan-page-management-browse'
+const prefixCls = 'shan-page-browse'
 export default {
-  name: 'shan-page-management-browse',
+  name: 'shan-page-browse',
   props: {
     value: {
       type: Boolean,

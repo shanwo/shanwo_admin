@@ -14,9 +14,9 @@
 import { statusTutorials } from '@/api/tutorials'
 import { columns } from '../page-info'
 
-const prefixCls = 'tutorials-management-list'
+const prefixCls = 'tutorials-list'
 export default {
-  name: 'tutorials-management-list',
+  name: 'tutorials-list',
   data () {
     return {
       prefixCls,

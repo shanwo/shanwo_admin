@@ -21,9 +21,9 @@
 </template>
 
 <script>
-const prefixCls = 'order-data-list'
+const prefixCls = 'order-list'
 export default {
-  name: 'order-data-list',
+  name: 'order-list',
   props: {
     value: {
       type: Object,
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"order-data-list";
+@prefix: ~"order-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

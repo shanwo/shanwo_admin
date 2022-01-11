@@ -11,9 +11,9 @@
 <script>
 import { feedbackStatus, columns } from '../page-info'
 
-const prefixCls = 'user-feedback-list'
+const prefixCls = 'feedback-list'
 export default {
-  name: 'user-feedback-list',
+  name: 'feedback-list',
   data () {
     return {
       prefixCls,

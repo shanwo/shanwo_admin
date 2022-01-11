@@ -17,9 +17,9 @@
 import { editUserStatus } from '@/api/users'
 import { userType, columns } from '../page-info'
 
-const prefixCls = 'user-management-list'
+const prefixCls = 'users-list'
 export default {
-  name: 'user-management-list',
+  name: 'users-list',
   components: {
     browse: () => import('./browse.vue'),
     attention: () => import('./attention.vue')

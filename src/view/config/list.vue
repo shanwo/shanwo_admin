@@ -21,10 +21,10 @@
 <script>
 import { getConfiglList } from '@/api/config'
 
-const prefixCls = 'config-management-list'
+const prefixCls = 'config-list'
 
 export default {
-  name: 'config-management-list',
+  name: 'config-list',
   components: {
     edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
@@ -86,7 +86,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"config-management-list";
+@prefix: ~"config-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;

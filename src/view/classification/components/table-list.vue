@@ -15,10 +15,10 @@
 import { delClassification } from '@/api/classification'
 import { columns } from '../page-info'
 
-const prefixCls = 'mannager-classification-list'
+const prefixCls = 'classification-list'
 
 export default {
-  name: 'mannager-classification-list',
+  name: 'classification-list',
   props: {
     classificationList: {
       type: Array,

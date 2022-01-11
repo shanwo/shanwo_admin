@@ -19,9 +19,9 @@
 <script>
 import { getOrderList } from '@/api/order'
 
-const prefixCls = 'order-data-list'
+const prefixCls = 'order-list'
 export default {
-  name: 'order-data-list',
+  name: 'order-list',
   components: {
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue')
@@ -73,7 +73,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"order-data-list";
+@prefix: ~"order-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;

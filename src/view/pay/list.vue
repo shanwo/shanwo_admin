@@ -21,10 +21,10 @@
 <script>
 import { getPayChannelList } from '@/api/pay'
 
-const prefixCls = 'pay-channel-list'
+const prefixCls = 'pay-list'
 
 export default {
-  name: 'pay-channel-list',
+  name: 'pay-list',
   components: {
     edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
@@ -89,7 +89,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"pay-channel-list";
+@prefix: ~"pay-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;

@@ -22,9 +22,9 @@
 
 <script>
 import { payType } from '../page-info'
-const prefixCls = 'pay-channel-list'
+const prefixCls = 'pay-list'
 export default {
-  name: 'pay-channel-list',
+  name: 'pay-list',
   props: {
     value: {
       type: Object,
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"pay-channel-list";
+@prefix: ~"pay-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

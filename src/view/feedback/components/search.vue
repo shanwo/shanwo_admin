@@ -22,9 +22,9 @@
 <script>
 import { feedbackStatus } from '../page-info'
 
-const prefixCls = 'user-feedback-list'
+const prefixCls = 'feedback-list'
 export default {
-  name: 'user-feedback-list',
+  name: 'feedback-list',
   props: {
     value: {
       type: Object,
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"user-feedback-list";
+@prefix: ~"feedback-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

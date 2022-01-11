@@ -10,9 +10,9 @@
 </template>
 
 <script>
-const prefixCls = 'pay-channel-list'
+const prefixCls = 'config-list'
 export default {
-  name: 'pay-channel-list',
+  name: 'config-list',
   props: {
     value: {
       type: Object,
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"pay-channel-list";
+@prefix: ~"config-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

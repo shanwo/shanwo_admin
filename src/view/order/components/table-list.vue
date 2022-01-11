@@ -9,9 +9,9 @@
 <script>
 import { columns } from '../page-info'
 
-const prefixCls = 'order-data-list'
+const prefixCls = 'order-list'
 export default {
-  name: 'order-data-list',
+  name: 'order-list',
   props: {
     orderList: {}
   },

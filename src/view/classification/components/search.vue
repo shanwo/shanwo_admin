@@ -18,9 +18,9 @@
 <script>
 import { classificationType } from '../page-info'
 
-const prefixCls = 'mannager-classification-list'
+const prefixCls = 'classification-list'
 export default {
-  name: 'mannager-classification-list',
+  name: 'classification-list',
   data () {
     return {
       prefixCls,
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"mannager-classification-list";
+@prefix: ~"classification-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

@@ -21,9 +21,9 @@
 <script>
 import { getTutorialsManagementList, getSortList } from '@/api/tutorials'
 
-const prefixCls = 'tutorials-management-list'
+const prefixCls = 'tutorials-list'
 export default {
-  name: 'tutorials-management-list',
+  name: 'tutorials-list',
   components: {
     edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
@@ -110,7 +110,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"tutorials-management-list";
+@prefix: ~"tutorials-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;

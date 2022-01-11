@@ -22,9 +22,9 @@
 <script>
 import { userType } from '../page-info'
 
-const prefixCls = 'user-management-list'
+const prefixCls = 'users-list'
 export default {
-  name: 'user-management-list',
+  name: 'users-list',
   props: {
     value: {
       type: Object,
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"user-management-list";
+@prefix: ~"users-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

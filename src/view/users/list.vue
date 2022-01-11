@@ -20,9 +20,9 @@
 <script>
 import { getUserList } from '@/api/users'
 
-const prefixCls = 'user-management-list'
+const prefixCls = 'users-list'
 export default {
-  name: 'user-management-list',
+  name: 'users-list',
   components: {
     info: () => import('./components/info.vue'),
     search: () => import('./components/search.vue'),
@@ -80,7 +80,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"user-management-list";
+@prefix: ~"users-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;

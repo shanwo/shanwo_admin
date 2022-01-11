@@ -21,9 +21,9 @@
 import { userType } from './page-info'
 import { getPageList } from '@/api/shan-page'
 
-const prefixCls = 'shan-page-management-list'
+const prefixCls = 'shan-page-list'
 export default {
-  name: 'shan-page-management-list',
+  name: 'shan-page-list',
   components: {
     edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
@@ -86,7 +86,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"shan-page-management-list";
+@prefix: ~"shan-page-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;

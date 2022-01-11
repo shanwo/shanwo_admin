@@ -17,9 +17,9 @@
 </template>
 
 <script>
-const prefixCls = 'template-management-list'
+const prefixCls = 'template-list'
 export default {
-  name: 'template-management-list',
+  name: 'template-list',
   data () {
     return {
       prefixCls
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"template-management-list";
+@prefix: ~"template-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

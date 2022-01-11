@@ -16,9 +16,9 @@
 </template>
 
 <script>
-const prefixCls = 'avatar-pendant-list'
+const prefixCls = 'decoration-list'
 export default {
-  name: 'avatar-pendant-list',
+  name: 'decoration-list',
   data () {
     return {
       prefixCls
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"avatar-pendant-list";
+@prefix: ~"decoration-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

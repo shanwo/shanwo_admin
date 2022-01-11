@@ -21,10 +21,10 @@
 <script>
 import { getTemplateManagementList, getSortList } from '@/api/template'
 
-const prefixCls = 'template-management-list'
+const prefixCls = 'template-list'
 
 export default {
-  name: 'template-management-list',
+  name: 'template-list',
   components: {
     edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
@@ -111,7 +111,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"template-management-list";
+@prefix: ~"template-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;

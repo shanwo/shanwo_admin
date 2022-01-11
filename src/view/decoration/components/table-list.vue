@@ -16,10 +16,10 @@
 import { statusDecoration } from '@/api/decoration'
 import { columns } from '../page-info'
 
-const prefixCls = 'avatar-pendant-list'
+const prefixCls = 'decoration-list'
 
 export default {
-  name: 'avatar-pendant-list',
+  name: 'decoration-list',
   props: {
     avatarPendantList: {
       type: Array,
