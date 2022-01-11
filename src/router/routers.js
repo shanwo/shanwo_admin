@@ -53,8 +53,8 @@ export default [
     ]
   },
   {
-    path: '/user_management',
-    name: 'user_management',
+    path: '/users',
+    name: 'users',
     component: Main,
     meta: {
       hideInBread: true
@@ -62,18 +62,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'user_management_list',
+        name: 'users_list',
         meta: {
           icon: 'md-people',
           title: '用户管理'
         },
-        component: () => import('@/view/user-management/list.vue')
+        component: () => import('@/view/users/list.vue')
       }
     ]
   },
   {
-    path: '/user_feedback',
-    name: 'user_feedback',
+    path: '/feedback',
+    name: 'feedback',
     component: Main,
     meta: {
       hideInBread: true
@@ -81,18 +81,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'user_feedback_list',
+        name: 'feedback_list',
         meta: {
           icon: 'md-chatboxes',
           title: '用户反馈'
         },
-        component: () => import('@/view/user-feedback/list.vue')
+        component: () => import('@/view/feedback/list.vue')
       }
     ]
   },
   {
-    path: '/mannager_classification',
-    name: 'mannager_classification',
+    path: '/classification',
+    name: 'classification',
     component: Main,
     meta: {
       hideInBread: true
@@ -100,18 +100,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'mannager_classification_list',
+        name: 'classification_list',
         meta: {
           icon: 'md-clipboard',
           title: '分类管理'
         },
-        component: () => import('@/view/mannager-classification/list.vue')
+        component: () => import('@/view/classification/list.vue')
       }
     ]
   },
   {
-    path: '/avatar_pendant',
-    name: 'avatar_pendant',
+    path: '/decoration',
+    name: 'decoration',
     component: Main,
     meta: {
       hideInBread: true
@@ -119,12 +119,12 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'avatar_pendant_list',
+        name: 'decoration_list',
         meta: {
           icon: 'md-bookmark',
-          title: '头衔挂件'
+          title: '头像装饰'
         },
-        component: () => import('@/view/avatar-pendant/list.vue')
+        component: () => import('@/view/decoration/list.vue')
       }
     ]
   },
@@ -148,8 +148,8 @@ export default [
     ]
   },
   {
-    path: '/template_management',
-    name: 'template_management',
+    path: '/template',
+    name: 'template',
     component: Main,
     meta: {
       hideInBread: true
@@ -157,18 +157,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'template_management_list',
+        name: 'template_list',
         meta: {
           icon: 'md-browsers',
           title: '模板管理'
         },
-        component: () => import('@/view/template-management/list.vue')
+        component: () => import('@/view/template/list.vue')
       }
     ]
   },
   {
-    path: '/tutorials_management',
-    name: 'tutorials_management',
+    path: '/tutorials',
+    name: 'tutorials',
     component: Main,
     meta: {
       hideInBread: true
@@ -176,18 +176,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'tutorials_management_list',
+        name: 'tutorials_list',
         meta: {
           icon: 'md-bookmarks',
           title: '教程管理'
         },
-        component: () => import('@/view/tutorials-management/list.vue')
+        component: () => import('@/view/tutorials/list.vue')
       }
     ]
   },
   {
-    path: '/shan_page_management',
-    name: 'shan_page_management',
+    path: '/shan_page',
+    name: 'shan_page',
     component: Main,
     meta: {
       hideInBread: true
@@ -195,18 +195,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'shan_page_management_list',
+        name: 'shan_page_list',
         meta: {
           icon: 'md-document',
           title: '闪页管理'
         },
-        component: () => import('@/view/shan-page-management/list.vue')
+        component: () => import('@/view/shan-page/list.vue')
       }
     ]
   },
   // {
-  //   path: '/ad_management',
-  //   name: 'ad_management',
+  //   path: '/ad',
+  //   name: 'ad',
   //   component: Main,
   //   meta: {
   //     hideInBread: true
@@ -214,18 +214,18 @@ export default [
   //   children: [
   //     {
   //       path: 'list',
-  //       name: 'ad_management_list',
+  //       name: 'ad_management',
   //       meta: {
   //         icon: 'md-pie',
   //         title: '广告管理'
   //       },
-  //       component: () => import('@/view/ad-management/list.vue')
+  //       component: () => import('@/view/ad/list.vue')
   //     }
   //   ]
   // },
   {
-    path: '/pay_channel',
-    name: 'pay_channel',
+    path: '/pay',
+    name: 'pay',
     component: Main,
     meta: {
       hideInBread: true
@@ -233,18 +233,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'pay_channel_list',
+        name: 'pay_list',
         meta: {
           icon: 'md-card',
           title: '支付渠道'
         },
-        component: () => import('@/view/pay-channel/list.vue')
+        component: () => import('@/view/pay/list.vue')
       }
     ]
   },
   {
-    path: '/order_data',
-    name: 'order_data',
+    path: '/order',
+    name: 'order',
     component: Main,
     meta: {
       hideInBread: true
@@ -252,18 +252,18 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'order_data_list',
+        name: 'order_list',
         meta: {
           icon: 'md-cart',
           title: '订单数据'
         },
-        component: () => import('@/view/order-data/list.vue')
+        component: () => import('@/view/order/list.vue')
       }
     ]
   },
   {
-    path: '/config_management',
-    name: 'config_management',
+    path: '/config',
+    name: 'config',
     component: Main,
     meta: {
       hideInBread: true
@@ -271,12 +271,12 @@ export default [
     children: [
       {
         path: 'list',
-        name: 'config_management_list',
+        name: 'config_list',
         meta: {
           icon: 'md-settings',
           title: '配置管理'
         },
-        component: () => import('@/view/config-management/list.vue')
+        component: () => import('@/view/config/list.vue')
       }
     ]
   },
@@ -290,13 +290,13 @@ export default [
     },
     children: [
       {
-        path: 'management',
-        name: 'tag_management',
+        path: 'list',
+        name: 'tag_list',
         meta: {
           icon: 'md-pricetags',
           title: '标签管理'
         }
-        // component: () => import('@/view/tag_management/list.vue')
+        // component: () => import('@/view/tag/list.vue')
       },
       {
         path: 'rule',

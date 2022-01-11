@@ -1,5 +1,5 @@
 import { setUser, getUser, getToken, removeUser } from '@/libs/util'
-import { getUserToken } from '../../api/user'
+import { getUserToken } from '../../api/admin'
 
 export default {
   state: {

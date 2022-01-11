@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './routers'
 import store from '@/store'
-import { toLogin } from '@/api/user'
+import { toLogin } from '@/api/admin'
 import { getToken, setTitle, urlQuery } from '@/libs/util'
 
 const originalPush = Router.prototype.push

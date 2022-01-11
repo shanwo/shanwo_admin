@@ -18,7 +18,7 @@
 <script>
 import './user.less'
 import { mapActions } from 'vuex'
-import { toLogout } from '@/api/user'
+import { toLogout } from '@/api/admin'
 
 export default {
   name: 'User',

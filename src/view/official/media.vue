@@ -44,7 +44,6 @@ export default {
   methods: {
     getMaterialList () {
       getMaterialList(this.searchData).then(res => {
-        console.log(res)
         this.total = res.data.total
         this.materialList = res.data.lists || []
       })
