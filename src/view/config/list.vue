@@ -4,12 +4,12 @@
       <search v-model="searchData">
         <template slot="btn">
           <Button @click="addIcon" type="primary" class="mr10">添加</Button>
-          <Button @click="getConfiglList" type="primary">刷新</Button>
+          <Button @click="getConfigList" type="primary">刷新</Button>
         </template>
       </search>
     </div>
     <div :class="prefixCls + '-table'">
-      <table-list @refresh="getConfiglList" :configlList="configlList" @toDetail="toDetail"></table-list>
+      <table-list @refresh="getConfigList" :configList="configList" @toDetail="toDetail"></table-list>
     </div>
     <div :class="prefixCls + '-page'">
       <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getConfiglList } from '@/api/config'
+import { getConfigList } from '@/api/config'
 
 const prefixCls = 'config-list'
 
@@ -36,7 +36,7 @@ export default {
       id: null,
       total: 0,
       isShowEdit: false,
-      configlList: [],
+      configList: [],
       searchData: {
         page: 1,
         size: 20
@@ -48,10 +48,10 @@ export default {
      * @description 获取链接白名单列表
      * @returns { undefined }
      */
-    getConfiglList () {
-      getConfiglList(this.searchData).then(res => {
+    getConfigList () {
+      getConfigList(this.searchData).then(res => {
         this.total = res.data.total
-        this.configlList = res.data.lists || []
+        this.configList = res.data.lists || []
       })
     },
     /**
@@ -61,7 +61,7 @@ export default {
      */
     pageChange (page) {
       this.searchData.page = page
-      this.getConfiglList()
+      this.getConfigList()
     },
     addIcon () {
       this.isShowEdit = true
@@ -72,11 +72,11 @@ export default {
     },
     editChange () {
       this.id = 0
-      this.getConfiglList()
+      this.getConfigList()
     }
   },
   created () {
-    this.getConfiglList()
+    this.getConfigList()
   }
 }
 </script>

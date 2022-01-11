@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <Table :columns="columns" :data="configlList" class="iviewtable">
+    <Table :columns="columns" :data="configList" class="iviewtable">
       <template slot-scope="{ row }" slot="action">
         <a v-if="row.status === 1" @click="toStatus(row.id,-1)">禁用</a>
         <a v-else @click="toStatus(row.id,1)" style="color: #ff0000">启用</a> |
@@ -27,7 +27,7 @@ export default {
     }
   },
   props: {
-    configlList: {
+    configList: {
       type: Array,
       default: () => []
     }

@@ -1,6 +1,6 @@
 import axios from '@/libs/api.request'
 
-export const getConfiglList = (params) => {
+export const getConfigList = (params) => {
   return axios.request({
     url: '/config/lists',
     params: params,
