@@ -49,13 +49,13 @@ export default {
     toEdit (id) {
       this.$emit('toDetail', id)
     },
-    toDel (id) {
+    toStatus (id, status) {
       this.$Modal.confirm({
         title: '警告',
-        content: '确认删除当前数据？',
+        content: '确认启/停用嘛？',
         onOk: () => {
-          statusConfig({ id }).then(() => {
-            this.$Message.success('删除成功')
+          statusConfig({ id: id, status: status }).then(() => {
+            this.$Message.success('成功')
             this.$emit('refresh')
           })
         }
