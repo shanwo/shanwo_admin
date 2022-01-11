@@ -295,8 +295,8 @@ export default [
         meta: {
           icon: 'md-pricetags',
           title: '标签管理'
-        }
-        // component: () => import('@/view/tag/list.vue')
+        },
+        component: () => import('@/view/tag/list.vue')
       },
       {
         path: 'rule',
