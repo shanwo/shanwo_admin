@@ -38,6 +38,7 @@ export default {
       isShowEdit: false,
       tagList: [],
       searchData: {
+        keyword: '',
         type: '',
         page: 1,
         size: 20

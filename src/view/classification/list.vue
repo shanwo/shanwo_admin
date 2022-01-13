@@ -35,6 +35,7 @@ export default {
       isShowEdit: false,
       classificationList: [],
       searchData: {
+        keyword: '',
         type: 0
       }
     }

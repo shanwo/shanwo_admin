@@ -38,9 +38,9 @@ export default {
       isShowEdit: false,
       userType,
       searchData: {
+        keyword: '',
         nickname: '',
         open: '',
-        keyword: '',
         page: 1,
         size: 20
       }

@@ -3,7 +3,7 @@
   <div :class="prefixCls + '-left'">
     <Form :label-width="100" inline>
       <FormItem label="关键字：">
-        <Input v-model="value.keyword" class="inputWidth" placeholder="请输入用户昵称/手机号"></Input>
+        <Input v-model="value.keyword" class="inputWidth" placeholder="关键字"></Input>
       </FormItem>
       <FormItem label="创建人：">
         <Input v-model="value.nickname" class="inputWidth" placeholder="请输入创建人"></Input>

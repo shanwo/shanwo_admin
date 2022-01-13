@@ -8,6 +8,9 @@
           </Option>
         </Select>
       </FormItem>
+      <FormItem label="关键字：">
+        <Input v-model="value.keyword" class="inputWidth" placeholder="关键字"></Input>
+      </FormItem>
     </Form>
   </div>
   <div :class="prefixCls + '-right'">

@@ -40,6 +40,7 @@ export default {
       linkWhiteList: [],
       sortList: [],
       searchData: {
+        keyword: '',
         sort_id: 0,
         page: 1,
         size: 20
