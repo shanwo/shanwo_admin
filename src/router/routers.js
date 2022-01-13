@@ -297,15 +297,25 @@ export default [
           title: '标签管理'
         },
         component: () => import('@/view/tag/list.vue')
-      },
+      }
+    ]
+  },
+  {
+    path: '/push',
+    name: 'push',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
       {
-        path: 'rule',
-        name: 'tag_rule',
+        path: 'list',
+        name: 'push_list',
         meta: {
-          icon: 'md-done-all',
-          title: '标签规则'
+          icon: 'md-cloud-upload',
+          title: '推送任务'
         }
-        // component: () => import('@/view/tag_rule/list.vue')
+        // component: () => import('@/view/push/list.vue')
       }
     ]
   },
