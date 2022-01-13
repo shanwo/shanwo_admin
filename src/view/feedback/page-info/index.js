@@ -1,10 +1,10 @@
 export const feedbackStatus = [
   {
-    type: 0,
+    type: 1,
     name: '未处理'
   },
   {
-    type: 1,
+    type: 2,
     name: '已处理'
   }
 ]
