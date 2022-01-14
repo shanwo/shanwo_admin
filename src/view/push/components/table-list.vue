@@ -2,14 +2,15 @@
 <div :class="prefixCls">
   <Table :columns="columns" :data="pushChannelList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
-      <c v-if="row.status === 1">
+      <a v-if="row.status === 1">
         <a @click="toStatus(row.id,-1)">禁用</a> |
         <a @click="toStatus(row.id,2)">推送</a>
-      </c>
+      </a>
       <a v-else-if="row.status === -1" @click="toStatus(row.id,1)" style="color: #ff0000">启用</a>
       <a v-else-if="row.status === 2" @click="toStatus(row.id,-1)">停止</a>
-      <a v-else>-</a> |
-      <a @click="toEdit(row.id)">编辑</a>
+      <a v-if="row.status < 2"> |
+        <a @click="toEdit(row.id)">编辑</a>
+      </a>
     </template>
   </Table>
 </div>
