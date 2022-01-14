@@ -1,6 +1,6 @@
 <template>
 <div :class="prefixCls">
-  <Modal :value="value" title="编辑/添加" @on-cancel="cancel">
+  <Modal :value="value" title="添加/编辑" @on-cancel="cancel">
     <div :class="prefixCls + '-box'">
       <Form :label-width="100">
         <FormItem label="ID：">
