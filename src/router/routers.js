@@ -314,8 +314,8 @@ export default [
         meta: {
           icon: 'md-cloud-upload',
           title: '推送任务'
-        }
-        // component: () => import('@/view/push/list.vue')
+        },
+        component: () => import('@/view/push/list.vue')
       }
     ]
   },
