@@ -6,24 +6,38 @@
         <FormItem label="名称：">
           <Input v-model="iconInfo.name" placeholder="请输入渠道名称" class="iptWidth"></Input>
         </FormItem>
-        <FormItem label="销售渠道：">
-          <Input-number :min="0" v-model="iconInfo.channel" placeholder="分销ID" class="iptWidth"></Input-number>
-        </FormItem>
-        <FormItem label="时长类型：">
-          <Select v-model="iconInfo.type" class="iptWidth">
+        <FormItem label="推送类型:">
+          <RadioGroup v-model="iconInfo.start_type">
             <template v-for="item in pushType">
-              <Option v-if="item" :value="item.type" :key="item.type">{{ item.name }}</Option>
+              <Radio v-if="item" :label="item.type" :key="item.type">{{ item.name }}</Radio>
             </template>
-          </Select>
+          </RadioGroup>
         </FormItem>
-        <FormItem label="原价(元)：">
-          <Input-number :min="0.01" v-model="iconInfo.original_price" placeholder="请输入原价" class="iptWidth"></Input-number>
+        <FormItem v-if="iconInfo.start_type === 2" label="时间：">
+          <date-picker v-model="iconInfo.start_time" type="datetime" format="yyyy-MM-dd HH:mm:ss"></date-picker>
         </FormItem>
-        <FormItem label="活动价(元)：">
-          <Input-number :min="0.01" v-model="iconInfo.activity_price" placeholder="请输入活动价" class="iptWidth"></Input-number>
+        <FormItem v-if="iconInfo.start_type === 3" label="时长类型：">
+          <RadioGroup v-model="iconInfo.start_method">
+            <template v-if="iconInfo.start_type === 3" v-for="item in pushMethod">
+              <Radio v-if="item" :label="item.type" :key="item.type">{{ item.name }}</Radio>
+            </template>
+          </RadioGroup>
+          <RadioGroup v-if="iconInfo.start_method === 2">
+            <template v-for="item in week">
+              <Radio v-if="item" :label="item.type" :key="item.type">{{ item.name }}</Radio>
+            </template>
+          </RadioGroup>
         </FormItem>
-        <FormItem label="描述：">
-          <Input v-model="iconInfo.description" placeholder="请输入描述" class="iptWidth"></Input>
+        <FormItem v-if="iconInfo.start_type === 3" label="时间：">
+          <date-picker v-if="iconInfo.start_method === 1 || iconInfo.start_method === 2 " v-model="iconInfo.start_time" type="time" format="HH:mm"></date-picker>
+          <date-picker v-if="iconInfo.start_method === 3" v-model="iconInfo.start_time" type="datetime" format="dd HH:mm"></date-picker>
+          <date-picker v-if="iconInfo.start_method === 4" v-model="iconInfo.start_time" type="datetime" format="MM-dd HH:mm"></date-picker>
+        </FormItem>
+        <FormItem label="过滤规则：">
+          <Input v-model="iconInfo.rule" placeholder="过滤规则" class="iptWidth"></Input>
+        </FormItem>
+        <FormItem label="推送配置：">
+          <Input v-model="iconInfo.config" placeholder="过滤规则" class="iptWidth"></Input>
         </FormItem>
       </Form>
     </div>
@@ -36,7 +50,7 @@
 </template>
 
 <script>
-import { pushType } from '../page-info'
+import { pushType, pushMethod, week } from '../page-info'
 import { updatePush, addPush, getPushInfo } from '@/api/push'
 
 const prefixCls = 'edit'
@@ -45,14 +59,16 @@ export default {
   data () {
     return {
       prefixCls,
+      week,
       pushType,
+      pushMethod,
       iconInfo: {
         name: '',
-        channel: 0,
-        original_price: 0,
-        activity_price: 0,
-        description: '',
-        type: 1
+        start_type: 0,
+        start_method: 0,
+        start_time: '',
+        rule: {},
+        config: {}
       }
     }
   },

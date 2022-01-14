@@ -22,10 +22,6 @@ export const status = {
 }
 export const pushType = [
   {
-    type: '',
-    name: '请选择'
-  },
-  {
     type: 1,
     name: '手动'
   },
@@ -40,24 +36,50 @@ export const pushType = [
 ]
 export const pushMethod = [
   {
-    type: 0,
-    name: '-'
-  },
-  {
     type: 1,
-    name: '天'
+    name: '每天'
   },
   {
     type: 2,
-    name: '周'
+    name: '每周'
   },
   {
     type: 3,
-    name: '月'
+    name: '每月'
   },
   {
     type: 4,
-    name: '年'
+    name: '每年'
+  }
+]
+export const week = [
+  {
+    type: 1,
+    name: '周一'
+  },
+  {
+    type: 2,
+    name: '周二'
+  },
+  {
+    type: 3,
+    name: '周三'
+  },
+  {
+    type: 4,
+    name: '周四'
+  },
+  {
+    type: 5,
+    name: '周五'
+  },
+  {
+    type: 6,
+    name: '周六'
+  },
+  {
+    type: 7,
+    name: '周日'
   }
 ]
 export const columns = [
