@@ -38,7 +38,20 @@
           <date-picker v-model="iconInfo.start_time" type="time" format="HH:mm"></date-picker>
         </FormItem>
         <FormItem label="过滤规则：">
-          <Input v-model="iconInfo.rule" placeholder="过滤规则" class="iptWidth"></Input>
+          <template v-for="ruleConfig in iconInfo.rule">
+            <Select v-model="ruleConfig.mark" class="iptWidth" style="width: 45%">
+              <template v-for="item in tagList">
+                <Option v-if="item" :value="item.mark" :key="item.mark">{{ item.name }}</Option>
+              </template>
+            </Select>
+            <Select v-model="ruleConfig.rule" class="iptWidth" style="width: 25%">
+              <template v-for="item in ruleList">
+                <Option v-if="item" :value="item.type" :key="item.type">{{ item.name }}</Option>
+              </template>
+            </Select>
+            <Input v-model="ruleConfig.value" placeholder="值" class="iptWidth" style="width: 30%"></Input>
+          </template>
+          <button>+</button>
         </FormItem>
         <FormItem label="推送配置：">
           <Input v-model="iconInfo.config" placeholder="过滤规则" class="iptWidth"></Input>
@@ -54,8 +67,9 @@
 </template>
 
 <script>
-import { pushType, pushMethod, week } from '../page-info'
+import { pushType, pushMethod, weekList, ruleList } from '../page-info'
 import { updatePush, addPush, getPushInfo } from '@/api/push'
+import { getTaglList } from '@/api/tag'
 
 const prefixCls = 'edit'
 export default {
@@ -63,7 +77,7 @@ export default {
   data () {
     return {
       prefixCls,
-      week,
+      weekList,
       pushType,
       pushMethod,
       iconInfo: {
@@ -89,6 +103,9 @@ export default {
     getPushInfo () {
       getPushInfo({ id: this.id }).then(res => {
         this.$set(this, 'iconInfo', res.data || {})
+      })
+      getTaglList({ size: 100 }).then(res => {
+        this.tagList = res.data.lists || []
       })
     },
     confirm () {
