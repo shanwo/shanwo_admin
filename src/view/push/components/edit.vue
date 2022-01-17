@@ -13,48 +13,63 @@
             </template>
           </RadioGroup>
         </FormItem>
-        <FormItem v-if="iconInfo.start_type === 3" label="时长类型：">
+        <FormItem v-if="iconInfo.start_type === 3" label="周期类型:">
           <RadioGroup v-model="iconInfo.start_method">
             <template v-if="iconInfo.start_type === 3" v-for="item in pushMethod">
               <Radio v-if="item" :label="item.type" :key="item.type">{{ item.name }}</Radio>
             </template>
           </RadioGroup>
-          <Select v-if="iconInfo.start_method === 2" class="iptWidth">
-            <template v-for="item in week">
+          <Select v-if="iconInfo.start_method === 2" class="iptWidth" style="width: 187px">
+            <template v-for="item in weekList">
               <Option v-if="item" :value="item.type" :key="item.type">{{ item.name }}</Option>
             </template>
           </Select>
-          <Select v-if="iconInfo.start_method === 3" class="iptWidth">
+          <Select v-if="iconInfo.start_method === 3" class="iptWidth" style="width: 187px">
             <template v-for='index in 28'>
               <Option :value="index" :key="index">{{ index }}日</Option>
             </template>
           </Select>
           <date-picker v-if="iconInfo.start_method === 4" v-model="iconInfo.start_time" type="date" format="MM-dd"></date-picker>
         </FormItem>
-        <FormItem v-if="iconInfo.start_type === 2" label="时间：">
+        <FormItem v-if="iconInfo.start_type === 2" label="执行时间：">
           <date-picker v-model="iconInfo.start_time" type="datetime" format="yyyy-MM-dd HH:mm"></date-picker>
         </FormItem>
-        <FormItem v-if="iconInfo.start_type === 3" label="时间：">
+        <FormItem v-if="iconInfo.start_type === 3" label="执行时间：">
           <date-picker v-model="iconInfo.start_time" type="time" format="HH:mm"></date-picker>
         </FormItem>
         <FormItem label="过滤规则：">
           <template v-for="ruleConfig in iconInfo.rule">
-            <Select v-model="ruleConfig.mark" class="iptWidth" style="width: 45%">
+            <Select v-model="ruleConfig.mark" :key="ruleConfig.mark" class="iptWidth" style="width: 45%">
               <template v-for="item in tagList">
                 <Option v-if="item" :value="item.mark" :key="item.mark">{{ item.name }}</Option>
               </template>
             </Select>
-            <Select v-model="ruleConfig.rule" class="iptWidth" style="width: 25%">
+            <Select v-model="ruleConfig.rule" :key="ruleConfig.rule" class="iptWidth" style="width: 25%">
               <template v-for="item in ruleList">
                 <Option v-if="item" :value="item.type" :key="item.type">{{ item.name }}</Option>
               </template>
             </Select>
-            <Input v-model="ruleConfig.value" placeholder="值" class="iptWidth" style="width: 30%"></Input>
+            <Input v-model="ruleConfig.value" :key="ruleConfig.value" placeholder="值" class="iptWidth" style="width: 30%"></Input>
           </template>
           <button>+</button>
         </FormItem>
         <FormItem label="推送配置：">
-          <Input v-model="iconInfo.config" placeholder="过滤规则" class="iptWidth"></Input>
+          <template v-for="message in iconInfo.config.contents">
+            <RadioGroup v-model="message.message_type" :key="message.message_type">
+              <template v-for="item in messageType">
+                <Radio v-if="item" :label="item.type" :key="item.type">{{ item.name }}</Radio>
+              </template>
+            </RadioGroup>
+            <Input-number :key="message.range_begin" v-model="message.range_begin" placeholder="区间-开始" class="iptWidth"></Input-number>
+            <Input-number :key="message.range_end" v-model="message.range_end" placeholder="区间-结束" class="iptWidth"></Input-number>
+            <Input v-if="message.message_type === 1" :key="message.content" v-model="message.content" placeholder="内容" class="iptWidth"></Input>
+            <Input v-if="message.message_type === 2" :key="message.media_id" v-model="message.media_id" placeholder="媒体ID" class="iptWidth"></Input>
+            <Input v-if="message.message_type === 3" :key="message.title" v-model="message.title" placeholder="标题" class="iptWidth"></Input>
+            <Input v-if="message.message_type === 3" :key="message.description" v-model="message.description" placeholder="描述" class="iptWidth"></Input>
+            <Input v-if="message.message_type === 3" :key="message.url" v-model="message.url" placeholder="地址" class="iptWidth"></Input>
+            <Input v-if="message.message_type === 3" :key="message.picurl" v-model="message.picurl" placeholder="图片" class="iptWidth"></Input>
+          </template>
+          <button>+</button>
         </FormItem>
       </Form>
     </div>
@@ -67,7 +82,7 @@
 </template>
 
 <script>
-import { pushType, pushMethod, weekList, ruleList } from '../page-info'
+import { pushType, pushMethod, weekList, ruleList, messageType } from '../page-info'
 import { updatePush, addPush, getPushInfo } from '@/api/push'
 import { getTaglList } from '@/api/tag'
 
@@ -77,9 +92,12 @@ export default {
   data () {
     return {
       prefixCls,
-      weekList,
       pushType,
       pushMethod,
+      weekList,
+      ruleList,
+      messageType,
+      tagList: [],
       iconInfo: {
         name: '',
         start_type: 1,
@@ -91,10 +109,7 @@ export default {
     }
   },
   props: {
-    value: {
-      type: Boolean,
-      default: false
-    },
+    value: {},
     id: {
       type: Number
     }

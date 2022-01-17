@@ -48,6 +48,30 @@ export const ruleList = [
   {
     type: 'like',
     name: '包含'
+  },
+  {
+    type: 'null',
+    name: '为空'
+  },
+  {
+    type: 'not null',
+    name: '不为空'
+  },
+  {
+    type: 'between',
+    name: '介于'
+  },
+  {
+    type: 'not between',
+    name: '不介于'
+  },
+  {
+    type: 'in',
+    name: '在列表'
+  },
+  {
+    type: 'not in',
+    name: '不在列表'
   }
 ]
 export const pushType = {
@@ -112,6 +136,20 @@ export const weekList = [
     name: '周日'
   }
 ]
+export const messageType = {
+  1: {
+    type: 1,
+    name: '文本消息'
+  },
+  2: {
+    type: 2,
+    name: '图片/语音'
+  },
+  3: {
+    type: 3,
+    name: '图文消息'
+  }
+}
 export const columns = [
   {
     key: 'id',
