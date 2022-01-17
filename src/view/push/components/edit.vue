@@ -51,7 +51,7 @@
             </Select>
             <Input v-model="ruleConfig.value" :key="ruleConfig.value" placeholder="值" class="iptWidth" style="width: 30%"></Input>
           </template>
-          <button>+</button>
+          <button>添加规则</button>
         </FormItem>
         <FormItem label="推送配置：">
           <template v-for="message in iconInfo.config.contents">
@@ -60,8 +60,8 @@
                 <Radio v-if="item" :label="item.type" :key="item.type">{{ item.name }}</Radio>
               </template>
             </RadioGroup>
-            <Input-number :key="message.range_begin" v-model="message.range_begin" placeholder="区间-开始" class="iptWidth"></Input-number>
-            <Input-number :key="message.range_end" v-model="message.range_end" placeholder="区间-结束" class="iptWidth"></Input-number>
+            <Input-number :key="message.range_begin" v-model="message.range_begin" min="0" placeholder="区间-开始" class="iptWidth"></Input-number>
+            <Input-number :key="message.range_end" v-model="message.range_end" max="99" placeholder="区间-结束" class="iptWidth"></Input-number>
             <Input v-if="message.message_type === 1" :key="message.content" v-model="message.content" placeholder="内容" class="iptWidth"></Input>
             <Input v-if="message.message_type === 2" :key="message.media_id" v-model="message.media_id" placeholder="媒体ID" class="iptWidth"></Input>
             <Input v-if="message.message_type === 3" :key="message.title" v-model="message.title" placeholder="标题" class="iptWidth"></Input>
@@ -69,7 +69,7 @@
             <Input v-if="message.message_type === 3" :key="message.url" v-model="message.url" placeholder="地址" class="iptWidth"></Input>
             <Input v-if="message.message_type === 3" :key="message.picurl" v-model="message.picurl" placeholder="图片" class="iptWidth"></Input>
           </template>
-          <button>+</button>
+          <button>添加内容配置</button>
         </FormItem>
       </Form>
     </div>
