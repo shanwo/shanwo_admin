@@ -13,25 +13,29 @@
             </template>
           </RadioGroup>
         </FormItem>
-        <FormItem v-if="iconInfo.start_type === 2" label="时间：">
-          <date-picker v-model="iconInfo.start_time" type="datetime" format="yyyy-MM-dd HH:mm:ss"></date-picker>
-        </FormItem>
         <FormItem v-if="iconInfo.start_type === 3" label="时长类型：">
           <RadioGroup v-model="iconInfo.start_method">
             <template v-if="iconInfo.start_type === 3" v-for="item in pushMethod">
               <Radio v-if="item" :label="item.type" :key="item.type">{{ item.name }}</Radio>
             </template>
           </RadioGroup>
-          <RadioGroup v-if="iconInfo.start_method === 2">
+          <Select v-if="iconInfo.start_method === 2" class="iptWidth">
             <template v-for="item in week">
-              <Radio v-if="item" :label="item.type" :key="item.type">{{ item.name }}</Radio>
+              <Option v-if="item" :value="item.type" :key="item.type">{{ item.name }}</Option>
             </template>
-          </RadioGroup>
+          </Select>
+          <Select v-if="iconInfo.start_method === 3" class="iptWidth">
+            <template v-for='index in 28'>
+              <Option :value="index" :key="index">{{ index }}日</Option>
+            </template>
+          </Select>
+          <date-picker v-if="iconInfo.start_method === 4" v-model="iconInfo.start_time" type="date" format="MM-dd"></date-picker>
+        </FormItem>
+        <FormItem v-if="iconInfo.start_type === 2" label="时间：">
+          <date-picker v-model="iconInfo.start_time" type="datetime" format="yyyy-MM-dd HH:mm"></date-picker>
         </FormItem>
         <FormItem v-if="iconInfo.start_type === 3" label="时间：">
-          <date-picker v-if="iconInfo.start_method === 1 || iconInfo.start_method === 2 " v-model="iconInfo.start_time" type="time" format="HH:mm"></date-picker>
-          <date-picker v-if="iconInfo.start_method === 3" v-model="iconInfo.start_time" type="datetime" format="dd HH:mm"></date-picker>
-          <date-picker v-if="iconInfo.start_method === 4" v-model="iconInfo.start_time" type="datetime" format="MM-dd HH:mm"></date-picker>
+          <date-picker v-model="iconInfo.start_time" type="time" format="HH:mm"></date-picker>
         </FormItem>
         <FormItem label="过滤规则：">
           <Input v-model="iconInfo.rule" placeholder="过滤规则" class="iptWidth"></Input>
@@ -64,7 +68,7 @@ export default {
       pushMethod,
       iconInfo: {
         name: '',
-        start_type: 0,
+        start_type: 1,
         start_method: 0,
         start_time: '',
         rule: {},

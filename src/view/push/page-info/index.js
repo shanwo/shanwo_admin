@@ -50,38 +50,38 @@ export const ruleList = [
     name: '包含'
   }
 ]
-export const pushType = [
-  {
+export const pushType = {
+  1: {
     type: 1,
     name: '手动'
   },
-  {
+  2: {
     type: 2,
     name: '定时'
   },
-  {
+  3: {
     type: 3,
     name: '周期'
   }
-]
-export const pushMethod = [
-  {
+}
+export const pushMethod = {
+  1: {
     type: 1,
     name: '每天'
   },
-  {
+  2: {
     type: 2,
     name: '每周'
   },
-  {
+  3: {
     type: 3,
     name: '每月'
   },
-  {
+  4: {
     type: 4,
     name: '每年'
   }
-]
+}
 export const weekList = [
   {
     type: 1,
