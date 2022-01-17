@@ -20,6 +20,36 @@ export const status = {
     name: '已完成'
   }
 }
+export const ruleList = [
+  {
+    type: '=',
+    name: '='
+  },
+  {
+    type: '!=',
+    name: '!='
+  },
+  {
+    type: '>',
+    name: '>'
+  },
+  {
+    type: '>=',
+    name: '>='
+  },
+  {
+    type: '<',
+    name: '<'
+  },
+  {
+    type: '<=',
+    name: '<='
+  },
+  {
+    type: 'like',
+    name: '包含'
+  }
+]
 export const pushType = [
   {
     type: 1,
@@ -52,7 +82,7 @@ export const pushMethod = [
     name: '每年'
   }
 ]
-export const week = [
+export const weekList = [
   {
     type: 1,
     name: '周一'
