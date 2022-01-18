@@ -23,31 +23,35 @@ export const status = {
 export const ruleList = [
   {
     type: '=',
-    name: '='
+    name: '等于'
   },
   {
     type: '!=',
-    name: '!='
+    name: '不等于'
   },
   {
     type: '>',
-    name: '>'
+    name: '大于'
   },
   {
     type: '>=',
-    name: '>='
+    name: '大于等于'
   },
   {
     type: '<',
-    name: '<'
+    name: '小于'
   },
   {
     type: '<=',
-    name: '<='
+    name: '小于等于'
   },
   {
     type: 'like',
     name: '包含'
+  },
+  {
+    type: 'not like',
+    name: '不包含'
   },
   {
     type: 'null',
@@ -108,6 +112,10 @@ export const pushMethod = {
 }
 export const weekList = [
   {
+    type: 0,
+    name: '周日'
+  },
+  {
     type: 1,
     name: '周一'
   },
@@ -130,10 +138,6 @@ export const weekList = [
   {
     type: 6,
     name: '周六'
-  },
-  {
-    type: 7,
-    name: '周日'
   }
 ]
 export const messageType = {
