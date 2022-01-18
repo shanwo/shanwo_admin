@@ -10,36 +10,32 @@ export const status = {
     name: '已启用'
   }
 }
-export const replyType = [
-  {
-    type: 0,
-    name: '全部'
-  },
-  {
+export const replyType = {
+  1: {
     type: 1,
     name: '文本消息'
   },
-  {
+  2: {
     type: 2,
     name: '图片消息'
   },
-  {
+  3: {
     type: 3,
     name: '语音消息'
   },
-  {
+  4: {
     type: 4,
     name: '视频消息'
   },
-  {
+  5: {
     type: 5,
     name: '音乐消息'
   },
-  {
+  6: {
     type: 6,
     name: '图文消息'
   }
-]
+}
 export const materialType = [
   {
     type: 'image',

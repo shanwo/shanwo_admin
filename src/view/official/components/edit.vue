@@ -6,10 +6,10 @@
         <FormItem label="关键词：">
           <Input v-model="iconInfo.keyword" placeholder="关键词" class="iptWidth"></Input>
         </FormItem>
-        <FormItem label="类型：">
+        <FormItem label="回复类型：">
           <Select v-model="iconInfo.type" class="iptWidth">
             <template v-for="item in replyType">
-              <Option v-if="item && item.type > 0" :value="item.type" :key="item.type">{{ item.name }}</Option>
+              <Option v-if="item" :value="item.type" :key="item.type">{{ item.name }}</Option>
             </template>
           </Select>
         </FormItem>
