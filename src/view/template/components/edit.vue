@@ -23,8 +23,7 @@
           <image-upload v-model="iconInfo.background" @on-change="uploadImageChange"/>
         </FormItem>
         <FormItem label="排序：">
-          <Input-number :min="1" v-model="iconInfo.order" placeholder="请输入排序值"
-                        class="iptWidth"></Input-number>
+          <Input-number v-model="iconInfo.order" :min="0" :max="255" placeholder="请输入排序值" class="iptWidth"></Input-number>
         </FormItem>
       </Form>
     </div>

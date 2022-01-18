@@ -9,7 +9,7 @@
         </Select>
       </FormItem>
       <FormItem label="排序值：">
-        <Input-number v-model="pageInfo.sort" placeholder="请输入排序值" class="inputWidth"></Input-number>
+        <Input-number v-model="pageInfo.sort" :min="-8388608" :max="8388607" placeholder="请输入排序值" class="inputWidth"></Input-number>
       </FormItem>
     </Form>
     </div>

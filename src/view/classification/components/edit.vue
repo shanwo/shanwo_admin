@@ -11,7 +11,7 @@
       <Input v-model="classificationInfo.name" placeholder="请输入名称" class="iptWidth"></Input>
     </FormItem>
     <FormItem label="排序：">
-      <Input-number v-model="classificationInfo.order" placeholder="请输入排序" class="iptWidth"></Input-number>
+      <Input-number v-model="classificationInfo.order" :min="0" :max="255" placeholder="请输入排序" class="iptWidth"></Input-number>
     </FormItem>
   </Form>
   <div slot="footer">
@@ -42,7 +42,7 @@ export default {
     return {
       prefixCls,
       classificationInfo: {
-        type: null,
+        type: 1,
         name: '',
         order: 1
       },
@@ -82,9 +82,9 @@ export default {
      */
     cancel () {
       this.$set(this, 'classificationInfo', {
-        type: null,
-        image: null,
-        order: null
+        type: 1,
+        name: '',
+        order: 1
       })
       this.$emit('input', false)
       this.$emit('on-change')

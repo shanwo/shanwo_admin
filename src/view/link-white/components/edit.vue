@@ -19,8 +19,7 @@
           <image-upload v-model="iconInfo.svg" @on-change="uploadSvgImageChange"/>
         </FormItem>
         <FormItem label="排序：">
-          <Input-number :min="1" v-model="iconInfo.order" placeholder="请输入排序值"
-                        class="iptWidth"></Input-number>
+          <Input-number v-model="iconInfo.order" :min="0" :max="255" placeholder="请输入排序值" class="iptWidth"></Input-number>
         </FormItem>
         <FormItem label="链接（域名）：">
           <Input v-model="iconInfo.url" placeholder="请输入链接（域名）" class="iptWidth"></Input>
