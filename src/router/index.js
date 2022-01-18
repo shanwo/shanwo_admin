@@ -12,7 +12,6 @@ Router.prototype.push = function push (location) {
 const userToLogin = () => {
   toLogin().then(res => {
     if (res.data) {
-      console.log(res.data)
       window.location.href = res.data.redirect_url
     }
   })
