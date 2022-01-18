@@ -60,8 +60,8 @@
                 <Radio v-if="item" :label="item.type" :key="item.type">{{ item.name }}</Radio>
               </template>
             </RadioGroup>
-            <Input-number :key="message.range_begin" v-model="message.range_begin" min="0" placeholder="区间-开始" class="iptWidth"></Input-number>
-            <Input-number :key="message.range_end" v-model="message.range_end" max="99" placeholder="区间-结束" class="iptWidth"></Input-number>
+            <Input-number :key="message.range_begin" v-model="message.range_begin" :min="0" placeholder="区间-开始" class="iptWidth"></Input-number>
+            <Input-number :key="message.range_end" v-model="message.range_end" :max="99" placeholder="区间-结束" class="iptWidth"></Input-number>
 
             <Input v-if="message.message_type === 1" :key="message.content" v-model="message.content" placeholder="内容" class="iptWidth"></Input>
 
