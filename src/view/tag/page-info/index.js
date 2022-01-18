@@ -8,28 +8,24 @@ export const status = {
     name: '已启用'
   }
 }
-export const type = [
-  {
-    type: '',
-    name: '请选择'
-  },
-  {
+export const type = {
+  1: {
     type: 1,
     name: '字符串'
   },
-  {
+  2: {
     type: 2,
     name: '整数'
   },
-  {
+  3: {
     type: 3,
     name: '小数'
   },
-  {
+  4: {
     type: 4,
     name: '布尔'
   }
-]
+}
 export const columns = [
   {
     key: 'id',
