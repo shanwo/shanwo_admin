@@ -9,13 +9,47 @@
         <FormItem label="类型：">
           <Select v-model="iconInfo.type" class="iptWidth">
             <template v-for="item in replyType">
-              <Option v-if="item" :value="item.type" :key="item.type">{{ item.name }}</Option>
+              <Option v-if="item && item.type > 0" :value="item.type" :key="item.type">{{ item.name }}</Option>
             </template>
           </Select>
         </FormItem>
-        <FormItem label="回复内容">
-          <textarea :rows="8" v-model="iconInfo.comment" class="ivu-input"/>
-        </FormItem>
+        <div v-if="iconInfo.type === 1">
+          <FormItem label="回复内容">
+            <Input v-model="iconInfo.comment.Content" placeholder="消息内容" class="iptWidth"></Input>
+          </FormItem>
+        </div>
+        <div v-if="iconInfo.type === 2 || iconInfo.type === 3 || iconInfo.type === 4">
+          <FormItem label="素材库ID">
+            <Input v-model="iconInfo.comment.MediaId" placeholder="素材库ID" class="iptWidth"></Input>
+          </FormItem>
+        </div>
+        <div v-if="iconInfo.type === 4 || iconInfo.type === 5 || iconInfo.type === 6">
+          <FormItem label="标题">
+            <Input v-model="iconInfo.comment.Title" placeholder="消息的标题" class="iptWidth"></Input>
+          </FormItem>
+          <FormItem label="描述">
+            <Input v-model="iconInfo.comment.Description" placeholder="消息的描述" class="iptWidth"></Input>
+          </FormItem>
+        </div>
+        <div v-if="iconInfo.type === 5">
+          <FormItem label="音乐链接">
+            <Input v-model="iconInfo.comment.MusicURL" placeholder="音乐链接" class="iptWidth"></Input>
+          </FormItem>
+          <FormItem label="高质量链接">
+            <Input v-model="iconInfo.comment.HQMusicUrl" placeholder="高质量链接" class="iptWidth"></Input>
+          </FormItem>
+          <FormItem label="缩略图素材库ID">
+            <Input v-model="iconInfo.comment.ThumbMediaId" placeholder="缩略图素材库ID" class="iptWidth"></Input>
+          </FormItem>
+        </div>
+        <div v-if="iconInfo.type === 6">
+          <FormItem label="跳转链接">
+            <Input v-model="iconInfo.comment.Url" placeholder="跳转链接" class="iptWidth"></Input>
+          </FormItem>
+          <FormItem label="图片链接">
+            <Input v-model="iconInfo.comment.PicUrl" placeholder="图片链接" class="iptWidth"></Input>
+          </FormItem>
+        </div>
       </Form>
     </div>
     <div slot="footer">
@@ -56,7 +90,6 @@ export default {
   methods: {
     getReplyInfo () {
       getReplyInfo({ id: this.id }).then(res => {
-        res.data.comment = JSON.stringify(res.data.comment, null, 4)
         this.$set(this, 'iconInfo', res.data || {})
       })
     },
@@ -64,11 +97,7 @@ export default {
       let actionFn = addReply
       let summitInfo = {}
       for (let key in this.iconInfo) {
-        if (key === 'comment') {
-          summitInfo[key] = JSON.parse(this.iconInfo[key])
-        } else {
-          summitInfo[key] = this.iconInfo[key]
-        }
+        summitInfo[key] = this.iconInfo[key]
       }
       if (this.id) {
         summitInfo.id = this.id
@@ -82,7 +111,7 @@ export default {
     cancel () {
       this.$set(this, 'iconInfo', {
         keyword: '',
-        type: 0,
+        type: 1,
         comment: {}
       })
       this.$emit('input', false)
