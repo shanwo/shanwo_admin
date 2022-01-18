@@ -26,24 +26,20 @@ export const cacheTypeList = [
     name: '最近更新'
   }
 ]
-export const userType = [
-  {
-    type: '',
-    typeName: '全部'
-  },
-  {
+export const userType = {
+  1: {
     type: 1,
     typeName: '普通'
   },
-  {
+  2: {
     type: 2,
     typeName: '会员'
   },
-  {
+  3: {
     type: 3,
     typeName: '黑名单'
   }
-]
+}
 export const columns = [
   {
     key: 'id',
