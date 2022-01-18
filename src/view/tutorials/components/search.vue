@@ -3,7 +3,7 @@
   <div :class="prefixCls + '-left'">
     <Form :label-width="100" inline>
       <FormItem label="分类：">
-        <Select v-model="value.sort_id" class="inputWidth">
+        <Select v-model="value.sort_id" clearable class="inputWidth">
           <Option v-for="item of getSortList" :value="item.id" :key="item.id">{{ item.name }}</Option>
         </Select>
       </FormItem>

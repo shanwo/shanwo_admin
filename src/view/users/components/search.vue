@@ -3,7 +3,7 @@
   <div :class="prefixCls + '-left'">
     <Form :label-width="100" inline>
       <FormItem label="用户类型：">
-        <Select v-model="value.type" class="inputWidth">
+        <Select v-model="value.type" clearable class="inputWidth">
           <Option v-for="item of userType" :value="item.type" :key="item.type">{{ item.name }}</Option>
         </Select>
       </FormItem>

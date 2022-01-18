@@ -12,24 +12,20 @@ export const userSex = [
     name: '女'
   }
 ]
-export const userType = [
-  {
-    type: '',
-    name: '全部'
-  },
-  {
+export const userType = {
+  1: {
     type: 1,
     name: '普通'
   },
-  {
+  2: {
     type: 2,
     name: '会员'
   },
-  {
+  3: {
     type: 3,
     name: '黑名单'
   }
-]
+}
 export const userVipType = [
   {
     type: 0,
