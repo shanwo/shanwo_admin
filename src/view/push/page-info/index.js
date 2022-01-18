@@ -167,14 +167,14 @@ export const columns = [
     key: 'start_type',
     title: '推送类型',
     render: (h, { row }) => {
-      return h('span', pushType[row.start_type] ? pushType[row.start_type].name : '未定义')
+      return h('span', pushType[row.start_type] ? pushType[row.start_type].name : '')
     }
   },
   {
     key: 'start_method',
     title: '推送模式',
     render: (h, { row }) => {
-      return h('span', pushMethod[row.start_method] ? pushMethod[row.start_method].name : '未定义')
+      return h('span', pushMethod[row.start_method] ? pushMethod[row.start_method].name : '')
     }
   },
   {

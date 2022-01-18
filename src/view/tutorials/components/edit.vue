@@ -5,8 +5,7 @@
       <Form :label-width="100">
         <FormItem label="所属分类：">
           <Select v-model="iconInfo.sort_id" class="iptWidth">
-            <Option v-for="(item, index) of getSortList" :value="item.id" :key="index">{{ item.name }}
-            </Option>
+            <Option v-for="(item, index) of getSortList" :value="item.id" :key="index">{{ item.name }}</Option>
           </Select>
         </FormItem>
         <FormItem label="名称：">

@@ -4,8 +4,7 @@
     <Form :label-width="100" inline>
       <FormItem label="类型：">
         <Select v-model="value.type" class="inputWidth">
-          <Option v-for="item of payType" :value="item.type" :key="item.type">{{ item.name }}
-          </Option>
+          <Option v-for="item of payType" :value="item.type" :key="item.type">{{ item.name }}</Option>
         </Select>
       </FormItem>
       <FormItem label="分销ID：">

@@ -3,8 +3,7 @@
   <Form :label-width="100">
     <FormItem label="分类：">
       <Select v-model="classificationInfo.type" :disabled="!!id" class="iptWidth">
-        <Option v-for="item in classificationType" :value="item.type" :key="item.type">{{ item.name }}
-        </Option>
+        <Option v-for="item in classificationType" :value="item.type" :key="item.type">{{ item.name }}</Option>
       </Select>
     </FormItem>
     <FormItem label="名称：">
