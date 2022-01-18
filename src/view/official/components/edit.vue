@@ -15,7 +15,7 @@
         </FormItem>
         <div v-if="iconInfo.type === 1">
           <FormItem label="回复内容">
-            <Input v-model="iconInfo.comment.Content" placeholder="消息内容" class="iptWidth"></Input>
+            <editor v-model="iconInfo.comment.Content" :value="iconInfo.comment.Content" :key="iconInfo.comment.Content"></editor>
           </FormItem>
         </div>
         <div v-if="iconInfo.type === 2 || iconInfo.type === 3 || iconInfo.type === 4">
@@ -67,6 +67,9 @@ import { updateReply, addReply, getReplyInfo } from '@/api/official'
 const prefixCls = 'edit'
 export default {
   name: 'edit',
+  components: {
+    editor: () => import('@/components/editor/editor.vue')
+  },
   data () {
     return {
       prefixCls,
