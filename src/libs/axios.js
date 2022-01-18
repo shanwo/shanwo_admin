@@ -43,6 +43,9 @@ class HttpRequest {
       const { data, status } = res
       if (data.code === 200) {
         return { data: data.data, status }
+      } else if (data.code === 300) {
+        localStorage.clear()
+        window.location.href = '/'
       } else {
         Vue.prototype.$Message.error(data.msg)
         return Promise.reject(data)
