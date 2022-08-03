@@ -11,28 +11,28 @@ export const status = {
   }
 }
 export const replyType = {
-  1: {
-    type: 1,
+  'text': {
+    type: 'text',
     name: '文本消息'
   },
-  2: {
-    type: 2,
+  'image': {
+    type: 'image',
     name: '图片消息'
   },
-  3: {
-    type: 3,
+  'voice': {
+    type: 'voice',
     name: '语音消息'
   },
-  4: {
-    type: 4,
+  'video': {
+    type: 'video',
     name: '视频消息'
   },
-  5: {
-    type: 5,
+  'music': {
+    type: 'music',
     name: '音乐消息'
   },
-  6: {
-    type: 6,
+  'news': {
+    type: 'news',
     name: '图文消息'
   }
 }
