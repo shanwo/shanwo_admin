@@ -38,7 +38,7 @@ export default {
       isShowEdit: false,
       replyList: [],
       searchData: {
-        type: 0,
+        type: 'text',
         page: 1,
         size: 20
       }
