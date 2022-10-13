@@ -24,9 +24,9 @@ export const toLogout = () => {
   })
 }
 export const getUserToken = ({ code, state }) => {
-  var url = 'https://api.shanwo.cc/callback/wechat'
+  var url = 'https://api.shanwo.cc/user/wechat'
   if (process.env.NODE_ENV !== 'production') {
-    url = '//api.shanwo.vip/callback/wechat'
+    url = '//api.shanwo.vip/user/wechat'
   }
   return axios.request({
     url,
