@@ -153,6 +153,12 @@ export const menuTypeInfo = {
       title: '备用网页',
       key: 'url'
     }
+  ],
+  click: [
+    {
+      title: '事件Key',
+      key: 'key'
+    }
   ]
 }
 export const menuTypeKey = {
@@ -160,5 +166,6 @@ export const menuTypeKey = {
   media_id: [ 'media_id' ],
   article_id: [ 'article_id' ],
   view: [ 'url' ],
-  miniprogram: [ 'appid', 'pagepath', 'url' ]
+  miniprogram: [ 'appid', 'pagepath', 'url' ],
+  click: [ 'key' ]
 }

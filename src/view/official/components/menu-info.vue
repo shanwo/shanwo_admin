@@ -17,6 +17,7 @@
             <Radio label="media_id">素材消息</Radio>
             <Radio label="article_id">图文消息</Radio>
             <Radio label="view">跳转网页</Radio>
+            <Radio label="click">按钮事件</Radio>
             <Radio label="miniprogram">跳转小程序</Radio>
           </RadioGroup>
         </FormItem>
