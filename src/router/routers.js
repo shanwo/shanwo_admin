@@ -313,7 +313,7 @@ export default [
         name: 'push_list',
         meta: {
           icon: 'md-cloud-upload',
-          title: '推送任务'
+          title: '推送任务(开发中)'
         },
         component: () => import('@/view/push/list.vue')
       }
@@ -342,7 +342,7 @@ export default [
         name: 'official_reply',
         meta: {
           icon: 'md-quote',
-          title: '回复'
+          title: '回复(前端待开发)'
         },
         component: () => import('@/view/official/reply.vue')
       },
@@ -351,7 +351,7 @@ export default [
         name: 'official_media',
         meta: {
           icon: 'md-planet',
-          title: '素材库'
+          title: '素材库(前端待开发)'
         },
         component: () => import('@/view/official/media.vue')
       },
@@ -360,7 +360,7 @@ export default [
         name: 'official_article',
         meta: {
           icon: 'md-bookmarks',
-          title: '图文库'
+          title: '图文库(前端待开发)'
         },
         component: () => import('@/view/official/article.vue')
       }
