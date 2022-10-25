@@ -320,6 +320,25 @@ export default [
     ]
   },
   {
+    path: '/hy',
+    name: 'hy',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'index',
+        name: 'hy_index',
+        meta: {
+          icon: 'md-cloud-upload',
+          title: '图片上传'
+        },
+        component: () => import('@/view/hy/index.vue')
+      }
+    ]
+  },
+  {
     path: '/official',
     name: 'official',
     component: Main,
