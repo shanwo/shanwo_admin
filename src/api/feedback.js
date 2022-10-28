@@ -2,7 +2,7 @@ import axios from '@/libs/api.request'
 
 export const getUserFeedbackList = (params) => {
   return axios.request({
-    url: '/feedback/lists',
+    url: '/base/feedback/lists',
     params: params,
     method: 'get'
   })
@@ -10,7 +10,7 @@ export const getUserFeedbackList = (params) => {
 
 export const getFeedbackInfo = (params) => {
   return axios.request({
-    url: '/feedback/info',
+    url: '/base/feedback/info',
     params: params,
     method: 'get'
   })
@@ -18,7 +18,7 @@ export const getFeedbackInfo = (params) => {
 
 export const uploadFeedbackInfo = (params) => {
   return axios.request({
-    url: '/feedback/edit',
+    url: '/base/feedback/edit',
     data: params,
     method: 'post'
   })

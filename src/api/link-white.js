@@ -2,7 +2,7 @@ import axios from '@/libs/api.request'
 
 export const getLinkWhiteList = (params) => {
   return axios.request({
-    url: '/link/lists',
+    url: '/sw/link/lists',
     params: params,
     method: 'get'
   })
@@ -10,7 +10,7 @@ export const getLinkWhiteList = (params) => {
 
 export const getSortList = (params) => {
   return axios.request({
-    url: '/sort/lists',
+    url: '/sw/sort/lists',
     params: params,
     method: 'get'
   })
@@ -18,28 +18,28 @@ export const getSortList = (params) => {
 
 export const getLinkInfo = (params) => {
   return axios.request({
-    url: '/link/info',
+    url: '/sw/link/info',
     params: params,
     method: 'get'
   })
 }
 export const addLink = (params) => {
   return axios.request({
-    url: '/link/add',
+    url: '/sw/link/add',
     data: params,
     method: 'post'
   })
 }
 export const updateLink = (params) => {
   return axios.request({
-    url: '/link/edit',
+    url: '/sw/link/edit',
     data: params,
     method: 'post'
   })
 }
 export const statusLink = (params) => {
   return axios.request({
-    url: '/link/status',
+    url: '/sw/link/status',
     data: params,
     method: 'post'
   })

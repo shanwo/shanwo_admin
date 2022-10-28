@@ -2,7 +2,7 @@ import axios from '@/libs/api.request'
 
 export const getPayChannelList = (params) => {
   return axios.request({
-    url: '/pay/lists',
+    url: '/sw/pay/lists',
     params: params,
     method: 'get'
   })
@@ -10,28 +10,28 @@ export const getPayChannelList = (params) => {
 
 export const getPayInfo = (params) => {
   return axios.request({
-    url: '/pay/info',
+    url: '/sw/pay/info',
     params: params,
     method: 'get'
   })
 }
 export const addPay = (params) => {
   return axios.request({
-    url: '/pay/add',
+    url: '/sw/pay/add',
     data: params,
     method: 'post'
   })
 }
 export const updatePay = (params) => {
   return axios.request({
-    url: '/pay/edit',
+    url: '/sw/pay/edit',
     data: params,
     method: 'post'
   })
 }
 export const statusPay = (params) => {
   return axios.request({
-    url: '/pay/status',
+    url: '/sw/pay/status',
     data: params,
     method: 'post'
   })

@@ -2,7 +2,7 @@ import axios from '@/libs/api.request'
 
 export const getConfigList = (params) => {
   return axios.request({
-    url: '/config/lists',
+    url: '/base/config/lists',
     params: params,
     method: 'get'
   })
@@ -10,28 +10,28 @@ export const getConfigList = (params) => {
 
 export const getConfigInfo = (params) => {
   return axios.request({
-    url: '/config/info',
+    url: '/base/config/info',
     params: params,
     method: 'get'
   })
 }
 export const addConfig = (params) => {
   return axios.request({
-    url: '/config/add',
+    url: '/base/config/add',
     data: params,
     method: 'post'
   })
 }
 export const updateConfig = (params) => {
   return axios.request({
-    url: '/config/edit',
+    url: '/base/config/edit',
     data: params,
     method: 'post'
   })
 }
 export const statusConfig = (params) => {
   return axios.request({
-    url: '/config/status',
+    url: '/base/config/status',
     data: params,
     method: 'post'
   })

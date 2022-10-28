@@ -2,7 +2,7 @@ import axios from '@/libs/api.request'
 
 export const addClassification = (params) => {
   return axios.request({
-    url: '/sort/add',
+    url: '/sw/sort/add',
     data: params,
     method: 'post'
   })
@@ -10,7 +10,7 @@ export const addClassification = (params) => {
 
 export const getClassificationList = (params) => {
   return axios.request({
-    url: '/sort/lists',
+    url: '/sw/sort/lists',
     params: params,
     method: 'get'
   })
@@ -18,7 +18,7 @@ export const getClassificationList = (params) => {
 
 export const getClassificationInfo = (params) => {
   return axios.request({
-    url: '/sort/info',
+    url: '/sw/sort/info',
     params: params,
     method: 'get'
   })
@@ -26,7 +26,7 @@ export const getClassificationInfo = (params) => {
 
 export const updateClassification = (params) => {
   return axios.request({
-    url: '/sort/edit',
+    url: '/sw/sort/edit',
     data: params,
     method: 'post'
   })
@@ -34,7 +34,7 @@ export const updateClassification = (params) => {
 
 export const delClassification = (params) => {
   return axios.request({
-    url: '/sort/del',
+    url: '/sw/sort/del',
     data: params,
     method: 'post'
   })

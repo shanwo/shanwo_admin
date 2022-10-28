@@ -2,7 +2,7 @@ import axios from '@/libs/api.request'
 
 export const getAvatarPendantList = (params) => {
   return axios.request({
-    url: '/decoration/lists',
+    url: '/sw/decoration/lists',
     params: params,
     method: 'get'
   })
@@ -10,7 +10,7 @@ export const getAvatarPendantList = (params) => {
 
 export const getSortList = (params) => {
   return axios.request({
-    url: '/sort/lists',
+    url: '/sw/sort/lists',
     params: params,
     method: 'get'
   })
@@ -18,28 +18,28 @@ export const getSortList = (params) => {
 
 export const getDecorationInfo = (params) => {
   return axios.request({
-    url: '/decoration/info',
+    url: '/sw/decoration/info',
     params: params,
     method: 'get'
   })
 }
 export const addDecoration = (params) => {
   return axios.request({
-    url: '/decoration/add',
+    url: '/sw/decoration/add',
     data: params,
     method: 'post'
   })
 }
 export const updateDecoration = (params) => {
   return axios.request({
-    url: '/decoration/edit',
+    url: '/sw/decoration/edit',
     data: params,
     method: 'post'
   })
 }
 export const statusDecoration = (params) => {
   return axios.request({
-    url: '/decoration/status',
+    url: '/sw/decoration/status',
     data: params,
     method: 'post'
   })

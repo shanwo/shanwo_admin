@@ -2,7 +2,7 @@ import axios from '@/libs/api.request'
 
 export const getTutorialsManagementList = (params) => {
   return axios.request({
-    url: '/tutorials/lists',
+    url: '/sw/tutorials/lists',
     params: params,
     method: 'get'
   })
@@ -10,7 +10,7 @@ export const getTutorialsManagementList = (params) => {
 
 export const getSortList = (params) => {
   return axios.request({
-    url: '/sort/lists',
+    url: '/sw/sort/lists',
     params: params,
     method: 'get'
   })
@@ -18,28 +18,28 @@ export const getSortList = (params) => {
 
 export const getTutorialsInfo = (params) => {
   return axios.request({
-    url: '/tutorials/info',
+    url: '/sw/tutorials/info',
     params: params,
     method: 'get'
   })
 }
 export const addTutorials = (params) => {
   return axios.request({
-    url: '/tutorials/add',
+    url: '/sw/tutorials/add',
     data: params,
     method: 'post'
   })
 }
 export const updateTutorials = (params) => {
   return axios.request({
-    url: '/tutorials/edit',
+    url: '/sw/tutorials/edit',
     data: params,
     method: 'post'
   })
 }
 export const statusTutorials = (params) => {
   return axios.request({
-    url: '/tutorials/status',
+    url: '/sw/tutorials/status',
     data: params,
     method: 'post'
   })
