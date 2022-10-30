@@ -53,6 +53,174 @@ export default [
     ]
   },
   {
+    path: '/sw',
+    name: 'sw',
+    component: Main,
+    meta: {
+      icon: 'md-ionic',
+      title: '闪我'
+    },
+    children: [
+      {
+        path: '/sw/classification',
+        name: 'sw_classification',
+        meta: {
+          icon: 'md-clipboard',
+          title: '分类管理'
+        },
+        component: () => import('@/view/sw/classification/list.vue')
+      },
+      {
+        path: '/sw/link_white',
+        name: 'sw_link_white',
+        meta: {
+          icon: 'md-link',
+          title: '链接白名单'
+        },
+        component: () => import('@/view/sw/link-white/list.vue')
+      },
+      {
+        path: '/sw/template',
+        name: 'sw_template',
+        meta: {
+          icon: 'md-browsers',
+          title: '模板管理'
+        },
+        component: () => import('@/view/sw/template/list.vue')
+      },
+      {
+        path: '/sw/tutorials',
+        name: 'sw_tutorials',
+        meta: {
+          icon: 'md-bookmarks',
+          title: '教程管理'
+        },
+        component: () => import('@/view/sw/tutorials/list.vue')
+      },
+      {
+        path: '/sw/decoration',
+        name: 'sw_decoration',
+        meta: {
+          icon: 'md-bookmark',
+          title: '头像装饰'
+        },
+        component: () => import('@/view/sw/decoration/list.vue')
+      },
+      {
+        path: '/sw/shan_page',
+        name: 'sw_shan_page',
+        meta: {
+          icon: 'md-document',
+          title: '闪页管理'
+        },
+        component: () => import('@/view/sw/shan-page/list.vue')
+      },
+      {
+        path: '/sw/pay',
+        name: 'sw_pay',
+        meta: {
+          icon: 'md-card',
+          title: '支付渠道'
+        },
+        component: () => import('@/view/sw/pay/list.vue')
+      },
+      {
+        path: '/sw/order',
+        name: 'sw_order',
+        meta: {
+          icon: 'md-cart',
+          title: '订单数据'
+        },
+        component: () => import('@/view/sw/order/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/hy',
+    name: 'hy',
+    component: Main,
+    meta: {
+      icon: 'md-ionic',
+      title: '滑呀'
+    },
+    children: [
+      {
+        path: '/hy/venue',
+        name: 'hy_venue',
+        meta: {
+          icon: 'md-snow',
+          title: '雪场管理'
+        }
+        // component: () => import('@/view/hy/venue/list.vue')
+      },
+      {
+        path: '/hy/image',
+        name: 'hy_image',
+        meta: {
+          icon: 'md-cloud-upload',
+          title: '图片上传'
+        },
+        component: () => import('@/view/hy/image/index.vue')
+      },
+      {
+        path: '/hy/order',
+        name: 'hy_order',
+        meta: {
+          icon: 'md-cart',
+          title: '订单数据'
+        },
+        component: () => import('@/view/hy/order/list.vue')
+      }
+    ]
+  },
+  {
+    path: '/official',
+    name: 'official',
+    component: Main,
+    meta: {
+      icon: 'md-ionic',
+      title: '公众号'
+    },
+    children: [
+      {
+        path: 'menu',
+        name: 'official_menu',
+        meta: {
+          icon: 'md-menu',
+          title: '菜单'
+        },
+        component: () => import('@/view/official/menu.vue')
+      },
+      {
+        path: 'reply',
+        name: 'official_reply',
+        meta: {
+          icon: 'md-quote',
+          title: '回复(前端待开发)'
+        },
+        component: () => import('@/view/official/reply.vue')
+      },
+      {
+        path: 'media',
+        name: 'official_media',
+        meta: {
+          icon: 'md-planet',
+          title: '素材库(前端待开发)'
+        },
+        component: () => import('@/view/official/media.vue')
+      },
+      {
+        path: 'article',
+        name: 'official_article',
+        meta: {
+          icon: 'md-bookmarks',
+          title: '图文库(前端待开发)'
+        },
+        component: () => import('@/view/official/article.vue')
+      }
+    ]
+  },
+  {
     path: '/users',
     name: 'users',
     component: Main,
@@ -87,177 +255,6 @@ export default [
           title: '用户反馈'
         },
         component: () => import('@/view/feedback/list.vue')
-      }
-    ]
-  },
-  {
-    path: '/classification',
-    name: 'classification',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'classification_list',
-        meta: {
-          icon: 'md-clipboard',
-          title: '分类管理'
-        },
-        component: () => import('@/view/classification/list.vue')
-      }
-    ]
-  },
-  {
-    path: '/decoration',
-    name: 'decoration',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'decoration_list',
-        meta: {
-          icon: 'md-bookmark',
-          title: '头像装饰'
-        },
-        component: () => import('@/view/decoration/list.vue')
-      }
-    ]
-  },
-  {
-    path: '/link_white',
-    name: 'link_white',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'link_white_list',
-        meta: {
-          icon: 'md-link',
-          title: '链接白名单'
-        },
-        component: () => import('@/view/link-white/list.vue')
-      }
-    ]
-  },
-  {
-    path: '/template',
-    name: 'template',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'template_list',
-        meta: {
-          icon: 'md-browsers',
-          title: '模板管理'
-        },
-        component: () => import('@/view/template/list.vue')
-      }
-    ]
-  },
-  {
-    path: '/tutorials',
-    name: 'tutorials',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'tutorials_list',
-        meta: {
-          icon: 'md-bookmarks',
-          title: '教程管理'
-        },
-        component: () => import('@/view/tutorials/list.vue')
-      }
-    ]
-  },
-  {
-    path: '/shan_page',
-    name: 'shan_page',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'shan_page_list',
-        meta: {
-          icon: 'md-document',
-          title: '闪页管理'
-        },
-        component: () => import('@/view/shan-page/list.vue')
-      }
-    ]
-  },
-  // {
-  //   path: '/ad',
-  //   name: 'ad',
-  //   component: Main,
-  //   meta: {
-  //     hideInBread: true
-  //   },
-  //   children: [
-  //     {
-  //       path: 'list',
-  //       name: 'ad_management',
-  //       meta: {
-  //         icon: 'md-pie',
-  //         title: '广告管理'
-  //       },
-  //       component: () => import('@/view/ad/list.vue')
-  //     }
-  //   ]
-  // },
-  {
-    path: '/pay',
-    name: 'pay',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'pay_list',
-        meta: {
-          icon: 'md-card',
-          title: '支付渠道'
-        },
-        component: () => import('@/view/pay/list.vue')
-      }
-    ]
-  },
-  {
-    path: '/order',
-    name: 'order',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'order_list',
-        meta: {
-          icon: 'md-cart',
-          title: '订单数据'
-        },
-        component: () => import('@/view/order/list.vue')
       }
     ]
   },
@@ -316,72 +313,6 @@ export default [
           title: '推送任务(开发中)'
         },
         component: () => import('@/view/push/list.vue')
-      }
-    ]
-  },
-  {
-    path: '/hy',
-    name: 'hy',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'index',
-        name: 'hy_index',
-        meta: {
-          icon: 'md-cloud-upload',
-          title: '图片上传'
-        },
-        component: () => import('@/view/hy/index.vue')
-      }
-    ]
-  },
-  {
-    path: '/official',
-    name: 'official',
-    component: Main,
-    meta: {
-      icon: 'md-ionic',
-      title: '公众号'
-    },
-    children: [
-      {
-        path: 'menu',
-        name: 'official_menu',
-        meta: {
-          icon: 'md-menu',
-          title: '菜单'
-        },
-        component: () => import('@/view/official/menu.vue')
-      },
-      {
-        path: 'reply',
-        name: 'official_reply',
-        meta: {
-          icon: 'md-quote',
-          title: '回复(前端待开发)'
-        },
-        component: () => import('@/view/official/reply.vue')
-      },
-      {
-        path: 'media',
-        name: 'official_media',
-        meta: {
-          icon: 'md-planet',
-          title: '素材库(前端待开发)'
-        },
-        component: () => import('@/view/official/media.vue')
-      },
-      {
-        path: 'article',
-        name: 'official_article',
-        meta: {
-          icon: 'md-bookmarks',
-          title: '图文库(前端待开发)'
-        },
-        component: () => import('@/view/official/article.vue')
       }
     ]
   }
