@@ -15,7 +15,7 @@
 </template>
 <script>
 import { editUserStatus } from '@/api/users'
-import { userType, columns } from '../page-info'
+import { columns } from '../page-info'
 
 const prefixCls = 'users-list'
 export default {
@@ -30,7 +30,6 @@ export default {
       id: null,
       browseData: false,
       attentionData: false,
-      userType,
       columns
     }
   },

@@ -20,8 +20,6 @@
 </template>
 
 <script>
-import { userType } from '../page-info'
-
 const prefixCls = 'users-list'
 export default {
   name: 'users-list',
@@ -34,8 +32,7 @@ export default {
   },
   data () {
     return {
-      prefixCls,
-      userType
+      prefixCls
     }
   }
 }

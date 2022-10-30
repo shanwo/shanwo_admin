@@ -26,8 +26,8 @@ export const columns = [
     title: 'id'
   },
   {
-    key: 'nickname',
-    title: '用户昵称'
+    key: 'user_id',
+    title: '用户ID'
   },
   {
     key: 'order_sn',

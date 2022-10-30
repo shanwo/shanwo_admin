@@ -12,46 +12,6 @@ export const userSex = [
     name: '女'
   }
 ]
-export const userType = {
-  1: {
-    type: 1,
-    name: '普通'
-  },
-  2: {
-    type: 2,
-    name: '会员'
-  },
-  3: {
-    type: 3,
-    name: '黑名单'
-  }
-}
-export const userVipType = [
-  {
-    type: 0,
-    name: '-'
-  },
-  {
-    type: 1,
-    name: '年卡'
-  },
-  {
-    type: 2,
-    name: '季卡'
-  },
-  {
-    type: 3,
-    name: '月卡'
-  },
-  {
-    type: 4,
-    name: '周卡'
-  },
-  {
-    type: 5,
-    name: '日卡'
-  }
-]
 export const contactType = {
   'wechat': {
     type: 'wechat',
@@ -105,13 +65,6 @@ export const columns = [
     title: 'id'
   },
   {
-    key: 'type',
-    title: '用户类型',
-    render: (h, { row }) => {
-      return h('span', userType[row.type] && userType[row.type].name)
-    }
-  },
-  {
     key: 'avatar',
     title: '用户头像',
     render: (h, { row }) => {
@@ -138,10 +91,6 @@ export const columns = [
   {
     key: 'merger_name',
     title: '地区'
-  },
-  {
-    key: 'pages',
-    title: '闪页数'
   },
   {
     key: 'contact',

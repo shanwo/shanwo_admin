@@ -35,7 +35,7 @@ export default {
       searchData: {
         order_sn: '',
         third_sn: '',
-        keyword: '',
+        user_id: '',
         page: 1,
         size: 20
       }

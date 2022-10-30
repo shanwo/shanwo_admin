@@ -24,17 +24,6 @@
         <FormItem label="地区：">
           <p>{{ userInfo.merger_name }}</p>
         </FormItem>
-        <div v-if="userInfo.type == 2">
-          <FormItem label="用户类型：" v-if="userType[userInfo.type]" style="width:200px;float: left">
-            <p>{{ userType[userInfo.type].name }}</p>
-          </FormItem>
-          <FormItem label="购买类型：">
-            <p v-if="userVipType[userInfo.vip_type]">{{ userVipType[userInfo.vip_type].name }}</p>
-          </FormItem>
-          <FormItem label="到期时间：" v-if="userInfo.vip_type">
-            <p>{{ userInfo.expired_at }}</p>
-          </FormItem>
-        </div>
         <FormItem label="注册时间：" style="width:200px;float: left">
           <p>{{ userInfo.created_at }}</p>
         </FormItem>
@@ -61,7 +50,7 @@
 </template>
 
 <script>
-import { userSex, userType, userThird, userVipType } from '../page-info'
+import { userSex, userThird } from '../page-info'
 import { getUserInfo } from '@/api/users'
 
 const prefixCls = 'users--info'
@@ -90,9 +79,7 @@ export default {
         third: []
       },
       userSex,
-      userType,
-      userThird,
-      userVipType
+      userThird
     }
   },
   methods: {

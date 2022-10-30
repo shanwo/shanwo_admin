@@ -7,8 +7,8 @@
           <Option v-for="item of feedbackStatus" :value="item.type" :key="item.type">{{ item.name }}</Option>
         </Select>
       </FormItem>
-      <FormItem label="用户关键字：">
-        <Input v-model="value.nickname" class="inputWidth" placeholder="请输入用户昵称"></Input>
+      <FormItem label="用户ID：">
+        <Input v-model="value.user_id" class="inputWidth" placeholder="请输入用户ID"></Input>
       </FormItem>
     </Form>
   </div>

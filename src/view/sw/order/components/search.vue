@@ -8,8 +8,8 @@
       <FormItem label="三方单号：">
         <Input v-model="value.third_sn" class="inputWidth" placeholder="请输入三方单号"></Input>
       </FormItem>
-      <FormItem label="用户昵称：">
-        <Input v-model="value.nickname" class="inputWidth" placeholder="请输入用户昵称"></Input>
+      <FormItem label="用户ID：">
+        <Input v-model="value.user_id" class="inputWidth" placeholder="请输入用户ID"></Input>
       </FormItem>
     </Form>
   </div>

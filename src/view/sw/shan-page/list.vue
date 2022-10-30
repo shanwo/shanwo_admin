@@ -39,7 +39,7 @@ export default {
       userType,
       searchData: {
         keyword: '',
-        nickname: '',
+        user_id: 0,
         open: '',
         page: 1,
         size: 20

@@ -102,8 +102,8 @@ export const columns = [
 ]
 export const record = [
   {
-    key: 'id',
-    title: 'id'
+    key: 'user_id',
+    title: '用户ID'
   },
   {
     key: 'avatar',
