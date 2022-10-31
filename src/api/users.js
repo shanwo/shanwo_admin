@@ -2,7 +2,7 @@ import axios from '@/libs/api.request'
 
 export const getUserList = (params) => {
   return axios.request({
-    url: '/base/user/lists',
+    url: '/user/lists',
     params: params,
     method: 'get'
   })
@@ -10,7 +10,7 @@ export const getUserList = (params) => {
 
 export const getUserInfo = (params) => {
   return axios.request({
-    url: '/base/user/info',
+    url: '/user/info',
     params: params,
     method: 'get'
   })
@@ -18,21 +18,21 @@ export const getUserInfo = (params) => {
 
 export const editUserStatus = (params) => {
   return axios.request({
-    url: '/base/user/status',
+    url: '/user/status',
     data: params,
     method: 'post'
   })
 }
 export const getUserAttention = (params) => {
   return axios.request({
-    url: '/base/user/attention',
+    url: '/user/attention',
     params,
     method: 'get'
   })
 }
 export const getUserBrowse = (params) => {
   return axios.request({
-    url: '/base/user/browse',
+    url: '/user/browse',
     params,
     method: 'get'
   })
