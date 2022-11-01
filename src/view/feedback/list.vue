@@ -37,7 +37,7 @@ export default {
       userFeedbackList: [],
       searchData: {
         type: '',
-        user_id: 0,
+        nickname: '',
         page: 1,
         size: 20
       }
