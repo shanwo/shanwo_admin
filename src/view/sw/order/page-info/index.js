@@ -26,8 +26,8 @@ export const columns = [
     title: 'id'
   },
   {
-    key: 'user_id',
-    title: '用户ID'
+    key: 'nickname',
+    title: '用户昵称'
   },
   {
     key: 'order_sn',
@@ -39,10 +39,7 @@ export const columns = [
   },
   {
     key: 'pay_price',
-    title: '支付金额',
-    render: (h, { row }) => {
-      return h('span', row.pay_price / 100)
-    }
+    title: '支付金额'
   },
   {
     key: 'status',
