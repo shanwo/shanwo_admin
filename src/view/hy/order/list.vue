@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { getOrderList } from '@/api/order'
+import { getOrderList } from '@/api/hy_order'
 
 const prefixCls = 'order-list'
 export default {
@@ -35,7 +35,7 @@ export default {
       searchData: {
         order_sn: '',
         third_sn: '',
-        keyword: '',
+        user_id: '',
         page: 1,
         size: 20
       }

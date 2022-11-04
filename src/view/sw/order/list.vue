@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { getOrderList } from '@/api/order'
+import { getOrderList } from '@/api/sw_order'
 
 const prefixCls = 'order-list'
 export default {

@@ -50,5 +50,9 @@ export const columns = [
     render: (h, { row }) => {
       return h('span', orderStatus[row.status] && orderStatus[row.status].name)
     }
+  },
+  {
+    key: 'payated_at',
+    title: '支付时间'
   }
 ]
