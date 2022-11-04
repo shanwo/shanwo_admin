@@ -37,3 +37,10 @@ export const getUserToken = ({ code, state }) => {
     method: 'get'
   })
 }
+export const getAreaList = (params) => {
+  return axios.request({
+    url: '/area/lists',
+    params,
+    method: 'get'
+  })
+}
