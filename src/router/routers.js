@@ -150,8 +150,8 @@ export default [
         meta: {
           icon: 'md-snow',
           title: '雪场管理'
-        }
-        // component: () => import('@/view/hy/venue/list.vue')
+        },
+        component: () => import('@/view/hy/venue/list.vue')
       },
       {
         path: '/hy/image',
