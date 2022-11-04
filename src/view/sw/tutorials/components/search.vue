@@ -7,10 +7,10 @@
           <Option v-for="item of getSortList" :value="item.id" :key="item.id">{{ item.name }}</Option>
         </Select>
       </FormItem>
+      <FormItem label="关键字：">
+        <Input v-model="value.keyword" class="inputWidth" placeholder="关键字" clearable></Input>
+      </FormItem>
     </Form>
-    <FormItem label="关键字：">
-      <Input v-model="value.keyword" class="inputWidth" placeholder="关键字" clearable></Input>
-    </FormItem>
   </div>
   <div :class="prefixCls + '-right'">
     <slot name="btn"></slot>
