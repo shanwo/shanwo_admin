@@ -14,28 +14,28 @@ export const getVenueInfo = (params) => {
     method: 'get'
   })
 }
-export const getVenueAdd = (params) => {
+export const venueAdd = (params) => {
   return axios.request({
     url: '/hy/venue/add',
     params,
     method: 'post'
   })
 }
-export const getVenueEdit = (params) => {
+export const venueEdit = (params) => {
   return axios.request({
     url: '/hy/venue/edit',
     params,
     method: 'post'
   })
 }
-export const editVenueStatus = (params) => {
+export const venueStatus = (params) => {
   return axios.request({
     url: '/hy/venue/status',
     data: params,
     method: 'post'
   })
 }
-export const editCacheCache = (params) => {
+export const vacheCache = (params) => {
   return axios.request({
     url: '/hy/venue/cache',
     data: params,
