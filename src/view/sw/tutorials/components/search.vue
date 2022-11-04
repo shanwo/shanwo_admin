@@ -9,7 +9,7 @@
       </FormItem>
     </Form>
     <FormItem label="关键字：">
-      <Input v-model="value.keyword" class="inputWidth" placeholder="关键字"></Input>
+      <Input v-model="value.keyword" class="inputWidth" placeholder="关键字" clearable></Input>
     </FormItem>
   </div>
   <div :class="prefixCls + '-right'">

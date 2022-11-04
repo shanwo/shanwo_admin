@@ -3,13 +3,13 @@
   <div :class="prefixCls + '-left'">
     <Form :label-width="100" inline>
       <FormItem label="订单号：">
-        <Input v-model="value.order_sn" class="inputWidth" placeholder="请输入订单号"></Input>
+        <Input v-model="value.order_sn" class="inputWidth" placeholder="请输入订单号" clearable></Input>
       </FormItem>
       <FormItem label="三方单号：">
-        <Input v-model="value.third_sn" class="inputWidth" placeholder="请输入三方单号"></Input>
+        <Input v-model="value.third_sn" class="inputWidth" placeholder="请输入三方单号" clearable></Input>
       </FormItem>
       <FormItem label="用户ID：">
-        <Input v-model="value.user_id" class="inputWidth" placeholder="请输入用户昵称"></Input>
+        <Input v-model="value.user_id" class="inputWidth" placeholder="请输入用户昵称" clearable></Input>
       </FormItem>
     </Form>
   </div>

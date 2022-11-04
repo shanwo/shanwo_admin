@@ -2,13 +2,8 @@
 <div :class="prefixCls">
   <div :class="prefixCls + '-left'">
     <Form :label-width="100" inline>
-      <FormItem label="用户类型：">
-        <Select v-model="value.type" clearable class="inputWidth">
-          <Option v-for="item of userType" :value="item.type" :key="item.type">{{ item.name }}</Option>
-        </Select>
-      </FormItem>
       <FormItem label="用户关键字：">
-        <Input v-model="value.keyword" class="inputWidth" placeholder="请输入用户昵称/手机号"></Input>
+        <Input v-model="value.keyword" class="inputWidth" placeholder="请输入用户昵称/手机号" clearable></Input>
       </FormItem>
     </Form>
   </div>

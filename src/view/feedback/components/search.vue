@@ -8,7 +8,7 @@
         </Select>
       </FormItem>
       <FormItem label="用户关键字：">
-        <Input v-model="value.nickname" class="inputWidth" placeholder="请输入用户昵称"></Input>
+        <Input v-model="value.nickname" class="inputWidth" placeholder="请输入用户昵称" clearable></Input>
       </FormItem>
     </Form>
   </div>

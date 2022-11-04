@@ -8,7 +8,7 @@
         </Select>
       </FormItem>
       <FormItem label="分销ID：">
-        <Input v-model="value.channel" class="inputWidth" placeholder="请输入分销人ID"></Input>
+        <Input v-model="value.channel" class="inputWidth" placeholder="请输入分销人ID" clearable></Input>
       </FormItem>
     </Form>
   </div>

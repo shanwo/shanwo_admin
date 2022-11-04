@@ -4,11 +4,11 @@
     <Form :label-width="100" inline>
       <FormItem label="类型：">
         <Select v-model="value.type" clearable class="inputWidth">
-          <Option v-for="item of type" :value="item.type" :key="item.type">{{ item.name }}</Option>
+          <Option v-for="item of type" :value="item.type" :key="item.type" >{{ item.name }}</Option>
         </Select>
       </FormItem>
       <FormItem label="关键字：">
-        <Input v-model="value.keyword" class="inputWidth" placeholder="关键字"></Input>
+        <Input v-model="value.keyword" class="inputWidth" placeholder="关键字" clearable></Input>
       </FormItem>
     </Form>
   </div>
