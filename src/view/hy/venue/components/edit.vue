@@ -10,19 +10,19 @@
           <Input-number :min="0.01" v-model="venueInfo.price" placeholder="照片单价" class="iptWidth"></Input-number>
         </FormItem>
         <FormItem prop="province" label="地区选择">
-          <Select v-model="province" style="width:200px" @click="getAreaList(0)">
+          <Select v-model="province" style="width:200px" @on-change="getAreaList(0)"  :disabled="city != 0">
             <Option v-for="(item, index) of areaList" :value="item.id" :key="index">{{ item.name }}</Option>
           </Select>{{ province }}
         </FormItem>
         <FormItem prop="province" label="地区选择">
-          <Select v-model="city" style="width:200px" @click="getAreaList(province)">
+          <Select v-model="city" style="width:200px" @on-change="getAreaList(province)" :disabled="province == 0 || district != 0">
             <Option v-for="(item, index) of areaList" :value="item.id" :key="index">{{ item.name }}</Option>
           </Select>{{ city }}
         </FormItem>
         <FormItem prop="province" label="地区选择">
-          <Select v-model="venueInfo.area_id" style="width:200px" @click="getAreaList(city)">
+          <Select v-model="district" style="width:200px" @on-change="getAreaList(city)" :disabled="city == 0">
             <Option v-for="(item, index) of areaList" :value="item.id" :key="index">{{ item.name }}</Option>
-          </Select>{{ venueInfo.area_id }}
+          </Select>{{ district}}
         </FormItem>
         <FormItem label="详细地址：">
           <Input v-model="venueInfo.address" placeholder="详细地址" class="iptWidth"></Input>
@@ -57,12 +57,12 @@ export default {
     return {
       prefixCls,
       areaList: {},
-      province: '',
-      city: '',
-      county: '',
+      province: 0,
+      city: 0,
+      district: 0,
       venueInfo: {
         name: '',
-        price: 0,
+        price: 0.00,
         area_id: '',
         address: '',
         sub_mchid: '',
@@ -83,18 +83,20 @@ export default {
     uploadImageChange (arg) {
       this.venueInfo.image = arg.data && arg.data.url
     },
-    getVenueInfo () {
-      getVenueInfo({ id: this.id }).then(res => {
-        this.$set(this, 'venueInfo', res.data || {})
-      })
-    },
     /**
      * @description 获取地区信息列表
      * @returns { undefined }
      */
     getAreaList (pid) {
+      console.log(pid)
+      console.log('--------------------------')
       getAreaList({ pid: pid }).then(res => {
         this.$set(this, 'areaList', res.data.lists || {})
+      })
+    },
+    getVenueInfo () {
+      getVenueInfo({ id: this.id }).then(res => {
+        this.$set(this, 'venueInfo', res.data || {})
       })
     },
     confirm () {
@@ -107,6 +109,7 @@ export default {
       }
       if (this.id) {
         summitInfo.id = this.id
+        summitInfo.area_id = this.district
         actionFn = venueEdit
       }
       actionFn(summitInfo).then(() => {
@@ -117,7 +120,7 @@ export default {
     cancel () {
       this.$set(this, 'venueInfo', {
         name: '',
-        price: 0,
+        price: 0.00,
         area_id: '',
         address: '',
         sub_mchid: '',
