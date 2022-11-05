@@ -14,7 +14,7 @@
   <div :class="prefixCls + '-page'">
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
   </div>
-  <edit v-model="isShowEdit" :id="id" @on-change="editChange"/>
+  <edit v-model="isShowEdit" :id="id" @on-change="editVenue"/>
 </div>
 </template>
 
@@ -71,7 +71,7 @@ export default {
       this.id = id
       this.isShowEdit = true
     },
-    editChange () {
+    editVenue () {
       this.id = 0
       this.getVenueList()
     }

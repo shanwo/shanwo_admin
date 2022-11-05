@@ -7,22 +7,18 @@
           <Input v-model="venueInfo.name" placeholder="请输入场地名称" class="iptWidth"></Input>
         </FormItem>
         <FormItem label="照片单价(元)：">
-          <Input-number :min="0.01" v-model="venueInfo.price" placeholder="照片单价" class="iptWidth"></Input-number>
+          <!--          <Input-number :min="0.01" v-model="venueInfo.price" placeholder="照片单价" class="iptWidth"></Input-number>-->
         </FormItem>
         <FormItem prop="province" label="地区选择">
-          <Select v-model="province" style="width:200px" @on-change="getAreaList(0)"  :disabled="city != 0">
-            <Option v-for="(item, index) of areaList" :value="item.id" :key="index">{{ item.name }}</Option>
-          </Select>{{ province }}
-        </FormItem>
-        <FormItem prop="province" label="地区选择">
-          <Select v-model="city" style="width:200px" @on-change="getAreaList(province)" :disabled="province == 0 || district != 0">
-            <Option v-for="(item, index) of areaList" :value="item.id" :key="index">{{ item.name }}</Option>
-          </Select>{{ city }}
-        </FormItem>
-        <FormItem prop="province" label="地区选择">
-          <Select v-model="district" style="width:200px" @on-change="getAreaList(city)" :disabled="city == 0">
-            <Option v-for="(item, index) of areaList" :value="item.id" :key="index">{{ item.name }}</Option>
-          </Select>{{ district}}
+          <Select v-model="province" :placeholder="province_name" :disabled="city != 0">
+            <Option v-for="(item,index) of provinceList" :value="item.id" :key="index">{{ item.name }}</Option>
+          </Select>{{province}}
+          <Select v-model="city"  @click.native="getAreaList(province,2)" :placeholder="city_name" :disabled="province == 0 || district != 0">
+            <Option v-for="(item,index) of cityList" :value="item.id" :key="index">{{ item.name }}</Option>
+          </Select>{{city}}
+          <Select v-model="district" @click.native="getAreaList(city,3)" :placeholder="district_name" :disabled="city == 0">
+            <Option v-for="(item,index) of districtList" :value="item.id" :key="index">{{ item.name }}</Option>
+          </Select>{{district}}
         </FormItem>
         <FormItem label="详细地址：">
           <Input v-model="venueInfo.address" placeholder="详细地址" class="iptWidth"></Input>
@@ -56,10 +52,15 @@ export default {
   data () {
     return {
       prefixCls,
-      areaList: {},
+      provinceList: [],
+      cityList: [],
+      districtList: [],
       province: 0,
       city: 0,
       district: 0,
+      province_name: '请选择',
+      city_name: '请选择',
+      district_name: '请选择',
       venueInfo: {
         name: '',
         price: 0.00,
@@ -87,15 +88,28 @@ export default {
      * @description 获取地区信息列表
      * @returns { undefined }
      */
-    getAreaList (pid) {
-      console.log(pid)
-      console.log('--------------------------')
+    getAreaList (pid, type) {
       getAreaList({ pid: pid }).then(res => {
-        this.$set(this, 'areaList', res.data.lists || {})
+        if (type === 1) {
+          this.$set(this, 'provinceList', res.data.lists || {})
+        }
+        if (type === 2) {
+          this.$set(this, 'cityList', res.data.lists || {})
+        }
+        if (type === 3) {
+          this.$set(this, 'districtList', res.data.lists || {})
+        }
       })
     },
     getVenueInfo () {
       getVenueInfo({ id: this.id }).then(res => {
+        var merger_name = res.data.merger_name.split('-')
+        this.province = 0
+        this.city = 0
+        this.district = 0
+        this.province_name = merger_name[0]
+        this.city_name = merger_name[1]
+        this.district_name = merger_name[2]
         this.$set(this, 'venueInfo', res.data || {})
       })
     },
@@ -126,8 +140,13 @@ export default {
         sub_mchid: '',
         image: ''
       })
+      this.$set(this, 'province', 0)
+      this.$set(this, 'city', 0)
+      this.$set(this, 'district', 0)
+      this.$set(this, 'province_name', '请选择')
+      this.$set(this, 'city_name', '请选择')
+      this.$set(this, 'district_name', '请选择')
       this.$emit('input', false)
-      this.$emit('on-change')
     }
   },
   watch: {
@@ -135,7 +154,7 @@ export default {
       handler (val, oldVal) {
         if (val && val !== oldVal) {
           this.getVenueInfo()
-          this.getAreaList()
+          this.getAreaList(0, 1)
         }
       },
       immediate: true
