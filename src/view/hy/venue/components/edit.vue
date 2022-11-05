@@ -7,18 +7,18 @@
           <Input v-model="venueInfo.name" placeholder="请输入场地名称" class="iptWidth"></Input>
         </FormItem>
         <FormItem label="照片单价(元)：">
-          <!--          <Input-number :min="0.01" v-model="venueInfo.price" placeholder="照片单价" class="iptWidth"></Input-number>-->
+          <Input-number :min="0.01" v-model="venueInfo.price" placeholder="照片单价" class="iptWidth"></Input-number>
         </FormItem>
         <FormItem prop="province" label="地区选择">
           <Select v-model="province" :placeholder="province_name" :disabled="city != 0">
             <Option v-for="(item,index) of provinceList" :value="item.id" :key="index">{{ item.name }}</Option>
-          </Select>{{province}}
-          <Select v-model="city"  @click.native="getAreaList(province,2)" :placeholder="city_name" :disabled="province == 0 || district != 0">
+          </Select>
+          <Select v-model="city" @click.native="getAreaList(province,2)" :placeholder="city_name" :disabled="province == 0 || district != 0">
             <Option v-for="(item,index) of cityList" :value="item.id" :key="index">{{ item.name }}</Option>
-          </Select>{{city}}
+          </Select>
           <Select v-model="district" @click.native="getAreaList(city,3)" :placeholder="district_name" :disabled="city == 0">
             <Option v-for="(item,index) of districtList" :value="item.id" :key="index">{{ item.name }}</Option>
-          </Select>{{district}}
+          </Select>
         </FormItem>
         <FormItem label="详细地址：">
           <Input v-model="venueInfo.address" placeholder="详细地址" class="iptWidth"></Input>
