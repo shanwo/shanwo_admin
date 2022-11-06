@@ -102,9 +102,7 @@ export default {
             {
               Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
               Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-              Key:
-            '/picture/9/2022-10/25/' + new Date().getTime() +
-            file[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
+              Key: that.safeObj.path + file[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
               Body: file[k], // 上传文件对象
               SliceSize:
             1024 *
@@ -131,22 +129,9 @@ export default {
                 // }
                 that.$set(that.processList[k], 'err', true)
               } else {
-                cos.getObjectUrl({
-                  Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-                  Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-                  Key: '/picture/9/2022-10/25/',
-                  Sign: true /* 获取带签名的对象URL */
-                }, function (err, data) {
-                  if (err) return console.log(err)
-                  /* url为对象访问url */
-                  var url = data.Url
-                  console.log('预览的url', url)
-                  that.$set(that.imgList, k, { 'url': url })
-                  // that.imgList[0] = { 'url': url }
-                  that.$forceUpdate()
-                })
-
-                console.log('上传成功')
+                console.log('上传成功', data)
+                console.log('预览的url', data.Location)
+                that.$set(that.imgList, k, { 'url': 'http://' + data.Location })
                 that.$forceUpdate()
               }
             }
@@ -162,9 +147,7 @@ export default {
         {
           Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
           Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-          Key:
-            '/picture/9/2022-10/25/' + new Date().getTime() +
-            fileObj.name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
+          Key: that.safeObj.path + fileObj.name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
           Body: fileObj, // 上传文件对象
           SliceSize:
             1024 *
@@ -193,19 +176,18 @@ export default {
             cos.getObjectUrl({
               Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
               Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-              Key: '/picture/9/2022-10/25/',
+              Key: that.safeObj.path,
               Sign: true /* 获取带签名的对象URL */
             }, function (err, data) {
+              console.log('上传成功3', data)
               if (err) return console.log(err)
               /* url为对象访问url */
-              var url = data.Url
-              console.log('预览的url', url)
-              that.$set(that.imgList, k, { 'url': url })
-              // that.imgList[0] = { 'url': url }
+              console.log('预览的url', data.Location)
+              that.$set(that.imgList, k, { 'url': data.Location })
               that.$forceUpdate()
             })
 
-            console.log('上传成功')
+            console.log('上传成功', data)
             that.$forceUpdate()
           }
         }
