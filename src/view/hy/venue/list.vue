@@ -65,6 +65,7 @@ export default {
       this.getVenueList()
     },
     addIcon () {
+      this.id = ''
       this.isShowEdit = true
     },
     toDetail (id) {

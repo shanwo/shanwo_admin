@@ -10,13 +10,13 @@
           <Input-number :min="0.01" v-model="venueInfo.price" placeholder="照片单价" class="iptWidth"></Input-number>
         </FormItem>
         <FormItem prop="province" label="地区选择">
-          <Select v-model="province" :placeholder="province_name" :disabled="city != 0">
+          <Select v-model="province" @on-change="listenProvince" :disabled="provinceStatus">
             <Option v-for="(item,index) of provinceList" :value="item.id" :key="index">{{ item.name }}</Option>
           </Select>
-          <Select v-model="city" @click.native="getAreaList(province,2)" :placeholder="city_name" :disabled="province == 0 || district != 0">
+          <Select v-model="city" @on-change="listenCity"  :disabled="cityStatus">
             <Option v-for="(item,index) of cityList" :value="item.id" :key="index">{{ item.name }}</Option>
           </Select>
-          <Select v-model="district" @click.native="getAreaList(city,3)" :placeholder="district_name" :disabled="city == 0">
+          <Select v-model="district" :disabled="areaStatus">
             <Option v-for="(item,index) of districtList" :value="item.id" :key="index">{{ item.name }}</Option>
           </Select>
         </FormItem>
@@ -51,6 +51,9 @@ export default {
   },
   data () {
     return {
+      provinceStatus: false,
+      areaStatus: false,
+      cityStatus: false,
       prefixCls,
       provinceList: [],
       cityList: [],
@@ -77,19 +80,40 @@ export default {
       default: false
     },
     id: {
-      type: Number
+      type: [Number | String]
     }
   },
   methods: {
+    // 监听选中省
+    listenProvince (id) {
+      console.log(id)
+      // this.$set(this, 'cityList', [])
+      // this.$set(this, 'districtList', [])
+      this.city = ''
+      this.district = ''
+      this.getAreaList(id, 2)
+    },
+    listenCity (id) {
+      if (id) {
+        this.districtList = []
+        this.district = ''
+        this.getAreaList(id, 3)
+      }
+    },
     uploadImageChange (arg) {
-      this.venueInfo.image = arg.data && arg.data.url
+      this.venueInfo.image = 'https://sw-img-1255862984.cos.ap-beijing.myqcloud.com/picture/7/2022-11/01-thumbnail/DSC03943.JPG' || (arg.data && arg.data.url)
     },
     /**
      * @description 获取地区信息列表
      * @returns { undefined }
      */
     getAreaList (pid, type) {
+      console.log('执行了2次', pid, type)
+      // if (pid === undefined || pid === 'undefined' || pid === null) {
+      //   return
+      // }
       getAreaList({ pid: pid }).then(res => {
+        console.log('省市区', res)
         if (type === 1) {
           this.$set(this, 'provinceList', res.data.lists || {})
         }
@@ -125,6 +149,8 @@ export default {
         summitInfo.id = this.id
         summitInfo.area_id = this.district
         actionFn = venueEdit
+      } else {
+        summitInfo.area_id = this.district
       }
       actionFn(summitInfo).then(() => {
         this.cancel()
@@ -132,6 +158,7 @@ export default {
       })
     },
     cancel () {
+      console.log('点击取消')
       this.$set(this, 'venueInfo', {
         name: '',
         price: 0.00,
@@ -153,7 +180,11 @@ export default {
     id: {
       handler (val, oldVal) {
         if (val && val !== oldVal) {
+          console.log('handlerhandler')
           this.getVenueInfo()
+          this.getAreaList(0, 1)
+        } else {
+          console.log('新增')
           this.getAreaList(0, 1)
         }
       },
