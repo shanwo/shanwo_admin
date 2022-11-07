@@ -8,11 +8,12 @@
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list :orderList="orderList" @refresh="getOrderList"></table-list>
+    <table-list :orderList="orderList" @refresh="getOrderList" @toRefund="toRefund"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
   </div>
+  <refund v-model="isShowEdit" :order_sn="order_sn" @on-change="editChange"/>
 </div>
 </template>
 
@@ -23,15 +24,17 @@ const prefixCls = 'order-list'
 export default {
   name: 'order-list',
   components: {
+    refund: () => import('./components/refund.vue'),
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue')
   },
   data () {
     return {
       prefixCls,
-      id: null,
+      order_sn: null,
       total: 0,
       orderList: [],
+      isShowEdit: false,
       searchData: {
         order_sn: '',
         third_sn: '',
@@ -51,6 +54,14 @@ export default {
         this.total = res.data.total
         this.orderList = res.data.lists || []
       })
+    },
+    toRefund (order_sn) {
+      this.order_sn = order_sn
+      this.isShowEdit = true
+    },
+    editChange () {
+      this.order_sn = ''
+      this.getOrderList()
     },
     /**
      * @description 分页参数发生变化时调用
