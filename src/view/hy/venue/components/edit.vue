@@ -27,7 +27,9 @@
           <Input v-model="venueInfo.sub_mchid" placeholder="商户号" class="iptWidth"></Input>
         </FormItem>
         <FormItem label="图片：">
-          <image-upload v-model="venueInfo.image" @on-change="uploadImageChange"/>
+          <div>
+            <image-upload v-model="venueInfo.image" @on-change="uploadImageChange"/>
+          </div>
         </FormItem>
       </Form>
     </div>
@@ -101,40 +103,38 @@ export default {
       }
     },
     uploadImageChange (arg) {
-      this.venueInfo.image = 'https://sw-img-1255862984.cos.ap-beijing.myqcloud.com/picture/7/2022-11/01-thumbnail/DSC03943.JPG' || (arg.data && arg.data.url)
+      this.venueInfo.image = arg.data && arg.data.url
     },
     /**
      * @description 获取地区信息列表
      * @returns { undefined }
      */
     getAreaList (pid, type) {
-      console.log('执行了2次', pid, type)
-      // if (pid === undefined || pid === 'undefined' || pid === null) {
-      //   return
-      // }
-      getAreaList({ pid: pid }).then(res => {
-        console.log('省市区', res)
-        if (type === 1) {
-          this.$set(this, 'provinceList', res.data.lists || {})
-        }
-        if (type === 2) {
-          this.$set(this, 'cityList', res.data.lists || {})
-        }
-        if (type === 3) {
-          this.$set(this, 'districtList', res.data.lists || {})
-        }
+      return new Promise((resolve, reject) => {
+        getAreaList({ pid: pid }).then(res => {
+          console.log('省市区', res)
+          if (type === 1) {
+            this.$set(this, 'provinceList', res.data.lists || {})
+          }
+          if (type === 2) {
+            this.$set(this, 'cityList', res.data.lists || {})
+          }
+          if (type === 3) {
+            this.$set(this, 'districtList', res.data.lists || {})
+          }
+          resolve()
+        })
       })
     },
-    getVenueInfo () {
-      getVenueInfo({ id: this.id }).then(res => {
-        var merger_name = res.data.merger_name.split('-')
-        this.province = 0
-        this.city = 0
-        this.district = 0
-        this.province_name = merger_name[0]
-        this.city_name = merger_name[1]
-        this.district_name = merger_name[2]
+    async getVenueInfo () {
+      getVenueInfo({ id: this.id }).then(async res => {
+        this.province = res.data.province_id
+        this.city = res.data.city_id
+        this.district = res.data.area_id
         this.$set(this, 'venueInfo', res.data || {})
+        await this.getAreaList(0, 1)
+        await this.getAreaList(this.province, 2)
+        await this.getAreaList(this.city, 3)
       })
     },
     confirm () {
@@ -155,6 +155,7 @@ export default {
       actionFn(summitInfo).then(() => {
         this.cancel()
         this.$Message.success('操作成功')
+        this.$emit('listenSuccess')
       })
     },
     cancel () {
@@ -170,9 +171,6 @@ export default {
       this.$set(this, 'province', 0)
       this.$set(this, 'city', 0)
       this.$set(this, 'district', 0)
-      this.$set(this, 'province_name', '请选择')
-      this.$set(this, 'city_name', '请选择')
-      this.$set(this, 'district_name', '请选择')
       this.$emit('input', false)
     }
   },
@@ -182,7 +180,6 @@ export default {
         if (val && val !== oldVal) {
           console.log('handlerhandler')
           this.getVenueInfo()
-          this.getAreaList(0, 1)
         } else {
           console.log('新增')
           this.getAreaList(0, 1)
