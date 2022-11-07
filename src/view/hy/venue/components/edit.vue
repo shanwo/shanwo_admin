@@ -9,7 +9,7 @@
         <FormItem label="照片单价(元)：">
           <Input-number :min="0.01" v-model="venueInfo.price" placeholder="照片单价" class="iptWidth"></Input-number>
         </FormItem>
-        <FormItem prop="province" label="地区选择">
+        <FormItem prop="province" label="地区选择：">
           <Select v-model="province" @on-change="listenProvince" :disabled="provinceStatus">
             <Option v-for="(item,index) of provinceList" :value="item.id" :key="index">{{ item.name }}</Option>
           </Select>
@@ -79,7 +79,7 @@ export default {
       default: false
     },
     id: {
-      type: [Number | String]
+      type: Number
     }
   },
   methods: {
