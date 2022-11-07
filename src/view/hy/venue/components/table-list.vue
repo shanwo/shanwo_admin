@@ -16,10 +16,10 @@
 import { venueStatus, vacheCache } from '@/api/venue'
 import { columns } from '../page-info'
 
-const prefixCls = 'pay-list'
+const prefixCls = 'venue-list'
 
 export default {
-  name: 'pay-list',
+  name: 'venue-list',
   data () {
     return {
       prefixCls,

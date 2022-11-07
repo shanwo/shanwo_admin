@@ -63,12 +63,9 @@ export default {
       province: 0,
       city: 0,
       district: 0,
-      province_name: '请选择',
-      city_name: '请选择',
-      district_name: '请选择',
       venueInfo: {
         name: '',
-        price: 0.00,
+        price: 0,
         area_id: '',
         address: '',
         sub_mchid: '',
@@ -88,9 +85,6 @@ export default {
   methods: {
     // 监听选中省
     listenProvince (id) {
-      console.log(id)
-      // this.$set(this, 'cityList', [])
-      // this.$set(this, 'districtList', [])
       this.city = ''
       this.district = ''
       this.getAreaList(id, 2)
@@ -112,7 +106,6 @@ export default {
     getAreaList (pid, type) {
       return new Promise((resolve, reject) => {
         getAreaList({ pid: pid }).then(res => {
-          console.log('省市区', res)
           if (type === 1) {
             this.$set(this, 'provinceList', res.data.lists || {})
           }
@@ -159,10 +152,9 @@ export default {
       })
     },
     cancel () {
-      console.log('点击取消')
       this.$set(this, 'venueInfo', {
         name: '',
-        price: 0.00,
+        price: 0,
         area_id: '',
         address: '',
         sub_mchid: '',
@@ -178,10 +170,8 @@ export default {
     id: {
       handler (val, oldVal) {
         if (val && val !== oldVal) {
-          console.log('handlerhandler')
           this.getVenueInfo()
         } else {
-          console.log('新增')
           this.getAreaList(0, 1)
         }
       },

@@ -15,9 +15,9 @@
 </template>
 
 <script>
-const prefixCls = 'pay-list'
+const prefixCls = 'venue-list'
 export default {
-  name: 'pay-list',
+  name: 'venue-list',
   props: {
     value: {
       type: Object,

@@ -24,7 +24,7 @@ import { getVenueList } from '@/api/venue'
 const prefixCls = 'pay-list'
 
 export default {
-  name: 'pay-list',
+  name: 'venue-list',
   components: {
     edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
