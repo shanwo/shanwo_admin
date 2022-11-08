@@ -1,23 +1,33 @@
 <template>
   <div>
-    <div>滑呀滑呀</div>
+    <Button type="primary" @click="handleShowModel">上传图片</Button>
+    <Modal
+        width="80%"
+        v-model="dialogStatus"
+        title="图片上传"
+        @on-ok="listenOk"
+        @on-cancel="listenCancel">
+
     <div class="img_photo">
         <div class="img_box" v-for="(item,index) in processList" :key="index">
             <div class="jindu_s">
-              <Progress :percent="Math.ceil(item.percent*100)"/>
+              <Progress :percent="Math.ceil(item.percent*100)" v-if="item.percent!= 1 "/>
               <div class="pedg_msg" v-if="item.loadingStatus">等待中...</div>
               <div v-if="item.err">
               <div class="err_msg">上传失败</div>
               <div class="reload_btn" @click="handleOneUpload(index)">点击重新上传</div>
             </div>
             </div>
-            <img :src="imgList[index].url" v-if="item.percent == 1 && imgList[index].url">
+            <div v-if="item.percent == 1">
+              <img class="origin_img" v-if="imgList[index]" :src="imgList[index].url" >
+            </div>
             <div class="mask_box" v-else></div>
         </div>
       </div>
     <div>
       <input id="fileSelector" multiple="multiple" type="file" @change="upload" />
     </div>
+  </Modal>
   </div>
 </template>
 
@@ -50,6 +60,7 @@ export default {
   components: {},
   data () {
     return {
+      dialogStatus: false,
       safeObj: {},
       imgList: [],
       fileListArr: [],
@@ -79,63 +90,73 @@ export default {
     },
     upload (e) {
       let that = this
-      console.log('e.target', e.target.files)
-      const file = e.target.files
-      that.fileListArr = file
-      console.log(Object.prototype.toString.call(file[0]), '-------')
-
-      // console.log('cos示例', this.cos)
-      /* 直接调用cos sdk的方法 */
-
+      let fileArr = []
+      for (let k in e.target.files) {
+        console.log(Object.prototype.toString.call(e.target.files[k]), '-------')
+        if (Object.prototype.toString.call(e.target.files[k]) === '[object File]') {
+          fileArr.push(e.target.files[k])
+        }
+      }
+      that.fileListArr = that.fileListArr.concat(fileArr)
       let newProcess = []
-      for (let i = 0; i < file.length; i++) {
+      for (let i = 0; i < fileArr.length; i++) {
         newProcess.push({
           percent: 0,
           loadingStatus: true
         })
       }
-      this.processList = newProcess
-      for (let k in file) {
-        console.log(Object.prototype.toString.call(file[k]), k)
-        if (Object.prototype.toString.call(file[k]) === '[object File]') {
-          cos.putObject(
-            {
-              Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-              Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-              Key: that.safeObj.path + file[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
-              Body: file[k], // 上传文件对象
-              SliceSize:
+      this.processList = this.processList.concat(newProcess)
+      console.log('this.processList', this.processList)
+      console.log('this.fileListArr', this.fileListArr)
+      for (let k = 0; k < that.fileListArr.length; k++) {
+        if (Object.prototype.toString.call(that.fileListArr[k]) === '[object File]') {
+          if (that.processList[k]['percent'] && that.processList[k]['percent'] === 1) {
+            console.log('进度')
+          } else {
+            cos.putObject(
+              {
+                Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
+                Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
+                Key: that.safeObj.path + that.fileListArr[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
+                Body: that.fileListArr[k], // 上传文件对象
+                SliceSize:
             1024 *
             1024 *
             10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
-              onProgress: function (progressData) {
-                console.log(`第${k}张的上传进度`, JSON.stringify(progressData))
-                that.processList[k] = progressData
-                that.processList[k]['loadingStatus'] = false
-                that.$forceUpdate()
+                onProgress: function (progressData) {
+                // console.log(`第${k}张的上传进度`, JSON.stringify(progressData))
+                  that.processList[k] = progressData
+                  that.processList[k]['loadingStatus'] = false
+                  that.$forceUpdate()
 
-                var percent = parseInt(info.percent * 10000) / 100
-                var speed = parseInt(info.speed / 1024 / 1024 * 100) / 100
-                console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
-              }
-            },
-            function (err, data) {
-              if (err) {
+                  // var percent = parseInt(info.percent * 10000) / 100
+                  // var speed = parseInt(info.speed / 1024 / 1024 * 100) / 100
+                  // console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
+                  if (that.imgList.length === that.fileListArr.length) {
+                    console.log('图片上传成功')
+                  } else {
+                    console.log('图片上传中,请耐心等待')
+                  }
+                }
+              },
+              function (err, data) {
+                if (err) {
                 // 网络异常 Error: CORS blocked or network error
-                console.log('上传失败', err)
-                // if (err === 'Error: CORS blocked or network error') {
-                //   console.log('网络异常')
-                //   this.$set(that.processList[k], 'err', true)
-                // }
-                that.$set(that.processList[k], 'err', true)
-              } else {
-                console.log('上传成功', data)
-                console.log('预览的url', data.Location)
-                that.$set(that.imgList, k, { 'url': 'http://' + data.Location })
-                that.$forceUpdate()
+                  console.log('上传失败', err)
+                  if (err === 'Error: CORS blocked or network error') {
+                    console.log('网络异常')
+                    this.$set(that.processList[k], 'err', true)
+                  }
+                  that.$set(that.processList[k], 'err', true)
+                } else {
+                  console.log('上传成功', data)
+                  let imgList = []
+                  imgList.push({ 'url': 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50' })
+                  that.imgList = that.imgList.concat(imgList)
+                }
               }
-            }
-          )
+            )
+          }
         }
       }
     },
@@ -182,8 +203,7 @@ export default {
               console.log('上传成功3', data)
               if (err) return console.log(err)
               /* url为对象访问url */
-              console.log('预览的url', data.Location)
-              that.$set(that.imgList, k, { 'url': data.Location })
+              that.imgList.push({ 'url': data.Location })
               that.$forceUpdate()
             })
 
@@ -193,12 +213,21 @@ export default {
         }
       )
     },
+    async handleShowModel () {
+      await this.getAjaxBaseSecret()
+      this.dialogStatus = true
+    },
     getAjaxBaseSecret () {
-      ajaxBaseSecret().then((res) => {
-        console.log('res', res.data)
-        this.safeObj = res.data
+      return new Promise((resolve, reject) => {
+        ajaxBaseSecret().then((res) => {
+          console.log('res', res.data)
+          this.safeObj = res.data
+          resolve()
+        })
       })
-    }
+    },
+    listenOk () {},
+    listenCancel () {}
   }
 
 }
@@ -226,15 +255,15 @@ export default {
 }
 .img_box{
   float: left;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   margin: 10px 10px 0 0;
   position: relative;
 }
 .img_list{
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   margin: 10px 10px 0 0;
 }
 .jindu_box{
@@ -276,5 +305,14 @@ export default {
   font-size: 12px;
   text-align: center;
   color: #ff9a01;
+}
+.origin_img{
+  width: 150px;
+  height: 150px;
+  left: 0;
+  top: 0;
+  object-fit: contain;
+  background:#ddd;
+
 }
 </style>
