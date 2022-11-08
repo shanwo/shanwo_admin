@@ -53,6 +53,44 @@ export default [
     ]
   },
   {
+    path: '/permissions',
+    name: 'permissions',
+    component: Main,
+    meta: {
+      icon: 'md-ionic',
+      title: '权限'
+    },
+    children: [
+      {
+        path: '/permissions/menu',
+        name: 'permissions_menu',
+        meta: {
+          icon: 'md-menu',
+          title: '菜单管理'
+        }
+        // component: () => import('@/view/sw/classification/list.vue')
+      },
+      {
+        path: '/permissions/role',
+        name: 'permissions_role',
+        meta: {
+          icon: 'md-person',
+          title: '角色管理'
+        }
+        // component: () => import('@/view/sw/link-white/list.vue')
+      },
+      {
+        path: '/permissions/users',
+        name: 'permissions_users',
+        meta: {
+          icon: 'md-people',
+          title: '用户组管理'
+        }
+        // component: () => import('@/view/sw/template/list.vue')
+      }
+    ]
+  },
+  {
     path: '/sw',
     name: 'sw',
     component: Main,

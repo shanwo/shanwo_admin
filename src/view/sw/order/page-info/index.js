@@ -51,5 +51,9 @@ export const columns = [
   {
     key: 'payated_at',
     title: '支付时间'
+  },
+  {
+    slot: 'action',
+    title: '操作'
   }
 ]

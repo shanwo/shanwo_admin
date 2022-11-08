@@ -7,10 +7,10 @@ export const getOrderList = (params) => {
     method: 'get'
   })
 }
-export const getOrderRefund = (params) => {
+export const orderRefund = (params) => {
   return axios.request({
     url: '/hy/order/refund',
-    params: params,
+    data: params,
     method: 'post'
   })
 }
