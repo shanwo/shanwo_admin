@@ -27,8 +27,8 @@
         </div>
       </div>
       <div>
-      <input v-if="!maxLoadingStatus" id="fileSelector" multiple="multiple" type="file" @change="upload" />
-      <div  v-if="maxLoadingStatus" class="label_box_text">图片正在上传,请耐心等待</div>
+      <input v-if="finishStatus === 'none'" id="fileSelector" multiple="multiple" type="file" @change="upload" />
+      <div  v-if="finishStatus === 'uploading'" class="label_box_text">图片正在上传,请耐心等待</div>
     </div>
   </Modal>
   </div>
@@ -68,7 +68,7 @@ export default {
     return {
       arrIndex: [], // 用来存放已经上传图片的index
       uploadTotal: 0, // 总共上传几次
-      finishStatus: false, //  图片是否全部上传完
+      finishStatus: 'none', //  图片是否全部上传完
       imgLoadingStatus: false, // 所有图片上传成功的标志
       maxLoadingStatus: false,
       dialogStatus: false,
@@ -137,15 +137,14 @@ export default {
             1024 *
             10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
                 onProgress: function (progressData) {
-                // console.log(`第${k}张的上传进度`, JSON.stringify(progressData))
-                  progressData['shangbaoStatus'] = ''
+                  that.finishStatus = 'uploading'
                   progressData['waitUrl'] = ''
                   progressData['imgUrl'] = ''
                   that.processList[k] = progressData
                   that.processList[k]['loadingStatus'] = false
-                  // var percent = parseInt(info.percent * 10000) / 100
-                  // var speed = parseInt(info.speed / 1024 / 1024 * 100) / 100
-                  // console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
+                  var percent = parseInt(info.percent * 10000) / 100
+                  var speed = parseInt(info.speed / 1024 / 1024 * 100) / 100
+                  console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
                   that.maxLoadingStatus = true
                   that.$forceUpdate()
                 }
@@ -165,7 +164,6 @@ export default {
                   // that.$set(that.processList[k], 'shangbaoStatus', 'waiting')
                   // that.$set(that.processList[k], 'waitUrl', data.Location)
                   // that.$set(that.processList[k], 'imgUrl', 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50')
-                  that.processList[k]['shangbaoStatus'] = 'waiting'
                   that.processList[k]['waitUrl'] = data.Location
                   that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
                   that.imgList.push({
@@ -228,7 +226,7 @@ export default {
           imgs.push(this.processList[val].waitUrl)
         })
         this.postImg(imgs)
-        this.finishStatus = true
+        this.finishStatus = 'finish'
       }
     },
     // 上报图片
