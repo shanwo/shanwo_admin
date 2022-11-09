@@ -1,12 +1,14 @@
 <template>
   <div>
-    <Button type="primary" @click="handleShowModel">上传图片</Button>
+    <uploadLoadingVue v-if="imgLoadingStatus"/>
+    <Button style="margin:20px auto" type="primary" @click="handleShowModel">上传图片</Button>
     <Modal
         width="80%"
+        :closable="false"
+        :mask-closable="false"
+        :footer-hide="true"
         v-model="dialogStatus"
-        title="图片上传"
-        @on-ok="listenOk"
-        @on-cancel="listenCancel">
+        title="图片上传">
 
     <div class="img_photo">
         <div class="img_box" v-for="(item,index) in processList" :key="index">
@@ -19,13 +21,14 @@
             </div>
             </div>
             <div v-if="item.percent == 1">
-              <img class="origin_img" v-if="imgList[index]" :src="imgList[index].url" >
+              <img class="origin_img" :src="item.imgUrl" >
             </div>
             <div class="mask_box" v-else></div>
         </div>
       </div>
-    <div>
-      <input id="fileSelector" multiple="multiple" type="file" @change="upload" />
+      <div>
+      <input v-if="!maxLoadingStatus" id="fileSelector" multiple="multiple" type="file" @change="upload" />
+      <div  v-if="maxLoadingStatus" class="label_box_text">图片正在上传,请耐心等待</div>
     </div>
   </Modal>
   </div>
@@ -33,6 +36,8 @@
 
 <script>
 import { ajaxBaseSecret } from '@/api/hxapi.js'
+import { ajaxUploadImg } from '@/api/venue.js'
+import uploadLoadingVue from '../../../components/uploadLoading/uploadLoading.vue'
 import COS from 'cos-js-sdk-v5'
 
 var cos = new COS({
@@ -54,12 +59,18 @@ var cos = new COS({
     })
   }
 })
-
 export default {
   name: 'feedback-list',
-  components: {},
+  components: {
+    uploadLoadingVue
+  },
   data () {
     return {
+      arrIndex: [], // 用来存放已经上传图片的index
+      uploadTotal: 0, // 总共上传几次
+      finishStatus: false, //  图片是否全部上传完
+      imgLoadingStatus: false, // 所有图片上传成功的标志
+      maxLoadingStatus: false,
       dialogStatus: false,
       safeObj: {},
       imgList: [],
@@ -98,6 +109,8 @@ export default {
         }
       }
       that.fileListArr = that.fileListArr.concat(fileArr)
+      that.uploadTotal = parseInt(this.fileListArr / 5) + this.fileListArr % 5 === 0 ? 0 : 1
+
       let newProcess = []
       for (let i = 0; i < fileArr.length; i++) {
         newProcess.push({
@@ -125,18 +138,16 @@ export default {
             10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
                 onProgress: function (progressData) {
                 // console.log(`第${k}张的上传进度`, JSON.stringify(progressData))
+                  progressData['shangbaoStatus'] = ''
+                  progressData['waitUrl'] = ''
+                  progressData['imgUrl'] = ''
                   that.processList[k] = progressData
                   that.processList[k]['loadingStatus'] = false
-                  that.$forceUpdate()
-
                   // var percent = parseInt(info.percent * 10000) / 100
                   // var speed = parseInt(info.speed / 1024 / 1024 * 100) / 100
                   // console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
-                  if (that.imgList.length === that.fileListArr.length) {
-                    console.log('图片上传成功')
-                  } else {
-                    console.log('图片上传中,请耐心等待')
-                  }
+                  that.maxLoadingStatus = true
+                  that.$forceUpdate()
                 }
               },
               function (err, data) {
@@ -147,18 +158,89 @@ export default {
                     console.log('网络异常')
                     this.$set(that.processList[k], 'err', true)
                   }
+                  that.maxLoadingStatus = false
                   that.$set(that.processList[k], 'err', true)
                 } else {
-                  console.log('上传成功', data)
-                  let imgList = []
-                  imgList.push({ 'url': 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50' })
-                  that.imgList = that.imgList.concat(imgList)
+                  console.log('data数据', data)
+                  // that.$set(that.processList[k], 'shangbaoStatus', 'waiting')
+                  // that.$set(that.processList[k], 'waitUrl', data.Location)
+                  // that.$set(that.processList[k], 'imgUrl', 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50')
+                  that.processList[k]['shangbaoStatus'] = 'waiting'
+                  that.processList[k]['waitUrl'] = data.Location
+                  that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
+                  that.imgList.push({
+                    index: k,
+                    url: data.Location
+                  })
+                  that.$forceUpdate()
+                  that.getImgListStatus()
+                  that.getUploadStatus()
+                  console.log('that.imgList', that.imgList)
                 }
               }
             )
           }
         }
       }
+    },
+    getImgListStatus () {
+      let that = this
+      if (this.imgList.length === 5) {
+        this.uploadTotal = this.uploadTotal - 1
+        let newImgList = JSON.parse(JSON.stringify(this.imgList))
+        for (let i = 0; i < newImgList.length; i++) {
+          that.arrIndex.push(newImgList[i].index)
+        }
+        this.imgList = []
+        console.log(' this.imgList', newImgList)
+        let imgs = []
+        for (let i = 0; i < newImgList.length; i++) {
+          imgs.push(newImgList[i].url)
+        }
+        that.postImg(imgs)
+      }
+    },
+    // 获取是否全部上窜完成
+    getUploadStatus () {
+      let num = 0
+      let arr = []
+      this.processList.forEach((val, index) => {
+        if (val.err) {
+          console.log('第' + index + '张图片上传失败')
+        } else {
+          if (val.percent === 1) {
+            num += 1
+          }
+        }
+      })
+      if (num === this.processList.length) {
+        console.log('所有图片上传完成')
+        for (let i = 0; i < this.fileListArr.length; i++) {
+          if (this.arrIndex.includes(i)) {
+
+          } else {
+            arr.push(i)
+          }
+        }
+        console.log('最后没上传的', arr)
+        let imgs = []
+        arr.forEach(val => {
+          imgs.push(this.processList[val].waitUrl)
+        })
+        this.postImg(imgs)
+        this.finishStatus = true
+      }
+    },
+    // 上报图片
+    postImg (imgs) {
+      let params = {
+        venue_id: 1,
+        images: imgs
+      }
+      console.log('入参', params)
+      ajaxUploadImg(params).then(res => {
+        console.log('图片上报', res)
+      })
     },
     handleOneUpload (index) {
       let that = this
@@ -225,9 +307,7 @@ export default {
           resolve()
         })
       })
-    },
-    listenOk () {},
-    listenCancel () {}
+    }
   }
 
 }
@@ -313,6 +393,11 @@ export default {
   top: 0;
   object-fit: contain;
   background:#ddd;
-
+}
+.label_box_text{
+  color: #409eff;
+  font-size: 14px;
+  margin: 20px auto;
+  text-align: center;
 }
 </style>

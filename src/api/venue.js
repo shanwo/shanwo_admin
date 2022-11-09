@@ -42,3 +42,11 @@ export const vacheCache = (params) => {
     method: 'post'
   })
 }
+// 图片上报
+export const ajaxUploadImg = (params) => {
+  return axios.request({
+    url: '/hy/upload/report',
+    data: params,
+    method: 'post'
+  })
+}
