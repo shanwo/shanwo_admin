@@ -88,14 +88,20 @@ export default {
   methods: {
     initNextWork () {
       console.log('监听网络')
+      let arr = []
       const netWorkDownlink = navigator.connection.downlink // 预估下载速度m/s
       if (navigator.connection && navigator.connection.onchange === null) {
         navigator.connection.onchange = () => {
           if (netWorkDownlink !== navigator.connection.downlink || navigator.connection.rtt === 0) {
             // 网络断开
-            this.$Message.error('您的网络已断开,请您检查网络')
+            arr.push(1)
+            console.log('断网了', arr)
+            if (arr.length === 10) {
+              this.$Message.error('您已断开,请检查网络')
+            }
           } else if (netWorkDownlink === navigator.connection.downlink || navigator.connection.rtt !== 0) {
             // 连接到网络
+            arr = []
             console.log('网络在线')
           }
         }
@@ -246,6 +252,9 @@ export default {
         images: imgs
       }
       console.log('入参', params)
+      if (imgs.length === 0) {
+        return
+      }
       ajaxUploadImg(params).then(res => {
         console.log('图片上报', res)
       })
@@ -322,12 +331,13 @@ export default {
         let minTime = this.$moment(date1).add(2, 'm')// 加上30分钟
         const endTime = this.$moment(minTime).format('YYYY-MM-DD HH:mm:ss')
         this.endTime = endTime
+        // console.log('下次结束的时间', this.endTime)
         this.getAjaxBaseSecret()
       }
     },
 
     getAjaxBaseSecret () {
-      console.log('重新获取时间重新获取时间')
+      console.log('重新获取时间重新获取时间', this.endTime)
       return new Promise((resolve, reject) => {
         ajaxBaseSecret().then((res) => {
           console.log('res', res.data)
