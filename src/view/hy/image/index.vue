@@ -67,7 +67,8 @@ export default {
   data () {
     return {
       startTime: '', //  获取时间戳的开始时间,默认2个小时有效 运行到1个半小时就重新获取一次
-      mStatus: true, //  是否重新获取时间戳
+      endTime: '', // 结束时间
+      mStatus: false, //  是否重新获取时间戳
       arrIndex: [], // 用来存放已经上传图片的index
       uploadTotal: 0, // 总共上传几次
       finishStatus: 'none', //  图片是否全部上传完
@@ -83,7 +84,6 @@ export default {
   },
   created () {
     this.initNextWork()
-    this.getAjaxBaseSecret()
   },
   methods: {
     initNextWork () {
@@ -104,6 +104,7 @@ export default {
     upload (e) {
       let that = this
       that.startTime = new Date()
+      that.addTime()
       console.log('startTime', that.startTime)
       let fileArr = []
       for (let k in e.target.files) {
@@ -142,6 +143,7 @@ export default {
             10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
                 onProgress: function (progressData) {
                   console.log('速度速度', progressData)
+                  that.getTimeCha()
                   that.finishStatus = 'uploading'
                   progressData['waitUrl'] = ''
                   progressData['imgUrl'] = ''
@@ -169,7 +171,6 @@ export default {
                   // that.$set(that.processList[k], 'shangbaoStatus', 'waiting')
                   // that.$set(that.processList[k], 'waitUrl', data.Location)
                   // that.$set(that.processList[k], 'imgUrl', 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50')
-                  that.getTimeCha(that.startTime)
 
                   that.processList[k]['waitUrl'] = data.Location
                   that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
@@ -295,7 +296,6 @@ export default {
               that.imgList.push({ 'url': data.Location })
               that.$forceUpdate()
             })
-
             console.log('上传成功', data)
             that.$forceUpdate()
           }
@@ -306,24 +306,28 @@ export default {
       await this.getAjaxBaseSecret()
       this.dialogStatus = true
     },
-    getTimeCha (startTime) {
-      const date1 = this.$moment(startTime).format('YYYY-MM-DD HH:mm:ss')
-      const date2 = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-      const date3 = this.$moment(date2).diff(this.$moment(date1), 'minute')
+    // 时间戳2小时过期,利用当前时间加上 90分钟 一个半小时
+    addTime () {
+      const date1 = this.$moment(this.startTime).format('YYYY-MM-DD HH:mm:ss')
+      let minTime = this.$moment(date1).add(2, 'm')// 加上30分钟
+      const endTime = this.$moment(minTime).format('YYYY-MM-DD HH:mm:ss')
+      this.endTime = endTime
+      console.log('endTime', endTime)
+    },
 
-      console.log('时间时间', date1, date2)
-
-      // const date3 = date2.diff(date1, 'minute')// 计算相差的分钟数
-      console.log('相差fenzhognshu', date3)
-      // if (this.mStatus && date3 === 0) {
-      //   this.mStatus = false
-      //   // this.startTime = new Date()
-      //   console.log('123455678')
-      //   this.getAjaxBaseSecret()
-      // }
+    getTimeCha () {
+      let currentTime = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+      if (currentTime === this.endTime) {
+        const date1 = this.$moment(this.endTime).format('YYYY-MM-DD HH:mm:ss')
+        let minTime = this.$moment(date1).add(2, 'm')// 加上30分钟
+        const endTime = this.$moment(minTime).format('YYYY-MM-DD HH:mm:ss')
+        this.endTime = endTime
+        this.getAjaxBaseSecret()
+      }
     },
 
     getAjaxBaseSecret () {
+      console.log('重新获取时间重新获取时间')
       return new Promise((resolve, reject) => {
         ajaxBaseSecret().then((res) => {
           console.log('res', res.data)
