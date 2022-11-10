@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import moment from 'moment'
 import router from './router'
 import store from './store'
 import iView from 'iview'
@@ -18,7 +19,7 @@ import 'v-org-tree/dist/v-org-tree.css'
 // 实际打包时应该不引入mock
 /* eslint-disable */
 // if (process.env.NODE_ENV !== 'production') require('@/mock')
-
+Vue.prototype.$moment = moment
 Vue.use(iView, {
   i18n: (key, value) => i18n.t(key, value)
 })

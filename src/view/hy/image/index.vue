@@ -66,6 +66,8 @@ export default {
   },
   data () {
     return {
+      startTime: '', //  获取时间戳的开始时间,默认2个小时有效 运行到1个半小时就重新获取一次
+      mStatus: true, //  是否重新获取时间戳
       arrIndex: [], // 用来存放已经上传图片的index
       uploadTotal: 0, // 总共上传几次
       finishStatus: 'none', //  图片是否全部上传完
@@ -101,6 +103,8 @@ export default {
     },
     upload (e) {
       let that = this
+      that.startTime = new Date()
+      console.log('startTime', that.startTime)
       let fileArr = []
       for (let k in e.target.files) {
         console.log(Object.prototype.toString.call(e.target.files[k]), '-------')
@@ -137,13 +141,14 @@ export default {
             1024 *
             10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
                 onProgress: function (progressData) {
+                  console.log('速度速度', progressData)
                   that.finishStatus = 'uploading'
                   progressData['waitUrl'] = ''
                   progressData['imgUrl'] = ''
                   that.processList[k] = progressData
                   that.processList[k]['loadingStatus'] = false
-                  var percent = parseInt(info.percent * 10000) / 100
-                  var speed = parseInt(info.speed / 1024 / 1024 * 100) / 100
+                  var percent = parseInt(progressData.percent * 10000) / 100
+                  var speed = parseInt(progressData.speed / 1024 / 1024 * 100) / 100
                   console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
                   that.maxLoadingStatus = true
                   that.$forceUpdate()
@@ -164,12 +169,16 @@ export default {
                   // that.$set(that.processList[k], 'shangbaoStatus', 'waiting')
                   // that.$set(that.processList[k], 'waitUrl', data.Location)
                   // that.$set(that.processList[k], 'imgUrl', 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50')
+                  that.getTimeCha(that.startTime)
+
                   that.processList[k]['waitUrl'] = data.Location
                   that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
                   that.imgList.push({
                     index: k,
                     url: data.Location
                   })
+                  console.log('开始时间', that.startTime)
+                  // that.getTimeCha(that.startTime, new Date())
                   that.$forceUpdate()
                   that.getImgListStatus()
                   that.getUploadStatus()
@@ -297,6 +306,23 @@ export default {
       await this.getAjaxBaseSecret()
       this.dialogStatus = true
     },
+    getTimeCha (startTime) {
+      const date1 = this.$moment(startTime).format('YYYY-MM-DD HH:mm:ss')
+      const date2 = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+      const date3 = this.$moment(date2).diff(this.$moment(date1), 'minute')
+
+      console.log('时间时间', date1, date2)
+
+      // const date3 = date2.diff(date1, 'minute')// 计算相差的分钟数
+      console.log('相差fenzhognshu', date3)
+      // if (this.mStatus && date3 === 0) {
+      //   this.mStatus = false
+      //   // this.startTime = new Date()
+      //   console.log('123455678')
+      //   this.getAjaxBaseSecret()
+      // }
+    },
+
     getAjaxBaseSecret () {
       return new Promise((resolve, reject) => {
         ajaxBaseSecret().then((res) => {
