@@ -113,6 +113,7 @@ export default {
       processList: [],
       userInfo: '',
       uploadErrList: [],
+      shangbaoList: [],
       cos: ''
     }
   },
@@ -310,6 +311,11 @@ export default {
       }
       ajaxUploadImg(params).then(res => {
         console.log('图片上报', res)
+        this.shangbaoList = this.shangbaoList.concat(res.data.images)
+        if (this.shangbaoList.length === this.fileListArr.length) {
+          this.$Message.success('图片上传成功')
+          this.dialogStatus = false
+        }
       })
     },
     handleOneUpload (index) {
