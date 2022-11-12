@@ -1,21 +1,19 @@
-export const status = {
-  '-1': {
-    type: -1,
-    name: '已禁用'
-  },
-  '1': {
-    type: 1,
-    name: '已启用'
-  }
-}
 export const columns = [
   {
     key: 'id',
     title: 'id'
   },
   {
-    slot: 'imgslot',
-    title: '图片预览图'
+    key: 'thumbnail_url',
+    title: '图片预览图',
+    render: (h, { row }) => {
+      return h('img', {
+        attrs: {
+          src: row.thumbnail_url,
+          height: 100
+        }
+      })
+    }
   },
   {
     key: 'name',
@@ -26,19 +24,12 @@ export const columns = [
     key: 'venue_name',
     title: '场地'
   },
-  // {
-  //   key: 'thumbnail_url',
-  //   title: '图片预览图',
-  //   render: (h, { row }) => {
-  //     return h('span', status[row.status] && status[row.status].name)
-  //   }
-  // },
+  {
+    key: 'created_at',
+    title: '拍摄时间'
+  },
   {
     key: 'updated_at',
-    title: '更新时间'
+    title: '上传时间'
   }
-  // {
-  //   slot: 'action',
-  //   title: '操作'
-  // }
 ]

@@ -10,7 +10,7 @@
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list @refresh="getList" :venueList="venueList"></table-list>
+    <table-list @refresh="getList" :imageList="imageList"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
@@ -91,7 +91,7 @@ export default {
         page: 1
       },
       total: 0,
-      venueList: [], // 图片列表
+      imageList: [], // 图片列表
       startTime: '', //  获取时间戳的开始时间,默认2个小时有效 运行到1个半小时就重新获取一次
       endTime: '', // 结束时间
       mStatus: false, //  是否重新获取时间戳
@@ -126,14 +126,19 @@ export default {
 
       }
       ajaxUploadLists(params).then(res => {
-        console.log('图片列表', res)
-        this.venueList = res.data.lists || [] // 图片列表
+        this.imageList = res.data.lists || [] // 图片列表
         this.total = res.data.total
       })
     },
     clean () {
-      ajaxUploadClean().then(res => {
-        this.total = res.data.total
+      this.$Modal.confirm({
+        title: '警告',
+        content: '将清理超过3个月的图片，清理后不再显示',
+        onOk: () => {
+          ajaxUploadClean().then(res => {
+            this.$emit('refresh')
+          })
+        }
       })
     },
     pageChange (page) {

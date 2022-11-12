@@ -1,9 +1,6 @@
 <template>
 <div :class="prefixCls">
-  <Table :columns="columns" :data="venueList" class="iviewtable">
-    <template slot-scope="{ row }" slot="imgslot">
-      <img style="width:150px;height:150px;object-fit: contain;" :src="row.thumbnail_url" alt="">
-    </template>
+  <Table :columns="columns" :data="imageList" class="iviewtable">
   </Table>
 </div>
 
@@ -24,7 +21,7 @@ export default {
     }
   },
   props: {
-    venueList: {
+    imageList: {
       type: Array,
       default: () => []
     }
