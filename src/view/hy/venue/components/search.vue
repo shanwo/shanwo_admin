@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"pay-list";
+@prefix: ~"venue-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;

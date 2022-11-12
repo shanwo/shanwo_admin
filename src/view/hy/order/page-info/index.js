@@ -26,6 +26,10 @@ export const columns = [
     title: 'id'
   },
   {
+    key: 'venue_name',
+    title: '场地名称'
+  },
+  {
     key: 'nickname',
     title: '用户昵称'
   },
