@@ -50,3 +50,11 @@ export const ajaxUploadImg = (params) => {
     method: 'post'
   })
 }
+// 图片列表
+export const ajaxUploadLists = (params) => {
+  return axios.request({
+    url: '/hy/upload/lists',
+    params: params,
+    method: 'get'
+  })
+}

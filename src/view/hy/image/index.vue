@@ -1,7 +1,24 @@
 <template>
   <div>
+    <div>
+      <div style="display:flex" :class="prefixCls + '-search'">
+        <search-vue v-model="searchData">
+          <template slot="btn">
+            <Button @click="getList()" type="primary">查询</Button>
+            <Button style="margin-left:30px" type="error" @click="handleShowModel">上传图片</Button>
+          </template>
+        </search-vue>
+
+  </div>
+    </div>
+    <div :class="prefixCls + '-table'">
+    <table-list-vue @refresh="getList" :venueList="venueList" ></table-list-vue>
+  </div>
+  <div :class="prefixCls + '-page'">
+    <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
+  </div>
+
     <uploadLoadingVue v-if="imgLoadingStatus"/>
-    <Button style="margin:20px auto" type="primary" @click="handleShowModel">上传图片</Button>
     <Modal
         width="80%"
         :closable="false"
@@ -36,8 +53,10 @@
 
 <script>
 import { ajaxBaseSecret } from '@/api/hxapi.js'
-import { ajaxUploadImg } from '@/api/venue.js'
+import { ajaxUploadImg, ajaxUploadLists } from '@/api/venue.js'
 import uploadLoadingVue from '../../../components/uploadLoading/uploadLoading.vue'
+import tableListVue from './components/table-list.vue'
+import searchVue from './components/search.vue'
 import COS from 'cos-js-sdk-v5'
 
 var cos = new COS({
@@ -59,13 +78,26 @@ var cos = new COS({
     })
   }
 })
+const prefixCls = 'venue-list'
+
 export default {
   name: 'feedback-list',
   components: {
-    uploadLoadingVue
+    uploadLoadingVue,
+    tableListVue,
+    searchVue
   },
   data () {
     return {
+      prefixCls,
+      searchData: {
+        keyword: '',
+        venue_id: '',
+        size: 10,
+        page: 1
+      },
+      total: 0,
+      venueList: [], // 图片列表
       startTime: '', //  获取时间戳的开始时间,默认2个小时有效 运行到1个半小时就重新获取一次
       endTime: '', // 结束时间
       mStatus: false, //  是否重新获取时间戳
@@ -79,13 +111,36 @@ export default {
       imgList: [],
       fileListArr: [],
       processList: [],
+      userInfo: '',
+      errArr: [],
       cos: ''
     }
   },
   created () {
+    this.userInfo = JSON.parse(localStorage.getItem('user'))
+    this.getList()
     this.initNextWork()
   },
   methods: {
+    getList () {
+      let params = {
+        keyword: this.searchData.keyword,
+        venue_id: this.searchData.venue_id,
+        user_id: this.userInfo.id,
+        page: this.searchData.page,
+        size: this.searchData.size
+
+      }
+      ajaxUploadLists(params).then(res => {
+        console.log('图片列表', res)
+        this.venueList = res.data.lists || [] // 图片列表
+        this.total = res.data.total
+      })
+    },
+    pageChange (page) {
+      this.searchData.page = page
+      this.getList()
+    },
     initNextWork () {
       console.log('监听网络')
       let arr = []
@@ -173,11 +228,6 @@ export default {
                   that.maxLoadingStatus = false
                   that.$set(that.processList[k], 'err', true)
                 } else {
-                  console.log('data数据', data)
-                  // that.$set(that.processList[k], 'shangbaoStatus', 'waiting')
-                  // that.$set(that.processList[k], 'waitUrl', data.Location)
-                  // that.$set(that.processList[k], 'imgUrl', 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50')
-
                   that.processList[k]['waitUrl'] = data.Location
                   that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
                   that.imgList.push({
