@@ -1,62 +1,56 @@
 <template>
-  <div>
-    <div>
-      <div style="display:flex" :class="prefixCls + '-search'">
-        <search-vue v-model="searchData">
-          <template slot="btn">
-            <Button @click="getList()" type="primary">查询</Button>
-            <Button style="margin-left:30px" type="error" @click="handleShowModel">上传图片</Button>
-          </template>
-        </search-vue>
-
+<div :class="prefixCls">
+  <div :class="prefixCls + '-search'">
+    <search v-model="searchData">
+        <template slot="btn">
+          <Button  @click="handleShowModel" type="error" class="mr10">上传图片</Button>
+          <Button @click="getList()" type="primary" class="mr10">查询</Button>
+          <Button @click="clean()" type="primary">清图片</Button>
+        </template>
+      </search>
   </div>
-    </div>
-    <div :class="prefixCls + '-table'">
-    <table-list-vue @refresh="getList" :venueList="venueList" ></table-list-vue>
+  <div :class="prefixCls + '-table'">
+    <table-list @refresh="getList" :venueList="venueList"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
   </div>
-
-    <uploadLoadingVue v-if="imgLoadingStatus"/>
-    <Modal
-        width="80%"
-        :closable="false"
-        :mask-closable="false"
-        :footer-hide="true"
-        v-model="dialogStatus"
-        title="图片上传">
+  <uploadLoadingVue v-if="imgLoadingStatus"/>
+  <Modal
+      width="80%"
+      :closable="false"
+      :mask-closable="false"
+      :footer-hide="true"
+      v-model="dialogStatus"
+      title="图片上传">
 
     <div class="img_photo">
-        <div class="img_box" v-for="(item,index) in processList" :key="index">
-            <div class="jindu_s">
-              <Progress :percent="Math.ceil(item.percent*100)" v-if="item.percent!= 1 "/>
-              <div class="pedg_msg" v-if="item.loadingStatus">等待中...</div>
-              <div v-if="item.err">
-              <div class="err_msg">上传失败</div>
-              <div class="reload_btn" @click="handleOneUpload(index)">点击重新上传</div>
-            </div>
-            </div>
-            <div v-if="item.percent == 1">
-              <img class="origin_img" :src="item.imgUrl" >
-            </div>
-            <div class="mask_box" v-else></div>
+      <div class="img_box" v-for="(item,index) in processList" :key="index">
+        <div class="jindu_s">
+          <Progress :percent="Math.ceil(item.percent*100)" v-if="item.percent!= 1 "/>
+          <div class="pedg_msg" v-if="item.loadingStatus">等待中...</div>
+          <div v-if="item.err">
+            <div class="err_msg">上传失败</div>
+            <div class="reload_btn" @click="handleOneUpload(index)">点击重新上传</div>
+          </div>
         </div>
+        <div v-if="item.percent == 1">
+          <img class="origin_img" :src="item.imgUrl">
+        </div>
+        <div class="mask_box" v-else></div>
       </div>
-      <div>
-      <input v-if="finishStatus === 'none'" id="fileSelector" multiple="multiple" type="file" @change="upload" />
-      <div  v-if="finishStatus === 'uploading'" class="label_box_text">图片正在上传,请耐心等待</div>
+    </div>
+    <div>
+      <input v-if="finishStatus === 'none'" id="fileSelector" multiple="multiple" type="file" @change="upload"/>
+      <div v-if="finishStatus === 'uploading'" class="label_box_text">图片正在上传,请耐心等待</div>
     </div>
   </Modal>
-  </div>
+</div>
 </template>
 
 <script>
 import { ajaxBaseSecret } from '@/api/hxapi.js'
-import { ajaxUploadImg, ajaxUploadLists } from '@/api/venue.js'
-import uploadLoadingVue from '../../../components/uploadLoading/uploadLoading.vue'
-import tableListVue from './components/table-list.vue'
-import searchVue from './components/search.vue'
+import { ajaxUploadImg, ajaxUploadLists, ajaxUploadClean } from '@/api/venue.js'
 import COS from 'cos-js-sdk-v5'
 
 var cos = new COS({
@@ -78,14 +72,14 @@ var cos = new COS({
     })
   }
 })
-const prefixCls = 'venue-list'
+const prefixCls = 'image-list'
 
 export default {
-  name: 'feedback-list',
+  name: 'image-list',
   components: {
-    uploadLoadingVue,
-    tableListVue,
-    searchVue
+    uploadLoadingVue: () => import('@/components/uploadLoading/uploadLoading.vue'),
+    search: () => import('./components/search.vue'),
+    tableList: () => import('./components/table-list.vue')
   },
   data () {
     return {
@@ -134,6 +128,11 @@ export default {
       ajaxUploadLists(params).then(res => {
         console.log('图片列表', res)
         this.venueList = res.data.lists || [] // 图片列表
+        this.total = res.data.total
+      })
+    },
+    clean () {
+      ajaxUploadClean().then(res => {
         this.total = res.data.total
       })
     },
@@ -193,58 +192,58 @@ export default {
             console.log('进度')
           } else {
             cos.putObject(
-              {
-                Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-                Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-                Key: that.safeObj.path + that.fileListArr[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
-                Body: that.fileListArr[k], // 上传文件对象
-                SliceSize:
-            1024 *
-            1024 *
-            10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
-                onProgress: function (progressData) {
-                  console.log('速度速度', progressData)
-                  that.getTimeCha()
-                  that.finishStatus = 'uploading'
-                  progressData['waitUrl'] = ''
-                  progressData['imgUrl'] = ''
-                  that.processList[k] = progressData
-                  that.processList[k]['loadingStatus'] = false
-                  var percent = parseInt(progressData.percent * 10000) / 100
-                  var speed = parseInt(progressData.speed / 1024 / 1024 * 100) / 100
-                  console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
-                  that.maxLoadingStatus = true
-                  that.$forceUpdate()
-                }
-              },
-              function (err, data) {
-                if (err) {
-                // 网络异常 Error: CORS blocked or network error
-                  console.log('上传失败', err)
-                  if (err === 'Error: CORS blocked or network error') {
-                    console.log('网络异常')
-                    this.$set(that.processList[k], 'err', true)
+                {
+                  Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
+                  Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
+                  Key: that.safeObj.path + that.fileListArr[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
+                  Body: that.fileListArr[k], // 上传文件对象
+                  SliceSize:
+                      1024 *
+                      1024 *
+                      10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
+                  onProgress: function (progressData) {
+                    console.log('速度速度', progressData)
+                    that.getTimeCha()
+                    that.finishStatus = 'uploading'
+                    progressData['waitUrl'] = ''
+                    progressData['imgUrl'] = ''
+                    that.processList[k] = progressData
+                    that.processList[k]['loadingStatus'] = false
+                    var percent = parseInt(progressData.percent * 10000) / 100
+                    var speed = parseInt(progressData.speed / 1024 / 1024 * 100) / 100
+                    console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
+                    that.maxLoadingStatus = true
+                    that.$forceUpdate()
                   }
-                  that.maxLoadingStatus = false
-                  that.$set(that.processList[k], 'err', true)
-                  this.uploadErrList.push({
-                    [k]: this.fileListArr[k]
-                  })
-                } else {
-                  that.processList[k]['waitUrl'] = data.Location
-                  that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
-                  that.imgList.push({
-                    index: k,
-                    url: data.Location
-                  })
-                  console.log('开始时间', that.startTime)
-                  // that.getTimeCha(that.startTime, new Date())
-                  that.$forceUpdate()
-                  that.getImgListStatus()
-                  that.getUploadStatus()
-                  console.log('that.imgList', that.imgList)
+                },
+                function (err, data) {
+                  if (err) {
+                    // 网络异常 Error: CORS blocked or network error
+                    console.log('上传失败', err)
+                    if (err === 'Error: CORS blocked or network error') {
+                      console.log('网络异常')
+                      this.$set(that.processList[k], 'err', true)
+                    }
+                    that.maxLoadingStatus = false
+                    that.$set(that.processList[k], 'err', true)
+                    this.uploadErrList.push({
+                      [k]: this.fileListArr[k]
+                    })
+                  } else {
+                    that.processList[k]['waitUrl'] = data.Location
+                    that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
+                    that.imgList.push({
+                      index: k,
+                      url: data.Location
+                    })
+                    console.log('开始时间', that.startTime)
+                    // that.getTimeCha(that.startTime, new Date())
+                    that.$forceUpdate()
+                    that.getImgListStatus()
+                    that.getUploadStatus()
+                    console.log('that.imgList', that.imgList)
+                  }
                 }
-              }
             )
           }
         }
@@ -317,51 +316,51 @@ export default {
       let fileObj = that.fileListArr[index]
       let k = index
       cos.putObject(
-        {
-          Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-          Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-          Key: that.safeObj.path + fileObj.name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
-          Body: fileObj, // 上传文件对象
-          SliceSize:
-            1024 *
-            1024 *
-            10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
-          onProgress: function (progressData) {
-            console.log(`第${k}张的上传进度`, JSON.stringify(progressData))
-            that.processList[k] = progressData
-            that.$forceUpdate()
-
-            var percent = parseInt(info.percent * 10000) / 100
-            var speed = parseInt(info.speed / 1024 / 1024 * 100) / 100
-            console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
-          }
-        },
-        function (err, data) {
-          if (err) {
-            // 网络异常 Error: CORS blocked or network error
-            console.log('上传失败', err)
-            // if (err === 'Error: CORS blocked or network error') {
-            //   console.log('网络异常')
-            //   this.$set(that.processList[k], 'err', true)
-            // }
-            that.$set(that.processList[k], 'err', true)
-          } else {
-            cos.getObjectUrl({
-              Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-              Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-              Key: that.safeObj.path,
-              Sign: true /* 获取带签名的对象URL */
-            }, function (err, data) {
-              console.log('上传成功3', data)
-              if (err) return console.log(err)
-              /* url为对象访问url */
-              that.imgList.push({ 'url': data.Location })
+          {
+            Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
+            Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
+            Key: that.safeObj.path + fileObj.name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
+            Body: fileObj, // 上传文件对象
+            SliceSize:
+                1024 *
+                1024 *
+                10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
+            onProgress: function (progressData) {
+              console.log(`第${k}张的上传进度`, JSON.stringify(progressData))
+              that.processList[k] = progressData
               that.$forceUpdate()
-            })
-            console.log('上传成功', data)
-            that.$forceUpdate()
+
+              var percent = parseInt(info.percent * 10000) / 100
+              var speed = parseInt(info.speed / 1024 / 1024 * 100) / 100
+              console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
+            }
+          },
+          function (err, data) {
+            if (err) {
+              // 网络异常 Error: CORS blocked or network error
+              console.log('上传失败', err)
+              // if (err === 'Error: CORS blocked or network error') {
+              //   console.log('网络异常')
+              //   this.$set(that.processList[k], 'err', true)
+              // }
+              that.$set(that.processList[k], 'err', true)
+            } else {
+              cos.getObjectUrl({
+                Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
+                Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
+                Key: that.safeObj.path,
+                Sign: true /* 获取带签名的对象URL */
+              }, function (err, data) {
+                console.log('上传成功3', data)
+                if (err) return console.log(err)
+                /* url为对象访问url */
+                that.imgList.push({ 'url': data.Location })
+                that.$forceUpdate()
+              })
+              console.log('上传成功', data)
+              that.$forceUpdate()
+            }
           }
-        }
       )
     },
     async handleShowModel () {
@@ -409,7 +408,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"feedback-list";
+@prefix: ~"image-list";
 
 .@{prefix} {
   padding: 10px;
@@ -421,30 +420,35 @@ export default {
     text-align: right;
   }
 }
-.img_photo{
+
+.img_photo {
   overflow: hidden;
 }
-.img_box{
+
+.img_box {
   float: left;
   width: 150px;
   height: 150px;
   margin: 10px 10px 0 0;
   position: relative;
 }
-.img_list{
+
+.img_list {
   position: relative;
   width: 150px;
   height: 150px;
   margin: 10px 10px 0 0;
 }
-.jindu_box{
+
+.jindu_box {
   width: 100%;
   position: absolute;
-  top:20px;
+  top: 20px;
   left: 0;
   z-index: 3;
 }
-.mask_box{
+
+.mask_box {
   width: 100%;
   height: 100%;
   background: #ddd;
@@ -453,39 +457,45 @@ export default {
   top: 0;
   z-index: 1;
 }
-.jindu_s{
+
+.jindu_s {
   width: 100%;
   position: absolute;
   left: 0;
   top: 40px;
   z-index: 2;
 }
-.err_msg{
+
+.err_msg {
   text-align: center;
   font-size: 12px;
   color: #fa4535;
 }
-.reload_btn{
+
+.reload_btn {
   width: 100%;
   font-size: 12px;
   text-align: center;
   color: blue;
 }
-.pedg_msg{
+
+.pedg_msg {
   width: 100%;
   font-size: 12px;
   text-align: center;
   color: #ff9a01;
 }
-.origin_img{
+
+.origin_img {
   width: 150px;
   height: 150px;
   left: 0;
   top: 0;
   object-fit: contain;
-  background:#ddd;
+  background: #ddd;
 }
-.label_box_text{
+
+.label_box_text {
   color: #409eff;
   font-size: 14px;
   margin: 20px auto;

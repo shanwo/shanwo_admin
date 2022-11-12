@@ -10,10 +10,13 @@
         <Option v-for="item in selectArr" :value="item.id" :key="item.id">{{ item.name }}</Option>
        </Select>
       </FormItem>
-      <FormItem label="">
-        <slot name="btn"></slot>
-      </FormItem>
+<!--      <FormItem label="支付时间：">-->
+<!--        <Date-picker @on-change="timeChange" :value="searchInfo.time" format="yyyy-MM-dd" type="daterange" placement="top-start" placeholder="选择日期" style="width: 200px"></Date-picker>-->
+<!--      </FormItem>-->
     </Form>
+  </div>
+  <div :class="prefixCls + '-right'">
+    <slot name="btn"></slot>
   </div>
 </div>
 
@@ -21,9 +24,9 @@
 
 <script>
 import { getVenueList } from '@/api/venue'
-const prefixCls = 'venue-list'
+const prefixCls = 'image-list'
 export default {
-  name: 'venue-list',
+  name: 'image-list',
   props: {
     value: {
       type: Object,
@@ -41,12 +44,17 @@ export default {
       prefixCls,
       selectArr: []
     }
+  },
+  methods: {
+    timeChange (arg) {
+      this.$set(this, 'searchTimeRange', arg)
+    }
   }
 }
 </script>
 
 <style lang="less" scoped>
-@prefix: ~"pay-list";
+@prefix: ~"image-list";
 .@{prefix} {
   padding-bottom: 10px;
   width: 100%;
