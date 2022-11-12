@@ -16,14 +16,7 @@
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
   </div>
   <uploadLoadingVue v-if="imgLoadingStatus"/>
-  <Modal
-      width="80%"
-      :closable="false"
-      :mask-closable="false"
-      :footer-hide="true"
-      v-model="dialogStatus"
-      title="图片上传">
-
+  <Modal v-model="dialogStatus" :closable="false" :mask-closable="false" :footer-hide="true" width="60%" title="图片上传">
     <div class="img_photo">
       <div class="img_box" v-for="(item,index) in processList" :key="index">
         <div class="jindu_s">
@@ -40,9 +33,10 @@
         <div class="mask_box" v-else></div>
       </div>
     </div>
-    <div>
+    <div :class="prefixCls + '-footer'">
       <input v-if="finishStatus === 'none'" id="fileSelector" multiple="multiple" type="file" @change="upload"/>
-      <div v-if="finishStatus === 'uploading'" class="label_box_text">图片正在上传,请耐心等待</div>
+      <div v-if="finishStatus === 'uploading'">图片正在上传,请耐心等待</div>
+      <Button v-if="finishStatus === 'finish'" type="primary" @click="cancel" ghost>关闭</Button>
     </div>
   </Modal>
 </div>
@@ -116,6 +110,10 @@ export default {
     this.initNextWork()
   },
   methods: {
+    cancel () {
+      this.$set(this, 'dialogStatus', false)
+      this.$emit('on-change')
+    },
     getList () {
       let params = {
         keyword: this.searchData.keyword,
@@ -425,6 +423,10 @@ export default {
     padding: 8px;
     text-align: right;
   }
+  &-footer{
+    padding: 20px 0;
+    text-align: center;
+  }
 }
 
 .img_photo {
@@ -499,12 +501,5 @@ export default {
   top: 0;
   object-fit: contain;
   background: #ddd;
-}
-
-.label_box_text {
-  color: #409eff;
-  font-size: 14px;
-  margin: 20px auto;
-  text-align: center;
 }
 </style>
