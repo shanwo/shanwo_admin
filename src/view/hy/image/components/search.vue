@@ -7,12 +7,12 @@
       </FormItem>
       <FormItem label="场地：">
         <Select v-model="value.venue_id" style="width:200px" clearable>
-        <Option v-for="item in selectArr" :value="item.id" :key="item.id">{{ item.name }}</Option>
-       </Select>
+          <Option v-for="item in selectArr" :value="item.id" :key="item.id">{{ item.name }}</Option>
+        </Select>
       </FormItem>
-<!--      <FormItem label="支付时间：">-->
-<!--        <Date-picker @on-change="timeChange" :value="searchInfo.time" format="yyyy-MM-dd" type="daterange" placement="top-start" placeholder="选择日期" style="width: 200px"></Date-picker>-->
-<!--      </FormItem>-->
+      <!--      <FormItem label="支付时间：">-->
+      <!--        <Date-picker @on-change="timeChange" :value="searchInfo.time" format="yyyy-MM-dd" type="daterange" placement="top-start" placeholder="选择日期" style="width: 200px"></Date-picker>-->
+      <!--      </FormItem>-->
     </Form>
   </div>
   <div :class="prefixCls + '-right'">
@@ -24,6 +24,7 @@
 
 <script>
 import { getVenueList } from '@/api/venue'
+
 const prefixCls = 'image-list'
 export default {
   name: 'image-list',
