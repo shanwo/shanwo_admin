@@ -3,8 +3,8 @@
   <div :class="prefixCls + '-search'">
     <search v-model="searchData">
       <template slot="btn">
-        <Button @click="addIcon" type="primary" class="mr10">添加</Button>
-        <Button @click="getVenueList" type="primary">查询</Button>
+        <Button type="primary" @click="addIcon" class="mr10">添加</Button>
+        <Button type="primary" @click="getVenueList">查询</Button>
       </template>
     </search>
   </div>
@@ -21,7 +21,7 @@
 <script>
 import { getVenueList } from '@/api/venue'
 
-const prefixCls = 'pay-list'
+const prefixCls = 'venue-list'
 
 export default {
   name: 'venue-list',
@@ -91,7 +91,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"pay-list";
+@prefix: ~"venue-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;
