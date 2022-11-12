@@ -58,3 +58,10 @@ export const ajaxUploadLists = (params) => {
     method: 'get'
   })
 }
+// 图片清理
+export const ajaxUploadClean = () => {
+  return axios.request({
+    url: '/hy/upload/clean',
+    method: 'get'
+  })
+}
