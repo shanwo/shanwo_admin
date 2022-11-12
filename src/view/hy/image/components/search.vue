@@ -2,13 +2,13 @@
 <div :class="prefixCls">
   <div :class="prefixCls + '-left'">
     <Form :label-width="100" inline>
-      <FormItem label="关键字：">
-        <Input v-model="value.keyword" class="inputWidth" placeholder="请输入关键字" clearable></Input>
-      </FormItem>
       <FormItem label="场地：">
-        <Select v-model="value.venue_id" style="width:200px" clearable>
+        <Select v-model="value.venue_id" class="inputWidth" clearable>
           <Option v-for="item in selectArr" :value="item.id" :key="item.id">{{ item.name }}</Option>
         </Select>
+      </FormItem>
+      <FormItem label="关键字：">
+        <Input v-model="value.keyword" class="inputWidth" placeholder="请输入关键字" clearable></Input>
       </FormItem>
       <!--      <FormItem label="支付时间：">-->
       <!--        <Date-picker @on-change="timeChange" :value="searchInfo.time" format="yyyy-MM-dd" type="daterange" placement="top-start" placeholder="选择日期" style="width: 200px"></Date-picker>-->
