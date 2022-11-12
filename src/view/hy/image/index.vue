@@ -133,9 +133,10 @@ export default {
     clean () {
       this.$Modal.confirm({
         title: '警告',
-        content: '将清理超过3个月的图片，清理后不再显示',
+        content: '将清理拍摄时间早于3个月前的图片，清理后不再显示。若3个月内无照片，将只保留最后一周的照片。',
         onOk: () => {
           ajaxUploadClean().then(res => {
+            this.$Message.success(res.msg ? res.msg : '清理成功')
             this.$emit('refresh')
           })
         }
