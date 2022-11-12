@@ -112,7 +112,7 @@ export default {
       fileListArr: [],
       processList: [],
       userInfo: '',
-      errArr: [],
+      uploadErrList: [],
       cos: ''
     }
   },
@@ -227,6 +227,9 @@ export default {
                   }
                   that.maxLoadingStatus = false
                   that.$set(that.processList[k], 'err', true)
+                  this.uploadErrList.push({
+                    [k]: this.fileListArr[k]
+                  })
                 } else {
                   that.processList[k]['waitUrl'] = data.Location
                   that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
