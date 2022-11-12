@@ -34,9 +34,11 @@
       </div>
     </div>
     <div :class="prefixCls + '-footer'">
-      <input v-if="finishStatus === 'none'" id="fileSelector" multiple="multiple" type="file" @change="upload"/>
       <div v-if="finishStatus === 'uploading'">图片正在上传,请耐心等待</div>
-      <Button v-if="finishStatus === 'finish'" type="primary" @click="cancel" ghost>关闭</Button>
+      <div v-else>
+        <input v-if="finishStatus !== 'uploading'" id="fileSelector" multiple="multiple" type="file" @change="upload"/>
+        <Button v-if="finishStatus !== 'uploading'" type="primary" @click="cancel" ghost>关闭</Button>
+      </div>
     </div>
   </Modal>
 </div>
@@ -112,7 +114,9 @@ export default {
   methods: {
     cancel () {
       this.$set(this, 'dialogStatus', false)
+      this.$set(this, 'finishStatus', 'none')
       this.$emit('on-change')
+      this.getList()
     },
     getList () {
       let params = {
@@ -134,8 +138,9 @@ export default {
         content: '将清理拍摄时间早于3个月前的图片，清理后不再显示。若3个月内无照片，将只保留最后一周的照片。',
         onOk: () => {
           ajaxUploadClean().then(res => {
-            this.$Message.success(res.msg ? res.msg : '清理成功')
+            this.$Message.success(res.msg ? res.msg : '本次清理' + Object.keys(res.data).length + '张照片')
             this.$emit('refresh')
+            this.getList()
           })
         }
       })
