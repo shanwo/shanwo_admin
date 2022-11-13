@@ -1,9 +1,10 @@
 import axios from '@/libs/api.request'
 
 export const toLogin = () => {
-  var url = 'https://api.shanwo.cc/user/signIn'
-  if (process.env.NODE_ENV !== 'production') {
-    url = '//api.shanwo.vip/user/signIn'
+  var thisurl = window.location.hostname;
+  var url = '//api.shanwo.vip/user/signIn'
+  if(thisurl === 'shanwo.cc'){
+    var url = 'https://api.shanwo.cc/user/signIn'
   }
   return axios.request({
     url,
@@ -14,9 +15,10 @@ export const toLogin = () => {
   })
 }
 export const toLogout = () => {
-  var url = 'https://api.shanwo.cc/user/signOut'
-  if (process.env.NODE_ENV !== 'production') {
-    url = '//api.shanwo.vip/user/signOut'
+  var thisurl = window.location.hostname;
+  var url = '//api.shanwo.vip/user/signOut'
+  if(thisurl === 'shanwo.cc'){
+    var url = 'https://api.shanwo.cc/user/signOut'
   }
   return axios.request({
     url,
@@ -24,9 +26,10 @@ export const toLogout = () => {
   })
 }
 export const getUserToken = ({ code, state }) => {
-  var url = 'https://api.shanwo.cc/user/wechat'
-  if (process.env.NODE_ENV !== 'production') {
-    url = '//api.shanwo.vip/user/wechat'
+  var thisurl = window.location.hostname;
+  var url = '//api.shanwo.vip/user/wechat'
+  if(thisurl === 'shanwo.cc'){
+    var url = 'https://api.shanwo.cc/user/wechat'
   }
   return axios.request({
     url,
