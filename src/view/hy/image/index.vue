@@ -87,7 +87,6 @@ export default {
         page: 1
       },
       total: 0,
-      imageList: [], // 图片列表
       startTime: '', //  获取时间戳的开始时间,默认2个小时有效 运行到1个半小时就重新获取一次
       endTime: '', // 结束时间
       mStatus: false, //  是否重新获取时间戳
@@ -101,9 +100,10 @@ export default {
       imgList: [],
       fileListArr: [],
       processList: [],
-      userInfo: '',
       uploadErrList: [],
       shangbaoList: [],
+      imageList: [], // 图片列表
+      userInfo: '',
       cos: ''
     }
   },
@@ -202,58 +202,58 @@ export default {
             console.log('进度')
           } else {
             cos.putObject(
-                {
-                  Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-                  Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-                  Key: that.safeObj.path + that.fileListArr[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
-                  Body: that.fileListArr[k], // 上传文件对象
-                  SliceSize:
+              {
+                Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
+                Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
+                Key: that.safeObj.path + that.fileListArr[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
+                Body: that.fileListArr[k], // 上传文件对象
+                SliceSize:
                       1024 *
                       1024 *
                       10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
-                  onProgress: function (progressData) {
-                    console.log('速度速度', progressData)
-                    that.getTimeCha()
-                    that.finishStatus = 'uploading'
-                    progressData['waitUrl'] = ''
-                    progressData['imgUrl'] = ''
-                    that.processList[k] = progressData
-                    that.processList[k]['loadingStatus'] = false
-                    var percent = parseInt(progressData.percent * 10000) / 100
-                    var speed = parseInt(progressData.speed / 1024 / 1024 * 100) / 100
-                    console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
-                    that.maxLoadingStatus = true
-                    that.$forceUpdate()
-                  }
-                },
-                function (err, data) {
-                  if (err) {
-                    // 网络异常 Error: CORS blocked or network error
-                    console.log('上传失败', err)
-                    if (err === 'Error: CORS blocked or network error') {
-                      console.log('网络异常')
-                      this.$set(that.processList[k], 'err', true)
-                    }
-                    that.maxLoadingStatus = false
-                    that.$set(that.processList[k], 'err', true)
-                    this.uploadErrList.push({
-                      [k]: this.fileListArr[k]
-                    })
-                  } else {
-                    that.processList[k]['waitUrl'] = data.Location
-                    that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
-                    that.imgList.push({
-                      index: k,
-                      url: data.Location
-                    })
-                    console.log('开始时间', that.startTime)
-                    // that.getTimeCha(that.startTime, new Date())
-                    that.$forceUpdate()
-                    that.getImgListStatus()
-                    that.getUploadStatus()
-                    console.log('that.imgList', that.imgList)
-                  }
+                onProgress: function (progressData) {
+                  console.log('速度速度', progressData)
+                  that.getTimeCha()
+                  that.finishStatus = 'uploading'
+                  progressData['waitUrl'] = ''
+                  progressData['imgUrl'] = ''
+                  that.processList[k] = progressData
+                  that.processList[k]['loadingStatus'] = false
+                  var percent = parseInt(progressData.percent * 10000) / 100
+                  var speed = parseInt(progressData.speed / 1024 / 1024 * 100) / 100
+                  console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
+                  that.maxLoadingStatus = true
+                  that.$forceUpdate()
                 }
+              },
+              function (err, data) {
+                if (err) {
+                  // 网络异常 Error: CORS blocked or network error
+                  console.log('上传失败', err)
+                  if (err === 'Error: CORS blocked or network error') {
+                    console.log('网络异常')
+                    this.$set(that.processList[k], 'err', true)
+                  }
+                  that.maxLoadingStatus = false
+                  that.$set(that.processList[k], 'err', true)
+                  this.uploadErrList.push({
+                    [k]: this.fileListArr[k]
+                  })
+                } else {
+                  that.processList[k]['waitUrl'] = data.Location
+                  that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
+                  that.imgList.push({
+                    index: k,
+                    url: data.Location
+                  })
+                  console.log('开始时间', that.startTime)
+                  // that.getTimeCha(that.startTime, new Date())
+                  that.$forceUpdate()
+                  that.getImgListStatus()
+                  that.getUploadStatus()
+                  console.log('that.imgList', that.imgList)
+                }
+              }
             )
           }
         }
@@ -331,55 +331,63 @@ export default {
       let fileObj = that.fileListArr[index]
       let k = index
       cos.putObject(
-          {
-            Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-            Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-            Key: that.safeObj.path + fileObj.name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
-            Body: fileObj, // 上传文件对象
-            SliceSize:
+        {
+          Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
+          Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
+          Key: that.safeObj.path + fileObj.name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
+          Body: fileObj, // 上传文件对象
+          SliceSize:
                 1024 *
                 1024 *
                 10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
-            onProgress: function (progressData) {
-              console.log(`第${k}张的上传进度`, JSON.stringify(progressData))
-              that.processList[k] = progressData
-              that.$forceUpdate()
+          onProgress: function (progressData) {
+            console.log(`第${k}张的上传进度`, JSON.stringify(progressData))
+            that.processList[k] = progressData
+            that.$forceUpdate()
 
-              var percent = parseInt(info.percent * 10000) / 100
-              var speed = parseInt(info.speed / 1024 / 1024 * 100) / 100
-              console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
-            }
-          },
-          function (err, data) {
-            if (err) {
-              // 网络异常 Error: CORS blocked or network error
-              console.log('上传失败', err)
-              // if (err === 'Error: CORS blocked or network error') {
-              //   console.log('网络异常')
-              //   this.$set(that.processList[k], 'err', true)
-              // }
-              that.$set(that.processList[k], 'err', true)
-            } else {
-              cos.getObjectUrl({
-                Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-                Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-                Key: that.safeObj.path,
-                Sign: true /* 获取带签名的对象URL */
-              }, function (err, data) {
-                console.log('上传成功3', data)
-                if (err) return console.log(err)
-                /* url为对象访问url */
-                that.imgList.push({ 'url': data.Location })
-                that.$forceUpdate()
-              })
-              console.log('上传成功', data)
-              that.$forceUpdate()
-            }
+            var percent = parseInt(info.percent * 10000) / 100
+            var speed = parseInt(info.speed / 1024 / 1024 * 100) / 100
+            console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
           }
+        },
+        function (err, data) {
+          if (err) {
+            // 网络异常 Error: CORS blocked or network error
+            console.log('上传失败', err)
+            // if (err === 'Error: CORS blocked or network error') {
+            //   console.log('网络异常')
+            //   this.$set(that.processList[k], 'err', true)
+            // }
+            that.$set(that.processList[k], 'err', true)
+          } else {
+            cos.getObjectUrl({
+              Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
+              Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
+              Key: that.safeObj.path,
+              Sign: true /* 获取带签名的对象URL */
+            }, function (err, data) {
+              console.log('上传成功3', data)
+              if (err) return console.log(err)
+              /* url为对象访问url */
+              that.imgList.push({ 'url': data.Location })
+              that.$forceUpdate()
+            })
+            console.log('上传成功', data)
+            that.$forceUpdate()
+          }
+        }
       )
     },
     async handleShowModel () {
       await this.getAjaxBaseSecret()
+      this.fileListArr = []
+      this.processList = []
+      this.imgList = []
+      this.fileListArr = []
+
+      this.uploadErrList = []
+      this.shangbaoList = []
+
       this.dialogStatus = true
     },
     // 时间戳2小时过期,利用当前时间加上 90分钟 一个半小时
