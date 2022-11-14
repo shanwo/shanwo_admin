@@ -15,71 +15,33 @@
   <div :class="prefixCls + '-page'">
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
   </div>
-  <uploadLoadingVue v-if="imgLoadingStatus"/>
   <Modal v-model="dialogStatus" :closable="false" :mask-closable="false" :footer-hide="true" width="60%" title="图片上传">
-    <div class="img_photo">
-      <div class="img_box" v-for="(item,index) in processList" :key="index">
-        <div class="jindu_s">
-          <Progress :percent="Math.ceil(item.percent*100)" v-if="item.percent!= 1 "/>
-          <div class="pedg_msg" v-if="item.loadingStatus">等待中...</div>
-          <div v-if="item.err">
-            <div class="err_msg">上传失败</div>
-            <div class="reload_btn" @click="handleOneUpload(index)">点击重新上传</div>
-          </div>
-        </div>
-        <div v-if="item.percent == 1">
-          <img class="origin_img" :src="item.imgUrl">
-        </div>
-        <div class="mask_box" v-else></div>
-      </div>
-    </div>
-    <div :class="prefixCls + '-footer'">
-      <div v-if="finishStatus === 'uploading'">图片正在上传,请耐心等待</div>
-      <div v-else>
-        <input v-if="finishStatus !== 'uploading'" id="fileSelector"   accept="image/jpg, image/png,image/jpeg,image/JPG, image/PNG,image/JPEG"  multiple="multiple"   type="file" @change="upload"/>
-        <Button v-if="finishStatus !== 'uploading'" type="primary" @click="cancel" ghost>关闭</Button>
-      </div>
-    </div>
+  <div v-if="dialogStatus">
+    <uploadFileCom  @listenCancel="cancel" :selectArr="selectArr" ref="uploadFileComRef"/>
+  </div>
+
   </Modal>
 </div>
 </template>
 
 <script>
-import { ajaxBaseSecret } from '@/api/hxapi.js'
-import { ajaxUploadImg, ajaxUploadLists, ajaxUploadClean } from '@/api/venue.js'
-import COS from 'cos-js-sdk-v5'
+import { getVenueList, ajaxUploadLists, ajaxUploadClean } from '@/api/venue.js'
 
-var cos = new COS({
-  // getAuthorization 必选参数
-  getAuthorization: function (options, callback) {
-    ajaxBaseSecret().then((res) => {
-      let data = res.data
-      let credentials = res.data.credentials
-      console.log('res', res, credentials)
-      // eslint-disable-next-line standard/no-callback-literal
-      callback({
-        TmpSecretId: credentials.tmpSecretId,
-        TmpSecretKey: credentials.tmpSecretKey,
-        SecurityToken: credentials.sessionToken,
-        // 建议返回服务器时间作为签名的开始时间，避免用户浏览器本地时间偏差过大导致签名错误
-        StartTime: data.startTime, // 时间戳，单位秒，如：1580000000
-        ExpiredTime: data.expiredTime // 时间戳，单位秒，如：1580000000
-      })
-    })
-  }
-})
+import uploadFileCom from '@/view/hy/image/components/uploadFileCom'
 const prefixCls = 'image-list'
 
 export default {
   name: 'image-list',
   components: {
+    uploadFileCom,
     uploadLoadingVue: () => import('@/components/uploadLoading/uploadLoading.vue'),
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue')
   },
   data () {
     return {
-      errShangbaoNum: 0,
+      selectArr: [],
+      imageList: [],
       prefixCls,
       searchData: {
         keyword: '',
@@ -87,40 +49,26 @@ export default {
         size: 10,
         page: 1
       },
-      venue_id: '', // 场地id
       total: 0,
-      startTime: '', //  获取时间戳的开始时间,默认2个小时有效 运行到1个半小时就重新获取一次
-      endTime: '', // 结束时间
-      mStatus: false, //  是否重新获取时间戳
-      arrIndex: [], // 用来存放已经上传图片的index
-      uploadTotal: 0, // 总共上传几次
-      finishStatus: 'none', //  图片是否全部上传完
-      imgLoadingStatus: false, // 所有图片上传成功的标志
-
       dialogStatus: false,
       safeObj: {},
-      imgList: [],
-      fileListArr: [],
-      processList: [],
-      uploadErrList: [],
-      shangbaoErrorList: [],
-      shangbaoList: [],
-      imageList: [], // 图片列表
-      userInfo: '',
-      cos: ''
+      userInfo: ''
     }
   },
   created () {
     this.userInfo = JSON.parse(localStorage.getItem('user'))
+    this.getVenList()
     this.getList()
-    this.initNextWork()
   },
   methods: {
     cancel () {
-      this.$set(this, 'dialogStatus', false)
-      this.$set(this, 'finishStatus', 'none')
-      this.$emit('on-change')
-      this.getList()
+      this.dialogStatus = false
+    },
+    // 获取雪场
+    getVenList () {
+      getVenueList().then(res => {
+        this.selectArr = res.data.lists
+      })
     },
     getList () {
       let params = {
@@ -153,383 +101,11 @@ export default {
       this.searchData.page = page
       this.getList()
     },
-    initNextWork () {
-      console.log('监听网络')
-      let arr = []
-      const netWorkDownlink = navigator.connection.downlink // 预估下载速度m/s
-      if (navigator.connection && navigator.connection.onchange === null) {
-        navigator.connection.onchange = () => {
-          if (netWorkDownlink !== navigator.connection.downlink || navigator.connection.rtt === 0) {
-            // 网络断开
-            arr.push(1)
-            console.log('断网了', arr)
-            if (arr.length === 10) {
-              this.$Message.error('您已断开,请检查网络')
-            }
-          } else if (netWorkDownlink === navigator.connection.downlink || navigator.connection.rtt !== 0) {
-            // 连接到网络
-            arr = []
-            console.log('网络在线')
-          }
-        }
-      }
-    },
-    upload (e) {
-      let that = this
-      that.startTime = new Date() // 上传开始时间
-      that.addTime() // 时间戳 计算上传时间用的
-      console.log('startTime', that.startTime)
-      let fileArr = []
-      for (let k in e.target.files) {
-        console.log(Object.prototype.toString.call(e.target.files[k]), '-------')
-        if (Object.prototype.toString.call(e.target.files[k]) === '[object File]') {
-          fileArr.push(e.target.files[k])
-        }
-      }
-      that.fileListArr = that.fileListArr.concat(fileArr)
-      that.uploadTotal = parseInt(this.fileListArr / 5) + this.fileListArr % 5 === 0 ? 0 : 1
 
-      let newProcess = []
-      for (let i = 0; i < fileArr.length; i++) {
-        newProcess.push({
-          percent: 0,
-          loadingStatus: true
-        })
-      }
-      this.processList = this.processList.concat(newProcess)
-      console.log('this.processList', this.processList)
-      console.log('this.fileListArr', this.fileListArr)
-      for (let k = 0; k < that.fileListArr.length; k++) {
-        if (Object.prototype.toString.call(that.fileListArr[k]) === '[object File]') {
-          if (that.processList[k]['percent'] && that.processList[k]['percent'] === 1) {
-            console.log('进度')
-          } else {
-            cos.putObject(
-              {
-                Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-                Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-                Key: that.safeObj.path + that.fileListArr[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
-                Body: that.fileListArr[k], // 上传文件对象
-                SliceSize:
-                      1024 *
-                      1024 *
-                      10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
-                onProgress: function (progressData) {
-                  console.log('速度速度', progressData)
-                  that.getTimeCha()
-                  that.finishStatus = 'uploading'
-                  progressData['waitUrl'] = ''
-                  progressData['imgUrl'] = ''
-                  that.processList[k] = progressData
-                  that.processList[k]['loadingStatus'] = false
-                  var percent = parseInt(progressData.percent * 10000) / 100
-                  var speed = parseInt(progressData.speed / 1024 / 1024 * 100) / 100
-                  console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
-
-                  that.$forceUpdate()
-                }
-              },
-              function (err, data) {
-                if (err) {
-                  // 网络异常 Error: CORS blocked or network error
-                  console.log('上传失败', err)
-                  if (err === 'Error: CORS blocked or network error') {
-                    console.log('网络异常')
-                    this.$set(that.processList[k], 'err', true)
-                  }
-
-                  that.$set(that.processList[k], 'err', true)
-                  that.uploadErrList.push(this.fileListArr[k])
-                } else {
-                  that.processList[k]['waitUrl'] = data.Location
-                  that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
-                  that.imgList.push({
-                    index: k,
-                    url: data.Location
-                  })
-                  console.log('开始时间', that.startTime)
-                  that.$forceUpdate()
-                  that.getImgListStatus()
-                  that.getUploadStatus()
-                  console.log('that.imgList', that.imgList)
-                }
-              }
-            )
-          }
-        }
-      }
-    },
-    // 上传错误对象
-    // upLoadError () {
-    //   console.log('上传第一次上传失败的对象')
-    //   let that = this
-    //   that.processList.forEach((val, k) => {
-    //     if (val.err) {
-    //       cos.putObject(
-    //         {
-    //           Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-    //           Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-    //           Key: that.safeObj.path + that.fileListArr[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
-    //           Body: that.fileListArr[k], // 上传文件对象
-    //           SliceSize:
-    //                   1024 *
-    //                   1024 *
-    //                   10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
-    //           onProgress: function (progressData) {
-    //             console.log('速度速度', progressData)
-    //             that.getTimeCha()
-    //             that.finishStatus = 'uploading'
-    //             progressData['waitUrl'] = ''
-    //             progressData['imgUrl'] = ''
-    //             that.processList[k] = progressData
-    //             that.processList[k]['loadingStatus'] = false
-    //             var percent = parseInt(progressData.percent * 10000) / 100
-    //             var speed = parseInt(progressData.speed / 1024 / 1024 * 100) / 100
-    //             console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
-    //             that.$forceUpdate()
-    //           }
-    //         },
-    //         function (err, data) {
-    //           if (err) {
-    //             // 网络异常 Error: CORS blocked or network error
-    //             console.log('上传失败', err)
-    //             if (err === 'Error: CORS blocked or network error') {
-    //               console.log('网络异常')
-    //               this.$set(that.processList[k], 'err', true)
-    //             }
-    //             that.$set(that.processList[k], 'err', true)
-    //             that.uploadErrList.push(this.fileListArr[k])
-    //           } else {
-    //             that.processList[k]['waitUrl'] = data.Location
-    //             that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
-    //             that.imgList.push({
-    //               index: k,
-    //               url: data.Location
-    //             })
-    //             console.log('开始时间', that.startTime)
-    //             that.$forceUpdate()
-    //             that.getImgListStatus()
-    //             that.getUploadStatus()
-    //             console.log('that.imgList', that.imgList)
-    //           }
-    //         }
-    //       )
-    //     }
-    //   })
-    // },
-    // 获取已上传的图片 5个一组向后台发送
-    getImgListStatus () {
-      let that = this
-      if (this.imgList.length === 5) {
-        this.uploadTotal = this.uploadTotal - 1
-        let newImgList = JSON.parse(JSON.stringify(this.imgList))
-        for (let i = 0; i < newImgList.length; i++) {
-          that.arrIndex.push(newImgList[i].index)
-        }
-        this.imgList = []
-        console.log(' this.imgList', newImgList)
-        let imgs = []
-        for (let i = 0; i < newImgList.length; i++) {
-          imgs.push(newImgList[i].url)
-        }
-        that.postImg(imgs)
-      }
-    },
-    // 获取是否全部上窜完成
-    getUploadStatus () {
-      let num = 0
-      let arr = []
-      this.processList.forEach((val, index) => {
-        if (val.err) {
-          console.log('第' + index + '张图片上传失败')
-        } else {
-          if (val.percent === 1) {
-            num += 1
-          }
-        }
-      })
-      if (num === this.processList.length) {
-        console.log('所有图片上传完成')
-        for (let i = 0; i < this.fileListArr.length; i++) {
-          if (this.arrIndex.includes(i)) {
-
-          } else {
-            arr.push(i)
-          }
-        }
-        console.log('最后没上传的', arr)
-        let imgs = []
-        arr.forEach(val => {
-          imgs.push(this.processList[val].waitUrl)
-        })
-        this.postImg(imgs) // 上报图片
-        this.finishStatus = 'finish' // 此时所有图片已经上传完成 但是是否全部上报成功 要看下面计算
-      }
-    },
-    // 上报图片
-    postImg (imgs) {
-      let params = {
-        venue_id: this.venue_id,
-        images: imgs
-      }
-      console.log('入参', params)
-      if (imgs.length === 0) {
-        return
-      }
-      ajaxUploadImg(params).then(res => {
-        this.shangbaoList = this.shangbaoList.concat(res.data.images)
-        // 这里判断一下 如果所有 图片都上报完成
-        if (this.shangbaoList.length === this.fileListArr.length) {
-          console.log('图片已经全部上报了----不知道是不是全部上报成功')
-          this.shangbaoList.forEach(val => {
-            if (val.images.msg !== 'success') {
-              this.shangbaoErrorList = this.shangbaoErrorList.concat([val])
-            }
-          })
-          if (this.shangbaoErrorList.length === 0) {
-            this.$Message.success('图片已经全部上传完成')
-            console.log('图片全部上报了--------没有错误图片需要上报')
-            this.dialogStatus = false
-            this.errShangbaoNum = 0
-          } else {
-            this.errorPostImg()
-          }
-        } else {
-
-        }
-      })
-    },
-    // 一次性上报错误的图片
-    errorPostImg () {
-      if (this.errShangbaoNum > 3) {
-        console.log('上报了3次以后还是没有上报成功,因此取消上报,关闭上传服务')
-        this.dialogStatus = false
-        return
-      }
-      if (this.shangbaoErrorList.length === 0) {
-        this.$Message.success('errorPostImg图片已经全部上传完成')
-        console.log('errorPostImg图片全部上报了--------没有错误图片需要上报')
-        this.dialogStatus = false
-        return
-      }
-      let imgs = []
-      this.shangbaoErrorList.forEach(val => {
-        imgs.push(val.path)
-      })
-      let params = {
-        venue_id: this.venue_id,
-        images: imgs
-      }
-      ajaxUploadImg(params).then(res => {
-        // 这里判断一下 如果所有 图片都上报完成
-        res.data.images.forEach(val => {
-          if (val.images.msg === 'success') {
-            num++
-            let index = this.shangbaoErrorList.findIndex(v => v.path === val.path)
-            if (index === -1) { // 没有需要上报的了
-              this.$Message.success('图片全部上传完成')
-              this.dialogStatus = false
-              console.log('所有上报出错的图片已经全部重新上报了')
-            } else {
-              this.shangbaoErrorList.splice(index, 1)
-            }
-          }
-          this.errShangbaoNum += 1
-        })
-      })
-    },
-    handleOneUpload (index) {
-      let that = this
-      let fileObj = that.fileListArr[index]
-      let k = index
-      cos.putObject(
-        {
-          Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-          Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-          Key: that.safeObj.path + fileObj.name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
-          Body: fileObj, // 上传文件对象
-          SliceSize:
-                1024 *
-                1024 *
-                10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
-          onProgress: function (progressData) {
-            console.log(`第${k}张的上传进度`, JSON.stringify(progressData))
-            that.processList[k] = progressData
-            that.$forceUpdate()
-
-            var percent = parseInt(info.percent * 10000) / 100
-            var speed = parseInt(info.speed / 1024 / 1024 * 100) / 100
-            console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
-          }
-        },
-        function (err, data) {
-          if (err) {
-            // 网络异常 Error: CORS blocked or network error
-            console.log('上传失败', err)
-            // if (err === 'Error: CORS blocked or network error') {
-            //   console.log('网络异常')
-            //   this.$set(that.processList[k], 'err', true)
-            // }
-            that.$set(that.processList[k], 'err', true)
-          } else {
-            cos.getObjectUrl({
-              Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-              Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-              Key: that.safeObj.path,
-              Sign: true /* 获取带签名的对象URL */
-            }, function (err, data) {
-              console.log('上传成功3', data)
-              if (err) return console.log(err)
-              /* url为对象访问url */
-              that.imgList.push({ 'url': data.Location })
-              that.$forceUpdate()
-            })
-            console.log('上传成功', data)
-            that.$forceUpdate()
-          }
-        }
-      )
-    },
     async handleShowModel () {
-      await this.getAjaxBaseSecret()
-      this.fileListArr = []
-      this.processList = []
-      this.imgList = []
-      this.fileListArr = []
-      this.uploadErrList = []
-      this.shangbaoList = []
-      this.errShangbaoNum = 0
       this.dialogStatus = true
-    },
-    // 时间戳2小时过期,利用当前时间加上 90分钟 一个半小时
-    addTime () {
-      const date1 = this.$moment(this.startTime).format('YYYY-MM-DD HH:mm:ss')
-      let minTime = this.$moment(date1).add(90, 'm')// 加上30分钟
-      const endTime = this.$moment(minTime).format('YYYY-MM-DD HH:mm:ss')
-      this.endTime = endTime
-      console.log('endTime', endTime)
-    },
-
-    getTimeCha () {
-      let currentTime = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-      if (currentTime === this.endTime) {
-        const date1 = this.$moment(this.endTime).format('YYYY-MM-DD HH:mm:ss')
-        let minTime = this.$moment(date1).add(90, 'm')// 加上30分钟
-        const endTime = this.$moment(minTime).format('YYYY-MM-DD HH:mm:ss')
-        this.endTime = endTime
-        // console.log('下次结束的时间', this.endTime)
-        this.getAjaxBaseSecret()
-      }
-    },
-
-    getAjaxBaseSecret () {
-      console.log('重新获取时间重新获取时间', this.endTime)
-      return new Promise((resolve, reject) => {
-        ajaxBaseSecret().then((res) => {
-          console.log('res', res.data)
-          this.safeObj = res.data
-          resolve()
-        })
+      setTimeout(async () => {
+        await this.$refs['uploadFileComRef'].getAjaxBaseSecret()
       })
     }
   }
