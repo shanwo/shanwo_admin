@@ -1,6 +1,16 @@
 <template>
 <div>
+  <globalLoading v-if="globalLoadingStatus"/>
   <uploadLoadingVue v-if="imgLoadingStatus"/>
+<!-- 
+  <Modal
+        v-model="errModelStatus"
+        title="错误提示"
+        @on-ok="asyncOK">
+        <p></p>
+    </Modal> -->
+
+
   <div>
     <Form :label-width="100">
       <FormItem label="场地：">
@@ -38,7 +48,7 @@
 
 <script>
 import { ajaxBaseSecret } from '@/api/hxapi.js'
-import { uploadImg } from '@/api/venue.js'
+import { uploadImg } from '@/api/hy_upload.js'
 import COS from 'cos-js-sdk-v5'
 
 var cos = new COS({
@@ -65,6 +75,7 @@ const prefixCls = 'image-list'
 export default {
   name: 'image-list',
   components: {
+    globalLoading:()=>import('@/components/uploadLoading/globalLoading.vue'),
     uploadLoadingVue: () => import('@/components/uploadLoading/uploadLoading.vue')
   },
   props: {
@@ -76,6 +87,8 @@ export default {
   },
   data () {
     return {
+      errModelStatus:false, //所有图片上报之后 显示是够有未上传的图片
+      globalLoadingStatus: false,
       errShangbaoNum: 0,
       prefixCls,
       venue_id: '', // 场地id
@@ -88,7 +101,7 @@ export default {
       finishStatus: 'none', //  图片是否全部上传完
       imgLoadingStatus: false, // 所有图片上传成功的标志
       safeObj: {},
-      imgList: [],
+      imgList: [], //用来存放上报对象的
       fileListArr: [],
       processList: [],
       uploadErrList: [],
@@ -101,30 +114,8 @@ export default {
   },
   created () {
     this.userInfo = JSON.parse(localStorage.getItem('user'))
-    this.initNextWork()
   },
   methods: {
-    initNextWork () {
-      console.log('监听网络')
-      let arr = []
-      const netWorkDownlink = navigator.connection.downlink // 预估下载速度m/s
-      if (navigator.connection && navigator.connection.onchange === null) {
-        navigator.connection.onchange = () => {
-          if (netWorkDownlink !== navigator.connection.downlink || navigator.connection.rtt === 0) {
-            // 网络断开
-            arr.push(1)
-            console.log('断网了', arr)
-            if (arr.length === 10) {
-              this.$Message.error('您已断开,请检查网络')
-            }
-          } else if (netWorkDownlink === navigator.connection.downlink || navigator.connection.rtt !== 0) {
-            // 连接到网络
-            arr = []
-            console.log('网络在线')
-          }
-        }
-      }
-    },
     cancel () {
       this.$emit('listenCancel')
     },
@@ -188,10 +179,6 @@ export default {
 
                     that.$forceUpdate()
                   }
-                  // TaskReady: function (taskId) { /* 非必须 */
-                  //   console.log('上传taskid', taskId)
-                  //   that.$set(that.processList, k, 'taskid')
-                  // }
                 },
                 function (err, data) {
                   if (err) {
@@ -199,11 +186,11 @@ export default {
                     console.log('上传失败', err)
                     if (err === 'Error: CORS blocked or network error') {
                       console.log('网络异常')
+                      that.$Message.error("网络异常,请您检查当前网络")
+
                       this.$set(that.processList[k], 'err', true)
                     }
-
                     that.$set(that.processList[k], 'err', true)
-                    that.uploadErrList.push(this.fileListArr[k])
                   } else {
                     that.processList[k]['waitUrl'] = data.Location
                     that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
@@ -224,63 +211,54 @@ export default {
       }
     },
     // 上传错误对象
-    // upLoadError () {
-    //   console.log('上传第一次上传失败的对象')
-    //   let that = this
-    //   that.processList.forEach((val, k) => {
-    //     if (val.err) {
-    //       cos.putObject(
-    //         {
-    //           Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-    //           Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-    //           Key: that.safeObj.path + that.fileListArr[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
-    //           Body: that.fileListArr[k], // 上传文件对象
-    //           SliceSize:
-    //                   1024 *
-    //                   1024 *
-    //                   10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
-    //           onProgress: function (progressData) {
-    //             console.log('速度速度', progressData)
-    //             that.getTimeCha()
-    //             that.finishStatus = 'uploading'
-    //             progressData['waitUrl'] = ''
-    //             progressData['imgUrl'] = ''
-    //             that.processList[k] = progressData
-    //             that.processList[k]['loadingStatus'] = false
-    //             var percent = parseInt(progressData.percent * 10000) / 100
-    //             var speed = parseInt(progressData.speed / 1024 / 1024 * 100) / 100
-    //             console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
-    //             that.$forceUpdate()
-    //           }
-    //         },
-    //         function (err, data) {
-    //           if (err) {
-    //             // 网络异常 Error: CORS blocked or network error
-    //             console.log('上传失败', err)
-    //             if (err === 'Error: CORS blocked or network error') {
-    //               console.log('网络异常')
-    //               this.$set(that.processList[k], 'err', true)
-    //             }
-    //             that.$set(that.processList[k], 'err', true)
-    //             that.uploadErrList.push(this.fileListArr[k])
-    //           } else {
-    //             that.processList[k]['waitUrl'] = data.Location
-    //             that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
-    //             that.imgList.push({
-    //               index: k,
-    //               url: data.Location
-    //             })
-    //             console.log('开始时间', that.startTime)
-    //             that.$forceUpdate()
-    //             that.getImgListStatus()
-    //             that.getUploadStatus()
-    //             console.log('that.imgList', that.imgList)
-    //           }
-    //         }
-    //       )
-    //     }
-    //   })
-    // },
+    upLoadErrorObj () {
+      console.log('上传第一次上传失败的对象')
+      let that = this
+      that.processList.forEach((val, k) => {
+        if (val.err) {
+          cos.putObject(
+            {
+              Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
+              Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
+              Key: that.safeObj.path + that.fileListArr[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
+              Body: that.fileListArr[k], // 上传文件对象
+              SliceSize:
+                      1024 *
+                      1024 *
+                      10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
+              onProgress: function (progressData) {
+                console.log('速度速度', progressData)
+                that.getTimeCha()
+                that.finishStatus = 'uploading'
+                progressData['waitUrl'] = ''
+                progressData['imgUrl'] = ''
+                that.processList[k] = progressData
+                that.processList[k]['loadingStatus'] = false
+                var percent = parseInt(progressData.percent * 10000) / 100
+                var speed = parseInt(progressData.speed / 1024 / 1024 * 100) / 100
+                console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
+                that.$forceUpdate()
+              }
+            },
+            function (err, data) {
+              if (err) {
+                // 网络异常 Error: CORS blocked or network error
+                console.log('上传失败', err)
+                if (err === 'Error: CORS blocked or network error') {
+                  that.$Message.error("网络异常,请您检查当前网络")
+              } else {
+                that.processList[k]['waitUrl'] = data.Location
+                that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
+                console.log('开始时间', that.startTime)
+                that.$forceUpdate()
+                that.postOneImg( data.Location)
+              }
+            }
+            }
+          )
+        }
+      })
+    },
     // 获取已上传的图片 5个一组向后台发送
     getImgListStatus () {
       let that = this
@@ -330,6 +308,19 @@ export default {
         this.finishStatus = 'finish' // 此时所有图片已经上传完成 但是是否全部上报成功 要看下面计算
       }
     },
+    postOneImg(imgUrl){
+      let params = {
+        venue_id: this.venue_id,
+        images: [imgUrl]
+      }
+      console.log('入参', params)
+      if (imgs.length === 0) {
+        return
+      }
+      uploadImg(params).then(res => {
+      })
+    },
+
     // 上报图片
     postImg (imgs) {
       let params = {
@@ -344,9 +335,10 @@ export default {
         this.shangbaoList = this.shangbaoList.concat(res.data.images)
         // 这里判断一下 如果所有 图片都上报完成
         if (this.shangbaoList.length === this.fileListArr.length) {
+          this.globalLoadingStatus = true;// 显示图片保存中的loading
           console.log('图片已经全部上报了----不知道是不是全部上报成功')
           this.shangbaoList.forEach(val => {
-            if (val.msg !== 'success') {
+            if (val.msg !== 'success' && val.msg !== '今日已上传过此图片，无需重复上传' ) {
               this.shangbaoErrorList = this.shangbaoErrorList.concat([ val ])
             }
           })
@@ -354,6 +346,7 @@ export default {
             this.$Message.success('图片已经全部上传完成')
             console.log('图片全部上报了--------没有错误图片需要上报')
             this.dialogStatus = false
+            this.globalLoadingStatus = false;// 显示图片保存中的loading
             this.errShangbaoNum = 0
             this.cancel()
           } else {
@@ -372,9 +365,10 @@ export default {
         return
       }
       if (this.shangbaoErrorList.length === 0) {
-        this.$Message.success('errorPostImg图片已经全部上传完成')
+        this.$Message.success('图片已经全部上传完成')
         console.log('errorPostImg图片全部上报了--------没有错误图片需要上报')
         this.dialogStatus = false
+        this.globalLoadingStatus = false
         return
       }
       let imgs = []
@@ -387,6 +381,7 @@ export default {
       }
       uploadImg(params).then(res => {
         // 这里判断一下 如果所有 图片都上报完成
+        console.log("res---------",res)
         res.data.images.forEach(val => {
           if (val.msg === 'success') {
             num++
@@ -394,6 +389,7 @@ export default {
             if (index === -1) { // 没有需要上报的了
               this.$Message.success('图片全部上传完成')
               this.dialogStatus = false
+              // this.globalLoadingStatus = false;// 显示图片保存中的loading
               console.log('所有上报出错的图片已经全部重新上报了')
               this.cancel()
             } else {
