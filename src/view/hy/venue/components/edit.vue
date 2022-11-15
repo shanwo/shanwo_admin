@@ -13,7 +13,7 @@
           <Select v-model="province" @on-change="listenProvince" :disabled="provinceStatus">
             <Option v-for="(item,index) of provinceList" :value="item.id" :key="index">{{ item.name }}</Option>
           </Select>
-          <Select v-model="city" @on-change="listenCity"  :disabled="cityStatus">
+          <Select v-model="city" @on-change="listenCity" :disabled="cityStatus">
             <Option v-for="(item,index) of cityList" :value="item.id" :key="index">{{ item.name }}</Option>
           </Select>
           <Select v-model="district" :disabled="areaStatus">

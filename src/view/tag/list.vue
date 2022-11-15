@@ -1,21 +1,21 @@
 <template>
-  <div :class="prefixCls">
-    <div :class="prefixCls + '-search'">
-      <search v-model="searchData">
-        <template slot="btn">
-          <Button @click="addIcon" type="primary" class="mr10">添加</Button>
-          <Button @click="getTaglList" type="primary">查询</Button>
-        </template>
-      </search>
-    </div>
-    <div :class="prefixCls + '-table'">
-      <table-list @refresh="getTaglList" :tagList="tagList" @toDetail="toDetail"></table-list>
-    </div>
-    <div :class="prefixCls + '-page'">
-      <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
-    </div>
-    <edit v-model="isShowEdit" :id="id" @on-change="editChange"/>
+<div :class="prefixCls">
+  <div :class="prefixCls + '-search'">
+    <search v-model="searchData">
+      <template slot="btn">
+        <Button @click="addIcon" type="primary" class="mr10">添加</Button>
+        <Button @click="getTaglList" type="primary">查询</Button>
+      </template>
+    </search>
   </div>
+  <div :class="prefixCls + '-table'">
+    <table-list @refresh="getTaglList" :tagList="tagList" @toDetail="toDetail"></table-list>
+  </div>
+  <div :class="prefixCls + '-page'">
+    <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
+  </div>
+  <edit v-model="isShowEdit" :id="id" @on-change="editChange"/>
+</div>
 </template>
 
 <script>

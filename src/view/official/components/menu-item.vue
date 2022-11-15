@@ -1,24 +1,24 @@
 <template>
-  <div :class="prefixCls" @click="touchMenu">
-    <div :class="{ selected: isSelected }">{{ menuDate.name }}</div>
-    <div :class="prefixCls + '-submenu'" v-if="isSelected">
-      <template v-for="(item, subIndex) of menuDate.sub_button">
-        <div
+<div :class="prefixCls" @click="touchMenu">
+  <div :class="{ selected: isSelected }">{{ menuDate.name }}</div>
+  <div :class="prefixCls + '-submenu'" v-if="isSelected">
+    <template v-for="(item, subIndex) of menuDate.sub_button">
+      <div
           :class="{
             [`${prefixCls}-submenu-item`]: true,
             selected: selectSubIndex === subIndex
           }"
           :key="subIndex"
           @click.stop="() => touchSubMenu(subIndex)"
-        >
-          {{ item.name }}
-        </div>
-      </template>
-      <template v-if="menuDate.sub_button.length < 5">
-        <div :class="prefixCls + '-submenu-item'" @click.stop="addSubmenu">添加子菜单</div>
-      </template>
-    </div>
+      >
+        {{ item.name }}
+      </div>
+    </template>
+    <template v-if="menuDate.sub_button.length < 5">
+      <div :class="prefixCls + '-submenu-item'" @click.stop="addSubmenu">添加子菜单</div>
+    </template>
   </div>
+</div>
 </template>
 
 <script>
@@ -66,6 +66,7 @@ export default {
   line-height: 38px;
   background: #fff;
   border-left: 1px solid #e0e0e0;
+
   &-submenu {
     position: absolute;
     bottom: 38px;

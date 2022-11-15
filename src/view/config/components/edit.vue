@@ -1,29 +1,29 @@
 <template>
-  <div :class="prefixCls">
-    <Modal :value="value" title="添加/编辑" @on-cancel="cancel">
-      <div :class="prefixCls + '-box'">
-        <Form :label-width="100">
-          <FormItem label="自动加载：">
-            <Select v-model="iconInfo.autoload" class="iptWidth">
-              <template v-for="item in configAutoload">
-                <Option v-if="item" :value="item.type" :key="item.type">{{ item.name }}</Option>
-              </template>
-            </Select>
-          </FormItem>
-          <FormItem label="配置名：">
-            <Input v-model="iconInfo.option_name" placeholder="请输入配置名称" class="iptWidth"></Input>
-          </FormItem>
-          <FormItem label="配置内容：">
-            <textarea :rows="8" v-model="iconInfo.option_value" class="ivu-input"/>
-          </FormItem>
-        </Form>
-      </div>
-      <div slot="footer">
-        <Button type="primary" @click="confirm">确定</Button>
-        <Button type="primary" @click="cancel" ghost>取消</Button>
-      </div>
-    </Modal>
-  </div>
+<div :class="prefixCls">
+  <Modal :value="value" title="添加/编辑" @on-cancel="cancel">
+    <div :class="prefixCls + '-box'">
+      <Form :label-width="100">
+        <FormItem label="自动加载：">
+          <Select v-model="iconInfo.autoload" class="iptWidth">
+            <template v-for="item in configAutoload">
+              <Option v-if="item" :value="item.type" :key="item.type">{{ item.name }}</Option>
+            </template>
+          </Select>
+        </FormItem>
+        <FormItem label="配置名：">
+          <Input v-model="iconInfo.option_name" placeholder="请输入配置名称" class="iptWidth"></Input>
+        </FormItem>
+        <FormItem label="配置内容：">
+          <textarea :rows="8" v-model="iconInfo.option_value" class="ivu-input"/>
+        </FormItem>
+      </Form>
+    </div>
+    <div slot="footer">
+      <Button type="primary" @click="confirm">确定</Button>
+      <Button type="primary" @click="cancel" ghost>取消</Button>
+    </div>
+  </Modal>
+</div>
 </template>
 
 <script>

@@ -1,39 +1,40 @@
 <template>
-  <div :class="prefixCls">
-    <div :class="prefixCls + '-box'">
-      <!-- 菜单 -->
-      <div :class="prefixCls + '-box-left'">
-        <div :class="prefixCls + '-box-left-menu'">
-          <template v-for="(item, index) of menu">
-            <menu-item
+<div :class="prefixCls">
+  <div :class="prefixCls + '-box'">
+    <!-- 菜单 -->
+    <div :class="prefixCls + '-box-left'">
+      <div :class="prefixCls + '-box-left-menu'">
+        <template v-for="(item, index) of menu">
+          <menu-item
               @touchMenu="(val) => touchMenu(index, val)"
               @touchSubMenu="touchSubMenu"
               :key="index"
               :menuDate="item"
               :isSelected="selectIndex === index"
-            />
-          </template>
-          <template v-if="menu.length < 3">
-            <div class="add-action" @click="addMenu">添加菜单</div>
-          </template>
-        </div>
-      </div>
-      <!-- 菜单信息 -->
-      <div :class="prefixCls + '-box-right'">
-        <menu-info-component :menuInfo="currentMenuInfo" />
+          />
+        </template>
+        <template v-if="menu.length < 3">
+          <div class="add-action" @click="addMenu">添加菜单</div>
+        </template>
       </div>
     </div>
-
-    <div :class="prefixCls + '-footer'">
-      <Button type="primary" @click="confirm">保存配置</Button>
+    <!-- 菜单信息 -->
+    <div :class="prefixCls + '-box-right'">
+      <menu-info-component :menuInfo="currentMenuInfo"/>
     </div>
   </div>
+
+  <div :class="prefixCls + '-footer'">
+    <Button type="primary" @click="confirm">保存配置</Button>
+  </div>
+</div>
 </template>
 
 <script>
 import { setMenu, menuInfo } from '@/api/official'
 import menuItem from './components/menu-item.vue'
 import menuInfoComponent from './components/menu-info.vue'
+
 const prefixCls = 'menu'
 export default {
   name: 'menu',
@@ -101,15 +102,18 @@ export default {
   padding: 10px;
   border-radius: 4px;
   background-color: #fff;
+
   &-box {
     display: flex;
     justify-content: center;
+
     &-left {
       position: relative;
       width: 327px;
       height: 695px;
       background-image: url(//shanwo.cc/home/img/phone.png);
       background-repeat: no-repeat;
+
       &-menu {
         position: absolute;
         bottom: 114px;
@@ -119,6 +123,7 @@ export default {
         text-align: center;
         cursor: pointer;
         background-color: #fff;
+
         .add-action {
           flex: 1;
           height: 38px;
@@ -127,12 +132,14 @@ export default {
         }
       }
     }
+
     &-right {
       padding-bottom: 30px;
       width: 450px;
     }
   }
-  &-footer{
+
+  &-footer {
     padding: 20px 0;
     text-align: center;
   }

@@ -1,11 +1,11 @@
 <template>
-  <div :class="prefixCls">
-    <div :class="prefixCls + '-left'">
-    </div>
-    <div :class="prefixCls + '-right'">
-      <slot name="btn"></slot>
-    </div>
+<div :class="prefixCls">
+  <div :class="prefixCls + '-left'">
   </div>
+  <div :class="prefixCls + '-right'">
+    <slot name="btn"></slot>
+  </div>
+</div>
 
 </template>
 

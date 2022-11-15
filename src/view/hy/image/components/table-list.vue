@@ -44,13 +44,13 @@ export default {
         title: '警告',
         content: '确认删除此图片嘛？',
         onOk: () => {
-          uploadDel({ id: id}).then(() => {
+          uploadDel({ id: id }).then(() => {
             this.$Message.success('成功')
             this.$emit('refresh')
           })
         }
       })
-    },
+    }
   }
 }
 </script>

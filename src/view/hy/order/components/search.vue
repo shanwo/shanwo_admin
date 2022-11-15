@@ -16,9 +16,9 @@
       <FormItem label="用户ID：">
         <Input v-model="value.user_id" class="inputWidth" placeholder="请输入用户昵称" clearable></Input>
       </FormItem>
-<!--      <FormItem label="支付时间：">-->
-<!--        <Date-picker @on-change="timeChange" :value="searchInfo.time" format="yyyy-MM-dd" type="daterange" placement="top-start" placeholder="选择日期" style="width: 200px"></Date-picker>-->
-<!--      </FormItem>-->
+      <!--      <FormItem label="支付时间：">-->
+      <!--        <Date-picker @on-change="timeChange" :value="searchInfo.time" format="yyyy-MM-dd" type="daterange" placement="top-start" placeholder="选择日期" style="width: 200px"></Date-picker>-->
+      <!--      </FormItem>-->
     </Form>
   </div>
   <div :class="prefixCls + '-right'">

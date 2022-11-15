@@ -16,7 +16,8 @@
           <p>{{ iconInfo.content }}</p>
         </FormItem>
         <FormItem label="处理状态：">
-          <p v-if="feedbackStatus[iconInfo.status]">{{ feedbackStatus[iconInfo.status].name }}</p><p v-else>-</p>
+          <p v-if="feedbackStatus[iconInfo.status]">{{ feedbackStatus[iconInfo.status].name }}</p>
+          <p v-else>-</p>
         </FormItem>
         <FormItem label="处理结果：">
           <Input v-model="iconInfo.result" placeholder="请输入处理结果" class="iptWidth"></Input>

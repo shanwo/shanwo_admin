@@ -16,25 +16,24 @@
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
   </div>
   <Modal v-model="dialogStatus" :closable="false" :mask-closable="false" :footer-hide="true" width="60%" title="图片上传">
-  <div v-if="dialogStatus">
-    <uploadFileCom  @listenCancel="cancel" :selectArr="selectArr" ref="uploadFileComRef"/>
-  </div>
+    <div v-if="dialogStatus">
+      <uploadFileCom @listenCancel="cancel" :selectArr="selectArr" ref="uploadFileComRef"/>
+    </div>
 
   </Modal>
 </div>
 </template>
 
 <script>
-import { getVenueList} from '@/api/venue.js'
+import { getVenueList } from '@/api/venue.js'
 import { uploadLists, uploadClean } from '@/api/hy_upload.js'
-
 
 const prefixCls = 'image-list'
 
 export default {
   name: 'image-list',
   components: {
-    uploadFileCom: () => import('@/components/uploadFileCom.vue'),
+    uploadFileCom: () => import('./components/uploadFileCom.vue'),
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue')
   },
@@ -85,17 +84,26 @@ export default {
       })
     },
     clean () {
-      this.$Modal.confirm({
-        title: '警告',
-        content: '将清理拍摄时间早于3个月前的图片，清理后不再显示。若3个月内无照片，将只保留最后一周的照片。',
-        onOk: () => {
-          uploadClean().then(res => {
-            this.$Message.success(res.msg ? res.msg : '本次清理' + Object.keys(res.data).length + '张照片')
-            this.$emit('refresh')
-            this.getList()
-          })
-        }
-      })
+      if (!this.searchData.venue_id) {
+        this.$Modal.confirm({
+          title: '警告',
+          content: '请选择要清理的雪场',
+          onOk: () => {
+          }
+        })
+      } else {
+        this.$Modal.confirm({
+          title: '警告',
+          content: '将清理拍摄时间早于3个月前的图片，清理后不再显示。若3个月内无照片，将只保留最后一周的照片。',
+          onOk: () => {
+            uploadClean({ venue_id: this.searchData.venue_id }).then(res => {
+              this.$Message.success(res.msg ? res.msg : '本次清理' + Object.keys(res.data).length + '张照片')
+              this.$emit('refresh')
+              this.getList()
+            })
+          }
+        })
+      }
     },
     pageChange (page) {
       this.searchData.page = page
@@ -104,7 +112,7 @@ export default {
 
     async handleShowModel () {
       this.dialogStatus = true
-      setTimeout(async () => {
+      setTimeout(async() => {
         await this.$refs['uploadFileComRef'].getAjaxBaseSecret()
       })
     }
@@ -129,7 +137,8 @@ export default {
     padding: 8px;
     text-align: right;
   }
-  &-footer{
+
+  &-footer {
     padding: 20px 0;
     text-align: center;
   }

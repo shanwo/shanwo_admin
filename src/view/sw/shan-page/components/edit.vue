@@ -3,15 +3,15 @@
   <Modal :value="value" title="推荐设置" @on-cancel="cancel">
     <div :class="prefixCls + '-box'">
       <Form :label-width="100">
-      <FormItem label="推荐类型：">
-        <Select v-model="pageInfo.is_open" class="inputWidth">
-          <Option v-for="item of cacheTypeList" :value="item.type" :key="item.type">{{ item.name }}</Option>
-        </Select>
-      </FormItem>
-      <FormItem label="排序值：">
-        <Input-number v-model="pageInfo.sort" :min="-8388608" :max="8388607" placeholder="请输入排序值" class="inputWidth"></Input-number>
-      </FormItem>
-    </Form>
+        <FormItem label="推荐类型：">
+          <Select v-model="pageInfo.is_open" class="inputWidth">
+            <Option v-for="item of cacheTypeList" :value="item.type" :key="item.type">{{ item.name }}</Option>
+          </Select>
+        </FormItem>
+        <FormItem label="排序值：">
+          <Input-number v-model="pageInfo.sort" :min="-8388608" :max="8388607" placeholder="请输入排序值" class="inputWidth"></Input-number>
+        </FormItem>
+      </Form>
     </div>
     <div slot="footer">
       <Button type="primary" @click="confirm">确定</Button>

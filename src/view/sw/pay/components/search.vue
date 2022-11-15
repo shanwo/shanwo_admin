@@ -21,6 +21,7 @@
 
 <script>
 import { payType } from '../page-info'
+
 const prefixCls = 'pay-list'
 export default {
   name: 'pay-list',

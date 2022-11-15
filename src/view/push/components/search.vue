@@ -21,6 +21,7 @@
 
 <script>
 import { pushType } from '../page-info'
+
 const prefixCls = 'push-list'
 export default {
   name: 'push-list',
