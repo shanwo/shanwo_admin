@@ -31,5 +31,9 @@ export const columns = [
   {
     key: 'updated_at',
     title: '上传时间'
+  },
+  {
+    slot: 'action',
+    title: '操作'
   }
 ]
