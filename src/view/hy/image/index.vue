@@ -25,7 +25,8 @@
 </template>
 
 <script>
-import { getVenueList, ajaxUploadLists, ajaxUploadClean } from '@/api/venue.js'
+import { getVenueList} from '@/api/venue.js'
+import { uploadLists, uploadClean } from '@/api/hy_upload.js'
 
 import uploadFileCom from '@/view/hy/image/components/uploadFileCom'
 const prefixCls = 'image-list'
@@ -79,7 +80,7 @@ export default {
         size: this.searchData.size
 
       }
-      ajaxUploadLists(params).then(res => {
+      uploadLists(params).then(res => {
         this.imageList = res.data.lists || [] // 图片列表
         this.total = res.data.total
       })
@@ -89,7 +90,7 @@ export default {
         title: '警告',
         content: '将清理拍摄时间早于3个月前的图片，清理后不再显示。若3个月内无照片，将只保留最后一周的照片。',
         onOk: () => {
-          ajaxUploadClean().then(res => {
+          uploadClean().then(res => {
             this.$Message.success(res.msg ? res.msg : '本次清理' + Object.keys(res.data).length + '张照片')
             this.$emit('refresh')
             this.getList()

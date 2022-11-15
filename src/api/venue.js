@@ -42,26 +42,3 @@ export const vacheCache = (params) => {
     method: 'post'
   })
 }
-// 图片上报
-export const ajaxUploadImg = (params) => {
-  return axios.request({
-    url: '/hy/upload/report',
-    data: params,
-    method: 'post'
-  })
-}
-// 图片列表
-export const ajaxUploadLists = (params) => {
-  return axios.request({
-    url: '/hy/upload/lists',
-    params: params,
-    method: 'get'
-  })
-}
-// 图片清理
-export const ajaxUploadClean = () => {
-  return axios.request({
-    url: '/hy/upload/clean',
-    method: 'get'
-  })
-}

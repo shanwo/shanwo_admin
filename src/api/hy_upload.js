@@ -1,0 +1,31 @@
+import axios from '@/libs/api.request'
+// 图片上报
+export const uploadImg = (params) => {
+  return axios.request({
+    url: '/hy/upload/report',
+    data: params,
+    method: 'post'
+  })
+}
+// 图片列表
+export const uploadLists = (params) => {
+  return axios.request({
+    url: '/hy/upload/lists',
+    params: params,
+    method: 'get'
+  })
+}
+// 图片清理
+export const uploadDel = () => {
+  return axios.request({
+    url: '/hy/upload/del',
+    method: 'get'
+  })
+}
+// 图片清理
+export const uploadClean = () => {
+  return axios.request({
+    url: '/hy/upload/clean',
+    method: 'get'
+  })
+}

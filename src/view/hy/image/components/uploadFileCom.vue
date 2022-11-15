@@ -38,7 +38,7 @@
 
 <script>
 import { ajaxBaseSecret } from '@/api/hxapi.js'
-import { ajaxUploadImg } from '@/api/venue.js'
+import { uploadImg } from '@/api/venue.js'
 import COS from 'cos-js-sdk-v5'
 
 var cos = new COS({
@@ -339,7 +339,7 @@ export default {
       if (imgs.length === 0) {
         return
       }
-      ajaxUploadImg(params).then(res => {
+      uploadImg(params).then(res => {
         this.shangbaoList = this.shangbaoList.concat(res.data.images)
         // 这里判断一下 如果所有 图片都上报完成
         if (this.shangbaoList.length === this.fileListArr.length) {
@@ -384,7 +384,7 @@ export default {
         venue_id: this.venue_id,
         images: imgs
       }
-      ajaxUploadImg(params).then(res => {
+      uploadImg(params).then(res => {
         // 这里判断一下 如果所有 图片都上报完成
         res.data.images.forEach(val => {
           if (val.msg === 'success') {
