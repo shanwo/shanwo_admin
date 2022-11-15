@@ -15,11 +15,12 @@ export const uploadLists = (params) => {
     method: 'get'
   })
 }
-// 图片清理
-export const uploadDel = () => {
+// 图片删除
+export const uploadDel = (params) => {
   return axios.request({
     url: '/hy/upload/del',
-    method: 'get'
+    data: params,
+    method: 'post'
   })
 }
 // 图片清理
