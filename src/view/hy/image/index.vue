@@ -28,14 +28,13 @@
 import { getVenueList} from '@/api/venue.js'
 import { uploadLists, uploadClean } from '@/api/hy_upload.js'
 
-import uploadFileCom from '@/view/hy/image/components/uploadFileCom'
+
 const prefixCls = 'image-list'
 
 export default {
   name: 'image-list',
   components: {
-    uploadFileCom,
-    uploadLoadingVue: () => import('@/components/uploadLoading/uploadLoading.vue'),
+    uploadFileCom: () => import('@/components/uploadFileCom.vue'),
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue')
   },
