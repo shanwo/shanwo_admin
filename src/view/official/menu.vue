@@ -110,15 +110,15 @@ export default {
     &-left {
       position: relative;
       width: 327px;
-      height: 695px;
-      background-image: url(@/assets/images/phone.png);
+      height: 612px;
+      background-image: url("../../assets/images/phone.png");
       background-repeat: no-repeat;
 
       &-menu {
         position: absolute;
-        bottom: 114px;
-        left: 67px;
-        width: 230px;
+        bottom: 75px;
+        left: 60px;
+        width: 244px;
         display: flex;
         text-align: center;
         cursor: pointer;
@@ -126,15 +126,14 @@ export default {
 
         .add-action {
           flex: 1;
-          height: 38px;
-          line-height: 38px;
+          height: 36px;
+          line-height: 36px;
           border-left: 1px solid #e0e0e0;
         }
       }
     }
 
     &-right {
-      padding-bottom: 30px;
       width: 450px;
     }
   }
