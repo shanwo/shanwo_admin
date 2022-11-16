@@ -20,7 +20,6 @@
     <div v-if="dialogStatus">
       <uploadFileCom @listenCancel="cancel" :selectArr="selectArr" ref="uploadFileComRef"/>
     </div>
-
   </Modal>
 </div>
 </template>
