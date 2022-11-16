@@ -111,11 +111,11 @@ export default {
       this.getList()
     },
 
-     handleShowModel () {
+    handleShowModel () {
       this.dialogStatus = true
-      setTimeout(async () => {
+      setTimeout(async() => {
         await this.$refs['uploadFileComRef'].getAjaxBaseSecret()
-      },1000)
+      }, 1000)
     }
   }
 

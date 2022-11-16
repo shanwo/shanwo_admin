@@ -2,13 +2,13 @@
 <div>
   <globalLoading v-if="globalLoadingStatus"/>
   <uploadLoadingVue v-if="imgLoadingStatus"/>
-<!-- 
-  <Modal
-        v-model="errModelStatus"
-        title="错误提示"
-        @on-ok="asyncOK">
-        <p></p>
-    </Modal> -->
+  <!--
+    <Modal
+          v-model="errModelStatus"
+          title="错误提示"
+          @on-ok="asyncOK">
+          <p></p>
+      </Modal> -->
 
 
   <div>
@@ -75,7 +75,7 @@ const prefixCls = 'image-list'
 export default {
   name: 'image-list',
   components: {
-    globalLoading:()=>import('@/components/uploadLoading/globalLoading.vue'),
+    globalLoading: () => import('@/components/uploadLoading/globalLoading.vue'),
     uploadLoadingVue: () => import('@/components/uploadLoading/uploadLoading.vue')
   },
   props: {
@@ -87,7 +87,7 @@ export default {
   },
   data () {
     return {
-      errModelStatus:false, //所有图片上报之后 显示是够有未上传的图片
+      errModelStatus: false, //所有图片上报之后 显示是够有未上传的图片
       globalLoadingStatus: false,
       errShangbaoNum: 0,
       prefixCls,
@@ -186,7 +186,7 @@ export default {
                     console.log('上传失败', err)
                     if (err === 'Error: CORS blocked or network error') {
                       console.log('网络异常')
-                      that.$Message.error("网络异常,请您检查当前网络")
+                      that.$Message.error('网络异常,请您检查当前网络')
 
                       this.$set(that.processList[k], 'err', true)
                     }
@@ -217,44 +217,44 @@ export default {
       that.processList.forEach((val, k) => {
         if (val.err) {
           cos.putObject(
-            {
-              Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
-              Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
-              Key: that.safeObj.path + that.fileListArr[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
-              Body: that.fileListArr[k], // 上传文件对象
-              SliceSize:
-                      1024 *
-                      1024 *
-                      10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
-              onProgress: function (progressData) {
-                console.log('速度速度', progressData)
-                that.getTimeCha()
-                that.finishStatus = 'uploading'
-                progressData['waitUrl'] = ''
-                progressData['imgUrl'] = ''
-                that.processList[k] = progressData
-                that.processList[k]['loadingStatus'] = false
-                var percent = parseInt(progressData.percent * 10000) / 100
-                var speed = parseInt(progressData.speed / 1024 / 1024 * 100) / 100
-                console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
-                that.$forceUpdate()
+              {
+                Bucket: that.safeObj.bucket /* 填写自己的bucket，必须字段 */,
+                Region: that.safeObj.region /* 存储桶所在地域，必须字段 */,
+                Key: that.safeObj.path + that.fileListArr[k].name /* 存储在桶里的对象键（例如1.jpg，a/b/test.txt），必须字段 */,
+                Body: that.fileListArr[k], // 上传文件对象
+                SliceSize:
+                    1024 *
+                    1024 *
+                    10 /* 触发分块上传的阈值，超过5MB使用分块上传，小20MB使用简单上传。可自行设置，非必须 */,
+                onProgress: function (progressData) {
+                  console.log('速度速度', progressData)
+                  that.getTimeCha()
+                  that.finishStatus = 'uploading'
+                  progressData['waitUrl'] = ''
+                  progressData['imgUrl'] = ''
+                  that.processList[k] = progressData
+                  that.processList[k]['loadingStatus'] = false
+                  var percent = parseInt(progressData.percent * 10000) / 100
+                  var speed = parseInt(progressData.speed / 1024 / 1024 * 100) / 100
+                  console.log('进度：' + percent + '%; 速度：' + speed + 'Mb/s;')
+                  that.$forceUpdate()
+                }
+              },
+              function (err, data) {
+                if (err) {
+                  // 网络异常 Error: CORS blocked or network error
+                  console.log('上传失败', err)
+                  if (err === 'Error: CORS blocked or network error') {
+                    that.$Message.error('网络异常,请您检查当前网络')
+                  } else {
+                    that.processList[k]['waitUrl'] = data.Location
+                    that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
+                    console.log('开始时间', that.startTime)
+                    that.$forceUpdate()
+                    that.postOneImg(data.Location)
+                  }
+                }
               }
-            },
-            function (err, data) {
-              if (err) {
-                // 网络异常 Error: CORS blocked or network error
-                console.log('上传失败', err)
-                if (err === 'Error: CORS blocked or network error') {
-                  that.$Message.error("网络异常,请您检查当前网络")
-              } else {
-                that.processList[k]['waitUrl'] = data.Location
-                that.processList[k]['imgUrl'] = 'http://' + data.Location + '?imageView2/1/w/200/h/200/q/50'
-                console.log('开始时间', that.startTime)
-                that.$forceUpdate()
-                that.postOneImg( data.Location)
-              }
-            }
-            }
           )
         }
       })
@@ -308,10 +308,10 @@ export default {
         this.finishStatus = 'finish' // 此时所有图片已经上传完成 但是是否全部上报成功 要看下面计算
       }
     },
-    postOneImg(imgUrl){
+    postOneImg (imgUrl) {
       let params = {
         venue_id: this.venue_id,
-        images: [imgUrl]
+        images: [ imgUrl ]
       }
       console.log('入参', params)
       if (imgs.length === 0) {
@@ -335,10 +335,10 @@ export default {
         this.shangbaoList = this.shangbaoList.concat(res.data.images)
         // 这里判断一下 如果所有 图片都上报完成
         if (this.shangbaoList.length === this.fileListArr.length) {
-          this.globalLoadingStatus = true;// 显示图片保存中的loading
+          this.globalLoadingStatus = true// 显示图片保存中的loading
           console.log('图片已经全部上报了----不知道是不是全部上报成功')
           this.shangbaoList.forEach(val => {
-            if (val.msg !== 'success' && val.msg !== '今日已上传过此图片，无需重复上传' ) {
+            if (val.msg !== 'success' && val.msg !== '今日已上传过此图片，无需重复上传') {
               this.shangbaoErrorList = this.shangbaoErrorList.concat([ val ])
             }
           })
@@ -346,7 +346,7 @@ export default {
             this.$Message.success('图片已经全部上传完成')
             console.log('图片全部上报了--------没有错误图片需要上报')
             this.dialogStatus = false
-            this.globalLoadingStatus = false;// 显示图片保存中的loading
+            this.globalLoadingStatus = false// 显示图片保存中的loading
             this.errShangbaoNum = 0
             this.cancel()
           } else {
@@ -381,7 +381,7 @@ export default {
       }
       uploadImg(params).then(res => {
         // 这里判断一下 如果所有 图片都上报完成
-        console.log("res---------",res)
+        console.log('res---------', res)
         res.data.images.forEach(val => {
           if (val.msg === 'success') {
             num++
