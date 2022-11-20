@@ -15,7 +15,6 @@
   <div :class="prefixCls + '-page'">
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
   </div>
-  div
   <Modal v-model="dialogStatus" :closable="false" :mask-closable="false" :footer-hide="true" width="60%" title="图片上传">
     <div v-if="dialogStatus">
       <uploadFileCom @listenCancel="cancel" :selectArr="selectArr" ref="uploadFileComRef"/>
