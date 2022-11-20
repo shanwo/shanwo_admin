@@ -192,10 +192,9 @@ export default {
       }
     },
     postOneImg (index,imgUrl) {
-      let imgs = [imgUrl]
       let params = {
         venue_id: this.venue_id,
-        images: imgs
+        image: 'https://' + imgUrl
       }
       this.shangbaoNum+= 1;
       //  所有图片都上报了,成不成功还不确定
@@ -209,7 +208,7 @@ export default {
         uploadImg(params).then(res => {
         console.log("上报单张图片",res);
         if(res.status ===200) {
-          if(res.data.images[0].msg === 'success' || res.data.images[0].msg === '今日已上传过此图片，无需重复上传'){
+          if(res.data.image.msg === 'success' || res.data.image.msg === '今日已上传过此图片，无需重复上传'){
             this.$set(this.processList[index],'shangbaoStatus',1)
           }else{
             this.$set(this.processList[index],'shangbaoStatus',0)
