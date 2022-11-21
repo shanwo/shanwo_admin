@@ -1,10 +1,8 @@
 <template>
 <div :class="prefixCls">
   <Upload
-      :action="`${config.baseUrl.dev}/upload/file`"
-      :headers="{
-                Authorization: `Bearer ${this.token}`
-            }"
+      :action=this.action+'/upload/file'
+      :headers="{Authorization: `Bearer ${this.token}`}"
       :on-success="uploadSuccess">
     <div :class="prefixCls + '-box'">
       <img :src="value" width="256">
@@ -29,6 +27,13 @@ export default {
     value: ''
   },
   computed: {
+    action () {
+      if (window.location.hostname === 'shanwo.cc') {
+        return config.baseUrl.pro
+      } else {
+        return config.baseUrl.dev
+      }
+    },
     token () {
       return this.$store.state && this.$store.state.user && this.$store.state.user.token
     }
