@@ -1,40 +1,41 @@
 <template>
 <div class="home bck-color">
-  <Divider orientation="left">整体数据</Divider>
-  <Row :gutter="20">
-    <i-col :xs="12" :md="8" :lg="6" v-for="(infor, i) in inforCardData" :key="`infor-${i}`"
-           style="height: 120px;padding-bottom: 10px;">
-      <infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="36">
-        <count-to :end="infor.count" count-class="count-style"/>
-        <p>{{ infor.title }}</p>
-      </infor-card>
-    </i-col>
-  </Row>
-  <Divider orientation="left">数据明细</Divider>
-  <Row :gutter="20">
-    <i-col :md="24" :lg="24">
-      <Form :label-width="100" inline>
-        <FormItem label="时间区间：">
-          <Date-picker @on-change="timeChange" :value="searchInfo.time" format="yyyy-MM-dd"
-                       type="daterange"
-                       placement="top-start" placeholder="选择日期" style="width: 200px"></Date-picker>
-        </FormItem>
-        <FormItem label="查询类型：">
-          <Select v-model="searchInfo.type" class="ipt-width">
-            <Option v-for="item in typeList" :value="item.value" :key="item.key"></Option>
-          </Select>
-        </FormItem>
-        <FormItem :label-width="0">
-          <Button type="primary">查询</Button>
-        </FormItem>
-      </Form>
-    </i-col>
-    <i-col :md="24" :lg="24">
-      <Card shadow>
-        <example style="height: 300px"/>
-      </Card>
-    </i-col>
-  </Row>
+  <Divider orientation="left">研发中</Divider>
+<!--  <Divider orientation="left">整体数据</Divider>-->
+<!--  <Row :gutter="20">-->
+<!--    <i-col :xs="12" :md="8" :lg="6" v-for="(infor, i) in inforCardData" :key="`infor-${i}`"-->
+<!--           style="height: 120px;padding-bottom: 10px;">-->
+<!--      <infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="36">-->
+<!--        <count-to :end="infor.count" count-class="count-style"/>-->
+<!--        <p>{{ infor.title }}</p>-->
+<!--      </infor-card>-->
+<!--    </i-col>-->
+<!--  </Row>-->
+<!--  <Divider orientation="left">数据明细</Divider>-->
+<!--  <Row :gutter="20">-->
+<!--    <i-col :md="24" :lg="24">-->
+<!--      <Form :label-width="100" inline>-->
+<!--        <FormItem label="时间区间：">-->
+<!--          <Date-picker @on-change="timeChange" :value="searchInfo.time" format="yyyy-MM-dd"-->
+<!--                       type="daterange"-->
+<!--                       placement="top-start" placeholder="选择日期" style="width: 200px"></Date-picker>-->
+<!--        </FormItem>-->
+<!--        <FormItem label="查询类型：">-->
+<!--          <Select v-model="searchInfo.type" class="ipt-width">-->
+<!--            <Option v-for="item in typeList" :value="item.value" :key="item.key"></Option>-->
+<!--          </Select>-->
+<!--        </FormItem>-->
+<!--        <FormItem :label-width="0">-->
+<!--          <Button type="primary">查询</Button>-->
+<!--        </FormItem>-->
+<!--      </Form>-->
+<!--    </i-col>-->
+<!--    <i-col :md="24" :lg="24">-->
+<!--      <Card shadow>-->
+<!--        <example style="height: 300px"/>-->
+<!--      </Card>-->
+<!--    </i-col>-->
+<!--  </Row>-->
 </div>
 </template>
 
