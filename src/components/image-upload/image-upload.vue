@@ -1,7 +1,7 @@
 <template>
 <div :class="prefixCls">
   <Upload
-      :action=this.action+'/upload/file'
+      :action="`${this.action}`+'/upload/file'"
       :headers="{Authorization: `Bearer ${this.token}`}"
       :on-success="uploadSuccess">
     <div :class="prefixCls + '-box'">
