@@ -1,5 +1,5 @@
 <template>
-<div :class="prefixCls">
+<div :class ="prefixCls">
   <div :class="prefixCls + '-search'">
     <search v-model="searchData">
       <template slot="btn">
@@ -27,14 +27,19 @@
 import { getVenueList } from '@/api/venue.js'
 import { uploadLists, uploadClean } from '@/api/hy_upload.js'
 
+import uploadFileCom from './components/uploadFileCom.vue'
+import search from './components/search.vue'
+
+import tableList from './components/table-list.vue'
+
 const prefixCls = 'image-list'
 
 export default {
   name: 'image-list',
   components: {
-    uploadFileCom: () => import('./components/uploadFileCom.vue'),
-    search: () => import('./components/search.vue'),
-    tableList: () => import('./components/table-list.vue')
+    uploadFileCom: uploadFileCom,
+    search: search,
+    tableList: tableList
   },
   data () {
     return {
@@ -52,11 +57,6 @@ export default {
       safeObj: {},
       userInfo: ''
     }
-  },
-  created () {
-    this.userInfo = JSON.parse(localStorage.getItem('user'))
-    this.getVenList()
-    this.getList()
   },
   methods: {
     cancel () {
@@ -112,7 +112,7 @@ export default {
 
     handleShowModel () {
       this.dialogStatus = true
-      setTimeout(async() => {
+      setTimeout(async () => {
         await this.$refs['uploadFileComRef'].getAjaxBaseSecret()
       }, 1000)
     }

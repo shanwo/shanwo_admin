@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   extends: ["plugin:vue/essential", "@vue/standard"],
-  parser: '@babel/eslint-parser',
+  parser: 'vue-eslint-parser',
   rules: {
     'standard/object-curly-even-spacing': [2, 'either'],
     'standard/array-bracket-even-spacing': [2, 'either'],

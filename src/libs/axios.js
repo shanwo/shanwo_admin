@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Vue from 'vue'
 import { getToken } from '@/libs/util'
-
+console.log('12')
 class HttpRequest {
   constructor (baseUrl = baseURL) {
     this.baseUrl = baseUrl
@@ -78,7 +78,6 @@ class HttpRequest {
       return Promise.reject(error)
     })
   }
-
   request (options) {
     const instance = axios.create()
     options = Object.assign(this.getInsideConfig(), options)
