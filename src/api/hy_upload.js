@@ -4,7 +4,8 @@ export const uploadImg = (params) => {
   return axios.request({
     url: '/hy/upload/report',
     data: params,
-    method: 'post'
+    method: 'post',
+    two: true
   })
 }
 // 图片列表

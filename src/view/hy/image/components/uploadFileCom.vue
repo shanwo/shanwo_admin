@@ -196,33 +196,43 @@ export default {
         venue_id: this.venue_id,
         image: 'https://' + imgUrl
       }
-      this.shangbaoNum+= 1;
-      //  所有图片都上报了,成不成功还不确定
-      if(this.shangbaoNum === this.processList.length){
-        console.log('所有图片都上报了,成不成功还不确定')
-        // 然后去找有没有图片 上传失败  如果有的话自动重新上传 如果没有的话就直接关掉窗口 真正的上传成功了
-        this.getErrorUploadObj();
-        return
-      }
+      // this.shangbaoNum+= 1;
+      // //  所有图片都上报了,成不成功还不确定
+      // if(this.shangbaoNum === this.processList.length){
+      //   console.log('所有图片都上报了,成不成功还不确定')
+      //   // 然后去找有没有图片 上传失败  如果有的话自动重新上传 如果没有的话就直接关掉窗口 真正的上传成功了
+      //   this.getErrorUploadObj();
+      //   return
+      // }
       try{
         uploadImg(params).then(res => {
-        console.log("上报单张图片",res);
-        if(res.status ===200) {
-          if(res.data.image.msg === 'success' || res.data.image.msg === '今日已上传过此图片，无需重复上传'){
-            this.$set(this.processList[index],'shangbaoStatus',1)
-          }else{
-            this.$set(this.processList[index],'shangbaoStatus',0)
-          }
+        console.log("上报单张图片",res.data);
+        if(res.data.code ===200) {
+          this.$set(this.processList[index],'shangbaoStatus',1)
+        }else if(res.data.code === 400){
+          this.$set(this.processList[index],'shangbaoStatus',1)
         }else{
-          console.warn('第'+index+"张图片上报失败")
           this.$set(this.processList[index],'shangbaoStatus',0)
-
         }
+        this.getUploadStatus()
       })
       }catch(err){
         console.warn('第'+index+"张图片上报失败-----")
         this.$set(this.processList[index],'shangbaoStatus',0)
       }
+    },
+    // 获取图片的上报状态
+    getUploadStatus(){
+        let num = 0 ;
+        this.processList.forEach(val=>{
+          if(val.shangbaoStatus === 1) {
+            num+=1
+          }
+        })
+        if(num === this.processList.length){
+          console.info('图片上报成功了')
+          this.cancel()
+        }
     },
     getErrorUploadObj(){
       let num = 0;

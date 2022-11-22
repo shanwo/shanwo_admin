@@ -26,6 +26,7 @@ class HttpRequest {
   }
 
   interceptors (instance, url) {
+    console.log('url', url)
     // 请求拦截
     instance.interceptors.request.use(config => {
       // 添加全局的loading...
@@ -41,11 +42,24 @@ class HttpRequest {
     instance.interceptors.response.use(res => {
       this.destroy(url)
       const { data, status } = res
+      // console.log("twourl",url)
       if (data.code === 200) {
-        return { data: data.data, status }
+        let arr = ['/hy/upload/report']
+        if (arr.includes(url)) {
+          return { data: data, status }
+        } else {
+          return { data: data.data, status }
+        }
       } else if (data.code === 300) {
         localStorage.clear()
         window.location.href = '/'
+      } else if (data.code === 400) {
+        let arr = ['/hy/upload/report']
+        if (arr.includes(url)) {
+          return { data: data, status }
+        } else {
+          Vue.prototype.$Message.error(data.msg)
+        }
       } else {
         Vue.prototype.$Message.error(data.msg)
         return Promise.reject(data)
@@ -68,6 +82,7 @@ class HttpRequest {
   }
 
   request (options) {
+    console.log('optionsssss', options)
     const instance = axios.create()
     options = Object.assign(this.getInsideConfig(), options)
     let token = getToken()
