@@ -61,6 +61,7 @@ export default {
   methods: {
     cancel () {
       this.dialogStatus = false
+      this.getList()
     },
     // 获取雪场
     getVenList () {
