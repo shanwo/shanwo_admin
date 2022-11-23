@@ -64,6 +64,7 @@ export default {
   },
   methods: {
     cancel () {
+      this.userInfo = JSON.parse(localStorage.getItem('user'))
       this.dialogStatus = false
       this.getList()
     },
