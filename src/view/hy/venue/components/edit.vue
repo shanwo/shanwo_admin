@@ -147,7 +147,6 @@ export default {
       }
       actionFn(summitInfo).then(() => {
         this.cancel()
-        this.$Message.success('操作成功')
         this.$emit('listenSuccess')
       })
     },

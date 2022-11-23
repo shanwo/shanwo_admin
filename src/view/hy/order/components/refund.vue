@@ -53,7 +53,6 @@ export default {
       data.reason = this.reason
       orderRefund(data).then(() => {
         this.cancel()
-        this.$Message.success('操作成功')
       })
     },
     /**
