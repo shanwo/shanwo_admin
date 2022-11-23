@@ -40,7 +40,6 @@ import User from './components/user'
 import ABackTop from './components/a-back-top'
 import Fullscreen from './components/fullscreen'
 import Language from './components/language'
-import ErrorStore from './components/error-store'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
 import { getNewTagList, routeEqual } from '@/libs/util'
 import routers from '@/router/routers'
@@ -48,6 +47,7 @@ import logo from '@/assets/images/logo.png'
 import './main.less'
 
 export default {
+  /* eslint-disable */
   name: 'Main',
   components: {
     SideMenu,
@@ -55,7 +55,6 @@ export default {
     Language,
     TagsNav,
     Fullscreen,
-    ErrorStore,
     User,
     ABackTop
   },
