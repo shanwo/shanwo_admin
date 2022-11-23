@@ -52,126 +52,124 @@ export default [
       }
     ]
   },
-  /**
   {
-    path: '/sw',
-    name: 'sw',
+    path: '/h5',
+    name: 'h5',
     component: Main,
     meta: {
       icon: 'md-ionic',
-      title: '闪我'
+      title: 'H5'
     },
     children: [
       {
-        path: '/sw/classification',
-        name: 'sw_classification',
+        path: '/h5/classification',
+        name: 'h5_classification',
         meta: {
           icon: 'md-clipboard',
           title: '分类管理'
         },
-        component: () => import('@/view/sw/classification/list.vue')
+        component: () => import('@/view/h5/classification/list.vue')
       },
       {
-        path: '/sw/link_white',
-        name: 'sw_link_white',
+        path: '/h5/link_white',
+        name: 'h5_link_white',
         meta: {
           icon: 'md-link',
           title: '链接白名单'
         },
-        component: () => import('@/view/sw/link-white/list.vue')
+        component: () => import('@/view/h5/link-white/list.vue')
       },
       {
-        path: '/sw/template',
-        name: 'sw_template',
+        path: '/h5/template',
+        name: 'h5_template',
         meta: {
           icon: 'md-browsers',
           title: '模板管理'
         },
-        component: () => import('@/view/sw/template/list.vue')
+        component: () => import('@/view/h5/template/list.vue')
       },
       {
-        path: '/sw/tutorials',
-        name: 'sw_tutorials',
+        path: '/h5/tutorials',
+        name: 'h5_tutorials',
         meta: {
           icon: 'md-bookmarks',
           title: '教程管理'
         },
-        component: () => import('@/view/sw/tutorials/list.vue')
+        component: () => import('@/view/h5/tutorials/list.vue')
       },
       {
-        path: '/sw/decoration',
-        name: 'sw_decoration',
+        path: '/h5/decoration',
+        name: 'h5_decoration',
         meta: {
           icon: 'md-bookmark',
           title: '头像装饰'
         },
-        component: () => import('@/view/sw/decoration/list.vue')
+        component: () => import('@/view/h5/decoration/list.vue')
       },
       {
-        path: '/sw/shan_page',
-        name: 'sw_shan_page',
+        path: '/h5/shan_page',
+        name: 'h5_shan_page',
         meta: {
           icon: 'md-document',
           title: '闪页管理'
         },
-        component: () => import('@/view/sw/shan-page/list.vue')
+        component: () => import('@/view/h5/shan-page/list.vue')
       },
       {
-        path: '/sw/pay',
-        name: 'sw_pay',
+        path: '/h5/pay',
+        name: 'h5_pay',
         meta: {
           icon: 'md-card',
           title: '支付渠道'
         },
-        component: () => import('@/view/sw/pay/list.vue')
+        component: () => import('@/view/h5/pay/list.vue')
       },
       {
-        path: '/sw/order',
-        name: 'sw_order',
+        path: '/h5/order',
+        name: 'h5_order',
         meta: {
           icon: 'md-cart',
           title: '订单数据'
         },
-        component: () => import('@/view/sw/order/list.vue')
+        component: () => import('@/view/h5/order/list.vue')
       }
     ]
   },
-   */
   {
-    path: '/hy',
-    name: 'hy',
+    path: '/xcx',
+    name: 'xcx',
     component: Main,
     meta: {
       icon: 'md-ionic',
-      title: '滑呀'
+      title: '小程序'
     },
     children: [
       {
-        path: '/hy/venue',
-        name: 'hy_venue',
+        path: '/xcx/venue',
+        name: 'xcx_venue',
         meta: {
           icon: 'md-snow',
           title: '雪场管理'
         },
-        component: () => import('@/view/hy/venue/list.vue')
+        component: () => import('@/view/xcx/venue/list.vue')
       },
       {
-        path: '/hy/image',
-        name: 'hy_image',
+        path: '/xcx/image',
+        name: 'xcx_image',
         meta: {
           icon: 'md-cloud-upload',
           title: '图片上传'
         },
-        component: () => import('@/view/hy/image/index.vue')
+        component: () => import('@/view/xcx/image/index.vue')
       },
       {
-        path: '/hy/order',
-        name: 'hy_order',
+        path: '/xcx/order',
+        name: 'xcx_order',
         meta: {
           icon: 'md-cart',
           title: '订单数据'
         },
-        component: () => import('@/view/hy/order/list.vue')
+        component: () => import('@/view/xcx/order/list.vue')
       }
     ]
   },
@@ -194,11 +192,20 @@ export default [
         component: () => import('@/view/official/menu.vue')
       },
       {
+        path: 'feedback',
+        name: 'official_feedback',
+        meta: {
+          icon: 'md-chatboxes',
+          title: '用户反馈'
+        },
+        component: () => import('@/view/feedback/list.vue')
+      },
+      {
         path: 'reply',
         name: 'official_reply',
         meta: {
           icon: 'md-quote',
-          title: '回复(前端待开发)'
+          title: '微信回复(前端待开发)'
         },
         component: () => import('@/view/official/reply.vue')
       },
@@ -242,25 +249,6 @@ export default [
     ]
   },
   {
-    path: '/feedback',
-    name: 'feedback',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'feedback_list',
-        meta: {
-          icon: 'md-chatboxes',
-          title: '用户反馈'
-        },
-        component: () => import('@/view/feedback/list.vue')
-      }
-    ]
-  },
-  {
     path: '/config',
     name: 'config',
     component: Main,
@@ -279,7 +267,6 @@ export default [
       }
     ]
   },
-  /**
   {
     path: '/tag',
     name: 'tag',
@@ -300,6 +287,7 @@ export default [
       }
     ]
   },
+  /**
   {
     path: '/push',
     name: 'push',
