@@ -65,7 +65,7 @@ export default {
     },
     // 获取雪场
     getVenList () {
-      getVenueList({ status: 1 }).then(res => {
+      getVenueList({ status: 1 ,size: 100 }).then(res => {
         this.selectArr = res.data.lists
       })
     },
