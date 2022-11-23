@@ -55,7 +55,6 @@ export default {
       total: 0,
       dialogStatus: false,
       safeObj: {},
-      userInfo: ''
     }
   },
   mounted () {
@@ -64,7 +63,6 @@ export default {
   },
   methods: {
     cancel () {
-      this.userInfo = JSON.parse(localStorage.getItem('user'))
       this.dialogStatus = false
       this.getList()
     },
@@ -75,10 +73,11 @@ export default {
       })
     },
     getList () {
+      var userInfo = JSON.parse(localStorage.getItem('user'))
       let params = {
         keyword: this.searchData.keyword,
         venue_id: this.searchData.venue_id,
-        user_id: this.userInfo.id,
+        user_id: userInfo.id,
         page: this.searchData.page,
         size: this.searchData.size
 
