@@ -17,14 +17,14 @@ export const getVenueInfo = (params) => {
 export const venueAdd = (params) => {
   return axios.request({
     url: '/hy/venue/add',
-    params,
+    data: params,
     method: 'post'
   })
 }
 export const venueEdit = (params) => {
   return axios.request({
     url: '/hy/venue/edit',
-    params,
+    data: params,
     method: 'post'
   })
 }
