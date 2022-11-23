@@ -58,6 +58,10 @@ export default {
       userInfo: ''
     }
   },
+  mounted () {
+    this.getList()
+    this.getVenList()
+  },
   methods: {
     cancel () {
       this.dialogStatus = false
