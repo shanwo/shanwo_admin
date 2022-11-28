@@ -65,7 +65,6 @@ export default {
       summitInfo.cache = this.pageInfo.is_open
       setSortConfig(summitInfo).then(() => {
         this.cancel()
-        this.$Message.success('操作成功')
       })
     },
     /**
