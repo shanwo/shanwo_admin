@@ -24,6 +24,14 @@ export const uploadDel = (params) => {
     method: 'post'
   })
 }
+// 图片下载
+export const uploadDown = (params) => {
+  return axios.request({
+    url: '/hy/upload/download',
+    params: params,
+    method: 'get'
+  })
+}
 // 图片清理
 export const uploadClean = () => {
   return axios.request({

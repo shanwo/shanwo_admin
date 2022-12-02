@@ -1,26 +1,41 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
-<div :class="prefixCls">
-  <div :class="prefixCls + '-left'">
-    <Form :label-width="100" inline>
-      <FormItem label="场地：">
-        <Select v-model="value.venue_id" class="inputWidth" clearable>
-          <Option v-for="item in selectArr" :value="item.id" :key="item.id">{{ item.name }}</Option>
-        </Select>
-      </FormItem>
-      <FormItem label="关键字：">
-        <Input v-model="value.keyword" class="inputWidth" placeholder="请输入关键字" clearable></Input>
-      </FormItem>
-      <!--  开始时间 start_time   结束时间 end_time  格式  2022-11-06 -->
-      <!--      <FormItem label="支付时间：">-->
-      <!--        <Date-picker @on-change="timeChange" :value="searchInfo.time" format="yyyy-MM-dd" type="daterange" placement="top-start" placeholder="选择日期" style="width: 200px"></Date-picker>-->
-      <!--      </FormItem>-->
-    </Form>
+  <div :class="prefixCls">
+    <div :class="prefixCls + '-left'">
+      <Form :label-width="100" inline>
+        <FormItem label="场地：">
+          <Select v-model="value.venue_id" class="inputWidth" clearable>
+            <Option v-for="item in selectArr" :value="item.id" :key="item.id">{{
+              item.name
+            }}</Option>
+          </Select>
+        </FormItem>
+        <FormItem label="关键字：">
+          <Input
+            v-model="value.keyword"
+            class="inputWidth"
+            placeholder="请输入关键字"
+            clearable
+          ></Input>
+        </FormItem>
+        <!--- 开始时间 start_time   结束时间 end_time  格式  2022-11-06 -->
+        <FormItem label="拍摄时间：">
+          <Date-picker
+            @on-change="timeChange"
+            :value="value.time"
+            format="yyyy-MM-dd"
+            type="daterange"
+            placement="top-start"
+            placeholder="选择日期"
+            style="width: 200px"
+          ></Date-picker>
+        </FormItem>
+      </Form>
+    </div>
+    <div :class="prefixCls + '-right'">
+      <slot name="btn"></slot>
+    </div>
   </div>
-  <div :class="prefixCls + '-right'">
-    <slot name="btn"></slot>
-  </div>
-</div>
-
 </template>
 
 <script>
@@ -32,12 +47,11 @@ export default {
   props: {
     value: {
       type: Object,
-      default: () => {
-      }
+      default: () => {}
     }
   },
   mounted () {
-    getVenueList().then(res => {
+    getVenueList().then((res) => {
       this.selectArr = res.data.lists
     })
   },
@@ -49,7 +63,14 @@ export default {
   },
   methods: {
     timeChange (arg) {
-      this.$set(this, 'searchTimeRange', arg)
+      console.log('arg', arg)
+      // eslint-disable-next-line vue/no-mutating-props
+      this.value['start_time'] = arg[0]
+      // eslint-disable-next-line vue/no-mutating-props
+      this.value['end_time'] = arg[1]
+      this.$emit('input', this.value)
+
+      // this.$set(this, "searchTimeRange", arg);
     }
   }
 }

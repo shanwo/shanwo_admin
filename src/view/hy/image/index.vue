@@ -1,26 +1,44 @@
 <template>
-<div :class ="prefixCls">
-  <div :class="prefixCls + '-search'">
-    <search v-model="searchData">
-      <template slot="btn">
-        <Button @click="handleShowModel" type="error" class="mr10">上传图片</Button>
-        <Button @click="getList()" type="primary" class="mr10">查询</Button>
-        <Button @click="clean()" type="primary">清图片</Button>
-      </template>
-    </search>
-  </div>
-  <div :class="prefixCls + '-table'">
-    <table-list @refresh="getList" :imageList="imageList"></table-list>
-  </div>
-  <div :class="prefixCls + '-page'">
-    <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
-  </div>
-  <Modal v-model="dialogStatus" :closable="false" :mask-closable="false" :footer-hide="true" width="60%" title="图片上传">
-    <div v-if="dialogStatus">
-      <uploadFileCom @listenCancel="cancel" :selectArr="selectArr" ref="uploadFileComRef"/>
+  <div :class="prefixCls">
+    <div :class="prefixCls + '-search'">
+      <search v-model="searchData">
+        <template slot="btn">
+          <Button @click="handleShowModel" type="error" class="mr10"
+            >上传图片</Button
+          >
+          <Button @click="getList()" type="primary" class="mr10">查询</Button>
+          <Button @click="clean()" type="primary">清图片</Button>
+        </template>
+      </search>
     </div>
-  </Modal>
-</div>
+    <div :class="prefixCls + '-table'">
+      <table-list @refresh="getList" :imageList="imageList"></table-list>
+    </div>
+    <div :class="prefixCls + '-page'">
+      <Page
+        :total="total"
+        show-total
+        :page-size="searchData.size"
+        @on-change="pageChange"
+      ></Page>
+    </div>
+    <Modal
+      v-model="dialogStatus"
+      :closable="false"
+      :mask-closable="false"
+      :footer-hide="true"
+      width="60%"
+      title="图片上传"
+    >
+      <div v-if="dialogStatus">
+        <uploadFileCom
+          @listenCancel="cancel"
+          :selectArr="selectArr"
+          ref="uploadFileComRef"
+        />
+      </div>
+    </Modal>
+  </div>
 </template>
 
 <script>
@@ -50,7 +68,9 @@ export default {
         keyword: '',
         venue_id: '',
         size: 10,
-        page: 1
+        page: 1,
+        start_time: '',
+        end_time: ''
       },
       total: 0,
       dialogStatus: false,
@@ -69,20 +89,22 @@ export default {
     },
     // 获取雪场
     getVenList () {
-      getVenueList({ status: 1, size: 100 }).then(res => {
+      getVenueList({ status: 1, size: 100 }).then((res) => {
         this.selectArr = res.data.lists
       })
     },
     getList () {
+      console.log('searchData,', this.searchData)
       let params = {
         keyword: this.searchData.keyword,
         venue_id: this.searchData.venue_id,
         user_id: this.userInfo.id,
         page: this.searchData.page,
-        size: this.searchData.size
-
+        size: this.searchData.size,
+        start_time: this.searchData.start_time,
+        end_time: this.searchData.end_time
       }
-      uploadLists(params).then(res => {
+      uploadLists(params).then((res) => {
         this.imageList = res.data.lists || [] // 图片列表
         this.total = res.data.total
       })
@@ -92,16 +114,20 @@ export default {
         this.$Modal.confirm({
           title: '警告',
           content: '请选择要清理的雪场',
-          onOk: () => {
-          }
+          onOk: () => {}
         })
       } else {
         this.$Modal.confirm({
           title: '警告',
-          content: '将清理拍摄时间早于3个月前的图片，清理后不再显示。若3个月内无照片，将只保留最后一周的照片。',
+          content:
+            '将清理拍摄时间早于3个月前的图片，清理后不再显示。若3个月内无照片，将只保留最后一周的照片。',
           onOk: () => {
-            uploadClean({ venue_id: this.searchData.venue_id }).then(res => {
-              this.$Message.success(res.msg ? res.msg : '本次清理' + Object.keys(res.data).length + '张照片')
+            uploadClean({ venue_id: this.searchData.venue_id }).then((res) => {
+              this.$Message.success(
+                res.msg
+                  ? res.msg
+                  : '本次清理' + Object.keys(res.data).length + '张照片'
+              )
               this.$emit('refresh')
               this.getList()
             })
@@ -121,7 +147,6 @@ export default {
       }, 1000)
     }
   }
-
 }
 </script>
 
