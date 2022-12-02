@@ -65,7 +65,6 @@ export default {
     },
     confirm () {
       setMenu({ button: this.menu }).then(() => {
-        this.$Message.success('操作成功')
       })
     },
     addMenu () {
