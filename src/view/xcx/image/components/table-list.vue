@@ -3,9 +3,7 @@
     <Table :columns="columns" :data="imageList" class="iviewtable">
       <template slot-scope="{ row }" slot="action">
         <a @click="toDel(row.id)">删除</a>
-        <a @click="handleDown(row)"  target="_blank" style="color: #fa4535; margin-left: 20px"
-          >下载</a
-        >
+         <a @click="handleDown(row)"  target="_blank" style="color: #fa4535; margin-left: 20px">下载</a>
       </template>
     </Table>
   </div>
@@ -55,11 +53,9 @@ export default {
     },
     handleDown (obj) {
       console.log(obj)
-
       uploadDown({ id: obj.id }).then(res => {
         console.log('res,', res)
         // window.location.href = res.data.original_url
-
         const a = document.createElement('a')
         a.style.display = 'none'
         a.href = res.data.original_url
