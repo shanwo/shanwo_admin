@@ -3,7 +3,7 @@
     <Table :columns="columns" :data="imageList" class="iviewtable">
       <template slot-scope="{ row }" slot="action">
         <a @click="toDel(row.id)">删除</a>
-         <a @click="handleDown(row)"  target="_blank" style="color: #fa4535; margin-left: 20px">下载</a>
+           <a @click="handleDown(row)"  target="_blank" style="color: #fa4535; margin-left: 20px">下载</a>
       </template>
     </Table>
   </div>
