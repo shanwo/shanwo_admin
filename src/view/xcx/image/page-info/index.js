@@ -11,6 +11,9 @@ export const columns = [
         attrs: {
           src: row.thumbnail_url,
           height: 100
+        },
+        on: {
+          click: (e) => { this.handleShow(row) }
         }
       })
     }
