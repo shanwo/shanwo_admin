@@ -17,8 +17,8 @@ export default {
    * @description api请求基础路径
    */
   baseUrl: {
-    dev: 'https://admin.shanwo.vip',
-    pro: 'https://admin.shanwo.cc'
+    dev: 'https://admin.shanwo.cc',
+    pro: 'https://admin.chillman.cc'
   },
   /**
    * @description 默认打开的首页的路由name值，默认为home

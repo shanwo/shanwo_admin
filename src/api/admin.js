@@ -2,9 +2,9 @@ import axios from '@/libs/api.request'
 
 export const toLogin = () => {
   var thisurl = window.location.hostname
-  var url = '//api.shanwo.vip/user/signIn'
-  if (thisurl === 'shanwo.cc') {
-    var url = 'https://api.shanwo.cc/user/signIn'
+  var url = '//api.shanwo.cc/user/signIn'
+  if (thisurl === 'chillman.cc') {
+    var url = 'https://api.chillman.cc/user/signIn'
   }
   return axios.request({
     url,
@@ -16,9 +16,9 @@ export const toLogin = () => {
 }
 export const toLogout = () => {
   var thisurl = window.location.hostname
-  var url = '//api.shanwo.vip/user/signOut'
-  if (thisurl === 'shanwo.cc') {
-    var url = 'https://api.shanwo.cc/user/signOut'
+  var url = '//api.shanwo.cc/user/signOut'
+  if (thisurl === 'chillman.cc') {
+    var url = 'https://api.chillman.cc/user/signOut'
   }
   return axios.request({
     url,
@@ -27,9 +27,9 @@ export const toLogout = () => {
 }
 export const getUserToken = ({ code, state }) => {
   var thisurl = window.location.hostname
-  var url = '//api.shanwo.vip/user/wechat'
-  if (thisurl === 'shanwo.cc') {
-    var url = 'https://api.shanwo.cc/user/wechat'
+  var url = '//api.shanwo.cc/user/wechat'
+  if (thisurl === 'chillman.cc') {
+    var url = 'https://api.chillman.cc/user/wechat'
   }
   return axios.request({
     url,

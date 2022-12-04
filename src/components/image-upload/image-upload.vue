@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     action () {
-      if (window.location.hostname === 'shanwo.cc') {
+      if (window.location.hostname === 'chillman.cc') {
         return config.baseUrl.pro
       } else {
         return config.baseUrl.dev
