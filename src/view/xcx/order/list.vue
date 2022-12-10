@@ -8,7 +8,7 @@
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list :orderList="orderList" @refresh="getOrderList" @toRefund="toRefund"></table-list>
+    <table-list :orderList="orderList" @refresh="getOrderList" ></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
@@ -20,13 +20,17 @@
 <script>
 import { getOrderList } from '@/api/hy_order'
 
+import refund from './components/refund.vue'
+import search from './components/search.vue'
+import tableList from './components/table-list.vue'
+
 const prefixCls = 'order-list'
 export default {
   name: 'order-list',
   components: {
-    refund: () => import('./components/refund.vue'),
-    search: () => import('./components/search.vue'),
-    tableList: () => import('./components/table-list.vue')
+    refund,
+    search,
+    tableList
   },
   data () {
     return {
