@@ -18,7 +18,6 @@
             clearable
           ></Input>
         </FormItem>
-        <!--- 开始时间 start_time   结束时间 end_time  格式  2022-11-06 -->
         <FormItem label="拍摄时间：">
           <Date-picker
             @on-change="timeChange"
@@ -63,14 +62,9 @@ export default {
   },
   methods: {
     timeChange (arg) {
-      console.log('arg', arg)
-      // eslint-disable-next-line vue/no-mutating-props
       this.value['start_time'] = arg[0]
-      // eslint-disable-next-line vue/no-mutating-props
       this.value['end_time'] = arg[1]
       this.$emit('input', this.value)
-
-      // this.$set(this, "searchTimeRange", arg);
     }
   }
 }

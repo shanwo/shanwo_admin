@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import { getVenueList } from '@/api/venue.js'
 import { uploadLists, uploadClean } from '@/api/hy_upload.js'
 
 import uploadFileCom from './components/uploadFileCom.vue'
@@ -85,12 +84,6 @@ export default {
     cancel () {
       this.dialogStatus = false
       this.getList()
-    },
-    // 获取雪场
-    getVenList () {
-      getVenueList({ status: 1, size: 100 }).then((res) => {
-        this.selectArr = res.data.lists
-      })
     },
     getList () {
       var userInfo = JSON.parse(localStorage.getItem('user'))
