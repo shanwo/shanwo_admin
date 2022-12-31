@@ -44,6 +44,7 @@ export default {
         order_sn: '',
         third_sn: '',
         user_id: '',
+        status: 30,
         page: 1,
         size: 20
       }
