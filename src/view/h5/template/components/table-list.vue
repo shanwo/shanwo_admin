@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { statusTemplate } from '@/api/template'
+import { statusTemplate } from '@/api/sw_template'
 import { columns } from '../page-info'
 
 const prefixCls = 'template-list'

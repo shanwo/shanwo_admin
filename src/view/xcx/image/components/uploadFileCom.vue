@@ -64,8 +64,7 @@
 </template>
 
 <script>
-import { ajaxBaseSecret } from '@/api/hxapi.js'
-import { uploadImg } from '@/api/hy_upload.js'
+import { uploadImg,ajaxBaseSecret } from '@/api/hy_upload'
 import COS from 'cos-js-sdk-v5'
 import globalLoading from '@/components/uploadLoading/globalLoading.vue'
 import uploadLoading from '@/components/uploadLoading/uploadLoading.vue'

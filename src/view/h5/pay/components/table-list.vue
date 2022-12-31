@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { statusPay } from '@/api/pay'
+import { statusPay } from '@/api/sw_pay'
 import { columns } from '../page-info'
 
 const prefixCls = 'pay-list'

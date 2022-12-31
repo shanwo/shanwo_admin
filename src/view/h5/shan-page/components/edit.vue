@@ -23,7 +23,7 @@
 
 <script>
 import { cacheTypeList } from '../page-info'
-import { setSortConfig, getPageInfo } from '@/api/shan-page'
+import { setSortConfig, getPageInfo } from '@/api/sw_shan-page'
 
 const prefixCls = 'edit'
 export default {

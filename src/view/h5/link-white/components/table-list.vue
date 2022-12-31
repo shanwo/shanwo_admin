@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { statusLink } from '@/api/link-white'
+import { statusLink } from '@/api/sw_link-white'
 import { columns } from '../page-info'
 
 const prefixCls = 'link-white-list'

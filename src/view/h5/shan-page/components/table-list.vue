@@ -17,7 +17,7 @@
 
 <script>
 import { userType, columns } from '../page-info'
-import { statusShanPage } from '@/api/shan-page'
+import { statusShanPage } from '@/api/sw_shan-page'
 
 const prefixCls = 'shan-page-list'
 

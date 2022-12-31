@@ -7,7 +7,6 @@ export const getPushChannelList = (params) => {
     method: 'get'
   })
 }
-
 export const getPushInfo = (params) => {
   return axios.request({
     url: '/push/info',

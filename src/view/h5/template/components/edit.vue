@@ -36,7 +36,7 @@
 
 <script>
 import { templateType } from '../page-info'
-import { updateTemplate, addTemplate, getTemplateInfo } from '@/api/template'
+import { updateTemplate, addTemplate, getTemplateInfo } from '@/api/sw_template'
 
 const prefixCls = 'edit'
 export default {

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { getClassificationList } from '@/api/classification'
+import { getClassificationList } from '@/api/sw_sort'
 
 const prefixCls = 'classification-list'
 

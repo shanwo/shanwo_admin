@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getAvatarPendantList, getSortList } from '@/api/decoration'
+import { getAvatarPendantList, getSortList } from '@/api/sw_decoration'
 
 const prefixCls = 'decoration-list'
 export default {

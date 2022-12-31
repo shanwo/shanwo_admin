@@ -42,7 +42,7 @@
 
 <script>
 import { linkType } from '../page-info'
-import { updateLink, addLink, getLinkInfo } from '@/api/link-white'
+import { updateLink, addLink, getLinkInfo } from '@/api/sw_link-white'
 
 const prefixCls = 'edit'
 export default {

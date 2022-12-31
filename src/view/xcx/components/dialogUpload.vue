@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { ajaxBaseSecret } from '@/api/hxapi.js'
+import { ajaxBaseSecret } from '@/api/hy_upload'
 import COS from 'cos-js-sdk-v5'
 
 var cos = new COS({

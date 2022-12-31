@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { getShanPageBrowse } from '@/api/shan-page'
+import { getShanPageBrowse } from '@/api/sw_shan-page'
 import { record } from '../page-info'
 
 const prefixCls = 'shan-page-browse'

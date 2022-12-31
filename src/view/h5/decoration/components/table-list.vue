@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { statusDecoration } from '@/api/decoration'
+import { statusDecoration } from '@/api/sw_decoration'
 import { columns } from '../page-info'
 
 const prefixCls = 'decoration-list'

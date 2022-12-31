@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { updateDecoration, addDecoration, getDecorationInfo } from '@/api/decoration'
+import { updateDecoration, addDecoration, getDecorationInfo } from '@/api/sw_decoration'
 
 const prefixCls = 'edit'
 export default {

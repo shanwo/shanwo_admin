@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { delClassification } from '@/api/classification'
+import { delClassification } from '@/api/sw_sort'
 import { columns } from '../page-info'
 
 const prefixCls = 'classification-list'

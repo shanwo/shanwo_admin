@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getLinkWhiteList, getSortList } from '@/api/link-white'
+import { getLinkWhiteList, getSortList } from '@/api/sw_link-white'
 
 const prefixCls = 'link-white-list'
 

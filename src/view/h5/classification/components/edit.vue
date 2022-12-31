@@ -23,7 +23,7 @@
 
 <script>
 import { classificationType } from '../page-info'
-import { getClassificationInfo, addClassification, updateClassification } from '@/api/classification'
+import { getClassificationInfo, addClassification, updateClassification } from '@/api/sw_sort'
 
 const prefixCls = 'edit'
 export default {

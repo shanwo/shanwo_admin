@@ -37,7 +37,7 @@
 
 <script>
 import { payType } from '../page-info'
-import { updatePay, addPay, getPayInfo } from '@/api/pay'
+import { updatePay, addPay, getPayInfo } from '@/api/sw_pay'
 
 const prefixCls = 'edit'
 export default {

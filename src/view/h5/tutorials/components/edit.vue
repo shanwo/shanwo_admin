@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { updateTutorials, addTutorials, getTutorialsInfo } from '@/api/tutorials'
+import { updateTutorials, addTutorials, getTutorialsInfo } from '@/api/sw_tutorials'
 
 const prefixCls = 'edit'
 export default {

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getPayChannelList } from '@/api/pay'
+import { getPayChannelList } from '@/api/sw_pay'
 
 const prefixCls = 'pay-list'
 

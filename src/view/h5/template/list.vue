@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getTemplateManagementList, getSortList } from '@/api/template'
+import { getTemplateManagementList, getSortList } from '@/api/sw_template'
 
 const prefixCls = 'template-list'
 

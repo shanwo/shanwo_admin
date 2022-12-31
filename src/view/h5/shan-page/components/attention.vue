@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { getShanPageAttention } from '@/api/shan-page'
+import { getShanPageAttention } from '@/api/sw_shan-page'
 import { record } from '../page-info'
 
 const prefixCls = 'shan-page-attention'

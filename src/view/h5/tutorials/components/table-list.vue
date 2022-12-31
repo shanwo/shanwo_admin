@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { statusTutorials } from '@/api/tutorials'
+import { statusTutorials } from '@/api/sw_tutorials'
 import { columns } from '../page-info'
 
 const prefixCls = 'tutorials-list'

@@ -19,7 +19,7 @@
 
 <script>
 import { userType } from './page-info'
-import { getPageList } from '@/api/shan-page'
+import { getPageList } from '@/api/sw_shan-page'
 
 const prefixCls = 'shan-page-list'
 export default {

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getTutorialsManagementList, getSortList } from '@/api/tutorials'
+import { getTutorialsManagementList, getSortList } from '@/api/sw_tutorials'
 
 const prefixCls = 'tutorials-list'
 export default {
