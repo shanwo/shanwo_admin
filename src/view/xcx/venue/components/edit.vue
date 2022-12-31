@@ -43,7 +43,7 @@
 
 <script>
 import { getAreaList } from '@/api/admin'
-import { venueEdit, venueAdd, getVenueInfo } from '@/api/venue'
+import { venueEdit, venueAdd, getVenueInfo } from '@/api/hy_venue'
 
 const prefixCls = 'edit'
 export default {

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { getVenueSelect } from '@/api/venue'
+import { getVenueSelect } from '@/api/hy_venue'
 import { orderStatus } from '../page-info'
 
 const prefixCls = 'order-list'

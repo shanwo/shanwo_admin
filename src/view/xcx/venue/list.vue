@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getVenueList } from '@/api/venue'
+import { getVenueList } from '@/api/hy_venue'
 
 const prefixCls = 'venue-list'
 

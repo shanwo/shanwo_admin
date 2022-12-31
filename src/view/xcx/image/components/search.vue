@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { getVenueSelect } from '@/api/venue'
+import { getVenueSelect } from '@/api/hy_venue'
 
 const prefixCls = 'image-list'
 export default {

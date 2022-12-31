@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { venueStatus, vacheCache } from '@/api/venue'
+import { venueStatus, vacheCache } from '@/api/hy_venue'
 import { columns } from '../page-info'
 
 const prefixCls = 'venue-list'
