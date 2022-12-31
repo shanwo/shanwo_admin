@@ -170,6 +170,15 @@ export default [
           title: '订单数据'
         },
         component: () => import('@/view/xcx/order/list.vue')
+      },
+      {
+        path: '/xcx/export',
+        name: 'xcx_export',
+        meta: {
+          icon: 'md-cart',
+          title: '导出任务'
+        },
+        component: () => import('@/view/xcx/export/list.vue')
       }
     ]
   },
