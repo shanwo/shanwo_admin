@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { getVenueList } from '@/api/venue'
+import { getVenueSelect } from '@/api/venue'
 
 const prefixCls = 'image-list'
 export default {
@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted () {
-    getVenueList().then((res) => {
+    getVenueSelect().then((res) => {
       this.selectArr = res.data.lists
     })
   },

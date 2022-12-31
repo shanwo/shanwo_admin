@@ -1,5 +1,11 @@
 import axios from '@/libs/api.request'
 
+export const getVenueSelect = () => {
+  return axios.request({
+    url: '/hy/venue/select',
+    method: 'get'
+  })
+}
 export const getVenueList = (params) => {
   return axios.request({
     url: '/hy/venue/lists',

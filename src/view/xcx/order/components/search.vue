@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { getVenueList } from '@/api/venue'
+import { getVenueSelect } from '@/api/venue'
 import { orderStatus } from '../page-info'
 
 const prefixCls = 'order-list'
@@ -48,7 +48,7 @@ export default {
     }
   },
   mounted () {
-    getVenueList().then(res => {
+    getVenueSelect().then(res => {
       this.selectArr = res.data.lists
     })
   },
