@@ -3,9 +3,7 @@
     <div :class="prefixCls + '-search'">
       <search v-model="searchData">
         <template slot="btn">
-          <Button @click="handleShowModel" type="error" class="mr10"
-            >上传图片</Button
-          >
+          <Button @click="handleShowModel" type="error" class="mr10">上传图片</Button>
           <Button @click="getList()" type="primary" class="mr10">查询</Button>
           <Button @click="clean()" type="primary">清图片</Button>
         </template>
