@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { uploadLists, uploadClean } from '@/api/hy_upload.js'
+import { uploadLists, uploadClean } from '@/api/hy_upload'
 
 import uploadFileCom from './components/uploadFileCom.vue'
 import search from './components/search.vue'

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { uploadDel, uploadDown } from '@/api/hy_upload.js'
+import { uploadDel, uploadDown } from '@/api/hy_upload'
 const prefixCls = 'image-list'
 
 export default {
