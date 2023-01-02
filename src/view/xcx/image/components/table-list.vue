@@ -1,12 +1,11 @@
 <template>
   <div :class="prefixCls">
-
-    <Modal
-      v-model="modalStatus"
-      title="图片">
+    <Modal v-model="modalStatus" @click="cancel">
       <img :src="imgSrc" style="width: 100%;display:block" alt="">
+      <div slot="footer">
+        <Button type="primary" @click="cancel">关闭</Button>
+      </div>
     </Modal>
-
     <Table :columns="columns" :data="imageList" class="iviewtable">
       <template slot-scope="{ row }" slot="action">
            <a @click="toDel(row.id)">删除</a>
@@ -26,8 +25,8 @@ export default {
     return {
       imgSrc: '',
       modalStatus: false,
-      prefixCls,
       isShowEdit: false,
+      prefixCls,
       columns: [
         {
           key: 'id',
@@ -81,9 +80,12 @@ export default {
 
   methods: {
     handleShow (obj) {
-      console.log('obj', obj)
       this.imgSrc = obj.thumbnail_url
       this.modalStatus = true
+    },
+    cancel () {
+      this.$emit('modalStatus', false)
+      this.$emit('imgSrc','')
     },
     /**
      * @description 刷新列表页数据
