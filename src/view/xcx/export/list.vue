@@ -3,30 +3,27 @@
   <div :class="prefixCls + '-search'">
     <search v-model="searchData">
       <template slot="btn">
-        <Button type="primary" @click="addIcon" class="mr10">添加</Button>
-        <Button type="primary" @click="getVenueList">查询</Button>
+        <Button type="primary" @click="getExportList">查询</Button>
       </template>
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list @refresh="getVenueList" :venueList="venueList" @toDetail="toDetail"></table-list>
+    <table-list @refresh="getExportList" :exportList="exportList" @toDetail="toDetail"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
   </div>
-  <edit @listenSuccess="listenSuccess" v-model="isShowEdit" :id="id" @on-change="editVenue"/>
 </div>
 </template>
 
 <script>
-import { getVenueList } from '@/api/hy_venue'
+import { getExportList } from '@/api/hy_export'
 
-const prefixCls = 'venue-list'
+const prefixCls = 'export-list'
 
 export default {
-  name: 'venue-list',
+  name: 'export-list',
   components: {
-    edit: () => import('./components/edit.vue'),
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue')
   },
@@ -36,7 +33,7 @@ export default {
       id: null,
       total: 0,
       isShowEdit: false,
-      venueList: [],
+      exportList: [],
       searchData: {
         keyword: '',
         page: 1,
@@ -49,10 +46,10 @@ export default {
      * @description 获取链接白名单列表
      * @returns { undefined }
      */
-    getVenueList () {
-      getVenueList(this.searchData).then(res => {
+    getExportList () {
+      getExportList(this.searchData).then(res => {
         this.total = res.data.total
-        this.venueList = res.data.lists || []
+        this.exportList = res.data.lists || []
       })
     },
     /**
@@ -62,26 +59,8 @@ export default {
      */
     pageChange (page) {
       this.searchData.page = page
-      this.getVenueList()
-    },
-    addIcon () {
-      this.id = ''
-      this.isShowEdit = true
-    },
-    toDetail (id) {
-      this.id = id
-      this.isShowEdit = true
-    },
-    editVenue () {
-      this.id = 0
-      this.getVenueList()
-    },
-    listenSuccess () {
-      this.getVenueList()
+      this.getExportList()
     }
-  },
-  created () {
-    this.getVenueList()
   }
 }
 </script>
@@ -91,7 +70,7 @@ export default {
   margin-right: 10px;
 }
 
-@prefix: ~"venue-list";
+@prefix: ~"export-list";
 .@{prefix} {
   padding: 10px;
   border-radius: 4px;
