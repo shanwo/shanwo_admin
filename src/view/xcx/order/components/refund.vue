@@ -22,9 +22,9 @@
 <script>
 import { orderRefund } from '@/api/hy_order'
 
-const prefixCls = 'refund'
+const prefixCls = 'order-refund'
 export default {
-  name: 'refund',
+  name: 'order-refund',
   data () {
     return {
       prefixCls,
