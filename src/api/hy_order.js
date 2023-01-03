@@ -10,14 +10,14 @@ export const getOrderList = (params) => {
 export const orderExport = (params) => {
   return axios.request({
     url: '/hy/order/export',
-    data: params,
+    params: params,
     method: 'get'
   })
 }
 export const orderInfo = (params) => {
   return axios.request({
     url: '/hy/order/info',
-    data: params,
+    params: params,
     method: 'get'
   })
 }
