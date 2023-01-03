@@ -76,7 +76,6 @@ export default {
   },
   mounted () {
     this.getList()
-    this.getVenList()
   },
   methods: {
     cancel () {

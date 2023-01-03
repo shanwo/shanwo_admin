@@ -13,9 +13,7 @@
       <Form :label-width="100">
         <FormItem label="场地：">
           <Select v-model="venue_id" class="inputWidth" clearable>
-            <Option v-for="item in selectArr" :value="item.id" :key="item.id">{{
-              item.name
-            }}</Option>
+            <Option v-for="item in selectArr" :value="item.id" :key="item.id">{{item.name }}</Option>
           </Select>
         </FormItem>
       </Form>
@@ -64,6 +62,7 @@
 </template>
 
 <script>
+import { getVenueSelect } from '@/api/hy_venue'
 import { uploadImg,ajaxBaseSecret } from '@/api/hy_upload'
 import COS from 'cos-js-sdk-v5'
 import globalLoading from '@/components/uploadLoading/globalLoading.vue'
@@ -96,11 +95,10 @@ export default {
     globalLoading: globalLoading,
     uploadLoadingVue: uploadLoading
   },
-  props: {
-    selectArr: {
-      type: Array,
-      default: () => {}
-    }
+  mounted () {
+    getVenueSelect().then((res) => {
+      this.selectArr = res.data.lists
+    })
   },
   data () {
     return {
@@ -123,6 +121,7 @@ export default {
       imgLoadingStatus: false, // 所有图片上传成功的标志
       safeObj: {},
 
+      selectArr: [],
       fileListArr: [],
       processList: [],
       uploadErrList: [],

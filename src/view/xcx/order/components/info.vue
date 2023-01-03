@@ -56,7 +56,7 @@ export default {
       prefixCls,
       orderInfo: {
         order_sn: '',
-        status: '',
+        status: 10,
         price: '',
         pay_price: '',
         images: []
