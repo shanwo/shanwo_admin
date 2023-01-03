@@ -33,7 +33,7 @@ export default {
         const c = a[1].split(':')
         const nowTime = new Date()
         const oldTime = new Date(b[0], b[1] - 1, b[2], c[0], c[1], c[2])
-        const over = (nowTime - oldTime) / (1000 * 60 * 60 * 24) < 3 // 大于3 代表是否大于3天，如果想判断30天就把3改成30
+        const over = (nowTime - oldTime) / (1000 * 60 * 60 * 24) < 1 // 大于1 代表是否大于1天，如果想判断30天就把1改成30
         return over
       } else {
         return false
