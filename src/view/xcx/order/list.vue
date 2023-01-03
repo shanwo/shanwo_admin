@@ -45,7 +45,7 @@ export default {
       isShowEdit: false,
       isShowInfo: false,
       searchData: {
-        venue_id: '',
+        venue_id: 1,
         order_sn: '',
         third_sn: '',
         user_id: '',
@@ -67,9 +67,7 @@ export default {
       })
     },
     orderExport () {
-      orderExport(this.searchData).then(res => {
-        this.orderList = res.data.lists || []
-      })
+      orderExport(this.searchData).then()
     },
     toRefund (order_sn) {
       this.order_sn = order_sn
