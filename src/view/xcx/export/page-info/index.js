@@ -30,16 +30,20 @@ export const columns = [
     title: '场地名称'
   },
   {
+    key: 'nickname',
+    title: '创建人'
+  },
+  {
     key: 'file_name',
-    title: '文件名称'
-  },
-  {
-    key: 'merger_name',
-    title: '地区'
-  },
-  {
-    key: 'address',
-    title: '详细地址'
+    title: '文件名称',
+    render: (h, { row }) => {
+      return h('a', {
+        attrs: {
+          href: row.file_url,
+          download:row.file_name,
+        }
+      },row.file_name)
+    }
   },
   {
     key: 'status',
@@ -50,14 +54,13 @@ export const columns = [
   },
   {
     key: 'updated_at',
-    title: '执行时间'
+    title: '执行时间',
+    render: (h, { row }) => {
+      return h('span', row.status === 10 ? '未执行' : row.updated_at)
+    }
   },
   {
     key: 'created_at',
     title: '创建时间'
-  },
-  {
-    slot: 'action',
-    title: '操作'
   }
 ]

@@ -8,7 +8,7 @@
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list @refresh="getExportList" :exportList="exportList" @toDetail="toDetail"></table-list>
+    <table-list @refresh="getExportList" :exportList="exportList"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
@@ -35,17 +35,13 @@ export default {
       isShowEdit: false,
       exportList: [],
       searchData: {
-        keyword: '',
+        venue_id: 1,
         page: 1,
         size: 20
       }
     }
   },
   methods: {
-    /**
-     * @description 获取链接白名单列表
-     * @returns { undefined }
-     */
     getExportList () {
       getExportList(this.searchData).then(res => {
         this.total = res.data.total
@@ -61,6 +57,9 @@ export default {
       this.searchData.page = page
       this.getExportList()
     }
+  },
+  created () {
+    this.getExportList()
   }
 }
 </script>
