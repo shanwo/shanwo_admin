@@ -175,7 +175,7 @@ export default [
         path: '/xcx/export',
         name: 'xcx_export',
         meta: {
-          icon: 'md-cart',
+          icon: 'md-cloud-download',
           title: '导出任务'
         },
         component: () => import('@/view/xcx/export/list.vue')
