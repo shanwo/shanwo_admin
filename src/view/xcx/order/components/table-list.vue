@@ -2,7 +2,7 @@
 <div :class="prefixCls">
   <Table :columns="columns" :data="orderList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
-      <a v-if="examineStatus(row.payated_at)" @click="toRefund(row.order_sn)">退款</a>
+<!--      <a v-if="examineStatus(row.payated_at)" @click="toRefund(row.order_sn)">退款</a>-->
       <a @click="toDetail(row.order_sn)">详情</a>
     </template>
   </Table>
