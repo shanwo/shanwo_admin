@@ -47,7 +47,7 @@ class HttpRequest {
       if (arr.includes(url)) {
         return { data: data, status }
       } else if (data.code === 200) {
-        return { data: data.data, status }
+        return { data: data.data, msg:data.msg,status }
       } else if (data.code === 300) {
         localStorage.clear()
         window.location.href = '/'

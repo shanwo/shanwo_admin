@@ -52,7 +52,7 @@ export default {
         status: 30,
         page: 1,
         size: 20
-      }
+      },
     }
   },
   methods: {
@@ -67,7 +67,10 @@ export default {
       })
     },
     orderExport () {
-      orderExport(this.searchData).then()
+      orderExport(this.searchData).then(res => {
+        console.log(res)
+        this.$Message.success(res.msg)
+      })
     },
     toRefund (order_sn) {
       this.order_sn = order_sn
@@ -89,7 +92,7 @@ export default {
     pageChange (page) {
       this.searchData.page = page
       this.getOrderList()
-    }
+    },
   },
   created () {
     this.getOrderList()
