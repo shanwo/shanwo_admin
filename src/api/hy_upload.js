@@ -32,13 +32,6 @@ export const uploadDown = (params) => {
     method: 'get'
   })
 }
-// 图片清理
-export const uploadClean = () => {
-  return axios.request({
-    url: '/hy/upload/clean',
-    method: 'get'
-  })
-}
 
 export const ajaxBaseSecret = (params) => {
   return axios.request({

@@ -5,7 +5,6 @@
         <template slot="btn">
           <Button @click="handleShowModel" type="error" class="mr10">上传图片</Button>
           <Button @click="getList()" type="primary" class="mr10">查询</Button>
-          <Button @click="clean()" type="primary">清图片</Button>
         </template>
       </search>
     </div>
@@ -40,7 +39,7 @@
 </template>
 
 <script>
-import { uploadLists, uploadClean } from '@/api/hy_upload'
+import { uploadLists } from '@/api/hy_upload'
 
 import uploadFileCom from './components/uploadFileCom.vue'
 import search from './components/search.vue'
@@ -97,32 +96,6 @@ export default {
         this.imageList = res.data.lists || [] // 图片列表
         this.total = res.data.total
       })
-    },
-    clean () {
-      if (!this.searchData.venue_id) {
-        this.$Modal.confirm({
-          title: '警告',
-          content: '请选择要清理的雪场',
-          onOk: () => {}
-        })
-      } else {
-        this.$Modal.confirm({
-          title: '警告',
-          content:
-            '将清理拍摄时间早于3个月前的图片，清理后不再显示。若3个月内无照片，将只保留最后一周的照片。',
-          onOk: () => {
-            uploadClean({ venue_id: this.searchData.venue_id }).then((res) => {
-              this.$Message.success(
-                res.msg
-                  ? res.msg
-                  : '本次清理' + Object.keys(res.data).length + '张照片'
-              )
-              this.$emit('refresh')
-              this.getList()
-            })
-          }
-        })
-      }
     },
     pageChange (page) {
       this.searchData.page = page
