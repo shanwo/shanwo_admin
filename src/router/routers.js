@@ -172,6 +172,15 @@ export default [
         component: () => import('@/view/xcx/order/list.vue')
       },
       {
+        path: '/xcx/revenue',
+        name: 'xcx_revenue',
+        meta: {
+          icon: 'md-cash',
+          title: '收入明细'
+        },
+        component: () => import('@/view/xcx/revenue/list.vue')
+      },
+      {
         path: '/xcx/export',
         name: 'xcx_export',
         meta: {

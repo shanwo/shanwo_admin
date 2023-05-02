@@ -1,8 +1,8 @@
 <template>
 <div :class="prefixCls">
-  <Table :columns="columns" :data="exportList" class="iviewtable">
+  <Table :columns="columns" :data="revenueList" class="iviewtable">
     <template slot-scope="{ row }" slot="action">
-      <a @click="handleDown(row)"  target="_blank" style="color: #fa4535; margin-left: 20px">下载</a>
+      <a @click="toDetail(row.id)">详情</a>
     </template>
   </Table>
 </div>
@@ -10,9 +10,9 @@
 <script>
 import { columns } from '../page-info'
 
-const prefixCls = 'export-list'
+const prefixCls = 'revenue-list'
 export default {
-  name: 'export-list',
+  name: 'revenue-list',
   data () {
     return {
       prefixCls,
@@ -20,23 +20,27 @@ export default {
     }
   },
   props: {
-    exportList: {
+    revenueList: {
       default: () => []
     }
   },
   methods: {
-    handleDown (obj) {
-      console.log(obj)
-        const a = document.createElement('a')
-        a.style.display = 'none'
-        a.href = obj.file_url
-        a.target = '_blank'
-        // 保存下来的文件名
-        a.download = obj.file_name
-        document.body.appendChild(a)
-        a.click()
-        // 移除元素
-        document.body.removeChild(a)
+    examineStatus (value) {
+      if (value && value !== null) {
+        const a = value.split(' ')
+        const b = a[0].split('-')
+        const c = a[1].split(':')
+        const nowTime = new Date()
+        const oldTime = new Date(b[0], b[1] - 1, b[2], c[0], c[1], c[2])
+        const over = (nowTime - oldTime) / (1000 * 60 * 60 * 24) < 1 // 大于1 代表是否大于1天，如果想判断30天就把1改成30
+        return over
+      } else {
+        return false
+      }
+    },
+    // 详情
+    toDetail (id) {
+      this.$emit('toDetail', id)
     },
     /**
      * @description 刷新列表页数据

@@ -8,11 +8,12 @@
     </search>
   </div>
   <div :class="prefixCls + '-table'">
-    <table-list @refresh="getRevenueList" :revenueList="revenueList"></table-list>
+    <table-list @refresh="getRevenueList" :revenueList="revenueList"  @toDetail="toDetail"></table-list>
   </div>
   <div :class="prefixCls + '-page'">
     <Page :total=total show-total :page-size=searchData.size @on-change="pageChange"></Page>
   </div>
+  <info v-model="isShowInfo" :id="id"/>
 </div>
 </template>
 
@@ -24,6 +25,7 @@ const prefixCls = 'revenue-list'
 export default {
   name: 'revenue-list',
   components: {
+    info: () => import('./components/info.vue'),
     search: () => import('./components/search.vue'),
     tableList: () => import('./components/table-list.vue')
   },
@@ -32,10 +34,11 @@ export default {
       prefixCls,
       id: null,
       total: 0,
-      isShowEdit: false,
+      isShowInfo: false,
       revenueList: [],
       searchData: {
         venue_id: 1,
+        user_id: '',
         page: 1,
         size: 20
       }
@@ -47,6 +50,10 @@ export default {
         this.total = res.data.total
         this.revenueList = res.data.lists || []
       })
+    },
+    toDetail (id) {
+      this.id = id
+      this.isShowInfo = true
     },
     /**
      * @description 分页参数发生变化时调用

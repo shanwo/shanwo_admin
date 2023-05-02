@@ -7,3 +7,10 @@ export const getRevenueList = (params) => {
     method: 'get'
   })
 }
+export const revenueInfo = (params) => {
+  return axios.request({
+    url: '/hy/revenue/info',
+    params: params,
+    method: 'get'
+  })
+}
