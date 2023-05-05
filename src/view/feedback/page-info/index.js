@@ -1,5 +1,9 @@
 export const feedbackStatus = [
   {
+    type: 0,
+    name: '全部'
+  },
+  {
     type: 1,
     name: '未处理'
   },

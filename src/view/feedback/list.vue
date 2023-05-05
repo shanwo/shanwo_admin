@@ -36,7 +36,7 @@ export default {
       isShowEdit: false,
       userFeedbackList: [],
       searchData: {
-        type: '',
+        status: 0,
         nickname: '',
         page: 1,
         size: 20
