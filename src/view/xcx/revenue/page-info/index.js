@@ -30,10 +30,6 @@ export const columns = [
 ]
 export const orderLists = [
   {
-    key: 'id',
-    title: 'id'
-  },
-  {
     key: 'nickname',
     title: '用户昵称'
   },
